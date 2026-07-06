@@ -1764,6 +1764,15 @@
     return [selectedGroup, ...groups.filter((group) => group.id !== groupId)];
   }
 
+  function selectedCollectionGroups() {
+    if (!selectedPlaylistFilterId || !isVisiblePlaylistFilter(selectedPlaylistFilterId)) return [];
+    return collectionGroupsFor(selectedPlaylistFilterId);
+  }
+
+  function visibleSelectedCollectionGroups() {
+    return moveCollectionGroupToFront(selectedCollectionGroups(), selectedCollectionGroupId);
+  }
+  
   function podcastActionsFor(config) {
     const actions = [];
     if (config.spotifyUrl) {
@@ -2145,7 +2154,7 @@
       selectedPlaylistFilterId = "";
       selectedCollectionGroupId = "";
     }
-    filteredCollectionGroups = collectionGroupsFor(selectedPlaylistFilterId);
+    filteredCollectionGroups = selectedCollectionGroups();
     if (selectedCollectionGroupId && !filteredCollectionGroups.some((group) => group.id === selectedCollectionGroupId)) {
       selectedCollectionGroupId = "";
     }
@@ -2162,9 +2171,7 @@
       title: "Highlighted Messages",
       subtitle: "",
     });
-    const visibleCollectionGroups = selectedPlaylistFilterId
-      ? moveCollectionGroupToFront(filteredCollectionGroups, selectedCollectionGroupId)
-      : [];
+    const visibleCollectionGroups = visibleSelectedCollectionGroups();
     const visiblePodcastShelves = podcastShelves.filter((feed) => feed.items.length > 0);
 
     console.log("All video playlists:", allVideoPlaylists.length);
@@ -2249,14 +2256,12 @@
       selectedPlaylistFilterId = "";
       selectedCollectionGroupId = "";
     }
-    filteredCollectionGroups = collectionGroupsFor(selectedPlaylistFilterId);
+    filteredCollectionGroups = selectedCollectionGroups();
     if (selectedCollectionGroupId && !filteredCollectionGroups.some((group) => group.id === selectedCollectionGroupId)) {
       selectedCollectionGroupId = "";
     }
-    const activeGroups = selectedPlaylistFilterId ? filteredCollectionGroups : [];
-    const visibleCollectionGroups = selectedPlaylistFilterId
-      ? moveCollectionGroupToFront(activeGroups, selectedCollectionGroupId)
-      : [];
+    const activeGroups = filteredCollectionGroups;
+    const visibleCollectionGroups = moveCollectionGroupToFront(activeGroups, selectedCollectionGroupId);
 
     const filterSection = dom.primaryShelves.querySelector("[data-component='playlist-filter-buttons']");
     if (filterSection) {
@@ -2304,7 +2309,7 @@
   function currentRenderedShelfConfigs() {
     allVideoPlaylists = buildAllVideoPlaylists();
     podcastShelves = buildPodcastShelves();
-    filteredCollectionGroups = collectionGroupsFor(selectedPlaylistFilterId);
+    filteredCollectionGroups = selectedCollectionGroups();
     if (selectedCollectionGroupId && !filteredCollectionGroups.some((group) => group.id === selectedCollectionGroupId)) {
       selectedCollectionGroupId = "";
     }
@@ -2322,9 +2327,7 @@
       title: "Highlighted Messages",
       subtitle: "",
     });
-    const visibleCollectionGroups = selectedPlaylistFilterId
-      ? moveCollectionGroupToFront(filteredCollectionGroups, selectedCollectionGroupId)
-      : [];
+    const visibleCollectionGroups = visibleSelectedCollectionGroups();
     const visiblePodcastShelves = podcastShelves.filter((feed) => feed.items.length > 0);
     const shelfMap = new Map();
 
@@ -2455,18 +2458,8 @@
     if (!groupId) return;
     const scrollY = window.scrollY;
     selectedCollectionGroupId = groupId;
-    filteredCollectionGroups = moveCollectionGroupToFront(filteredCollectionGroups, groupId);
-    const targetShelf = [...dom.extraShelves.children].find((shelf) => shelf.dataset?.shelfId === groupId);
-
-    if (targetShelf) {
-      captureShelfScrollPositions(dom.extraShelves);
-      dom.extraShelves.prepend(targetShelf);
-      revealShelvesInViewport();
-      window.requestAnimationFrame(() => restoreWindowScrollInstant(scrollY));
-    } else {
-      renderSelectedPlaylistShelves();
-      window.requestAnimationFrame(() => restoreWindowScrollInstant(scrollY));
-    }
+    renderSelectedPlaylistShelves();
+    window.requestAnimationFrame(() => restoreWindowScrollInstant(scrollY));
 
     updatePlaylistFilterButtons();
   }
