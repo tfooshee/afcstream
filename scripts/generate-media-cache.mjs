@@ -496,6 +496,22 @@ function buildSpeakerGroups(sermons = []) {
     .filter((group) => group.itemIds.length > 0);
 }
 
+function sermonsForPlaylist(sermons = [], playlistId = "") {
+  return dedupeVideosById(
+    sermons.filter((item) => (item.playlistIds || []).includes(playlistId))
+  ).filter((item) => !isUnavailableYouTubeVideo(item));
+}
+
+function findHighlightedShelf(shelfConfigs = []) {
+  const normalizedHighlight = "highlighted messages";
+  return (
+    shelfConfigs.find((shelf) => normalizeText(shelf.title) === normalizeText(normalizedHighlight)) ||
+    shelfConfigs.find((shelf) => normalizeText(shelf.title).includes("highlight")) ||
+    shelfConfigs.find((shelf) => !shelf.isLatestShelf) ||
+    null
+  );
+}
+
 async function fetchYouTubeVideoDetails(videoIds = []) {
   const details = new Map();
   const uniqueIds = [...new Set(videoIds.filter(Boolean))];
@@ -689,12 +705,18 @@ async function buildYouTubeCache() {
     prefix: "Series",
   });
   const speakerGroups = buildSpeakerGroups(sermons);
+  const latestSermons = sermonsForPlaylist(sermons, uploadsPlaylistId);
+  const highlightedShelf = findHighlightedShelf(visibleShelfConfigs);
+  const highlightedMessages = highlightedShelf ? sermonsForPlaylist(sermons, highlightedShelf.playlistId) : [];
 
   return {
     playlists,
     playlistDetails,
     shelfConfigs: visibleShelfConfigs,
     sermons,
+    latestSermons,
+    highlightedMessages,
+    highlightedPlaylistId: highlightedShelf?.playlistId || "",
     topicGroups,
     seriesGroups,
     speakerGroups,
@@ -783,7 +805,9 @@ async function spotifyAccessToken() {
 
   const clientId = process.env.SPOTIFY_CLIENT_ID || "";
   const clientSecret = process.env.SPOTIFY_CLIENT_SECRET || "";
-  if (!clientId || !clientSecret) return "";
+  if (!clientId || !clientSecret) {
+    throw new Error("SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET are required.");
+  }
 
   const response = await fetch("https://accounts.spotify.com/api/token", {
     method: "POST",
@@ -866,7 +890,9 @@ async function buildPodcastCache() {
     mediaType: "audioShelf",
     sourceUrl: source.rssUrl,
     rssUrl: source.rssUrl,
+    spotifyShowId: source.spotifyShowId,
     spotifyUrl: source.spotifyUrl,
+    applePodcastUrl: source.applePodcastUrl || "",
   }));
   const audioEpisodes = [];
 
@@ -920,15 +946,44 @@ async function buildPodcastCache() {
 function validateCache(cache) {
   const data = cache.data || {};
   const errors = [];
+  const spotifyReadyEpisodes = (data.audioEpisodes || []).filter((episode) =>
+    extractSpotifyEpisodeId(episode.spotifyEpisodeId || episode.spotifyEpisodeUrl)
+  );
 
   if (!data.sermons?.length) errors.push("No YouTube sermons were generated.");
   if (!data.shelfConfigs?.length) errors.push("No YouTube shelves were generated.");
+  if (!Object.keys(data.playlists || {}).length) errors.push("No YouTube playlists were generated.");
+  if (!data.latestSermons?.length) errors.push("No latest sermons were generated.");
+  if (!data.highlightedMessages?.length) errors.push("No highlighted messages were generated.");
+  if (!data.topicGroups?.length) errors.push("No Topic groups were generated.");
+  if (!data.seriesGroups?.length) errors.push("No Series groups were generated.");
+  if (!data.speakerGroups?.length) errors.push("No Speaker groups were generated.");
   if (!data.audioEpisodes?.length) errors.push("No podcast episodes were generated.");
-  if (REQUIRE_SPOTIFY_EPISODES && data.audioEpisodes?.some((episode) => !extractSpotifyEpisodeId(episode.spotifyEpisodeId || episode.spotifyEpisodeUrl))) {
+  if (!spotifyReadyEpisodes.length) errors.push("No Spotify-ready podcast episodes were generated.");
+  if (REQUIRE_SPOTIFY_EPISODES && spotifyReadyEpisodes.length !== (data.audioEpisodes || []).length) {
     errors.push("One or more podcast episodes is missing a Spotify episode ID.");
   }
 
   if (errors.length) throw new Error(errors.join(" "));
+}
+
+function cacheSummary(cache) {
+  const data = cache.data || {};
+  const spotifyReadyEpisodes = (data.audioEpisodes || []).filter((episode) =>
+    extractSpotifyEpisodeId(episode.spotifyEpisodeId || episode.spotifyEpisodeUrl)
+  );
+
+  return {
+    sermons: (data.sermons || []).length,
+    playlists: Object.keys(data.playlists || {}).length,
+    latestSermons: (data.latestSermons || []).length,
+    highlightedMessages: (data.highlightedMessages || []).length,
+    topicGroups: (data.topicGroups || []).length,
+    seriesGroups: (data.seriesGroups || []).length,
+    speakerGroups: (data.speakerGroups || []).length,
+    podcastEpisodes: (data.audioEpisodes || []).length,
+    spotifyReadyPodcastEpisodes: spotifyReadyEpisodes.length,
+  };
 }
 
 async function writeCache(cache) {
@@ -955,6 +1010,9 @@ async function main() {
       playlists: youtubeData.playlists,
       playlistDetails: youtubeData.playlistDetails,
       shelfConfigs: youtubeData.shelfConfigs,
+      latestSermons: youtubeData.latestSermons,
+      highlightedMessages: youtubeData.highlightedMessages,
+      highlightedPlaylistId: youtubeData.highlightedPlaylistId,
       topicGroups: youtubeData.topicGroups,
       seriesGroups: youtubeData.seriesGroups,
       speakerGroups: youtubeData.speakerGroups,
@@ -970,13 +1028,17 @@ async function main() {
   };
 
   await writeCache(cache);
+  const summary = cacheSummary(cache);
+  console.log("Anchor Faith media cache summary:");
+  console.table(summary);
   console.log(
-    `Wrote media cache: ${cache.data.sermons.length} videos, ` +
-      `${cache.data.shelfConfigs.length} video shelves, ` +
-      `${cache.data.audioEpisodes.length} podcast episodes, ` +
-      `${cache.data.topicGroups.length} topic groups, ` +
-      `${cache.data.seriesGroups.length} series groups, ` +
-      `${cache.data.speakerGroups.length} speaker groups.`
+    `Wrote media cache: ${summary.sermons} sermons, ` +
+      `${summary.playlists} playlists, ` +
+      `${summary.topicGroups} Topic groups, ` +
+      `${summary.seriesGroups} Series groups, ` +
+      `${summary.speakerGroups} Speaker groups, ` +
+      `${summary.podcastEpisodes} podcast episodes, ` +
+      `${summary.spotifyReadyPodcastEpisodes} Spotify-ready podcast episodes.`
   );
 }
 

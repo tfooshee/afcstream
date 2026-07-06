@@ -26,6 +26,16 @@ The generated cache should be committed/deployed with the app so visitors get an
 
 The generator validates the full cache before replacing `media-cache.json` or `media-cache.js`. If YouTube, RSS, or Spotify fails, the previous cache files stay intact.
 
+## GitHub Pages deployment
+
+The repository workflow at `.github/workflows/deploy.yml` generates the cache during deployment. Add these repository secrets before deploying:
+
+- `YOUTUBE_API_KEY`
+- `SPOTIFY_CLIENT_ID`
+- `SPOTIFY_CLIENT_SECRET`
+
+GitHub Pages should be configured to deploy from GitHub Actions.
+
 ## Visitor-side behavior
 
 For v1.1, keep visitor-side live refresh disabled. The browser should simply:
