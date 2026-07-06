@@ -6,6 +6,7 @@
   let sermons = [];
   let audioEpisodes = [];
   let shelfConfigs = [];
+  let collectionGroupConfigs = { topic: [], series: [], speaker: [] };
   let podcastShelfConfigs = mergePodcastSources(
     Array.isArray(prototypeData.dataSources?.podcasts) ? prototypeData.dataSources.podcasts : [],
     Array.isArray(runtimeConfig.podcasts) ? runtimeConfig.podcasts : runtimeConfig.dataSources?.podcasts || []
@@ -104,6 +105,7 @@
   let deferredRefreshPatchTimer = 0;
   let heroSlideIndex = 0;
   let heroCarouselTimer = 0;
+  let previousHeroImage = "";
   const HERO_CAROUSEL_INTERVAL_MS = 12000;
 
   function iconPlay() {
@@ -269,6 +271,15 @@
     return combinedMedia.filter((item) => item.mediaType === mediaType);
   }
 
+  function normalizeCollectionGroupCache(data = {}) {
+    const grouped = data.collectionGroups || {};
+    return {
+      topic: clonePlain(data.topicGroups || grouped.topic || []) || [],
+      series: clonePlain(data.seriesGroups || grouped.series || []) || [],
+      speaker: clonePlain(data.speakerGroups || grouped.speaker || []) || [],
+    };
+  }
+
   function applyMediaDataset(data = {}, source = "cache") {
     const nextPlaylists = {
       ...(prototypeData.playlists || {}),
@@ -284,6 +295,7 @@
       : Array.isArray(data.podcastShelves)
         ? data.podcastShelves
         : [];
+    const nextCollectionGroups = normalizeCollectionGroupCache(data);
     const nextSermons = [
       ...(Array.isArray(data.sermons) ? data.sermons : []),
       ...(Array.isArray(data.videos) ? data.videos : []),
@@ -297,6 +309,7 @@
 
     resetPlaylistRegistry(nextPlaylists);
     shelfConfigs = clonePlain(nextShelfConfigs) || [];
+    collectionGroupConfigs = nextCollectionGroups;
     podcastShelfConfigs = mergePodcastSources(podcastShelfConfigs, clonePlain(nextPodcastConfigs) || []);
     sermons = dedupeMediaItems(clonePlain(nextSermons) || []);
     audioEpisodes = dedupeMediaItems(clonePlain(nextAudioEpisodes) || []);
@@ -341,6 +354,7 @@
     return {
       playlists: clonePlain(playlists) || {},
       shelfConfigs: clonePlain(shelfConfigs) || [],
+      collectionGroupConfigs: clonePlain(collectionGroupConfigs) || { topic: [], series: [], speaker: [] },
       podcastShelfConfigs: clonePlain(podcastShelfConfigs) || [],
       sermons: clonePlain(sermons) || [],
       audioEpisodes: clonePlain(audioEpisodes) || [],
@@ -350,6 +364,7 @@
   function restoreYouTubeDataset(snapshot, previousState) {
     resetPlaylistRegistry(snapshot.playlists || {});
     shelfConfigs = snapshot.shelfConfigs || [];
+    collectionGroupConfigs = snapshot.collectionGroupConfigs || collectionGroupConfigs;
     sermons = snapshot.sermons || [];
     dataState.youtube = previousState || dataState.youtube;
     rebuildMediaLookups();
@@ -419,13 +434,6 @@
   }
 
   async function hydrateBundledMediaCacheInBackground() {
-    if (cacheState.hasCache) return false;
-    const bundledCache = await readBundledMediaCache();
-    if (applyMediaCacheEnvelope(bundledCache)) {
-      saveMediaCache("media-cache.json");
-      return true;
-    }
-
     return false;
   }
 
@@ -1118,9 +1126,8 @@
   }
 
   async function loadRealData(options = {}) {
-    const results = await Promise.all([loadYouTubeData(options), loadPodcastData(options)]);
-    rebuildMediaLookups();
-    return results;
+    void options;
+    return [];
   }
 
   function cleanDescriptionText(value) {
@@ -1447,18 +1454,7 @@
       });
     }
 
-    if (titleParts.length === 2) {
-      const trailingSpeakerMatch = canonicalSpeakerFromControlledText(titleParts[1], {
-        allowUniquePastorFirstName: true,
-        allowBareUniqueFirstName: true,
-      });
-      if (trailingSpeakerMatch) return trailingSpeakerMatch;
-    }
-
-    const titleFallback = titleParts.length === 2 ? titleParts[0] : rawTitle;
-    return canonicalSpeakerFromControlledText(titleFallback, {
-      allowUniquePastorFirstName: true,
-    });
+    return null;
   }
 
   function isUnavailableYouTubeVideo(video) {
@@ -1642,6 +1638,47 @@
     return `collection-${filterId}-${normalizedText(value)}`;
   }
 
+  function itemsForCachedCollectionGroup(group) {
+    const inlineItems = Array.isArray(group.items)
+      ? group.items.filter((item) => item && typeof item === "object")
+      : [];
+    const itemIds = [
+      ...(Array.isArray(group.itemIds) ? group.itemIds : []),
+      ...(Array.isArray(group.items)
+        ? group.items.filter((item) => typeof item === "string" || typeof item === "number")
+        : []),
+    ];
+    const resolvedItems = itemIds
+      .map((id) => findMediaItemById(id, "video"))
+      .filter(Boolean);
+
+    return dedupeMediaItems([...inlineItems, ...resolvedItems])
+      .map((item) => ({ ...item, mediaType: "video" }))
+      .filter((item) => !isUnavailableYouTubeVideo(item));
+  }
+
+  function cachedCollectionGroupsFor(filterId) {
+    const cachedGroups = collectionGroupConfigs[filterId] || [];
+    return cachedGroups
+      .map((group) => {
+        const label = group.optionLabel || group.title || group.rawCollectionTitle || "";
+        const id = group.id || collectionGroupId(filterId, label);
+        const items = itemsForCachedCollectionGroup(group);
+
+        return {
+          ...group,
+          id,
+          collectionType: group.collectionType || filterId,
+          optionLabel: label,
+          title: label,
+          subtitle: "",
+          mediaType: "video",
+          items,
+        };
+      })
+      .filter((group) => group.items.length > 0);
+  }
+
   function getCollectionDisplayLabel(rawTitle, selectedCollection) {
     if (!rawTitle) return "";
 
@@ -1714,6 +1751,8 @@
   function collectionGroupsFor(filterId) {
     const filter = collectionFilterById(filterId);
     if (!filter) return [];
+    const cachedGroups = cachedCollectionGroupsFor(filterId);
+    if (cachedGroups.length) return cachedGroups;
     if (filter.id === "speaker" || filter.type === "speaker") return speakerCollectionGroups();
     return playlistCollectionGroupsFor(filter);
   }
@@ -1861,9 +1900,13 @@
     const featured = heroItems[heroSlideIndex];
     dom.hero.classList.remove("af-hero--state");
     const heroImage = highQualityYouTubeImage(featured) || featured.heroImage || featured.thumbnail;
+    const heroPrevImage = previousHeroImage && previousHeroImage !== heroImage ? previousHeroImage : "";
     dom.hero.style.setProperty("--hero-image", `url("${heroImage}")`);
+    dom.hero.style.setProperty("--hero-prev-image", heroPrevImage ? `url("${heroPrevImage}")` : "none");
     const heroMeta = [featured.minister, featured.date].filter(Boolean).join(" • ");
     dom.hero.innerHTML = `
+      ${heroPrevImage ? `<div class="af-hero__bg af-hero__bg--previous" aria-hidden="true"></div>` : ""}
+      <div class="af-hero__bg af-hero__bg--current" aria-hidden="true"></div>
       <div class="af-hero__content af-hero__content--carousel" data-cms-item-id="${featured.id}" data-hero-slide="${heroSlideIndex}">
         <div class="af-hero__slide-copy" aria-live="polite">
           <p class="af-kicker">Featured Sermon</p>
@@ -1894,6 +1937,7 @@
           .join("")}
       </div>
     `;
+    previousHeroImage = heroImage;
   }
 
   function renderMediaCard(item) {
@@ -2065,6 +2109,7 @@
         </div>
         <div class="af-playlist-filter__control-row">
           <div class="af-playlist-filter__buttons" role="tablist" aria-label="Playlist filters">
+            <span class="af-playlist-filter__hover-pill" aria-hidden="true"></span>
             <span class="af-playlist-filter__active-pill" aria-hidden="true"></span>
             ${filters
               .map(
@@ -2174,6 +2219,25 @@
       button.classList.toggle("is-active", isActive);
       button.setAttribute("aria-pressed", String(isActive));
     });
+  }
+
+  function setCollectionHoverPill(button) {
+    const control = button?.closest(".af-playlist-filter__buttons");
+    const filterSection = button?.closest("[data-component='playlist-filter-buttons']");
+    if (!control || !filterSection) return;
+
+    const buttons = [...control.querySelectorAll("[data-playlist-filter]")];
+    const index = buttons.indexOf(button);
+    if (index < 0) return;
+
+    filterSection.style.setProperty("--hover-filter-index", index);
+    filterSection.classList.add("is-hovering-filter");
+  }
+
+  function clearCollectionHoverPill(control) {
+    const filterSection = control?.closest?.("[data-component='playlist-filter-buttons']");
+    if (!filterSection) return;
+    filterSection.classList.remove("is-hovering-filter");
   }
 
   function renderSelectedPlaylistShelves() {
@@ -3185,6 +3249,17 @@
       if (!audioSeek) return;
       seekCustomAudioPlayer(audioSeek);
     });
+
+    document.addEventListener("pointerover", (event) => {
+      const filterButton = event.target.closest("[data-playlist-filter]");
+      if (filterButton) setCollectionHoverPill(filterButton);
+    }, { passive: true });
+
+    document.addEventListener("pointerout", (event) => {
+      const control = event.target.closest(".af-playlist-filter__buttons");
+      if (!control || control.contains(event.relatedTarget)) return;
+      clearCollectionHoverPill(control);
+    }, { passive: true });
 
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape") closeModal();

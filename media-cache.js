@@ -1025,7 +1025,503 @@
           "Kingdom First Business Alliance Podcast"
         ]
       }
-    ]
+    ],
+    "playlistDetails": {
+      "uploads-latest": {
+        "id": "uploads-latest",
+        "title": "Latest Sermons",
+        "description": "",
+        "thumbnailUrl": ""
+      },
+      "highlighted-messages": {
+        "id": "highlighted-messages",
+        "title": "Highlighted Messages",
+        "description": "",
+        "thumbnailUrl": ""
+      },
+      "series-spiritual-fathers": {
+        "id": "series-spiritual-fathers",
+        "title": "Series | Spiritual Fathers & Sons",
+        "description": "",
+        "thumbnailUrl": ""
+      },
+      "topic-faith": {
+        "id": "topic-faith",
+        "title": "Topic | Faith",
+        "description": "",
+        "thumbnailUrl": ""
+      },
+      "topic-righteousness": {
+        "id": "topic-righteousness",
+        "title": "Topic | Righteousness",
+        "description": "",
+        "thumbnailUrl": ""
+      },
+      "topic-kingdom-direction": {
+        "id": "topic-kingdom-direction",
+        "title": "Topic | Kingdom Direction",
+        "description": "",
+        "thumbnailUrl": ""
+      },
+      "series-kingdom-identity": {
+        "id": "series-kingdom-identity",
+        "title": "Series | Kingdom Identity",
+        "description": "",
+        "thumbnailUrl": ""
+      },
+      "series-reigning-church": {
+        "id": "series-reigning-church",
+        "title": "Series | The Reigning Church",
+        "description": "",
+        "thumbnailUrl": ""
+      },
+      "topic-kingdom-growth": {
+        "id": "topic-kingdom-growth",
+        "title": "Topic | Kingdom Growth",
+        "description": "",
+        "thumbnailUrl": ""
+      },
+      "topic-worship": {
+        "id": "topic-worship",
+        "title": "Topic | Worship",
+        "description": "",
+        "thumbnailUrl": ""
+      }
+    },
+    "topicGroups": [
+      {
+        "id": "collection-topic-topic-faith",
+        "title": "Faith",
+        "optionLabel": "Faith",
+        "collectionType": "topic",
+        "mediaType": "video",
+        "playlistId": "topic-faith",
+        "rawCollectionTitle": "Topic | Faith",
+        "description": "",
+        "thumbnailUrl": "https://i.ytimg.com/vi/XC1HZOA7yvo/hqdefault.jpg",
+        "itemIds": [
+          "XC1HZOA7yvo",
+          "m8zPNlMPsg0",
+          "FIn3Vz6Es0s",
+          "9rrjoa5Hvdk",
+          "u6gQPIUvFcY",
+          "8P-JostHZDo",
+          "bfBdnqQ4Q4k"
+        ]
+      },
+      {
+        "id": "collection-topic-topic-righteousness",
+        "title": "Righteousness",
+        "optionLabel": "Righteousness",
+        "collectionType": "topic",
+        "mediaType": "video",
+        "playlistId": "topic-righteousness",
+        "rawCollectionTitle": "Topic | Righteousness",
+        "description": "",
+        "thumbnailUrl": "https://i.ytimg.com/vi/FIn3Vz6Es0s/hqdefault.jpg",
+        "itemIds": [
+          "FIn3Vz6Es0s",
+          "Pq7qetsKCF0",
+          "bfBdnqQ4Q4k"
+        ]
+      },
+      {
+        "id": "collection-topic-topic-kingdom-direction",
+        "title": "Kingdom Direction",
+        "optionLabel": "Kingdom Direction",
+        "collectionType": "topic",
+        "mediaType": "video",
+        "playlistId": "topic-kingdom-direction",
+        "rawCollectionTitle": "Topic | Kingdom Direction",
+        "description": "",
+        "thumbnailUrl": "https://i.ytimg.com/vi/K9kAK7vn--s/hqdefault.jpg",
+        "itemIds": [
+          "K9kAK7vn--s",
+          "krkYDxDw3iE"
+        ]
+      },
+      {
+        "id": "collection-topic-topic-kingdom-growth",
+        "title": "Kingdom Growth",
+        "optionLabel": "Kingdom Growth",
+        "collectionType": "topic",
+        "mediaType": "video",
+        "playlistId": "topic-kingdom-growth",
+        "rawCollectionTitle": "Topic | Kingdom Growth",
+        "description": "",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Raznj0gbY1o/hqdefault.jpg",
+        "itemIds": [
+          "Raznj0gbY1o"
+        ]
+      },
+      {
+        "id": "collection-topic-topic-worship",
+        "title": "Worship",
+        "optionLabel": "Worship",
+        "collectionType": "topic",
+        "mediaType": "video",
+        "playlistId": "topic-worship",
+        "rawCollectionTitle": "Topic | Worship",
+        "description": "",
+        "thumbnailUrl": "https://i.ytimg.com/vi/9IV8YgrHrb0/hqdefault.jpg",
+        "itemIds": [
+          "9IV8YgrHrb0"
+        ]
+      }
+    ],
+    "seriesGroups": [
+      {
+        "id": "collection-series-series-spiritual-fathers",
+        "title": "Spiritual Fathers & Sons",
+        "optionLabel": "Spiritual Fathers & Sons",
+        "collectionType": "series",
+        "mediaType": "video",
+        "playlistId": "series-spiritual-fathers",
+        "rawCollectionTitle": "Series | Spiritual Fathers & Sons",
+        "description": "",
+        "thumbnailUrl": "https://i.ytimg.com/vi/OdAl2-i8q_Y/hqdefault.jpg",
+        "itemIds": [
+          "OdAl2-i8q_Y",
+          "QB_lD-9XJAg"
+        ]
+      },
+      {
+        "id": "collection-series-series-kingdom-identity",
+        "title": "Kingdom Identity",
+        "optionLabel": "Kingdom Identity",
+        "collectionType": "series",
+        "mediaType": "video",
+        "playlistId": "series-kingdom-identity",
+        "rawCollectionTitle": "Series | Kingdom Identity",
+        "description": "",
+        "thumbnailUrl": "https://i.ytimg.com/vi/u6gQPIUvFcY/hqdefault.jpg",
+        "itemIds": [
+          "u6gQPIUvFcY"
+        ]
+      },
+      {
+        "id": "collection-series-series-reigning-church",
+        "title": "The Reigning Church",
+        "optionLabel": "The Reigning Church",
+        "collectionType": "series",
+        "mediaType": "video",
+        "playlistId": "series-reigning-church",
+        "rawCollectionTitle": "Series | The Reigning Church",
+        "description": "",
+        "thumbnailUrl": "https://i.ytimg.com/vi/8P-JostHZDo/hqdefault.jpg",
+        "itemIds": [
+          "8P-JostHZDo",
+          "7zwLt4XyQ3I",
+          "UFVVAr2nm4E"
+        ]
+      }
+    ],
+    "speakerGroups": [
+      {
+        "id": "collection-speaker-ap-earl-glisson",
+        "title": "Ap. Earl Glisson",
+        "optionLabel": "Ap. Earl Glisson",
+        "collectionType": "speaker",
+        "mediaType": "video",
+        "rawCollectionTitle": "Ap. Earl Glisson",
+        "itemIds": [
+          "OdAl2-i8q_Y",
+          "QB_lD-9XJAg",
+          "m8zPNlMPsg0",
+          "FIn3Vz6Es0s",
+          "9rrjoa5Hvdk",
+          "7zwLt4XyQ3I",
+          "UFVVAr2nm4E",
+          "Pq7qetsKCF0"
+        ]
+      },
+      {
+        "id": "collection-speaker-ap-marci-glisson",
+        "title": "Ap. Marci Glisson",
+        "optionLabel": "Ap. Marci Glisson",
+        "collectionType": "speaker",
+        "mediaType": "video",
+        "rawCollectionTitle": "Ap. Marci Glisson",
+        "itemIds": [
+          "XC1HZOA7yvo",
+          "8P-JostHZDo"
+        ]
+      },
+      {
+        "id": "collection-speaker-p-mike-krulcik",
+        "title": "P. Mike Krulcik",
+        "optionLabel": "P. Mike Krulcik",
+        "collectionType": "speaker",
+        "mediaType": "video",
+        "rawCollectionTitle": "P. Mike Krulcik",
+        "itemIds": [
+          "u6gQPIUvFcY"
+        ]
+      },
+      {
+        "id": "collection-speaker-p-angie-krulcik",
+        "title": "P. Angie Krulcik",
+        "optionLabel": "P. Angie Krulcik",
+        "collectionType": "speaker",
+        "mediaType": "video",
+        "rawCollectionTitle": "P. Angie Krulcik",
+        "itemIds": [
+          "9IV8YgrHrb0"
+        ]
+      },
+      {
+        "id": "collection-speaker-p-chase-glisson",
+        "title": "P. Chase Glisson",
+        "optionLabel": "P. Chase Glisson",
+        "collectionType": "speaker",
+        "mediaType": "video",
+        "rawCollectionTitle": "P. Chase Glisson",
+        "itemIds": [
+          "Raznj0gbY1o",
+          "bfBdnqQ4Q4k"
+        ]
+      },
+      {
+        "id": "collection-speaker-p-joshua-clay",
+        "title": "P. Joshua Clay",
+        "optionLabel": "P. Joshua Clay",
+        "collectionType": "speaker",
+        "mediaType": "video",
+        "rawCollectionTitle": "P. Joshua Clay",
+        "itemIds": [
+          "K9kAK7vn--s"
+        ]
+      },
+      {
+        "id": "collection-speaker-p-darrell-huffman",
+        "title": "P. Darrell Huffman",
+        "optionLabel": "P. Darrell Huffman",
+        "collectionType": "speaker",
+        "mediaType": "video",
+        "rawCollectionTitle": "P. Darrell Huffman",
+        "itemIds": [
+          "krkYDxDw3iE"
+        ]
+      }
+    ],
+    "collectionGroups": {
+      "topic": [
+        {
+          "id": "collection-topic-topic-faith",
+          "title": "Faith",
+          "optionLabel": "Faith",
+          "collectionType": "topic",
+          "mediaType": "video",
+          "playlistId": "topic-faith",
+          "rawCollectionTitle": "Topic | Faith",
+          "description": "",
+          "thumbnailUrl": "https://i.ytimg.com/vi/XC1HZOA7yvo/hqdefault.jpg",
+          "itemIds": [
+            "XC1HZOA7yvo",
+            "m8zPNlMPsg0",
+            "FIn3Vz6Es0s",
+            "9rrjoa5Hvdk",
+            "u6gQPIUvFcY",
+            "8P-JostHZDo",
+            "bfBdnqQ4Q4k"
+          ]
+        },
+        {
+          "id": "collection-topic-topic-righteousness",
+          "title": "Righteousness",
+          "optionLabel": "Righteousness",
+          "collectionType": "topic",
+          "mediaType": "video",
+          "playlistId": "topic-righteousness",
+          "rawCollectionTitle": "Topic | Righteousness",
+          "description": "",
+          "thumbnailUrl": "https://i.ytimg.com/vi/FIn3Vz6Es0s/hqdefault.jpg",
+          "itemIds": [
+            "FIn3Vz6Es0s",
+            "Pq7qetsKCF0",
+            "bfBdnqQ4Q4k"
+          ]
+        },
+        {
+          "id": "collection-topic-topic-kingdom-direction",
+          "title": "Kingdom Direction",
+          "optionLabel": "Kingdom Direction",
+          "collectionType": "topic",
+          "mediaType": "video",
+          "playlistId": "topic-kingdom-direction",
+          "rawCollectionTitle": "Topic | Kingdom Direction",
+          "description": "",
+          "thumbnailUrl": "https://i.ytimg.com/vi/K9kAK7vn--s/hqdefault.jpg",
+          "itemIds": [
+            "K9kAK7vn--s",
+            "krkYDxDw3iE"
+          ]
+        },
+        {
+          "id": "collection-topic-topic-kingdom-growth",
+          "title": "Kingdom Growth",
+          "optionLabel": "Kingdom Growth",
+          "collectionType": "topic",
+          "mediaType": "video",
+          "playlistId": "topic-kingdom-growth",
+          "rawCollectionTitle": "Topic | Kingdom Growth",
+          "description": "",
+          "thumbnailUrl": "https://i.ytimg.com/vi/Raznj0gbY1o/hqdefault.jpg",
+          "itemIds": [
+            "Raznj0gbY1o"
+          ]
+        },
+        {
+          "id": "collection-topic-topic-worship",
+          "title": "Worship",
+          "optionLabel": "Worship",
+          "collectionType": "topic",
+          "mediaType": "video",
+          "playlistId": "topic-worship",
+          "rawCollectionTitle": "Topic | Worship",
+          "description": "",
+          "thumbnailUrl": "https://i.ytimg.com/vi/9IV8YgrHrb0/hqdefault.jpg",
+          "itemIds": [
+            "9IV8YgrHrb0"
+          ]
+        }
+      ],
+      "series": [
+        {
+          "id": "collection-series-series-spiritual-fathers",
+          "title": "Spiritual Fathers & Sons",
+          "optionLabel": "Spiritual Fathers & Sons",
+          "collectionType": "series",
+          "mediaType": "video",
+          "playlistId": "series-spiritual-fathers",
+          "rawCollectionTitle": "Series | Spiritual Fathers & Sons",
+          "description": "",
+          "thumbnailUrl": "https://i.ytimg.com/vi/OdAl2-i8q_Y/hqdefault.jpg",
+          "itemIds": [
+            "OdAl2-i8q_Y",
+            "QB_lD-9XJAg"
+          ]
+        },
+        {
+          "id": "collection-series-series-kingdom-identity",
+          "title": "Kingdom Identity",
+          "optionLabel": "Kingdom Identity",
+          "collectionType": "series",
+          "mediaType": "video",
+          "playlistId": "series-kingdom-identity",
+          "rawCollectionTitle": "Series | Kingdom Identity",
+          "description": "",
+          "thumbnailUrl": "https://i.ytimg.com/vi/u6gQPIUvFcY/hqdefault.jpg",
+          "itemIds": [
+            "u6gQPIUvFcY"
+          ]
+        },
+        {
+          "id": "collection-series-series-reigning-church",
+          "title": "The Reigning Church",
+          "optionLabel": "The Reigning Church",
+          "collectionType": "series",
+          "mediaType": "video",
+          "playlistId": "series-reigning-church",
+          "rawCollectionTitle": "Series | The Reigning Church",
+          "description": "",
+          "thumbnailUrl": "https://i.ytimg.com/vi/8P-JostHZDo/hqdefault.jpg",
+          "itemIds": [
+            "8P-JostHZDo",
+            "7zwLt4XyQ3I",
+            "UFVVAr2nm4E"
+          ]
+        }
+      ],
+      "speaker": [
+        {
+          "id": "collection-speaker-ap-earl-glisson",
+          "title": "Ap. Earl Glisson",
+          "optionLabel": "Ap. Earl Glisson",
+          "collectionType": "speaker",
+          "mediaType": "video",
+          "rawCollectionTitle": "Ap. Earl Glisson",
+          "itemIds": [
+            "OdAl2-i8q_Y",
+            "QB_lD-9XJAg",
+            "m8zPNlMPsg0",
+            "FIn3Vz6Es0s",
+            "9rrjoa5Hvdk",
+            "7zwLt4XyQ3I",
+            "UFVVAr2nm4E",
+            "Pq7qetsKCF0"
+          ]
+        },
+        {
+          "id": "collection-speaker-ap-marci-glisson",
+          "title": "Ap. Marci Glisson",
+          "optionLabel": "Ap. Marci Glisson",
+          "collectionType": "speaker",
+          "mediaType": "video",
+          "rawCollectionTitle": "Ap. Marci Glisson",
+          "itemIds": [
+            "XC1HZOA7yvo",
+            "8P-JostHZDo"
+          ]
+        },
+        {
+          "id": "collection-speaker-p-mike-krulcik",
+          "title": "P. Mike Krulcik",
+          "optionLabel": "P. Mike Krulcik",
+          "collectionType": "speaker",
+          "mediaType": "video",
+          "rawCollectionTitle": "P. Mike Krulcik",
+          "itemIds": [
+            "u6gQPIUvFcY"
+          ]
+        },
+        {
+          "id": "collection-speaker-p-angie-krulcik",
+          "title": "P. Angie Krulcik",
+          "optionLabel": "P. Angie Krulcik",
+          "collectionType": "speaker",
+          "mediaType": "video",
+          "rawCollectionTitle": "P. Angie Krulcik",
+          "itemIds": [
+            "9IV8YgrHrb0"
+          ]
+        },
+        {
+          "id": "collection-speaker-p-chase-glisson",
+          "title": "P. Chase Glisson",
+          "optionLabel": "P. Chase Glisson",
+          "collectionType": "speaker",
+          "mediaType": "video",
+          "rawCollectionTitle": "P. Chase Glisson",
+          "itemIds": [
+            "Raznj0gbY1o",
+            "bfBdnqQ4Q4k"
+          ]
+        },
+        {
+          "id": "collection-speaker-p-joshua-clay",
+          "title": "P. Joshua Clay",
+          "optionLabel": "P. Joshua Clay",
+          "collectionType": "speaker",
+          "mediaType": "video",
+          "rawCollectionTitle": "P. Joshua Clay",
+          "itemIds": [
+            "K9kAK7vn--s"
+          ]
+        },
+        {
+          "id": "collection-speaker-p-darrell-huffman",
+          "title": "P. Darrell Huffman",
+          "optionLabel": "P. Darrell Huffman",
+          "collectionType": "speaker",
+          "mediaType": "video",
+          "rawCollectionTitle": "P. Darrell Huffman",
+          "itemIds": [
+            "krkYDxDw3iE"
+          ]
+        }
+      ]
+    }
   }
 };
 })();

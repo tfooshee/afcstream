@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { readFile, writeFile } from "node:fs/promises";
+import { readFile, rename, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -249,18 +249,7 @@ function getCanonicalSpeakerName({ rawTitle = "", parsedMinister = "" } = {}) {
     });
   }
 
-  if (titleParts.length === 2) {
-    const trailingSpeakerMatch = canonicalSpeakerFromControlledText(titleParts[1], {
-      allowUniquePastorFirstName: true,
-      allowBareUniqueFirstName: true,
-    });
-    if (trailingSpeakerMatch) return trailingSpeakerMatch;
-  }
-
-  const titleFallback = titleParts.length === 2 ? titleParts[0] : String(rawTitle || "");
-  return canonicalSpeakerFromControlledText(titleFallback, {
-    allowUniquePastorFirstName: true,
-  });
+  return null;
 }
 
 function extractSpotifyEpisodeId(value = "") {
@@ -419,6 +408,94 @@ function isUnavailableYouTubeVideo(video = {}) {
   );
 }
 
+function getCollectionDisplayLabel(rawTitle, selectedCollection) {
+  if (!rawTitle) return "";
+
+  let label = String(rawTitle).trim();
+  const prefixes = ["Topic", "Series", "Speaker"];
+  const activePrefix =
+    selectedCollection ||
+    prefixes.find((prefix) => label.toLowerCase().startsWith(prefix.toLowerCase()));
+
+  if (activePrefix && label.toLowerCase().startsWith(activePrefix.toLowerCase())) {
+    label = label.slice(activePrefix.length).trim();
+  }
+
+  label = label.replace(/^(\||-|:|–|—)+\s*/g, "").trim();
+  return label || String(rawTitle).trim();
+}
+
+function playlistStartsWith(value, prefix) {
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .startsWith(String(prefix || "").trim().toLowerCase());
+}
+
+function dedupeVideosById(items = []) {
+  const seen = new Set();
+  return items.filter((item) => {
+    const key = item.youtubeVideoId || item.youtubeId || item.id;
+    if (!key || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function buildPlaylistCollectionGroups({ shelfConfigs = [], sermons = [], type = "", prefix = "" }) {
+  return shelfConfigs
+    .filter((shelf) => playlistStartsWith(shelf.title, prefix))
+    .map((shelf) => {
+      const items = dedupeVideosById(
+        sermons.filter((item) => (item.playlistIds || []).includes(shelf.playlistId))
+      ).filter((item) => !isUnavailableYouTubeVideo(item));
+      const label = getCollectionDisplayLabel(shelf.title, prefix);
+
+      return {
+        id: `collection-${type}-${slugify(shelf.playlistId || label)}`,
+        title: label,
+        optionLabel: label,
+        collectionType: type,
+        mediaType: "video",
+        playlistId: shelf.playlistId,
+        rawCollectionTitle: shelf.title,
+        description: shelf.description || shelf.subtitle || "",
+        thumbnailUrl: shelf.thumbnailUrl || items[0]?.thumbnailUrl || "",
+        itemIds: items.map((item) => item.id),
+      };
+    })
+    .filter((group) => group.itemIds.length > 0);
+}
+
+function buildSpeakerGroups(sermons = []) {
+  const speakerMap = new Map();
+
+  sermons.forEach((item) => {
+    if (isUnavailableYouTubeVideo(item) || !item.canonicalSpeaker) return;
+    const key = normalizeSpeakerText(item.canonicalSpeaker);
+    const group = speakerMap.get(key) || {
+      id: `collection-speaker-${slugify(item.canonicalSpeaker)}`,
+      title: item.canonicalSpeaker,
+      optionLabel: item.canonicalSpeaker,
+      collectionType: "speaker",
+      mediaType: "video",
+      rawCollectionTitle: item.canonicalSpeaker,
+      itemIds: [],
+    };
+
+    group.itemIds.push(item.id);
+    speakerMap.set(key, group);
+  });
+
+  return APPROVED_SPEAKERS.map((speaker) => speakerMap.get(normalizeSpeakerText(speaker.displayName)))
+    .filter(Boolean)
+    .map((group) => ({
+      ...group,
+      itemIds: [...new Set(group.itemIds)],
+    }))
+    .filter((group) => group.itemIds.length > 0);
+}
+
 async function fetchYouTubeVideoDetails(videoIds = []) {
   const details = new Map();
   const uniqueIds = [...new Set(videoIds.filter(Boolean))];
@@ -455,14 +532,24 @@ async function buildYouTubeCache() {
   const channelId = channel.id;
   const uploadsPlaylistId = channel.contentDetails?.relatedPlaylists?.uploads || "";
   const playlists = {};
+  const playlistDetails = {};
   const shelfConfigs = [];
 
   if (uploadsPlaylistId) {
     playlists[uploadsPlaylistId] = "Latest Sermons";
+    playlistDetails[uploadsPlaylistId] = {
+      id: uploadsPlaylistId,
+      title: "Latest Sermons",
+      description: cleanText(channel.snippet?.description || ""),
+      thumbnailUrl: youtubeThumbnail(channel.snippet),
+      isLatestShelf: true,
+    };
     shelfConfigs.push({
       id: "latest-sermons",
       title: "Latest Sermons",
       subtitle: "",
+      description: cleanText(channel.snippet?.description || ""),
+      thumbnailUrl: youtubeThumbnail(channel.snippet),
       mediaType: "video",
       playlistId: uploadsPlaylistId,
       isLatestShelf: true,
@@ -477,11 +564,23 @@ async function buildYouTubeCache() {
 
   channelPlaylists.forEach((playlist) => {
     const title = cleanText(playlist.snippet?.title || "Untitled Playlist");
+    const description = cleanText(playlist.snippet?.description || "");
+    const thumbnailUrl = youtubeThumbnail(playlist.snippet);
     playlists[playlist.id] = title;
+    playlistDetails[playlist.id] = {
+      id: playlist.id,
+      title,
+      description,
+      thumbnailUrl,
+      itemCount: playlist.contentDetails?.itemCount || 0,
+      publishedAt: playlist.snippet?.publishedAt || "",
+    };
     shelfConfigs.push({
       id: `youtube-${playlist.id}`,
       title,
-      subtitle: cleanText(playlist.snippet?.description || ""),
+      subtitle: description,
+      description,
+      thumbnailUrl,
       mediaType: "video",
       playlistId: playlist.id,
     });
@@ -533,6 +632,7 @@ async function buildYouTubeCache() {
         mediaType: "video",
         ...titleData,
         canonicalSpeaker,
+        speaker: canonicalSpeaker,
         title: titleData.mainTitle,
         date: formatDate(detail?.snippet?.publishedAt || playlistItem.contentDetails?.videoPublishedAt || playlistItem.snippet?.publishedAt),
         duration: formatYouTubeDuration(detail?.contentDetails?.duration),
@@ -564,7 +664,41 @@ async function buildYouTubeCache() {
     sermons.some((item) => item.playlistIds.includes(shelf.playlistId))
   );
 
-  return { playlists, shelfConfigs: visibleShelfConfigs, sermons };
+  visibleShelfConfigs.forEach((shelf) => {
+    const firstItem = sermons.find((item) => item.playlistIds.includes(shelf.playlistId));
+    shelf.thumbnailUrl = shelf.thumbnailUrl || firstItem?.thumbnailUrl || "";
+    shelf.description = shelf.description || shelf.subtitle || "";
+    if (playlistDetails[shelf.playlistId]) {
+      playlistDetails[shelf.playlistId].thumbnailUrl =
+        playlistDetails[shelf.playlistId].thumbnailUrl || shelf.thumbnailUrl;
+      playlistDetails[shelf.playlistId].description =
+        playlistDetails[shelf.playlistId].description || shelf.description;
+    }
+  });
+
+  const topicGroups = buildPlaylistCollectionGroups({
+    shelfConfigs: visibleShelfConfigs,
+    sermons,
+    type: "topic",
+    prefix: "Topic",
+  });
+  const seriesGroups = buildPlaylistCollectionGroups({
+    shelfConfigs: visibleShelfConfigs,
+    sermons,
+    type: "series",
+    prefix: "Series",
+  });
+  const speakerGroups = buildSpeakerGroups(sermons);
+
+  return {
+    playlists,
+    playlistDetails,
+    shelfConfigs: visibleShelfConfigs,
+    sermons,
+    topicGroups,
+    seriesGroups,
+    speakerGroups,
+  };
 }
 
 function xmlTagText(block = "", tagName = "") {
@@ -799,11 +933,15 @@ function validateCache(cache) {
 
 async function writeCache(cache) {
   validateCache(cache);
-  await writeFile(mediaCacheJsonPath, `${JSON.stringify(cache, null, 2)}\n`);
-  await writeFile(
-    mediaCacheJsPath,
-    `(function () {\n  window.AnchorFaithMediaCache = ${JSON.stringify(cache, null, 2)};\n})();\n`
-  );
+  const jsonOutput = `${JSON.stringify(cache, null, 2)}\n`;
+  const jsOutput = `(function () {\n  window.AnchorFaithMediaCache = ${JSON.stringify(cache, null, 2)};\n})();\n`;
+  const tempJsonPath = `${mediaCacheJsonPath}.tmp`;
+  const tempJsPath = `${mediaCacheJsPath}.tmp`;
+
+  await writeFile(tempJsonPath, jsonOutput);
+  await writeFile(tempJsPath, jsOutput);
+  await rename(tempJsonPath, mediaCacheJsonPath);
+  await rename(tempJsPath, mediaCacheJsPath);
 }
 
 async function main() {
@@ -815,7 +953,16 @@ async function main() {
     version: CACHE_VERSION,
     data: {
       playlists: youtubeData.playlists,
+      playlistDetails: youtubeData.playlistDetails,
       shelfConfigs: youtubeData.shelfConfigs,
+      topicGroups: youtubeData.topicGroups,
+      seriesGroups: youtubeData.seriesGroups,
+      speakerGroups: youtubeData.speakerGroups,
+      collectionGroups: {
+        topic: youtubeData.topicGroups,
+        series: youtubeData.seriesGroups,
+        speaker: youtubeData.speakerGroups,
+      },
       podcastShelfConfigs: podcastData.podcastShelfConfigs,
       sermons: youtubeData.sermons,
       audioEpisodes: podcastData.audioEpisodes,
@@ -826,7 +973,10 @@ async function main() {
   console.log(
     `Wrote media cache: ${cache.data.sermons.length} videos, ` +
       `${cache.data.shelfConfigs.length} video shelves, ` +
-      `${cache.data.audioEpisodes.length} podcast episodes.`
+      `${cache.data.audioEpisodes.length} podcast episodes, ` +
+      `${cache.data.topicGroups.length} topic groups, ` +
+      `${cache.data.seriesGroups.length} series groups, ` +
+      `${cache.data.speakerGroups.length} speaker groups.`
   );
 }
 

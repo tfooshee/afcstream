@@ -4,14 +4,16 @@ This version is configured as a prebuilt-cache streaming app.
 
 ## What changed in this package
 
-- The bundled `media-cache.json` / `media-cache.js` now contains real Anchor Faith public YouTube and Spotify episode references so the page no longer opens to an empty "cached content" state.
+- The bundled `media-cache.json` / `media-cache.js` are the only visitor-side media source for v1.1.
 - The visitor browser does **not** run live YouTube/RSS/Spotify refresh for v1.1. The page renders from the bundled cache immediately.
-- Podcast episodes include episode-level Spotify IDs, allowing the modal to render the large Spotify episode player.
+- The cache generator writes complete YouTube, podcast, and Spotify episode data when run in a network-enabled environment with credentials.
+- The cache generator also writes prebuilt `topicGroups`, `seriesGroups`, and `speakerGroups`, so the browser renders collection groups instead of parsing speakers or playlists.
+- Podcast episodes must include episode-level Spotify IDs, allowing the modal to render the large Spotify episode player.
 - The hero now behaves as a three-item Featured Sermon carousel and rotates automatically every 12 seconds.
 
 ## Important production note
 
-The included cache is a real seeded cache assembled from publicly discoverable Anchor Faith YouTube/Spotify content. Before final public launch, run the generator in a network-enabled environment with credentials to replace the seeded cache with the latest complete dataset.
+Before final public launch, run the generator in a network-enabled environment with credentials to replace the cache with the latest complete dataset.
 
 ```bash
 npm install
@@ -21,6 +23,8 @@ npm run generate:cache
 ```
 
 The generated cache should be committed/deployed with the app so visitors get an immediate first paint with real media.
+
+The generator validates the full cache before replacing `media-cache.json` or `media-cache.js`. If YouTube, RSS, or Spotify fails, the previous cache files stay intact.
 
 ## Visitor-side behavior
 
