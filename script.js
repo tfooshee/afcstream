@@ -2058,9 +2058,7 @@
       title: "Highlighted Messages",
       subtitle: "",
     });
-    console.log("All video playlists:", allVideoPlaylists.length);
-    console.log("Current collection type:", currentCollectionType);
-    console.log("Visible podcast shelves:", visiblePodcastShelves.length);
+    const visiblePodcastShelves = podcastShelves.filter((feed) => feed.items.length > 0);
 
     dom.primaryShelves.innerHTML = [
       latestShelf ? renderShelfStack([latestShelf], { delayStep: 70 }) : "",
