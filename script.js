@@ -1878,7 +1878,10 @@
 
 
   function highQualityYouTubeImage(item) {
-    const videoId = item?.youtubeVideoId || item?.youtubeId || extractYouTubeId(item?.externalUrl || item?.youtubeUrl || item?.embedUrl || "");
+    const videoId =
+      item?.youtubeVideoId ||
+      item?.youtubeId ||
+      extractYouTubeVideoId(item?.externalUrl || item?.youtubeUrl || item?.embedUrl || "");
     if (!videoId) return "";
     return `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
   }
@@ -2250,8 +2253,9 @@
     if (selectedCollectionGroupId && !filteredCollectionGroups.some((group) => group.id === selectedCollectionGroupId)) {
       selectedCollectionGroupId = "";
     }
+    const activeGroups = selectedPlaylistFilterId ? filteredCollectionGroups : [];
     const visibleCollectionGroups = selectedPlaylistFilterId
-      ? moveCollectionGroupToFront(filteredCollectionGroups, selectedCollectionGroupId)
+      ? moveCollectionGroupToFront(activeGroups, selectedCollectionGroupId)
       : [];
 
     const filterSection = dom.primaryShelves.querySelector("[data-component='playlist-filter-buttons']");
