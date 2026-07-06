@@ -6,7 +6,6 @@
   let sermons = [];
   let audioEpisodes = [];
   let shelfConfigs = [];
-  let collectionGroupConfigs = { topic: [], series: [], speaker: [] };
   let podcastShelfConfigs = mergePodcastSources(
     Array.isArray(prototypeData.dataSources?.podcasts) ? prototypeData.dataSources.podcasts : [],
     Array.isArray(runtimeConfig.podcasts) ? runtimeConfig.podcasts : runtimeConfig.dataSources?.podcasts || []
@@ -96,10 +95,9 @@
   let scrollLockState = null;
   let modalTouchStartY = 0;
   let allVideoPlaylists = [];
-  let filteredCollectionGroups = [];
   let podcastShelves = [];
-  let selectedPlaylistFilterId = "";
-  let selectedCollectionGroupId = "";
+  let currentCollectionType = "";
+  let currentSelectedGroupId = "";
   let isCollectionCollapsed = false;
   let lastShelfInteractionAt = 0;
   let deferredRefreshPatchTimer = 0;
@@ -271,15 +269,6 @@
     return combinedMedia.filter((item) => item.mediaType === mediaType);
   }
 
-  function normalizeCollectionGroupCache(data = {}) {
-    const grouped = data.collectionGroups || {};
-    return {
-      topic: clonePlain(data.topicGroups || grouped.topic || []) || [],
-      series: clonePlain(data.seriesGroups || grouped.series || []) || [],
-      speaker: clonePlain(data.speakerGroups || grouped.speaker || []) || [],
-    };
-  }
-
   function applyMediaDataset(data = {}, source = "cache") {
     const nextPlaylists = {
       ...(prototypeData.playlists || {}),
@@ -295,7 +284,6 @@
       : Array.isArray(data.podcastShelves)
         ? data.podcastShelves
         : [];
-    const nextCollectionGroups = normalizeCollectionGroupCache(data);
     const nextSermons = [
       ...(Array.isArray(data.sermons) ? data.sermons : []),
       ...(Array.isArray(data.videos) ? data.videos : []),
@@ -309,7 +297,6 @@
 
     resetPlaylistRegistry(nextPlaylists);
     shelfConfigs = clonePlain(nextShelfConfigs) || [];
-    collectionGroupConfigs = nextCollectionGroups;
     podcastShelfConfigs = mergePodcastSources(podcastShelfConfigs, clonePlain(nextPodcastConfigs) || []);
     sermons = dedupeMediaItems(clonePlain(nextSermons) || []);
     audioEpisodes = dedupeMediaItems(clonePlain(nextAudioEpisodes) || []);
@@ -354,7 +341,6 @@
     return {
       playlists: clonePlain(playlists) || {},
       shelfConfigs: clonePlain(shelfConfigs) || [],
-      collectionGroupConfigs: clonePlain(collectionGroupConfigs) || { topic: [], series: [], speaker: [] },
       podcastShelfConfigs: clonePlain(podcastShelfConfigs) || [],
       sermons: clonePlain(sermons) || [],
       audioEpisodes: clonePlain(audioEpisodes) || [],
@@ -364,7 +350,6 @@
   function restoreYouTubeDataset(snapshot, previousState) {
     resetPlaylistRegistry(snapshot.playlists || {});
     shelfConfigs = snapshot.shelfConfigs || [];
-    collectionGroupConfigs = snapshot.collectionGroupConfigs || collectionGroupConfigs;
     sermons = snapshot.sermons || [];
     dataState.youtube = previousState || dataState.youtube;
     rebuildMediaLookups();
@@ -1608,19 +1593,6 @@
       .filter((playlist) => playlist.items.length > 0);
   }
 
-  function playlistStartsWith(playlistTitle, prefix) {
-    return String(playlistTitle || "")
-      .trim()
-      .toLowerCase()
-      .startsWith(String(prefix || "").trim().toLowerCase());
-  }
-
-  function playlistMatchesFilter(playlist, filter) {
-    const title = playlist.playlistTitle || playlist.title || "";
-    const prefix = filter.prefix || filter.matchText || filter.label || filter.id || "";
-    return playlistStartsWith(title, prefix);
-  }
-
   function collectionFilterById(filterId) {
     const filter = playlistFilters.find((candidate) => candidate.id === filterId);
     return filter || null;
@@ -1638,6 +1610,16 @@
     return `collection-${filterId}-${normalizedText(value)}`;
   }
 
+  function collectionGroupCacheKey(collectionType) {
+    return collectionType ? `${collectionType}Groups` : "";
+  }
+
+  function cachedCollectionGroupSource(collectionType) {
+    const cacheData = window.AnchorFaithMediaCache?.data || {};
+    const cacheKey = collectionGroupCacheKey(collectionType);
+    return Array.isArray(cacheData[cacheKey]) ? cacheData[cacheKey] : [];
+  }
+  
   function itemsForCachedCollectionGroup(group) {
     const inlineItems = Array.isArray(group.items)
       ? group.items.filter((item) => item && typeof item === "object")
@@ -1657,18 +1639,17 @@
       .filter((item) => !isUnavailableYouTubeVideo(item));
   }
 
-  function cachedCollectionGroupsFor(filterId) {
-    const cachedGroups = collectionGroupConfigs[filterId] || [];
-    return cachedGroups
+  function collectionGroupsForType(collectionType) {
+    return cachedCollectionGroupSource(collectionType)
       .map((group) => {
         const label = group.optionLabel || group.title || group.rawCollectionTitle || "";
-        const id = group.id || collectionGroupId(filterId, label);
+        const id = group.id || collectionGroupId(collectionType, label);
         const items = itemsForCachedCollectionGroup(group);
 
         return {
           ...group,
           id,
-          collectionType: group.collectionType || filterId,
+          collectionType,
           optionLabel: label,
           title: label,
           subtitle: "",
@@ -1677,84 +1658,6 @@
         };
       })
       .filter((group) => group.items.length > 0);
-  }
-
-  function getCollectionDisplayLabel(rawTitle, selectedCollection) {
-    if (!rawTitle) return "";
-
-    let label = String(rawTitle).trim();
-    const prefixes = ["Topic", "Series", "Worship Moments", "Speaker"];
-    const activePrefix =
-      selectedCollection ||
-      prefixes.find((prefix) => label.toLowerCase().startsWith(prefix.toLowerCase()));
-
-    if (activePrefix && label.toLowerCase().startsWith(activePrefix.toLowerCase())) {
-      label = label.slice(activePrefix.length).trim();
-    }
-
-    label = label.replace(/^(\||-|:|–|—)+\s*/g, "").trim();
-
-    return label || String(rawTitle).trim();
-  }
-
-  function playlistCollectionGroupsFor(filter) {
-    return allVideoPlaylists
-      .filter((playlist) => playlistMatchesFilter(playlist, filter))
-      .map((playlist) => {
-        const playlistTitle = playlist.playlistTitle || playlist.title || "";
-        const id = collectionGroupId(filter.id, playlist.playlistId || playlist.id || playlistTitle);
-        const displayLabel = getCollectionDisplayLabel(playlistTitle, filter.prefix || filter.matchText || filter.label);
-
-        return {
-          ...playlist,
-          id,
-          collectionType: filter.id,
-          optionLabel: displayLabel,
-          title: displayLabel,
-          subtitle: "",
-          rawCollectionTitle: playlistTitle,
-          items: playlist.items,
-        };
-      });
-  }
-
-  function speakerCollectionGroups() {
-    const speakerMap = new Map();
-    sermons.forEach((item) => {
-      if (item.mediaType !== "video") return;
-      if (isUnavailableYouTubeVideo(item)) return;
-      const speaker = getCanonicalSpeakerName(item);
-      if (!speaker) return;
-      const key = normalizeSpeakerText(speaker);
-      const group = speakerMap.get(key) || {
-        id: collectionGroupId("speaker", speaker),
-        title: speaker,
-        optionLabel: speaker,
-        collectionType: "speaker",
-        mediaType: "video",
-        items: [],
-      };
-      group.items.push(item);
-      speakerMap.set(key, group);
-    });
-
-    return APPROVED_SPEAKERS.map((speaker) => speakerMap.get(normalizeSpeakerText(speaker.displayName)))
-      .filter(Boolean)
-      .map((group) => ({
-        ...group,
-        items: dedupeMediaItems(group.items),
-        subtitle: "",
-      }))
-      .filter((group) => group.items.length > 0);
-  }
-
-  function collectionGroupsFor(filterId) {
-    const filter = collectionFilterById(filterId);
-    if (!filter) return [];
-    const cachedGroups = cachedCollectionGroupsFor(filterId);
-    if (cachedGroups.length) return cachedGroups;
-    if (filter.id === "speaker" || filter.type === "speaker") return speakerCollectionGroups();
-    return playlistCollectionGroupsFor(filter);
   }
 
   function moveCollectionGroupToFront(groups = [], groupId = "") {
@@ -2055,20 +1958,20 @@
   }
 
 
-  function renderCollectionSecondaryOptions(activeFilter, activeGroups) {
-    if (!activeGroups.length || isCollectionCollapsed) return "";
+  function renderCollectionSecondaryOptions(activeFilter, collectionGroups) {
+    if (!collectionGroups.length || isCollectionCollapsed) return "";
     return `<div class="af-playlist-filter__options-wrap" data-secondary-options>
           <div class="af-playlist-filter__options" role="group" aria-label="${escapeHtml(
             activeFilter?.label || "Collection"
           )} options">
-            ${activeGroups
+            ${collectionGroups
               .map(
                 (group, index) => `
                   <button
-                    class="af-filter-button af-filter-button--secondary ${group.id === selectedCollectionGroupId ? "is-active" : ""}"
+                    class="af-filter-button af-filter-button--secondary ${group.id === currentSelectedGroupId ? "is-active" : ""}"
                     type="button"
                     data-collection-option="${group.id}"
-                    aria-pressed="${group.id === selectedCollectionGroupId}"
+                    aria-pressed="${group.id === currentSelectedGroupId}"
                     style="--option-delay:${index * 36}ms"
                   >
                     ${escapeHtml(group.optionLabel || group.title)}
@@ -2081,7 +1984,7 @@
   }
 
   function renderCollectionCollapseControl() {
-    if (!selectedPlaylistFilterId || isCollectionCollapsed) return "";
+    if (!currentCollectionType || isCollectionCollapsed) return "";
     return `<button
           class="af-playlist-filter__toggle af-playlist-filter__toggle--utility"
           type="button"
@@ -2098,19 +2001,12 @@
   function renderPlaylistFilters() {
     const filters = visiblePlaylistFilters();
     if (!filters.length) return "";
-    if (selectedPlaylistFilterId && !isVisiblePlaylistFilter(selectedPlaylistFilterId)) {
-      selectedPlaylistFilterId = "";
-      selectedCollectionGroupId = "";
-    }
-    const activeFilter = collectionFilterById(selectedPlaylistFilterId);
-    const activeIndex = selectedPlaylistFilterId ? Math.max(0, filters.findIndex((filter) => filter.id === selectedPlaylistFilterId)) : -1;
-    const activeGroups = selectedPlaylistFilterId ? collectionGroupsFor(selectedPlaylistFilterId) : [];
-    const secondaryOptions = renderCollectionSecondaryOptions(activeFilter, activeGroups);
+    const activeIndex = currentCollectionType ? Math.max(0, filters.findIndex((filter) => filter.id === currentCollectionType)) : -1;
     const collapseControl = renderCollectionCollapseControl();
 
     return `
       <section class="af-playlist-filter" data-component="playlist-filter-buttons" data-has-selection="${Boolean(
-        selectedPlaylistFilterId
+        currentCollectionType
       )}" data-is-collapsed="${isCollectionCollapsed}" style="--active-filter-index:${activeIndex}">
         <div class="af-playlist-filter__copy">
           <p class="af-kicker">Browse Playlists</p>
@@ -2127,12 +2023,12 @@
               .map(
                 (filter) => `
                   <button
-                    class="af-filter-button ${filter.id === selectedPlaylistFilterId ? "is-active" : ""}"
+                    class="af-filter-button ${filter.id === currentCollectionType ? "is-active" : ""}"
                     type="button"
                     role="tab"
                     data-playlist-filter="${filter.id}"
-                    aria-selected="${filter.id === selectedPlaylistFilterId}"
-                    aria-pressed="${filter.id === selectedPlaylistFilterId}"
+                    aria-selected="${filter.id === currentCollectionType}"
+                    aria-pressed="${filter.id === currentCollectionType}"
                   >
                     ${escapeHtml(filter.label)}
                   </button>
@@ -2142,7 +2038,6 @@
           </div>
           ${collapseControl}
         </div>
-        ${secondaryOptions}
       </section>
     `;
   }
@@ -2150,14 +2045,6 @@
   function renderShelves() {
     allVideoPlaylists = buildAllVideoPlaylists();
     podcastShelves = buildPodcastShelves();
-    if (selectedPlaylistFilterId && !isVisiblePlaylistFilter(selectedPlaylistFilterId)) {
-      selectedPlaylistFilterId = "";
-      selectedCollectionGroupId = "";
-    }
-    filteredCollectionGroups = selectedCollectionGroups();
-    if (selectedCollectionGroupId && !filteredCollectionGroups.some((group) => group.id === selectedCollectionGroupId)) {
-      selectedCollectionGroupId = "";
-    }
     const rawLatestShelf = allVideoPlaylists.find((playlist) => playlist.isLatestShelf) || null;
     const latestShelf = rawLatestShelf
       ? {
@@ -2171,13 +2058,8 @@
       title: "Highlighted Messages",
       subtitle: "",
     });
-    const visibleCollectionGroups = visibleSelectedCollectionGroups();
-    const visiblePodcastShelves = podcastShelves.filter((feed) => feed.items.length > 0);
-
     console.log("All video playlists:", allVideoPlaylists.length);
-    console.log("Selected playlist filter:", selectedPlaylistFilterId);
-    console.log("Filtered collection groups:", filteredCollectionGroups.length);
-    console.log("Visible collection groups:", visibleCollectionGroups.length);
+    console.log("Current collection type:", currentCollectionType);
     console.log("Visible podcast shelves:", visiblePodcastShelves.length);
 
     dom.primaryShelves.innerHTML = [
@@ -2186,10 +2068,7 @@
       dataState.youtube.status !== "loaded" ? renderDataState("youtube", "YouTube playlists") : "",
       renderPlaylistFilters(),
     ].join("");
-    dom.extraShelves.innerHTML = renderShelfStack(visibleCollectionGroups, { delayStep: 70 });
-    dom.extraShelves.classList.toggle("is-collapsed", Boolean(isCollectionCollapsed && selectedPlaylistFilterId));
-    dom.extraShelves.classList.toggle("is-expanded", Boolean(visibleCollectionGroups.length && !isCollectionCollapsed));
-    dom.extraShelves.setAttribute("aria-hidden", visibleCollectionGroups.length && !isCollectionCollapsed ? "false" : "true");
+    renderCollectionShelves();
     const podcastStateMarkup =
       visiblePodcastShelves.length === 0 && dataState.podcasts.status !== "loaded"
         ? renderDataState("podcasts", "Podcast feeds")
@@ -2214,18 +2093,18 @@
   function updatePlaylistFilterButtons() {
     const filterSection = dom.primaryShelves.querySelector("[data-component='playlist-filter-buttons']");
     if (filterSection) {
-      filterSection.dataset.hasSelection = String(Boolean(selectedPlaylistFilterId));
+      filterSection.dataset.hasSelection = String(Boolean(currentCollectionType));
       filterSection.dataset.isCollapsed = String(isCollectionCollapsed);
     }
 
     dom.primaryShelves.querySelectorAll("[data-playlist-filter]").forEach((button) => {
-      const isActive = button.dataset.playlistFilter === selectedPlaylistFilterId;
+      const isActive = button.dataset.playlistFilter === currentCollectionType;
       button.classList.toggle("is-active", isActive);
       button.setAttribute("aria-pressed", String(isActive));
     });
 
     dom.primaryShelves.querySelectorAll("[data-collection-option]").forEach((button) => {
-      const isActive = button.dataset.collectionOption === selectedCollectionGroupId;
+      const isActive = button.dataset.collectionOption === currentSelectedGroupId;
       button.classList.toggle("is-active", isActive);
       button.setAttribute("aria-pressed", String(isActive));
     });
@@ -2250,29 +2129,28 @@
     filterSection.classList.remove("is-hovering-filter");
   }
 
-  function renderSelectedPlaylistShelves() {
+  function renderCollectionShelves() {
     const preservedWindowScrollY = window.scrollY;
-    if (selectedPlaylistFilterId && !isVisiblePlaylistFilter(selectedPlaylistFilterId)) {
-      selectedPlaylistFilterId = "";
-      selectedCollectionGroupId = "";
+    if (currentCollectionType && !isVisiblePlaylistFilter(currentCollectionType)) {
+      currentCollectionType = "";
+      currentSelectedGroupId = "";
     }
-    filteredCollectionGroups = selectedCollectionGroups();
-    if (selectedCollectionGroupId && !filteredCollectionGroups.some((group) => group.id === selectedCollectionGroupId)) {
-      selectedCollectionGroupId = "";
+    const activeGroups = currentCollectionType ? collectionGroupsForType(currentCollectionType) : [];
+    if (currentSelectedGroupId && !activeGroups.some((group) => group.id === currentSelectedGroupId)) {
+      currentSelectedGroupId = "";
     }
-    const activeGroups = filteredCollectionGroups;
-    const visibleCollectionGroups = moveCollectionGroupToFront(activeGroups, selectedCollectionGroupId);
+    const visibleCollectionGroups = moveCollectionGroupToFront(activeGroups, currentSelectedGroupId);
 
     const filterSection = dom.primaryShelves.querySelector("[data-component='playlist-filter-buttons']");
     if (filterSection) {
       const filters = visiblePlaylistFilters();
-      const activeFilter = collectionFilterById(selectedPlaylistFilterId);
-      const activeIndex = selectedPlaylistFilterId ? Math.max(0, filters.findIndex((filter) => filter.id === selectedPlaylistFilterId)) : -1;
-      filterSection.dataset.hasSelection = String(Boolean(selectedPlaylistFilterId));
+      const activeFilter = collectionFilterById(currentCollectionType);
+      const activeIndex = currentCollectionType ? Math.max(0, filters.findIndex((filter) => filter.id === currentCollectionType)) : -1;
+      filterSection.dataset.hasSelection = String(Boolean(currentCollectionType));
       filterSection.dataset.isCollapsed = String(isCollectionCollapsed);
       filterSection.style.setProperty("--active-filter-index", activeIndex);
       filterSection.querySelectorAll("[data-playlist-filter]").forEach((button) => {
-        const isActive = button.dataset.playlistFilter === selectedPlaylistFilterId;
+        const isActive = button.dataset.playlistFilter === currentCollectionType;
         button.classList.toggle("is-active", isActive);
         button.setAttribute("aria-selected", String(isActive));
         button.setAttribute("aria-pressed", String(isActive));
@@ -2296,7 +2174,7 @@
     }
 
     dom.extraShelves.innerHTML = renderShelfStack(visibleCollectionGroups, { delayStep: 70 });
-    dom.extraShelves.classList.toggle("is-collapsed", Boolean(isCollectionCollapsed && selectedPlaylistFilterId));
+    dom.extraShelves.classList.toggle("is-collapsed", Boolean(isCollectionCollapsed && currentCollectionType));
     dom.extraShelves.classList.toggle("is-expanded", Boolean(visibleCollectionGroups.length && !isCollectionCollapsed));
     dom.extraShelves.setAttribute("aria-hidden", visibleCollectionGroups.length && !isCollectionCollapsed ? "false" : "true");
     attachShelfBehavior(dom.extraShelves);
@@ -2309,10 +2187,6 @@
   function currentRenderedShelfConfigs() {
     allVideoPlaylists = buildAllVideoPlaylists();
     podcastShelves = buildPodcastShelves();
-    filteredCollectionGroups = selectedCollectionGroups();
-    if (selectedCollectionGroupId && !filteredCollectionGroups.some((group) => group.id === selectedCollectionGroupId)) {
-      selectedCollectionGroupId = "";
-    }
 
     const rawLatestShelf = allVideoPlaylists.find((playlist) => playlist.isLatestShelf) || null;
     const latestShelf = rawLatestShelf
@@ -2327,7 +2201,7 @@
       title: "Highlighted Messages",
       subtitle: "",
     });
-    const visibleCollectionGroups = visibleSelectedCollectionGroups();
+    const visibleCollectionGroups = moveCollectionGroupToFront(collectionGroupsForType(currentCollectionType), currentSelectedGroupId);
     const visiblePodcastShelves = podcastShelves.filter((feed) => feed.items.length > 0);
     const shelfMap = new Map();
 
@@ -2433,35 +2307,33 @@
 
   function selectPlaylistFilter(filterId) {
     if (!filterId || !isVisiblePlaylistFilter(filterId)) return;
-    if (filterId === selectedPlaylistFilterId) {
+    if (filterId === currentCollectionType) {
       if (isCollectionCollapsed) {
         isCollectionCollapsed = false;
-        renderSelectedPlaylistShelves();
+        renderCollectionShelves();
       }
       return;
     }
-    selectedPlaylistFilterId = filterId;
-    selectedCollectionGroupId = "";
+    currentCollectionType = filterId;
+    currentSelectedGroupId = "";
     isCollectionCollapsed = false;
     if (!allVideoPlaylists.length) allVideoPlaylists = buildAllVideoPlaylists();
     updatePlaylistFilterButtons();
-    renderSelectedPlaylistShelves();
+    renderCollectionShelves();
   }
 
   function toggleCollectionCollapse() {
-    if (!selectedPlaylistFilterId) return;
+    if (!currentCollectionType) return;
     isCollectionCollapsed = !isCollectionCollapsed;
-    renderSelectedPlaylistShelves();
+    renderCollectionShelves();
   }
 
   function reorderCollectionGroup(groupId) {
     if (!groupId) return;
     const scrollY = window.scrollY;
-    selectedCollectionGroupId = groupId;
-    renderSelectedPlaylistShelves();
+    currentSelectedGroupId = groupId;
+    renderCollectionShelves();
     window.requestAnimationFrame(() => restoreWindowScrollInstant(scrollY));
-
-    updatePlaylistFilterButtons();
   }
 
   function attachShelfBehavior(root = document) {
