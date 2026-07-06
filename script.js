@@ -1865,8 +1865,8 @@
     const heroMeta = [featured.minister, featured.date].filter(Boolean).join(" • ");
     dom.hero.innerHTML = `
       <div class="af-hero__content af-hero__content--carousel" data-cms-item-id="${featured.id}" data-hero-slide="${heroSlideIndex}">
-        <p class="af-kicker">Featured Sermon</p>
         <div class="af-hero__slide-copy" aria-live="polite">
+          <p class="af-kicker">Featured Sermon</p>
           <h1 class="af-hero__title" data-cms-field="main-title">${featured.mainTitle || featured.title}</h1>
           ${featured.subtitle ? `<p class="af-hero__subtitle" data-cms-field="subtitle">${featured.subtitle}</p>` : ""}
           ${heroMeta ? `<div class="af-hero__meta" data-cms-field="hero-meta">${heroMeta}</div>` : ""}
@@ -1876,22 +1876,22 @@
             </button>
           </div>
         </div>
-        <div class="af-hero__pagination" role="tablist" aria-label="Featured sermons">
-          ${heroItems
-            .map(
-              (item, index) => `
-                <button
-                  class="af-hero__dot ${index === heroSlideIndex ? "is-active" : ""}"
-                  type="button"
-                  role="tab"
-                  aria-selected="${index === heroSlideIndex}"
-                  aria-label="Show featured sermon ${index + 1}: ${escapeHtml(item.mainTitle || item.title)}"
-                  data-hero-index="${index}"
-                ><span></span></button>
-              `
-            )
-            .join("")}
-        </div>
+      </div>
+      <div class="af-hero__pagination" role="tablist" aria-label="Featured sermons">
+        ${heroItems
+          .map(
+            (item, index) => `
+              <button
+                class="af-hero__dot ${index === heroSlideIndex ? "is-active" : ""}"
+                type="button"
+                role="tab"
+                aria-selected="${index === heroSlideIndex}"
+                aria-label="Show featured sermon ${index + 1}: ${escapeHtml(item.mainTitle || item.title)}"
+                data-hero-index="${index}"
+              ><span></span></button>
+            `
+          )
+          .join("")}
       </div>
     `;
   }
@@ -1998,18 +1998,10 @@
       .join("");
   }
 
-  function renderPlaylistFilters() {
-    const filters = visiblePlaylistFilters();
-    if (!filters.length) return "";
-    if (selectedPlaylistFilterId && !isVisiblePlaylistFilter(selectedPlaylistFilterId)) {
-      selectedPlaylistFilterId = "";
-      selectedCollectionGroupId = "";
-    }
-    const activeFilter = collectionFilterById(selectedPlaylistFilterId);
-    const activeIndex = Math.max(0, filters.findIndex((filter) => filter.id === selectedPlaylistFilterId));
-    const activeGroups = selectedPlaylistFilterId ? collectionGroupsFor(selectedPlaylistFilterId) : [];
-    const secondaryOptions = activeGroups.length && !isCollectionCollapsed
-      ? `<div class="af-playlist-filter__options-wrap" data-secondary-options>
+
+  function renderCollectionSecondaryOptions(activeFilter, activeGroups) {
+    if (!activeGroups.length || isCollectionCollapsed) return "";
+    return `<div class="af-playlist-filter__options-wrap" data-secondary-options>
           <div class="af-playlist-filter__options" role="group" aria-label="${escapeHtml(
             activeFilter?.label || "Collection"
           )} options">
@@ -2029,10 +2021,12 @@
               )
               .join("")}
           </div>
-        </div>`
-      : "";
-    const collapseControl = selectedPlaylistFilterId && !isCollectionCollapsed
-      ? `<button
+        </div>`;
+  }
+
+  function renderCollectionCollapseControl() {
+    if (!selectedPlaylistFilterId || isCollectionCollapsed) return "";
+    return `<button
           class="af-playlist-filter__toggle af-playlist-filter__toggle--utility"
           type="button"
           data-collection-collapse
@@ -2042,8 +2036,21 @@
         >
           <span>Collapse</span>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-        </button>`
-      : "";
+        </button>`;
+  }
+
+  function renderPlaylistFilters() {
+    const filters = visiblePlaylistFilters();
+    if (!filters.length) return "";
+    if (selectedPlaylistFilterId && !isVisiblePlaylistFilter(selectedPlaylistFilterId)) {
+      selectedPlaylistFilterId = "";
+      selectedCollectionGroupId = "";
+    }
+    const activeFilter = collectionFilterById(selectedPlaylistFilterId);
+    const activeIndex = selectedPlaylistFilterId ? Math.max(0, filters.findIndex((filter) => filter.id === selectedPlaylistFilterId)) : -1;
+    const activeGroups = selectedPlaylistFilterId ? collectionGroupsFor(selectedPlaylistFilterId) : [];
+    const secondaryOptions = renderCollectionSecondaryOptions(activeFilter, activeGroups);
+    const collapseControl = renderCollectionCollapseControl();
 
     return `
       <section class="af-playlist-filter" data-component="playlist-filter-buttons" data-has-selection="${Boolean(
@@ -2170,6 +2177,7 @@
   }
 
   function renderSelectedPlaylistShelves() {
+    const preservedWindowScrollY = window.scrollY;
     if (selectedPlaylistFilterId && !isVisiblePlaylistFilter(selectedPlaylistFilterId)) {
       selectedPlaylistFilterId = "";
       selectedCollectionGroupId = "";
@@ -2182,13 +2190,36 @@
       ? moveCollectionGroupToFront(filteredCollectionGroups, selectedCollectionGroupId)
       : [];
 
-    console.log("Selected playlist filter:", selectedPlaylistFilterId);
-    console.log("Filtered collection groups:", filteredCollectionGroups.length);
-    console.log("Visible collection groups:", visibleCollectionGroups.length);
-
     const filterSection = dom.primaryShelves.querySelector("[data-component='playlist-filter-buttons']");
     if (filterSection) {
-      filterSection.outerHTML = renderPlaylistFilters();
+      const filters = visiblePlaylistFilters();
+      const activeFilter = collectionFilterById(selectedPlaylistFilterId);
+      const activeIndex = selectedPlaylistFilterId ? Math.max(0, filters.findIndex((filter) => filter.id === selectedPlaylistFilterId)) : -1;
+      filterSection.dataset.hasSelection = String(Boolean(selectedPlaylistFilterId));
+      filterSection.dataset.isCollapsed = String(isCollectionCollapsed);
+      filterSection.style.setProperty("--active-filter-index", activeIndex);
+      filterSection.querySelectorAll("[data-playlist-filter]").forEach((button) => {
+        const isActive = button.dataset.playlistFilter === selectedPlaylistFilterId;
+        button.classList.toggle("is-active", isActive);
+        button.setAttribute("aria-selected", String(isActive));
+        button.setAttribute("aria-pressed", String(isActive));
+      });
+
+      const controlRow = filterSection.querySelector(".af-playlist-filter__control-row");
+      const oldCollapse = filterSection.querySelector("[data-collection-collapse]");
+      if (oldCollapse) oldCollapse.remove();
+      const collapseMarkup = renderCollectionCollapseControl();
+      if (collapseMarkup && controlRow) controlRow.insertAdjacentHTML("beforeend", collapseMarkup);
+
+      const oldOptions = filterSection.querySelector("[data-secondary-options]");
+      const secondaryMarkup = renderCollectionSecondaryOptions(activeFilter, activeGroups);
+      if (oldOptions && secondaryMarkup) {
+        oldOptions.outerHTML = secondaryMarkup;
+      } else if (oldOptions && !secondaryMarkup) {
+        oldOptions.remove();
+      } else if (!oldOptions && secondaryMarkup) {
+        filterSection.insertAdjacentHTML("beforeend", secondaryMarkup);
+      }
     }
 
     dom.extraShelves.innerHTML = renderShelfStack(visibleCollectionGroups, { delayStep: 70 });
@@ -2199,6 +2230,7 @@
     observeShelves(dom.extraShelves);
     syncViewMoreButton();
     updateCollectionStickyState();
+    window.requestAnimationFrame(() => restoreWindowScrollInstant(preservedWindowScrollY));
   }
 
   function currentRenderedShelfConfigs() {
@@ -3169,7 +3201,12 @@
     if (!filterSection) return;
     const offset = Number.parseFloat(getComputedStyle(filterSection).getPropertyValue("--sticky-header-offset")) || 80;
     const rect = filterSection.getBoundingClientRect();
-    filterSection.classList.toggle("is-sticky", rect.top <= offset + 1);
+    const isSticky = rect.top <= offset + 1;
+    filterSection.classList.toggle("is-sticky", isSticky);
+
+    const podcastRect = dom.podcasts && !dom.podcasts.hidden ? dom.podcasts.getBoundingClientRect() : null;
+    const shouldYieldToPodcasts = Boolean(isSticky && podcastRect && podcastRect.top <= offset + filterSection.offsetHeight + 24);
+    filterSection.classList.toggle("is-past-collections", shouldYieldToPodcasts);
   }
 
   function toggleSecondaryOptionsForTouch(event) {
