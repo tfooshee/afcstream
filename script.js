@@ -535,7 +535,7 @@
   function spotifyEpisodeEmbedUrl(episodeIdOrUrl) {
     const cleanEpisodeId = extractSpotifyEpisodeId(episodeIdOrUrl);
     return cleanEpisodeId
-      ? `https://open.spotify.com/embed/episode/${cleanEpisodeId}?utm_source=generator`
+      ? `https://open.spotify.com/embed/episode/${cleanEpisodeId}?utm_source=generator&theme=0`
       : "";
   }
 
@@ -2600,9 +2600,11 @@
                     width="100%"
                     height="352"
                     frameborder="0"
-                    loading="lazy"
+                    loading="eager"
                     scrolling="no"
                     allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    allowfullscreen
+                    referrerpolicy="strict-origin-when-cross-origin"
                   ></iframe>
                 </div>`
               : item.audioUrl
