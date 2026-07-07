@@ -2116,7 +2116,6 @@
       latestShelf ? renderShelfStack([latestShelf], { delayStep: 70 }) : "",
       highlightedShelf ? renderShelfStack([highlightedShelf], { delayStep: 70 }) : "",
       dataState.youtube.status !== "loaded" ? renderDataState("youtube", "YouTube playlists") : "",
-      renderPlaylistFilters(),
     ].join("");
     renderCollectionShelves();
     const podcastStateMarkup =
@@ -2140,20 +2139,27 @@
     syncViewMoreButton();
   }
 
+  function collectionFilterElement() {
+    return (
+      dom.extraShelves?.querySelector?.("[data-component='playlist-filter-buttons']") ||
+      dom.primaryShelves?.querySelector?.("[data-component='playlist-filter-buttons']")
+    );
+  }
+
   function updatePlaylistFilterButtons() {
-    const filterSection = dom.primaryShelves.querySelector("[data-component='playlist-filter-buttons']");
+    const filterSection = collectionFilterElement();
     if (filterSection) {
       filterSection.dataset.hasSelection = String(Boolean(currentCollectionType));
       filterSection.dataset.isCollapsed = String(isCollectionCollapsed);
     }
 
-    dom.primaryShelves.querySelectorAll("[data-playlist-filter]").forEach((button) => {
+    filterSection?.querySelectorAll("[data-playlist-filter]").forEach((button) => {
       const isActive = button.dataset.playlistFilter === currentCollectionType;
       button.classList.toggle("is-active", isActive);
       button.setAttribute("aria-pressed", String(isActive));
     });
 
-    dom.primaryShelves.querySelectorAll("[data-collection-option]").forEach((button) => {
+    filterSection?.querySelectorAll("[data-collection-option]").forEach((button) => {
       const isActive = button.dataset.collectionOption === currentSelectedGroupId;
       button.classList.toggle("is-active", isActive);
       button.setAttribute("aria-pressed", String(isActive));
@@ -2191,7 +2197,11 @@
     }
     const visibleCollectionGroups = moveCollectionGroupToFront(activeGroups, currentSelectedGroupId);
 
-    const filterSection = dom.primaryShelves.querySelector("[data-component='playlist-filter-buttons']");
+    if (!dom.extraShelves.querySelector("[data-component='playlist-filter-buttons']")) {
+      dom.extraShelves.innerHTML = `${renderPlaylistFilters()}<div class="af-collection-shelves" data-collection-shelves></div>`;
+    }
+
+    const filterSection = collectionFilterElement();
     if (filterSection) {
       const filters = visiblePlaylistFilters();
       const activeFilter = collectionFilterById(currentCollectionType);
@@ -2223,12 +2233,17 @@
       }
     }
 
-    dom.extraShelves.innerHTML = renderShelfStack(visibleCollectionGroups, { delayStep: 70 });
+    let collectionShelfContainer = dom.extraShelves.querySelector("[data-collection-shelves]");
+    if (!collectionShelfContainer) {
+      dom.extraShelves.insertAdjacentHTML("beforeend", '<div class="af-collection-shelves" data-collection-shelves></div>');
+      collectionShelfContainer = dom.extraShelves.querySelector("[data-collection-shelves]");
+    }
+    collectionShelfContainer.innerHTML = renderShelfStack(visibleCollectionGroups, { delayStep: 70 });
     dom.extraShelves.classList.toggle("is-collapsed", Boolean(isCollectionCollapsed && currentCollectionType));
     dom.extraShelves.classList.toggle("is-expanded", Boolean(visibleCollectionGroups.length && !isCollectionCollapsed));
-    dom.extraShelves.setAttribute("aria-hidden", visibleCollectionGroups.length && !isCollectionCollapsed ? "false" : "true");
-    attachShelfBehavior(dom.extraShelves);
-    observeShelves(dom.extraShelves);
+    dom.extraShelves.setAttribute("aria-hidden", "false");
+    attachShelfBehavior(collectionShelfContainer || dom.extraShelves);
+    observeShelves(collectionShelfContainer || dom.extraShelves);
     syncViewMoreButton();
     updateCollectionStickyState();
     window.requestAnimationFrame(() => restoreWindowScrollInstant(preservedWindowScrollY));
@@ -3236,7 +3251,7 @@
 
 
   function updateCollectionStickyState() {
-    const filterSection = dom.primaryShelves?.querySelector?.("[data-component='playlist-filter-buttons']");
+    const filterSection = collectionFilterElement();
     if (!filterSection) return;
     const offset = Number.parseFloat(getComputedStyle(filterSection).getPropertyValue("--sticky-header-offset")) || 80;
     const rect = filterSection.getBoundingClientRect();
@@ -3302,6 +3317,7 @@
     window.addEventListener("scroll", handleWindowScroll, { passive: true });
     window.addEventListener("resize", updateCollectionStickyState, { passive: true });
     dom.primaryShelves.addEventListener("pointerdown", toggleSecondaryOptionsForTouch, { passive: true });
+    dom.extraShelves.addEventListener("pointerdown", toggleSecondaryOptionsForTouch, { passive: true });
     updateCollectionStickyState();
   }
 
