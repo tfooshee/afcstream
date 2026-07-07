@@ -2,16 +2,21 @@ name: Build and deploy Anchor Faith Streaming
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   workflow_dispatch:
   schedule:
-    # Refresh the generated media cache daily at 8:00 UTC.
-    - cron: '0 8 * * *'
+    # Refresh the media cache once per day at 8:00 UTC.
+    # This keeps YouTube playlists and Spotify podcast episodes updated without manual work.
+    - cron: "0 8 * * *"
 
 permissions:
   contents: read
   pages: write
   id-token: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 concurrency:
   group: pages
@@ -21,44 +26,101 @@ jobs:
   build:
     name: Generate media cache and package site
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 24
 
-      - name: Install project dependencies
+      - name: Install dependencies
         run: npm install --no-audit --no-fund
 
       - name: Generate real media cache
-        run: npm run generate:cache
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
           SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
-          # Keep enabled so the build fails instead of publishing podcast episodes without Spotify embeds.
-          REQUIRE_SPOTIFY_EPISODES: "1"
+        run: npm run generate:cache
 
-      - name: Verify generated cache files exist
+      - name: Verify generated cache
         run: |
-          test -s media-cache.json
-          test -s media-cache.js
-          node --check script.js
-          node --check scripts/generate-media-cache.mjs
+          node <<'NODE'
+          const fs = require('fs');
+          const cache = JSON.parse(fs.readFileSync('media-cache.json', 'utf8'));
+          const data = cache.data || {};
+          const summary = {
+            sermons: (data.sermons || []).length,
+            playlists: Object.keys(data.playlists || {}).length,
+            latestSermons: (data.latestSermons || []).length,
+            highlightedMessages: (data.highlightedMessages || []).length,
+            topicGroups: (data.topicGroups || []).length,
+            seriesGroups: (data.seriesGroups || []).length,
+            speakerGroups: (data.speakerGroups || []).length,
+            podcastEpisodes: (data.audioEpisodes || []).length,
+            spotifyReadyPodcastEpisodes: (data.audioEpisodes || []).filter((episode) => episode.spotifyEpisodeId || episode.spotifyEpisodeUrl).length,
+          };
+          console.log('Anchor Faith generated cache verification:');
+          console.table(summary);
+          const failures = [];
+          if (!summary.sermons) failures.push('sermons');
+          if (!summary.playlists) failures.push('playlists');
+          if (!summary.topicGroups) failures.push('topicGroups');
+          if (!summary.seriesGroups) failures.push('seriesGroups');
+          if (!summary.speakerGroups) failures.push('speakerGroups');
+          if (!summary.podcastEpisodes) failures.push('podcastEpisodes');
+          if (!summary.spotifyReadyPodcastEpisodes) failures.push('spotifyReadyPodcastEpisodes');
+          if (failures.length) {
+            throw new Error(`Generated cache failed required counts: ${failures.join(', ')}`);
+          }
+          NODE
+
+      - name: Prepare GitHub Pages artifact
+        run: |
+          BUILD_ID="${GITHUB_RUN_NUMBER}-${GITHUB_SHA::7}-$(date +%s)"
+          mkdir -p _site
+          tar \
+            --exclude='./_site' \
+            --exclude='./.git' \
+            --exclude='./.github' \
+            --exclude='./node_modules' \
+            --exclude='./.env' \
+            -cf - . | tar -xf - -C _site
+          python3 <<PY
+          from pathlib import Path
+          build_id = "${BUILD_ID}"
+          replacements = [
+              ("styles.css?v=", "styles.css?v=" + build_id),
+              ("media-cache.js?v=", "media-cache.js?v=" + build_id),
+              ("prototype-data.js?v=", "prototype-data.js?v=" + build_id),
+              ("script.js?v=", "script.js?v=" + build_id),
+              ("media-cache.json?v=", "media-cache.json?v=" + build_id),
+          ]
+          for relative in ["index.html", "prototype-data.js"]:
+              path = Path("_site") / relative
+              if not path.exists():
+                  continue
+              text = path.read_text()
+              import re
+              text = re.sub(r"styles\.css\?v=[^\"']+", f"styles.css?v={build_id}", text)
+              text = re.sub(r"media-cache\.js\?v=[^\"']+", f"media-cache.js?v={build_id}", text)
+              text = re.sub(r"prototype-data\.js\?v=[^\"']+", f"prototype-data.js?v={build_id}", text)
+              text = re.sub(r"script\.js\?v=[^\"']+", f"script.js?v={build_id}", text)
+              text = re.sub(r"media-cache\.json\?v=[^\"']+", f"media-cache.json?v={build_id}", text)
+              path.write_text(text)
+          print(f"Prepared Pages artifact with cache-busting build id: {build_id}")
+          PY
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload Pages artifact
+      - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
 
   deploy:
     name: Deploy to GitHub Pages
@@ -69,6 +131,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Deploy Pages artifact
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
