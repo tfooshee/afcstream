@@ -105,6 +105,21 @@
   let heroCarouselTimer = 0;
   let previousHeroImage = "";
   const HERO_CAROUSEL_INTERVAL_MS = 12000;
+  const MOBILE_SHELF_QUERY = "(max-width: 767px), (pointer: coarse)";
+  const SHELF_INITIAL_LIMITS = {
+    mobileVideo: 8,
+    mobileAudio: 8,
+    desktopVideo: 28,
+    desktopAudio: 24,
+  };
+  const SHELF_APPEND_LIMITS = {
+    mobileVideo: 6,
+    mobileAudio: 6,
+    desktopVideo: 18,
+    desktopAudio: 16,
+  };
+  const renderedShelfItemsById = new Map();
+  let windowScrollFrame = 0;
 
   function iconPlay() {
     return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7V5Z"/></svg>';
@@ -1876,7 +1891,7 @@
         aria-label="${ariaAction}: ${item.mainTitle || item.title}"
       >
         <span class="af-media-card__frame">
-          <img class="af-media-card__artwork" src="${item.thumbnail}" alt="" loading="lazy" decoding="async" draggable="false" data-cms-field="thumbnail" />
+          <img class="af-media-card__artwork" src="${item.thumbnail}" alt="" loading="lazy" decoding="async" fetchpriority="low" draggable="false" data-cms-field="thumbnail" />
           <span class="af-media-card__shade"></span>
           <span class="af-media-card__play" aria-hidden="true">${iconPlay()}</span>
         </span>
@@ -1906,19 +1921,56 @@
     `;
   }
 
+  function isMobileShelfEnvironment() {
+    return typeof window.matchMedia === "function" && window.matchMedia(MOBILE_SHELF_QUERY).matches;
+  }
+
+  function isAudioShelf(config = {}) {
+    return config.mediaType === "audio" || config.mediaType === "audioShelf";
+  }
+
+  function shelfInitialLimit(config = {}, options = {}) {
+    if (Number.isFinite(options.itemLimit)) return options.itemLimit;
+    if (options.renderAll) return Number.POSITIVE_INFINITY;
+
+    const mobile = isMobileShelfEnvironment();
+    if (isAudioShelf(config)) {
+      return mobile ? SHELF_INITIAL_LIMITS.mobileAudio : SHELF_INITIAL_LIMITS.desktopAudio;
+    }
+
+    return mobile ? SHELF_INITIAL_LIMITS.mobileVideo : SHELF_INITIAL_LIMITS.desktopVideo;
+  }
+
+  function shelfAppendLimit(config = {}) {
+    const mobile = isMobileShelfEnvironment();
+    if (isAudioShelf(config)) {
+      return mobile ? SHELF_APPEND_LIMITS.mobileAudio : SHELF_APPEND_LIMITS.desktopAudio;
+    }
+
+    return mobile ? SHELF_APPEND_LIMITS.mobileVideo : SHELF_APPEND_LIMITS.desktopVideo;
+  }
+
   function renderShelf(config, options = {}) {
     const items = dedupeMediaItems(options.items || itemsForShelf(config));
     const minimumItems = options.minimumItems || 0;
     if (!items.length || items.length < minimumItems) return "";
+    const initialLimit = shelfInitialLimit(config, options);
+    const visibleItems = Number.isFinite(initialLimit) ? items.slice(0, initialLimit) : items;
+    const shelfId = String(config.id);
+    const appendLimit = shelfAppendLimit(config);
+    renderedShelfItemsById.set(shelfId, items);
 
     return `
       <section
         class="af-shelf"
         data-component="shelf-component"
-        data-shelf-id="${config.id}"
+        data-shelf-id="${shelfId}"
         data-media-type="${config.mediaType}"
         data-playlist-id="${config.playlistId || ""}"
         data-total-items="${items.length}"
+        data-rendered-items="${visibleItems.length}"
+        data-render-batch="${appendLimit}"
+        data-has-more="${visibleItems.length < items.length}"
         style="--shelf-delay:${options.delay || 0}ms"
       >
         ${
@@ -1932,8 +1984,8 @@
               </div>`
             : ""
         }
-        <div class="af-shelf__rail" data-shelf-rail="${config.id}">
-          ${items.map(renderMediaCard).join("")}
+        <div class="af-shelf__rail" data-shelf-rail="${shelfId}">
+          ${visibleItems.map(renderMediaCard).join("")}
         </div>
       </section>
     `;
@@ -2334,6 +2386,37 @@
     window.requestAnimationFrame(() => restoreWindowScrollInstant(scrollY));
   }
 
+  function appendShelfItemsIfNeeded(rail, options = {}) {
+    const shelf = rail?.closest?.(".af-shelf[data-shelf-id]");
+    if (!rail || !shelf || shelf.dataset.hasMore !== "true") return false;
+    const shelfId = String(shelf.dataset.shelfId || rail.dataset.shelfRail || "");
+    const allItems = renderedShelfItemsById.get(shelfId) || [];
+    if (!allItems.length) return false;
+
+    const renderedCount = Number(shelf.dataset.renderedItems || rail.querySelectorAll("[data-media-id]").length || 0);
+    if (renderedCount >= allItems.length) {
+      shelf.dataset.hasMore = "false";
+      return false;
+    }
+
+    const distanceFromEnd = rail.scrollWidth - rail.clientWidth - rail.scrollLeft;
+    const shouldAppend = options.force || distanceFromEnd < Math.max(rail.clientWidth * 0.85, 360);
+    if (!shouldAppend) return false;
+
+    const batchSize = Math.max(1, Number(shelf.dataset.renderBatch || 8));
+    const nextItems = allItems.slice(renderedCount, renderedCount + batchSize);
+    if (!nextItems.length) {
+      shelf.dataset.hasMore = "false";
+      return false;
+    }
+
+    rail.insertAdjacentHTML("beforeend", nextItems.map(renderMediaCard).join(""));
+    const nextRenderedCount = renderedCount + nextItems.length;
+    shelf.dataset.renderedItems = String(nextRenderedCount);
+    shelf.dataset.hasMore = String(nextRenderedCount < allItems.length);
+    return true;
+  }
+
   function attachShelfBehavior(root = document) {
     root.querySelectorAll(".af-shelf__rail").forEach((rail) => {
       const shelfId = rail.dataset.shelfRail;
@@ -2348,6 +2431,7 @@
       let startScroll = 0;
       let moved = 0;
       let scrollStorageFrame = 0;
+      let appendFrame = 0;
 
       rail.addEventListener("scroll", () => {
         lastShelfInteractionAt = Date.now();
@@ -2357,6 +2441,12 @@
           scrollStorageFrame = 0;
           sessionStorage.setItem("afShelfPositions", JSON.stringify([...shelfPositions]));
         });
+        if (!appendFrame) {
+          appendFrame = window.requestAnimationFrame(() => {
+            appendFrame = 0;
+            appendShelfItemsIfNeeded(rail);
+          });
+        }
       }, { passive: true });
 
       rail.addEventListener("pointerdown", (event) => {
@@ -3016,6 +3106,11 @@
     dom.modal.setAttribute("aria-hidden", "true");
     activeModalId = null;
     unlockPage();
+    window.setTimeout(() => {
+      if (!activeModalId && dom.modal.getAttribute("aria-hidden") === "true") {
+        dom.modalContent.innerHTML = "";
+      }
+    }, 760);
   }
 
   function handleClicks() {
@@ -3176,6 +3271,15 @@
     }
   }
 
+  function handleWindowScroll() {
+    if (windowScrollFrame) return;
+    windowScrollFrame = window.requestAnimationFrame(() => {
+      windowScrollFrame = 0;
+      revealShelvesInViewport();
+      updateCollectionStickyState();
+    });
+  }
+
   async function refreshMediaInBackground() {
     return false;
   }
@@ -3195,10 +3299,7 @@
     dom.modal.addEventListener("wheel", containModalScroll, { passive: false });
     dom.modal.addEventListener("touchstart", beginModalTouch, { passive: true });
     dom.modal.addEventListener("touchmove", containModalTouch, { passive: false });
-    window.addEventListener("scroll", () => {
-      revealShelvesInViewport();
-      updateCollectionStickyState();
-    }, { passive: true });
+    window.addEventListener("scroll", handleWindowScroll, { passive: true });
     window.addEventListener("resize", updateCollectionStickyState, { passive: true });
     dom.primaryShelves.addEventListener("pointerdown", toggleSecondaryOptionsForTouch, { passive: true });
     updateCollectionStickyState();

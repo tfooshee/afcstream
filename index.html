@@ -52,12 +52,13 @@
       aria-labelledby="modalTitle"
     >
       <div class="af-modal__backdrop" data-close-modal></div>
-      <button class="af-icon-button af-modal__close" type="button" data-close-modal aria-label="Close">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="m6 6 12 12M18 6 6 18" />
-        </svg>
-      </button>
       <div class="af-modal__shell" role="document">
+        <button class="af-icon-button af-modal__close" type="button" data-close-modal aria-label="Close">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m6 6 12 12M18 6 6 18" />
+          </svg>
+          <span class="af-modal__close-label">Close</span>
+        </button>
         <div id="modalContent" class="af-modal__content"></div>
       </div>
     </div>
