@@ -1,49 +1,57 @@
-# GitHub Actions cache generation setup
+# Anchor Faith Streaming — GitHub Actions cache setup
 
-This project is now configured so GitHub Actions can generate the real `media-cache.json` and `media-cache.js` before deploying to GitHub Pages.
+This project is designed so the public browser app does **not** fetch YouTube or Spotify live.
+Instead, GitHub Actions runs the cache generator, writes `media-cache.json` and `media-cache.js`, then deploys those generated files to GitHub Pages.
 
 ## Required repository secrets
 
-In GitHub, go to:
+Go to:
 
 `Settings → Secrets and variables → Actions → Repository secrets`
 
-Add these three secrets:
+Add exactly these three repository secrets:
 
 - `YOUTUBE_API_KEY`
 - `SPOTIFY_CLIENT_ID`
 - `SPOTIFY_CLIENT_SECRET`
 
-Do not commit these values into the repository.
+Do not commit these values to the repository.
 
-## Pages source setting
+## GitHub Pages source
 
-In GitHub, go to:
+Go to:
 
 `Settings → Pages`
 
-Set **Build and deployment → Source** to **GitHub Actions**.
+Set source to:
 
-## How it updates
+`GitHub Actions`
 
-The workflow runs when:
+## Automatic refresh cadence
 
-- you push to `main`
-- you manually run the workflow from the Actions tab
-- the daily schedule runs at 8:00 UTC
+The workflow runs:
 
-Each run does this:
+- on every push to `main`
+- manually with `workflow_dispatch`
+- daily at `08:00 UTC`
 
-1. Installs Node 24.
-2. Runs `npm run generate:cache` with the repository secrets.
-3. Generates real YouTube/Spotify cache files.
-4. Fails safely if the cache cannot be generated.
-5. Deploys the generated site to GitHub Pages.
+This means the site will refresh from YouTube + Spotify automatically without your team touching the website.
 
-## Expected workflow log
+## What to check in Actions
 
-Look for a section like:
+After the workflow runs, open the workflow log and look for the cache summary.
+A healthy run should show non-zero values for:
 
-`Anchor Faith media cache summary:`
+- sermons
+- playlists
+- topicGroups
+- seriesGroups
+- speakerGroups
+- podcastEpisodes
+- spotifyReadyPodcastEpisodes
 
-It should show non-zero counts for sermons, playlists, Topic groups, Series groups, Speaker groups, podcast episodes, and Spotify-ready podcast episodes.
+If those are non-zero, the generator is working. If the live page still looks stale, open:
+
+`https://tfooshee.github.io/afcstream/media-cache.json?v=test`
+
+and verify that the deployed cache contains the generated counts.
