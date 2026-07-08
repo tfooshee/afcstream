@@ -2185,7 +2185,7 @@
     filterSection.classList.remove("is-hovering-filter");
   }
 
-  function renderCollectionShelves() {
+  function renderCollectionShelves(options = {}) {
     const preservedWindowScrollY = window.scrollY;
     if (currentCollectionType && !isVisiblePlaylistFilter(currentCollectionType)) {
       currentCollectionType = "";
@@ -2223,14 +2223,25 @@
       if (collapseMarkup && controlRow) controlRow.insertAdjacentHTML("beforeend", collapseMarkup);
 
       const oldOptions = filterSection.querySelector("[data-secondary-options]");
+      const oldOptionsScroll = oldOptions?.querySelector(".af-playlist-filter__options");
+      const optionsScrollLeft = options.optionsScrollLeft ?? oldOptionsScroll?.scrollLeft ?? 0;
       const secondaryMarkup = renderCollectionSecondaryOptions(activeFilter, activeGroups);
-      if (oldOptions && secondaryMarkup) {
+      if (oldOptions && secondaryMarkup && !options.preserveOptions) {
         oldOptions.outerHTML = secondaryMarkup;
       } else if (oldOptions && !secondaryMarkup) {
         oldOptions.remove();
       } else if (!oldOptions && secondaryMarkup) {
         filterSection.insertAdjacentHTML("beforeend", secondaryMarkup);
       }
+
+      filterSection.querySelectorAll("[data-collection-option]").forEach((button) => {
+        const isActive = button.dataset.collectionOption === currentSelectedGroupId;
+        button.classList.toggle("is-active", isActive);
+        button.setAttribute("aria-pressed", String(isActive));
+      });
+
+      const nextOptionsScroll = filterSection.querySelector("[data-secondary-options] .af-playlist-filter__options");
+      if (nextOptionsScroll && optionsScrollLeft) nextOptionsScroll.scrollLeft = optionsScrollLeft;
     }
 
     let collectionShelfContainer = dom.extraShelves.querySelector("[data-collection-shelves]");
@@ -2388,16 +2399,19 @@
   }
 
   function toggleCollectionCollapse() {
-    if (!currentCollectionType) return;
-    isCollectionCollapsed = !isCollectionCollapsed;
+    currentCollectionType = "";
+    currentSelectedGroupId = "";
+    isCollectionCollapsed = false;
     renderCollectionShelves();
   }
 
   function reorderCollectionGroup(groupId) {
     if (!groupId) return;
     const scrollY = window.scrollY;
+    const optionsScroll = collectionFilterElement()?.querySelector("[data-secondary-options] .af-playlist-filter__options");
+    const optionsScrollLeft = optionsScroll?.scrollLeft || 0;
     currentSelectedGroupId = groupId;
-    renderCollectionShelves();
+    renderCollectionShelves({ preserveOptions: true, optionsScrollLeft });
     window.requestAnimationFrame(() => restoreWindowScrollInstant(scrollY));
   }
 

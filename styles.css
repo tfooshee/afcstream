@@ -2902,3 +2902,146 @@ img {
     mask-image: linear-gradient(180deg, transparent 0%, #000 7%, #000 73%, transparent 100%);
   }
 }
+
+/* v1.1.9 polish: stronger hero feathering + Safari-stable collection toolbar */
+.af-hero {
+  background: #180f11;
+}
+
+.af-hero__bg {
+  background-position: center top !important;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 64%, transparent 100%) !important;
+  mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 64%, transparent 100%) !important;
+}
+
+.af-hero::after {
+  background:
+    linear-gradient(180deg, #180f11 0%, rgba(24, 15, 17, 0.96) 5%, rgba(24, 15, 17, 0.42) 16%, rgba(24, 15, 17, 0) 32%),
+    linear-gradient(90deg, rgba(24, 15, 17, 0.98) 0%, rgba(24, 15, 17, 0.78) 38%, rgba(24, 15, 17, 0.16) 76%),
+    linear-gradient(0deg, #180f11 0%, rgba(24, 15, 17, 0.98) 22%, rgba(24, 15, 17, 0.66) 44%, rgba(24, 15, 17, 0.08) 74%, rgba(24, 15, 17, 0) 100%) !important;
+}
+
+.af-playlist-filter {
+  position: sticky;
+  isolation: isolate;
+  overflow: visible;
+  contain: none;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.af-playlist-filter::before {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  top: 0;
+  left: 50%;
+  width: 100vw;
+  height: calc(100% + clamp(2.5rem, 6vw, 4.75rem));
+  transform: translateX(-50%);
+  pointer-events: none;
+  opacity: 0;
+  background:
+    linear-gradient(180deg, rgba(24, 15, 17, 0.94) 0%, rgba(24, 15, 17, 0.78) 48%, rgba(24, 15, 17, 0.38) 74%, rgba(24, 15, 17, 0) 100%);
+  backdrop-filter: blur(18px) saturate(1.06);
+  -webkit-backdrop-filter: blur(18px) saturate(1.06);
+  transition: opacity var(--af-motion-medium) var(--af-motion-ease);
+}
+
+.af-playlist-filter.is-sticky::before {
+  opacity: 1;
+}
+
+.af-playlist-filter.is-sticky {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.af-playlist-filter__copy {
+  position: relative;
+  z-index: 1;
+}
+
+.af-playlist-filter__control-row {
+  position: relative !important;
+  z-index: 1;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  width: 100%;
+  min-height: 3rem;
+  padding-inline: 0 !important;
+  gap: 0;
+}
+
+.af-playlist-filter__buttons {
+  grid-column: 2;
+  justify-self: center !important;
+  width: auto !important;
+  min-width: 0 !important;
+  flex: none !important;
+}
+
+.af-playlist-filter__toggle--utility {
+  grid-column: 3;
+  justify-self: end;
+  position: relative !important;
+  top: auto !important;
+  right: auto !important;
+  transform: none !important;
+  animation: none !important;
+  transition:
+    color var(--af-motion-fast) var(--af-motion-ease),
+    background var(--af-motion-fast) var(--af-motion-ease),
+    border-color var(--af-motion-fast) var(--af-motion-ease) !important;
+}
+
+.af-playlist-filter__toggle--utility:hover {
+  transform: none !important;
+}
+
+.af-playlist-filter[data-has-selection="false"] .af-collection-shelves,
+.af-extra-shelves:not(.is-expanded) .af-collection-shelves {
+  display: none;
+}
+
+@supports (-webkit-touch-callout: none) {
+  @media (min-width: 821px) {
+    .af-playlist-filter__control-row {
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    }
+
+    .af-playlist-filter__buttons {
+      grid-column: 2;
+      justify-self: center !important;
+    }
+
+    .af-playlist-filter__toggle--utility {
+      grid-column: 3;
+      justify-self: end;
+    }
+  }
+
+  @media (max-width: 900px), (pointer: coarse) {
+    .af-playlist-filter::before {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+  }
+}
+
+@media (max-width: 820px) {
+  .af-playlist-filter__control-row {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 0.65rem;
+  }
+
+  .af-playlist-filter__buttons,
+  .af-playlist-filter__toggle--utility {
+    grid-column: 1;
+  }
+}
