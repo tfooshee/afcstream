@@ -2590,6 +2590,24 @@ img {
     0 0 0 5px rgba(226, 219, 252, 0.7);
 }
 
+@media (min-width: 821px) {
+  .af-modal__close {
+    top: 0 !important;
+    right: 0 !important;
+    width: 52px;
+    height: 52px;
+    border-top: 0;
+    border-right: 0;
+    border-radius: 0 5px 0 5px;
+    background: rgba(8, 6, 7, 0.72);
+  }
+
+  .af-modal__close:hover,
+  .af-modal__close:active {
+    transform: none;
+  }
+}
+
 .af-modal__backdrop {
   transition:
     opacity 620ms var(--af-motion-ease),
@@ -2726,6 +2744,62 @@ img {
   padding-left: clamp(1rem, 3vw, 2rem) !important;
   padding-right: clamp(1rem, 3vw, 2rem) !important;
   scroll-padding-inline: clamp(1rem, 3vw, 2rem) !important;
+}
+
+.af-cms-template-page--video > .af-modal__related {
+  overflow: visible;
+}
+
+.af-cms-template-page--video > .af-modal__related .af-modal__section-title {
+  margin: 0 0 0.85rem;
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: 0;
+}
+
+.af-cms-template-page--video > .af-modal__related .af-shelf__rail {
+  --modal-related-pad: clamp(1rem, 3vw, 2rem);
+  width: calc(100% + (var(--modal-related-pad) * 2)) !important;
+  max-width: none !important;
+  margin-left: calc(var(--modal-related-pad) * -1) !important;
+  margin-right: calc(var(--modal-related-pad) * -1) !important;
+  padding-left: var(--modal-related-pad) !important;
+  padding-right: var(--modal-related-pad) !important;
+  scroll-padding-inline: var(--modal-related-pad) !important;
+}
+
+.af-cms-template-page--audio > .af-audio-modal__shelves {
+  overflow: visible;
+}
+
+.af-cms-template-page--audio > .af-audio-modal__shelves .af-modal__section-title {
+  margin: 0 0 0.85rem;
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: 0;
+}
+
+.af-cms-template-page--audio > .af-audio-modal__shelves .af-related-audio-zone {
+  --modal-audio-related-pad: clamp(1rem, 3vw, 2rem);
+  margin-left: calc(var(--modal-audio-related-pad) * -1) !important;
+  margin-right: calc(var(--modal-audio-related-pad) * -1) !important;
+  margin-bottom: calc(clamp(1rem, 3vw, 2rem) * -1);
+  padding-left: var(--modal-audio-related-pad) !important;
+  padding-right: var(--modal-audio-related-pad) !important;
+  padding-bottom: calc(clamp(0.625rem, 1.5vw, 1rem) + clamp(1rem, 3vw, 2rem));
+}
+
+.af-cms-template-page--audio > .af-audio-modal__shelves .af-related-audio-zone .af-shelf__rail {
+  --modal-audio-rail-pad: clamp(1rem, 3vw, 2rem);
+  width: calc(100% + (var(--modal-audio-rail-pad) * 2)) !important;
+  max-width: none !important;
+  margin-left: calc(var(--modal-audio-rail-pad) * -1) !important;
+  margin-right: calc(var(--modal-audio-rail-pad) * -1) !important;
+  padding-left: var(--modal-audio-rail-pad) !important;
+  padding-right: var(--modal-audio-rail-pad) !important;
+  scroll-padding-inline: var(--modal-audio-rail-pad) !important;
 }
 
 .af-media-card__frame {

@@ -513,6 +513,29 @@
     return `https://www.youtube.com/embed/${cleanVideoId}?${params}`;
   }
 
+  function youtubeThumbnailUrl(videoId, fileName) {
+    const cleanVideoId = extractYouTubeVideoId(videoId);
+    return cleanVideoId && fileName ? `https://i.ytimg.com/vi/${cleanVideoId}/${fileName}` : "";
+  }
+
+  function modalVideoPosterSource(item, videoId) {
+    const cleanVideoId = extractYouTubeVideoId(videoId);
+    const candidates = [
+      item.heroImage,
+      item.maxresThumbnail,
+      item.maxresdefault,
+      cleanVideoId ? youtubeThumbnailUrl(cleanVideoId, "maxresdefault.jpg") : "",
+      item.standardThumbnail,
+      item.thumbnailUrl,
+      item.thumbnail,
+    ].filter(Boolean);
+
+    return {
+      src: candidates[0] || "",
+      fallback: cleanVideoId ? youtubeThumbnailUrl(cleanVideoId, "hqdefault.jpg") : item.thumbnail || item.thumbnailUrl || "",
+    };
+  }
+
   function extractSpotifyEpisodeId(value) {
     const source = String(value || "").trim();
     if (!source) return "";
@@ -2748,6 +2771,7 @@
     const videoId = extractYouTubeVideoId(item.youtubeVideoId || item.youtubeId || item.embedUrl || item.externalUrl);
     const embedUrl = videoId ? youtubeEmbedUrl(videoId, { autoplay: true }) : "";
     if (!videoId) return `<img src="${item.thumbnail}" alt="" />`;
+    const poster = modalVideoPosterSource(item, videoId);
 
     return `
       <div
@@ -2757,7 +2781,13 @@
         data-youtube-video-id="${videoId}"
         data-youtube-embed-url="${escapeHtml(embedUrl)}"
       >
-        <img class="af-modal__player-poster" data-player-poster src="${item.thumbnail}" alt="${escapeHtml(title)}" />
+        <img
+          class="af-modal__player-poster"
+          data-player-poster
+          data-fallback-src="${escapeHtml(poster.fallback)}"
+          src="${escapeHtml(poster.src || item.thumbnail)}"
+          alt="${escapeHtml(title)}"
+        />
         <button
           class="af-modal__play-overlay"
           type="button"
@@ -2830,6 +2860,17 @@
     playerShell.dataset.playerState = "playing";
 
     playerFrame.focus({ preventScroll: true });
+  }
+
+  function handleModalPosterFallback(event) {
+    const poster = event.target?.closest?.("[data-player-poster]");
+    if (!poster || poster.dataset.fallbackAttempted === "true") return;
+
+    const fallbackSrc = poster.dataset.fallbackSrc;
+    if (!fallbackSrc) return;
+
+    poster.dataset.fallbackAttempted = "true";
+    poster.src = fallbackSrc;
   }
 
   function renderVideoModal(item, mode = "details") {
@@ -3346,6 +3387,7 @@
 
     handleClicks();
     setupViewMore();
+    document.addEventListener("error", handleModalPosterFallback, true);
     dom.modal.addEventListener("wheel", containModalScroll, { passive: false });
     dom.modal.addEventListener("touchstart", beginModalTouch, { passive: true });
     dom.modal.addEventListener("touchmove", containModalTouch, { passive: false });
