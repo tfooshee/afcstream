@@ -1831,8 +1831,11 @@
     dom.hero.classList.remove("af-hero--state");
     const heroImage = highQualityYouTubeImage(featured) || featured.heroImage || featured.thumbnail;
     const heroPrevImage = previousHeroImage && previousHeroImage !== heroImage ? previousHeroImage : "";
+    const introSurface = dom.hero.closest(".af-main");
     dom.hero.style.setProperty("--hero-image", `url("${heroImage}")`);
     dom.hero.style.setProperty("--hero-prev-image", heroPrevImage ? `url("${heroPrevImage}")` : "none");
+    introSurface?.style.setProperty("--hero-image", `url("${heroImage}")`);
+    introSurface?.style.setProperty("--hero-prev-image", heroPrevImage ? `url("${heroPrevImage}")` : "none");
     const heroMeta = [featured.minister, featured.date].filter(Boolean).join(" • ");
     dom.hero.innerHTML = `
       ${heroPrevImage ? `<div class="af-hero__bg af-hero__bg--previous" aria-hidden="true"></div>` : ""}
@@ -2220,7 +2223,7 @@
       const oldCollapse = filterSection.querySelector("[data-collection-collapse]");
       if (oldCollapse) oldCollapse.remove();
       const collapseMarkup = renderCollectionCollapseControl();
-      if (collapseMarkup && controlRow) controlRow.insertAdjacentHTML("beforeend", collapseMarkup);
+      if (controlRow && collapseMarkup) controlRow.insertAdjacentHTML("beforeend", collapseMarkup);
 
       const oldOptions = filterSection.querySelector("[data-secondary-options]");
       const oldOptionsScroll = oldOptions?.querySelector(".af-playlist-filter__options");
@@ -2407,12 +2410,20 @@
 
   function reorderCollectionGroup(groupId) {
     if (!groupId) return;
-    const scrollY = window.scrollY;
     const optionsScroll = collectionFilterElement()?.querySelector("[data-secondary-options] .af-playlist-filter__options");
     const optionsScrollLeft = optionsScroll?.scrollLeft || 0;
     currentSelectedGroupId = groupId;
     renderCollectionShelves({ preserveOptions: true, optionsScrollLeft });
-    window.requestAnimationFrame(() => restoreWindowScrollInstant(scrollY));
+    window.requestAnimationFrame(() => {
+      const selectedShelf = [...dom.extraShelves.querySelectorAll("[data-shelf-id]")]
+        .find((shelf) => shelf.dataset.shelfId === groupId);
+      const filterSection = collectionFilterElement();
+      if (!selectedShelf || !filterSection) return;
+
+      const offset = Number.parseFloat(getComputedStyle(filterSection).getPropertyValue("--sticky-header-offset")) || 80;
+      const targetTop = selectedShelf.getBoundingClientRect().top + window.scrollY - offset - filterSection.offsetHeight - 16;
+      window.scrollTo({ top: Math.max(0, targetTop), behavior: "smooth" });
+    });
   }
 
   function appendShelfItemsIfNeeded(rail, options = {}) {
@@ -2747,6 +2758,16 @@
         data-youtube-embed-url="${escapeHtml(embedUrl)}"
       >
         <img class="af-modal__player-poster" data-player-poster src="${item.thumbnail}" alt="${escapeHtml(title)}" />
+        <button
+          class="af-modal__play-overlay"
+          type="button"
+          data-play-inside="${mediaLookupId(item)}"
+          data-media-type="${item.mediaType}"
+          data-play-mode="watch"
+          aria-label="Play sermon video"
+        >
+          ${iconPlay()}
+        </button>
       </div>
     `;
   }
