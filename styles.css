@@ -3575,12 +3575,3 @@ body,
     margin-bottom: 0 !important;
   }
 }
-
-html,
-body {
-  overflow-x: hidden;
-}
-
-body {
-  margin: 0;
-}
