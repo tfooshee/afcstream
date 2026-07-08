@@ -46,6 +46,11 @@ body {
   letter-spacing: 0;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 html.af-modal-open,
 body.af-modal-open {
   overflow: hidden;
