@@ -66,5 +66,30 @@
     <script src="./media-cache.js?v=20260707-actions-cache"></script>
     <script src="./prototype-data.js?v=20260707-actions-cache"></script>
     <script src="./script.js?v=1.1.8-actions-cache"></script>
+    <script>
+  function sendAfcHeight() {
+    const height = Math.max(
+      document.body.scrollHeight,
+      document.documentElement.scrollHeight
+    );
+
+    window.parent.postMessage(
+      {
+        type: "AFC_STREAM_HEIGHT",
+        height
+      },
+      "*"
+    );
+  }
+
+  window.addEventListener("load", sendAfcHeight);
+  window.addEventListener("resize", sendAfcHeight);
+
+  if ("ResizeObserver" in window) {
+    new ResizeObserver(sendAfcHeight).observe(document.body);
+  }
+
+  setInterval(sendAfcHeight, 1000);
+</script>
   </body>
 </html>
