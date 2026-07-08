@@ -19,6 +19,11 @@ const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY || "";
 const YOUTUBE_CHANNEL_HANDLE = process.env.YOUTUBE_CHANNEL_HANDLE || "anchorfaith";
 const REQUIRE_SPOTIFY_EPISODES = process.env.REQUIRE_SPOTIFY_EPISODES !== "0";
 
+const SPEAKER_PRIORITY = {
+  "Ap. Earl Glisson": 100,
+  "Ap. Marci Glisson": 90,
+};
+
 const podcastSources = [
   {
     id: "anchor-faith-church-podcast",
@@ -425,11 +430,55 @@ function getCollectionDisplayLabel(rawTitle, selectedCollection) {
   return label || String(rawTitle).trim();
 }
 
+function cleanSpeakerPlaylistTitle(title) {
+  return String(title || "")
+    .replace(/^Speaker\s*\|\s*/i, "")
+    .trim();
+}
+
+function compareCollectionGroupsByLabel(a, b) {
+  return String(a?.optionLabel || a?.title || "").localeCompare(
+    String(b?.optionLabel || b?.title || ""),
+    undefined,
+    { sensitivity: "base", numeric: true }
+  );
+}
+
+function sortTopicSeriesGroups(groups = [], type = "") {
+  if (!["topic", "series"].includes(type)) return groups;
+  return [...groups].sort(compareCollectionGroupsByLabel);
+}
+
 function playlistStartsWith(value, prefix) {
   return String(value || "")
     .trim()
     .toLowerCase()
     .startsWith(String(prefix || "").trim().toLowerCase());
+}
+
+function isSpeakerPlaylistTitle(value) {
+  return /^Speaker\s*\|\s*/i.test(String(value || "").trim());
+}
+
+function newestPublishedAtForItems(items = []) {
+  return items.reduce((newest, item) => {
+    const publishedAt = item.publishedAt || item.videoPublishedAt || "";
+    if (!publishedAt) return newest;
+    if (!newest) return publishedAt;
+    return new Date(publishedAt).getTime() > new Date(newest).getTime() ? publishedAt : newest;
+  }, "");
+}
+
+function compareSpeakerGroups(a, b) {
+  const priorityDifference = Number(b.priority || 0) - Number(a.priority || 0);
+  if (priorityDifference) return priorityDifference;
+
+  const newestDifference =
+    new Date(b.newestVideoPublishedAt || 0).getTime() -
+    new Date(a.newestVideoPublishedAt || 0).getTime();
+  if (newestDifference) return newestDifference;
+
+  return compareCollectionGroupsByLabel(a, b);
 }
 
 function dedupeVideosById(items = []) {
@@ -443,7 +492,7 @@ function dedupeVideosById(items = []) {
 }
 
 function buildPlaylistCollectionGroups({ shelfConfigs = [], sermons = [], type = "", prefix = "" }) {
-  return shelfConfigs
+  const groups = shelfConfigs
     .filter((shelf) => playlistStartsWith(shelf.title, prefix))
     .map((shelf) => {
       const items = dedupeVideosById(
@@ -465,35 +514,36 @@ function buildPlaylistCollectionGroups({ shelfConfigs = [], sermons = [], type =
       };
     })
     .filter((group) => group.itemIds.length > 0);
+
+  return sortTopicSeriesGroups(groups, type);
 }
 
-function buildSpeakerGroups(sermons = []) {
-  const speakerMap = new Map();
+function buildSpeakerGroups({ shelfConfigs = [], sermons = [] }) {
+  return shelfConfigs
+    .filter((shelf) => isSpeakerPlaylistTitle(shelf.title))
+    .map((shelf) => {
+      const items = dedupeVideosById(
+        sermons.filter((item) => (item.playlistIds || []).includes(shelf.playlistId))
+      ).filter((item) => !isUnavailableYouTubeVideo(item));
+      const label = cleanSpeakerPlaylistTitle(shelf.title);
 
-  sermons.forEach((item) => {
-    if (isUnavailableYouTubeVideo(item) || !item.canonicalSpeaker) return;
-    const key = normalizeSpeakerText(item.canonicalSpeaker);
-    const group = speakerMap.get(key) || {
-      id: `collection-speaker-${slugify(item.canonicalSpeaker)}`,
-      title: item.canonicalSpeaker,
-      optionLabel: item.canonicalSpeaker,
-      collectionType: "speaker",
-      mediaType: "video",
-      rawCollectionTitle: item.canonicalSpeaker,
-      itemIds: [],
-    };
-
-    group.itemIds.push(item.id);
-    speakerMap.set(key, group);
-  });
-
-  return APPROVED_SPEAKERS.map((speaker) => speakerMap.get(normalizeSpeakerText(speaker.displayName)))
-    .filter(Boolean)
-    .map((group) => ({
-      ...group,
-      itemIds: [...new Set(group.itemIds)],
-    }))
-    .filter((group) => group.itemIds.length > 0);
+      return {
+        id: `collection-speaker-${slugify(shelf.playlistId || label)}`,
+        title: label,
+        optionLabel: label,
+        collectionType: "speaker",
+        mediaType: "video",
+        playlistId: shelf.playlistId,
+        rawCollectionTitle: shelf.title,
+        priority: SPEAKER_PRIORITY[label] || 0,
+        newestVideoPublishedAt: newestPublishedAtForItems(items),
+        description: shelf.description || shelf.subtitle || "",
+        thumbnailUrl: shelf.thumbnailUrl || items[0]?.thumbnailUrl || "",
+        itemIds: items.map((item) => item.id),
+      };
+    })
+    .filter((group) => group.itemIds.length > 0)
+    .sort(compareSpeakerGroups);
 }
 
 function sermonsForPlaylist(sermons = [], playlistId = "") {
@@ -632,6 +682,7 @@ async function buildYouTubeCache() {
       const description = cleanText(snippet.description || playlistItem.snippet?.description || "");
       const summaryDescription = previewDescription(description);
       const thumbnail = youtubeThumbnail(snippet) || youtubeThumbnail(playlistItem.snippet);
+      const publishedAt = detail?.snippet?.publishedAt || playlistItem.contentDetails?.videoPublishedAt || playlistItem.snippet?.publishedAt || "";
       const canonicalSpeaker = getCanonicalSpeakerName({
         rawTitle: titleData.rawTitle,
         parsedMinister: titleData.minister,
@@ -650,7 +701,8 @@ async function buildYouTubeCache() {
         canonicalSpeaker,
         speaker: canonicalSpeaker,
         title: titleData.mainTitle,
-        date: formatDate(detail?.snippet?.publishedAt || playlistItem.contentDetails?.videoPublishedAt || playlistItem.snippet?.publishedAt),
+        date: formatDate(publishedAt),
+        publishedAt,
         duration: formatYouTubeDuration(detail?.contentDetails?.duration),
         description: summaryDescription,
         rawDescription: description,
@@ -704,7 +756,10 @@ async function buildYouTubeCache() {
     type: "series",
     prefix: "Series",
   });
-  const speakerGroups = buildSpeakerGroups(sermons);
+  const speakerGroups = buildSpeakerGroups({
+    shelfConfigs: visibleShelfConfigs,
+    sermons,
+  });
   const latestSermons = sermonsForPlaylist(sermons, uploadsPlaylistId);
   const highlightedShelf = findHighlightedShelf(visibleShelfConfigs);
   const highlightedMessages = highlightedShelf ? sermonsForPlaylist(sermons, highlightedShelf.playlistId) : [];

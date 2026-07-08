@@ -2788,7 +2788,7 @@ img {
   margin-bottom: calc(clamp(1rem, 3vw, 2rem) * -1);
   padding-left: var(--modal-audio-related-pad) !important;
   padding-right: var(--modal-audio-related-pad) !important;
-  padding-bottom: calc(clamp(0.625rem, 1.5vw, 1rem) + clamp(1rem, 3vw, 2rem));
+  padding-bottom: var(--modal-audio-related-pad);
 }
 
 .af-cms-template-page--audio > .af-audio-modal__shelves .af-related-audio-zone .af-shelf__rail {
@@ -3379,4 +3379,72 @@ body,
 .af-audio-region {
   position: relative;
   z-index: 1;
+}
+
+/* Collection sticky background: full-viewport gradient field, no blur edge */
+.af-playlist-filter,
+.af-playlist-filter.is-sticky,
+.af-extra-shelves .af-playlist-filter.is-sticky {
+  --collection-sticky-bg-extension: clamp(3.5rem, 7vw, 6rem);
+  --collection-sticky-bg-open-extension: clamp(8rem, 16vw, 12rem);
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.af-playlist-filter::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: calc(-1 * var(--sticky-header-offset, 80px));
+  left: 50%;
+  width: 100vw;
+  height: calc(var(--sticky-header-offset, 80px) + 100% + var(--collection-sticky-bg-extension));
+  transform: translateX(-50%);
+  pointer-events: none;
+  opacity: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      #12090c 0%,
+      rgba(18, 9, 12, 0.96) 18%,
+      rgba(18, 9, 12, 0.82) 45%,
+      rgba(18, 9, 12, 0.55) 72%,
+      rgba(18, 9, 12, 0.15) 92%,
+      rgba(18, 9, 12, 0) 100%
+    ) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transition:
+    height 520ms var(--af-motion-ease),
+    opacity 520ms var(--af-motion-ease);
+}
+
+.af-playlist-filter.is-sticky::before {
+  opacity: 1;
+}
+
+.af-playlist-filter.is-sticky:hover,
+.af-playlist-filter.is-sticky:focus-within,
+.af-playlist-filter.is-sticky.is-secondary-open {
+  --collection-sticky-bg-extension: var(--collection-sticky-bg-open-extension);
+}
+
+.af-playlist-filter__copy,
+.af-playlist-filter__control-row,
+.af-playlist-filter__options-wrap {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 760px) {
+  .af-playlist-filter__toggle--utility {
+    align-self: center;
+    transform: translateY(-0.38rem) !important;
+  }
+
+  .af-playlist-filter__toggle--utility:hover {
+    transform: translateY(-0.38rem) !important;
+  }
 }

@@ -1657,6 +1657,25 @@
     const cacheKey = collectionGroupCacheKey(collectionType);
     return Array.isArray(cacheData[cacheKey]) ? cacheData[cacheKey] : [];
   }
+
+  function compareCollectionGroupsByLabel(a, b) {
+    return String(a?.optionLabel || a?.title || "").localeCompare(
+      String(b?.optionLabel || b?.title || ""),
+      undefined,
+      { sensitivity: "base", numeric: true }
+    );
+  }
+
+  function sortTopicSeriesCollectionGroups(groups = [], collectionType = "") {
+    if (!["topic", "series"].includes(collectionType)) return groups;
+    return [...groups].sort(compareCollectionGroupsByLabel);
+  }
+
+  function displayLabelForCollectionGroup(group, collectionType = "") {
+    const label = group.optionLabel || group.title || group.rawCollectionTitle || "";
+    if (collectionType !== "speaker") return label;
+    return String(label).replace(/^Speaker\s*\|\s*/i, "").trim();
+  }
   
   function itemsForCachedCollectionGroup(group) {
     const inlineItems = Array.isArray(group.items)
@@ -1678,9 +1697,9 @@
   }
 
   function collectionGroupsForType(collectionType) {
-    return cachedCollectionGroupSource(collectionType)
+    const groups = cachedCollectionGroupSource(collectionType)
       .map((group) => {
-        const label = group.optionLabel || group.title || group.rawCollectionTitle || "";
+        const label = displayLabelForCollectionGroup(group, collectionType);
         const id = group.id || collectionGroupId(collectionType, label);
         const items = itemsForCachedCollectionGroup(group);
 
@@ -1696,6 +1715,8 @@
         };
       })
       .filter((group) => group.items.length > 0);
+
+    return sortTopicSeriesCollectionGroups(groups, collectionType);
   }
 
   function moveCollectionGroupToFront(groups = [], groupId = "") {
