@@ -3448,3 +3448,130 @@ body,
     transform: translateY(-0.38rem) !important;
   }
 }
+
+@media (max-width: 560px) {
+  .af-hero__actions {
+    justify-items: start;
+    justify-content: start;
+  }
+
+  .af-hero__actions .af-button {
+    display: inline-flex !important;
+    width: auto !important;
+    flex: 0 0 auto;
+    justify-self: start;
+    align-self: flex-start;
+  }
+}
+
+@media (max-width: 767px) {
+  .af-hero {
+    min-height: clamp(28.75rem, 68vh, 38.75rem);
+  }
+
+  .af-hero__pagination {
+    bottom: calc(clamp(0px, calc(9vw - 75px), 45px) + 28px) !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .af-shelf[data-shelf-id="latest-sermons"] .af-shelf__header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .af-shelf[data-shelf-id="latest-sermons"] .af-shelf__copy {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .af-shelf[data-shelf-id="latest-sermons"] .af-shelf__actions {
+    flex: 0 0 auto;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    gap: 0.4rem;
+  }
+
+  .af-shelf[data-shelf-id="latest-sermons"] .af-shelf__action {
+    width: auto;
+    min-height: 2rem;
+    padding-inline: 0.65rem;
+    flex: 0 0 auto;
+    white-space: nowrap;
+    font-size: 0.76rem;
+  }
+
+  .af-shelf[data-shelf-id="latest-sermons"] .af-shelf__action[data-action-kind="youtube"] {
+    font-size: 0;
+  }
+
+  .af-shelf[data-shelf-id="latest-sermons"] .af-shelf__action[data-action-kind="youtube"]::after {
+    content: "Subscribe";
+    font-size: 0.76rem;
+  }
+
+  .af-shelf[data-shelf-id="latest-sermons"] .af-shelf__action[data-action-kind="youtube-notifications"] {
+    width: 2rem;
+    padding-inline: 0;
+    font-size: 0;
+  }
+
+  .af-shelf[data-shelf-id="latest-sermons"] .af-shelf__action[data-action-kind="youtube-notifications"]::after {
+    content: "";
+    width: 0.95rem;
+    height: 0.95rem;
+    background: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.268 21a2 2 0 0 0 3.464 0'/%3E%3Cpath d='M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.268 21a2 2 0 0 0 3.464 0'/%3E%3Cpath d='M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+}
+
+@media (max-width: 767px) {
+  .af-playlist-filter[data-has-selection="true"] {
+    --collection-mobile-gap: 0px;
+    --collection-mobile-collapse-bottom-gap: 5px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .af-playlist-filter[data-has-selection="true"] .af-playlist-filter__control-row {
+    display: contents !important;
+  }
+
+  .af-playlist-filter[data-has-selection="true"] .af-playlist-filter__copy {
+    order: 1;
+  }
+
+  .af-playlist-filter[data-has-selection="true"] .af-playlist-filter__buttons {
+    order: 2;
+    align-self: center;
+    justify-self: center !important;
+  }
+
+  .af-playlist-filter[data-has-selection="true"] .af-playlist-filter__options-wrap {
+    order: 3;
+    margin-top: var(--collection-mobile-gap) !important;
+  }
+
+  .af-playlist-filter[data-has-selection="true"] .af-playlist-filter__toggle--utility {
+    order: 4;
+    align-self: center !important;
+    justify-self: center !important;
+    margin: var(--collection-mobile-gap) auto var(--collection-mobile-collapse-bottom-gap) !important;
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    transform: none !important;
+  }
+
+  .af-playlist-filter[data-has-selection="true"] .af-playlist-filter__toggle--utility:hover {
+    transform: none !important;
+  }
+
+  .af-extra-shelves .af-playlist-filter[data-has-selection="true"] {
+    margin-bottom: 0 !important;
+  }
+}

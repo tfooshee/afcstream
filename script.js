@@ -103,6 +103,9 @@
   let deferredRefreshPatchTimer = 0;
   let heroSlideIndex = 0;
   let heroCarouselTimer = 0;
+  let heroTouchStartX = 0;
+  let heroTouchStartY = 0;
+  let heroTouchStarted = false;
   let previousHeroImage = "";
   const HERO_CAROUSEL_INTERVAL_MS = 12000;
   const MOBILE_SHELF_QUERY = "(max-width: 767px), (pointer: coarse)";
@@ -1847,6 +1850,43 @@
     startHeroCarousel();
   }
 
+  function moveHeroSlideBy(offset = 0) {
+    const heroItems = featuredHeroItems();
+    if (heroItems.length <= 1) return;
+    const nextIndex = (heroSlideIndex + offset + heroItems.length) % heroItems.length;
+    setHeroSlide(nextIndex);
+  }
+
+  function beginHeroSwipe(event) {
+    if (!isMobileShelfEnvironment() || event.touches.length !== 1) return;
+    if (event.target.closest("a, button")) return;
+
+    const touch = event.touches[0];
+    heroTouchStartX = touch.clientX;
+    heroTouchStartY = touch.clientY;
+    heroTouchStarted = true;
+  }
+
+  function endHeroSwipe(event) {
+    if (!heroTouchStarted || !isMobileShelfEnvironment()) return;
+    heroTouchStarted = false;
+
+    const touch = event.changedTouches?.[0];
+    if (!touch) return;
+
+    const deltaX = touch.clientX - heroTouchStartX;
+    const deltaY = touch.clientY - heroTouchStartY;
+    const absX = Math.abs(deltaX);
+    const absY = Math.abs(deltaY);
+
+    if (absX < 40 || absX <= absY) return;
+    moveHeroSlideBy(deltaX < 0 ? 1 : -1);
+  }
+
+  function cancelHeroSwipe() {
+    heroTouchStarted = false;
+  }
+
 
   function highQualityYouTubeImage(item) {
     const videoId =
@@ -3412,6 +3452,9 @@
     dom.modal.addEventListener("wheel", containModalScroll, { passive: false });
     dom.modal.addEventListener("touchstart", beginModalTouch, { passive: true });
     dom.modal.addEventListener("touchmove", containModalTouch, { passive: false });
+    dom.hero.addEventListener("touchstart", beginHeroSwipe, { passive: true });
+    dom.hero.addEventListener("touchend", endHeroSwipe, { passive: true });
+    dom.hero.addEventListener("touchcancel", cancelHeroSwipe, { passive: true });
     window.addEventListener("scroll", handleWindowScroll, { passive: true });
     window.addEventListener("resize", updateCollectionStickyState, { passive: true });
     dom.primaryShelves.addEventListener("pointerdown", toggleSecondaryOptionsForTouch, { passive: true });
