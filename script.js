@@ -127,33 +127,64 @@
   const isEmbeddedFrame = window.parent !== window;
   let parentViewportState = null;
 
+  function debugIframe(message, details = {}) {
+    if (!window.AFC_DEBUG_IFRAME) return;
+    console.log(`[AFC iframe] ${message}`, details);
+  }
+
   function refreshHeroLayout() {
-    window.dispatchEvent(new Event("resize"));
+    document.documentElement.style.setProperty("--af-layout-refresh-token", String(Date.now()));
+    window.requestAnimationFrame(() => window.dispatchEvent(new Event("resize")));
+  }
+
+  function embeddedNavOffset() {
+    return Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--af-webflow-nav-offset")) || 88;
   }
 
   function updateEmbeddedModalPosition() {
     if (!isEmbeddedFrame || !parentViewportState) return;
-    document.documentElement.style.setProperty("--af-visible-center-y", `${parentViewportState.visibleCenterInIframe}px`);
+    const navOffset = embeddedNavOffset();
+    const usableHeight = Math.max(320, parentViewportState.viewportHeight - navOffset);
+    const centerY = parentViewportState.visibleTopInIframe + navOffset + usableHeight / 2;
+    document.documentElement.style.setProperty("--af-visible-top-y", `${parentViewportState.visibleTopInIframe}px`);
+    document.documentElement.style.setProperty("--af-visible-center-y", `${centerY}px`);
+    document.documentElement.style.setProperty("--af-parent-viewport-height", `${parentViewportState.viewportHeight}px`);
+    debugIframe("modal center", { centerY, navOffset, parentViewportState });
+  }
+
+  function clearEmbeddedStickyState(filterSection) {
+    filterSection.classList.remove("is-embedded-sticky", "is-past-collections");
+    filterSection.style.removeProperty("--af-embedded-sticky-top");
+    filterSection.style.removeProperty("--af-embedded-sticky-height");
+    filterSection.parentElement?.classList.remove("has-embedded-sticky-placeholder");
+    filterSection.parentElement?.style.removeProperty("--af-embedded-sticky-placeholder-height");
   }
 
   function updateEmbeddedCollectionStickyState() {
     const filterSection = collectionFilterElement();
     if (!filterSection || !isEmbeddedFrame || !parentViewportState) return false;
 
-    const offset = Number.parseFloat(getComputedStyle(filterSection).getPropertyValue("--sticky-header-offset")) || 80;
+    const hasSelection = filterSection.dataset.hasSelection === "true";
+    const offset = embeddedNavOffset() + 12;
     const sectionRect = filterSection.getBoundingClientRect();
     const podcastsRect = dom.podcasts && !dom.podcasts.hidden ? dom.podcasts.getBoundingClientRect() : null;
     const visibleTop = parentViewportState.visibleTopInIframe + offset;
     const sectionTop = sectionRect.top + window.scrollY;
+    const sectionHeight = filterSection.offsetHeight;
     const sectionBottom = podcastsRect ? podcastsRect.top + window.scrollY : document.documentElement.scrollHeight;
-    const stickyLimit = sectionBottom - filterSection.offsetHeight - 24;
-    const isWithinCollection = visibleTop >= sectionTop && visibleTop < stickyLimit;
+    const stickyLimit = Math.max(sectionTop, sectionBottom - sectionHeight - 24);
+    const isWithinCollection = hasSelection && visibleTop >= sectionTop && visibleTop < stickyLimit;
     const stickyTop = Math.max(sectionTop, Math.min(visibleTop, stickyLimit));
 
     filterSection.classList.toggle("is-sticky", isWithinCollection);
     filterSection.classList.toggle("is-embedded-sticky", isWithinCollection);
-    filterSection.classList.toggle("is-past-collections", visibleTop >= stickyLimit);
+    filterSection.classList.toggle("is-past-collections", hasSelection && visibleTop >= stickyLimit);
     filterSection.style.setProperty("--af-embedded-sticky-top", `${stickyTop}px`);
+    filterSection.style.setProperty("--af-embedded-sticky-height", `${sectionHeight}px`);
+    filterSection.parentElement?.classList.toggle("has-embedded-sticky-placeholder", isWithinCollection);
+    filterSection.parentElement?.style.setProperty("--af-embedded-sticky-placeholder-height", `${sectionHeight}px`);
+    if (!isWithinCollection) filterSection.parentElement?.classList.remove("has-embedded-sticky-placeholder");
+    debugIframe("sticky collection", { active: isWithinCollection, hasSelection, visibleTop, sectionTop, stickyTop, stickyLimit, podcastBoundary: sectionBottom });
     return true;
   }
 
@@ -168,6 +199,7 @@
     };
     parentViewportState = normalized;
     document.documentElement.classList.add("is-embedded-in-webflow");
+    debugIframe("received parent viewport", normalized);
     updateEmbeddedModalPosition();
     if (parentViewportFrame) return;
     parentViewportFrame = window.requestAnimationFrame(() => {
@@ -3446,8 +3478,7 @@
     if (!filterSection) return;
     if (updateEmbeddedCollectionStickyState()) return;
 
-    filterSection.classList.remove("is-embedded-sticky");
-    filterSection.style.removeProperty("--af-embedded-sticky-top");
+    clearEmbeddedStickyState(filterSection);
     const offset = Number.parseFloat(getComputedStyle(filterSection).getPropertyValue("--sticky-header-offset")) || 80;
     const rect = filterSection.getBoundingClientRect();
     const isSticky = rect.top <= offset + 1;
