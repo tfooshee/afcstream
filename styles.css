@@ -3580,3 +3580,37 @@ body,
     margin-bottom: 0 !important;
   }
 }
+
+/* Webflow iframe parent-scroll awareness. Standalone GitHub keeps native fixed/sticky behavior. */
+html.is-embedded-in-webflow .af-modal {
+  position: absolute;
+  min-height: 100%;
+  overflow: visible;
+  place-items: start center;
+}
+
+html.is-embedded-in-webflow .af-modal__backdrop {
+  position: absolute;
+}
+
+html.is-embedded-in-webflow .af-modal__shell {
+  position: absolute;
+  top: var(--af-visible-center-y, 50vh);
+  transform: translateY(calc(-50% + 28px)) scale(0.975);
+}
+
+html.is-embedded-in-webflow .af-modal.is-open .af-modal__shell {
+  transform: translateY(-50%) scale(1);
+}
+
+html.is-embedded-in-webflow .af-playlist-filter {
+  position: relative;
+  top: auto;
+}
+
+html.is-embedded-in-webflow .af-playlist-filter.is-embedded-sticky {
+  position: absolute;
+  top: var(--af-embedded-sticky-top, auto);
+  left: 50%;
+  transform: translateX(-50%);
+}

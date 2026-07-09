@@ -80,6 +80,8 @@
       },
       "*"
     );
+
+    window.dispatchEvent(new Event("resize"));
   }
 
   window.addEventListener("load", sendAfcHeight);
