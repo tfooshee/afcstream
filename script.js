@@ -123,6 +123,60 @@
   };
   const renderedShelfItemsById = new Map();
   let windowScrollFrame = 0;
+  let parentViewportFrame = 0;
+  const isEmbeddedFrame = window.parent !== window;
+  let parentViewportState = null;
+
+  function refreshHeroLayout() {
+    window.dispatchEvent(new Event("resize"));
+  }
+
+  function updateEmbeddedModalPosition() {
+    if (!isEmbeddedFrame || !parentViewportState) return;
+    document.documentElement.style.setProperty("--af-visible-center-y", `${parentViewportState.visibleCenterInIframe}px`);
+  }
+
+  function updateEmbeddedCollectionStickyState() {
+    const filterSection = collectionFilterElement();
+    if (!filterSection || !isEmbeddedFrame || !parentViewportState) return false;
+
+    const offset = Number.parseFloat(getComputedStyle(filterSection).getPropertyValue("--sticky-header-offset")) || 80;
+    const sectionRect = filterSection.getBoundingClientRect();
+    const podcastsRect = dom.podcasts && !dom.podcasts.hidden ? dom.podcasts.getBoundingClientRect() : null;
+    const visibleTop = parentViewportState.visibleTopInIframe + offset;
+    const sectionTop = sectionRect.top + window.scrollY;
+    const sectionBottom = podcastsRect ? podcastsRect.top + window.scrollY : document.documentElement.scrollHeight;
+    const stickyLimit = sectionBottom - filterSection.offsetHeight - 24;
+    const isWithinCollection = visibleTop >= sectionTop && visibleTop < stickyLimit;
+    const stickyTop = Math.max(sectionTop, Math.min(visibleTop, stickyLimit));
+
+    filterSection.classList.toggle("is-sticky", isWithinCollection);
+    filterSection.classList.toggle("is-embedded-sticky", isWithinCollection);
+    filterSection.classList.toggle("is-past-collections", visibleTop >= stickyLimit);
+    filterSection.style.setProperty("--af-embedded-sticky-top", `${stickyTop}px`);
+    return true;
+  }
+
+  function applyParentViewportState(nextState) {
+    if (!isEmbeddedFrame || !nextState || nextState.type !== "AFC_PARENT_VIEWPORT") return;
+    const normalized = {
+      scrollY: Number(nextState.scrollY) || 0,
+      iframeTop: Number(nextState.iframeTop) || 0,
+      viewportHeight: Math.max(0, Number(nextState.viewportHeight) || 0),
+      visibleTopInIframe: Math.max(0, Number(nextState.visibleTopInIframe) || 0),
+      visibleCenterInIframe: Math.max(0, Number(nextState.visibleCenterInIframe) || 0),
+    };
+    parentViewportState = normalized;
+    document.documentElement.classList.add("is-embedded-in-webflow");
+    updateEmbeddedModalPosition();
+    if (parentViewportFrame) return;
+    parentViewportFrame = window.requestAnimationFrame(() => {
+      parentViewportFrame = 0;
+      revealShelvesInViewport();
+      updateCollectionStickyState();
+      refreshHeroLayout();
+    });
+  }
 
   function iconPlay() {
     return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7V5Z"/></svg>';
@@ -3390,6 +3444,10 @@
   function updateCollectionStickyState() {
     const filterSection = collectionFilterElement();
     if (!filterSection) return;
+    if (updateEmbeddedCollectionStickyState()) return;
+
+    filterSection.classList.remove("is-embedded-sticky");
+    filterSection.style.removeProperty("--af-embedded-sticky-top");
     const offset = Number.parseFloat(getComputedStyle(filterSection).getPropertyValue("--sticky-header-offset")) || 80;
     const rect = filterSection.getBoundingClientRect();
     const isSticky = rect.top <= offset + 1;
@@ -3457,6 +3515,7 @@
     dom.hero.addEventListener("touchcancel", cancelHeroSwipe, { passive: true });
     window.addEventListener("scroll", handleWindowScroll, { passive: true });
     window.addEventListener("resize", updateCollectionStickyState, { passive: true });
+    window.addEventListener("message", (event) => applyParentViewportState(event.data));
     dom.primaryShelves.addEventListener("pointerdown", toggleSecondaryOptionsForTouch, { passive: true });
     dom.extraShelves.addEventListener("pointerdown", toggleSecondaryOptionsForTouch, { passive: true });
     updateCollectionStickyState();
