@@ -3614,3 +3614,55 @@ html.is-embedded-in-webflow .af-playlist-filter.is-embedded-sticky {
   left: 50%;
   transform: translateX(-50%);
 }
+
+html.is-embedded-in-webflow {
+  --af-webflow-nav-offset: 88px;
+  --af-parent-viewport-height: 100vh;
+  --af-visible-top-y: 0px;
+  --af-visible-center-y: 50vh;
+}
+
+html.is-embedded-in-webflow .af-modal {
+  top: var(--af-visible-top-y);
+  right: 0;
+  bottom: auto;
+  left: 0;
+  min-height: var(--af-parent-viewport-height);
+  padding-top: calc(var(--af-webflow-nav-offset) + clamp(0.75rem, 2vw, 1.25rem));
+  padding-bottom: clamp(1rem, 3vw, 2rem);
+  overflow: visible;
+  place-items: center;
+}
+
+html.is-embedded-in-webflow .af-modal__shell {
+  max-height: calc(var(--af-parent-viewport-height) - var(--af-webflow-nav-offset) - 2rem);
+  overflow: auto;
+  top: auto;
+}
+
+html.is-embedded-in-webflow .af-modal__close {
+  position: sticky;
+  top: 0.75rem;
+  margin-left: auto;
+  margin-right: 0.75rem;
+}
+
+html.is-embedded-in-webflow .af-extra-shelves.has-embedded-sticky-placeholder {
+  padding-top: calc(var(--af-embedded-sticky-placeholder-height, 0px) + 1rem);
+}
+
+html.is-embedded-in-webflow .af-playlist-filter.is-embedded-sticky {
+  transition:
+    background-color var(--af-motion-medium) var(--af-motion-ease),
+    box-shadow var(--af-motion-medium) var(--af-motion-ease),
+    backdrop-filter var(--af-motion-medium) var(--af-motion-ease);
+}
+
+html.is-embedded-in-webflow .af-modal__shell {
+  position: relative;
+  transform: translateY(28px) scale(0.975);
+}
+
+html.is-embedded-in-webflow .af-modal.is-open .af-modal__shell {
+  transform: translateY(0) scale(1);
+}
