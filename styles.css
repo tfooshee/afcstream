@@ -3707,3 +3707,18 @@ html.is-embedded-in-webflow .af-modal__content {
     margin: 0;
   }
 }
+
+/* Embedded Webflow collection follow mode: transform the one real nav; do not use sticky or clones. */
+html.is-embedded-in-webflow .af-playlist-filter,
+html.is-embedded-in-webflow .af-playlist-filter.is-embedded-sticky {
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: translate3d(0, var(--af-embedded-sticky-translate, 0px), 0);
+  transition:
+    padding var(--af-motion-medium) var(--af-motion-ease),
+    background-color var(--af-motion-medium) var(--af-motion-ease),
+    box-shadow var(--af-motion-medium) var(--af-motion-ease),
+    backdrop-filter var(--af-motion-medium) var(--af-motion-ease);
+  will-change: transform;
+}
