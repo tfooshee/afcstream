@@ -3722,3 +3722,20 @@ html.is-embedded-in-webflow .af-playlist-filter.is-embedded-sticky {
     backdrop-filter var(--af-motion-medium) var(--af-motion-ease);
   will-change: transform;
 }
+
+/* Embedded Webflow collection tracking must be immediate and cover the viewport edge. */
+html.is-embedded-in-webflow {
+  --af-embedded-sticky-top-offset: -20px;
+}
+
+html.is-embedded-in-webflow .af-playlist-filter.is-embedded-sticky {
+  transition: none !important;
+}
+
+html.is-embedded-in-webflow .af-playlist-filter.is-embedded-sticky::before {
+  top: var(--af-embedded-sticky-top-offset);
+  height: calc(100% - var(--af-embedded-sticky-top-offset) + var(--collection-sticky-bg-extension));
+  transition: none !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}

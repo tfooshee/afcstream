@@ -141,6 +141,15 @@
     return Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--af-webflow-nav-offset")) || 88;
   }
 
+  function embeddedCollectionTopOffset() {
+    return Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--af-embedded-sticky-top-offset")) || 0;
+  }
+
+  function roundToDevicePixel(value) {
+    const dpr = window.devicePixelRatio || 1;
+    return Math.round(value * dpr) / dpr;
+  }
+
   function updateEmbeddedModalPosition() {
     if (!isEmbeddedFrame || !parentViewportState) return;
     const navOffset = embeddedNavOffset();
@@ -163,19 +172,20 @@
     if (!filterSection || !isEmbeddedFrame || !parentViewportState) return false;
 
     const hasSelection = filterSection.dataset.hasSelection === "true";
-    const offset = embeddedNavOffset() + 12;
+    const offset = embeddedNavOffset() + 12 + embeddedCollectionTopOffset();
     const currentTranslate = Number.parseFloat(filterSection.style.getPropertyValue("--af-embedded-sticky-translate")) || 0;
     const sectionRect = filterSection.getBoundingClientRect();
+    const sectionHeight = filterSection.offsetHeight;
+    const podcastsRect = dom.podcasts && !dom.podcasts.hidden ? dom.podcasts.getBoundingClientRect() : null;
     const measuredStart = sectionRect.top + window.scrollY - currentTranslate;
     const storedStart = Number.parseFloat(filterSection.dataset.embeddedCollectionStartY || "");
     const sectionStart = Number.isFinite(storedStart) ? storedStart : measuredStart;
-    const sectionHeight = filterSection.offsetHeight;
-    const podcastsRect = dom.podcasts && !dom.podcasts.hidden ? dom.podcasts.getBoundingClientRect() : null;
     const podcastBoundary = podcastsRect ? podcastsRect.top + window.scrollY : document.documentElement.scrollHeight;
     const stickyLimit = Math.max(sectionStart, podcastBoundary - sectionHeight - 24);
     const visibleTop = parentViewportState.visibleTopInIframe + offset;
     const shouldFollow = hasSelection && visibleTop >= sectionStart && visibleTop < podcastBoundary;
-    const nextTranslate = shouldFollow ? Math.max(0, Math.min(visibleTop - sectionStart, stickyLimit - sectionStart)) : 0;
+    const targetTranslate = shouldFollow ? Math.max(0, Math.min(visibleTop - sectionStart, stickyLimit - sectionStart)) : 0;
+    const nextTranslate = roundToDevicePixel(targetTranslate);
 
     if (!Number.isFinite(storedStart) || !shouldFollow) {
       filterSection.dataset.embeddedCollectionStartY = String(measuredStart);
@@ -184,7 +194,9 @@
     filterSection.classList.toggle("is-sticky", shouldFollow && visibleTop < stickyLimit);
     filterSection.classList.toggle("is-embedded-sticky", shouldFollow);
     filterSection.classList.toggle("is-past-collections", hasSelection && visibleTop >= stickyLimit);
-    filterSection.style.setProperty("--af-embedded-sticky-translate", `${nextTranslate}px`);
+    if (currentTranslate !== nextTranslate) {
+      filterSection.style.setProperty("--af-embedded-sticky-translate", `${nextTranslate}px`);
+    }
     debugIframe("sticky collection", { active: shouldFollow, hasSelection, visibleTop, sectionStart, translateY: nextTranslate, stickyLimit, podcastBoundary });
     return true;
   }
