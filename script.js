@@ -154,10 +154,8 @@
 
   function clearEmbeddedStickyState(filterSection) {
     filterSection.classList.remove("is-embedded-sticky", "is-past-collections");
-    filterSection.style.removeProperty("--af-embedded-sticky-top");
-    filterSection.style.removeProperty("--af-embedded-sticky-height");
-    filterSection.parentElement?.classList.remove("has-embedded-sticky-placeholder");
-    filterSection.parentElement?.style.removeProperty("--af-embedded-sticky-placeholder-height");
+    filterSection.style.removeProperty("--af-embedded-sticky-translate");
+    filterSection.removeAttribute("data-embedded-collection-start-y");
   }
 
   function updateEmbeddedCollectionStickyState() {
@@ -166,25 +164,28 @@
 
     const hasSelection = filterSection.dataset.hasSelection === "true";
     const offset = embeddedNavOffset() + 12;
+    const currentTranslate = Number.parseFloat(filterSection.style.getPropertyValue("--af-embedded-sticky-translate")) || 0;
     const sectionRect = filterSection.getBoundingClientRect();
-    const podcastsRect = dom.podcasts && !dom.podcasts.hidden ? dom.podcasts.getBoundingClientRect() : null;
-    const visibleTop = parentViewportState.visibleTopInIframe + offset;
-    const sectionTop = sectionRect.top + window.scrollY;
+    const measuredStart = sectionRect.top + window.scrollY - currentTranslate;
+    const storedStart = Number.parseFloat(filterSection.dataset.embeddedCollectionStartY || "");
+    const sectionStart = Number.isFinite(storedStart) ? storedStart : measuredStart;
     const sectionHeight = filterSection.offsetHeight;
-    const sectionBottom = podcastsRect ? podcastsRect.top + window.scrollY : document.documentElement.scrollHeight;
-    const stickyLimit = Math.max(sectionTop, sectionBottom - sectionHeight - 24);
-    const isWithinCollection = hasSelection && visibleTop >= sectionTop && visibleTop < stickyLimit;
-    const stickyTop = Math.max(sectionTop, Math.min(visibleTop, stickyLimit));
+    const podcastsRect = dom.podcasts && !dom.podcasts.hidden ? dom.podcasts.getBoundingClientRect() : null;
+    const podcastBoundary = podcastsRect ? podcastsRect.top + window.scrollY : document.documentElement.scrollHeight;
+    const stickyLimit = Math.max(sectionStart, podcastBoundary - sectionHeight - 24);
+    const visibleTop = parentViewportState.visibleTopInIframe + offset;
+    const shouldFollow = hasSelection && visibleTop >= sectionStart && visibleTop < podcastBoundary;
+    const nextTranslate = shouldFollow ? Math.max(0, Math.min(visibleTop - sectionStart, stickyLimit - sectionStart)) : 0;
 
-    filterSection.classList.toggle("is-sticky", isWithinCollection);
-    filterSection.classList.toggle("is-embedded-sticky", isWithinCollection);
+    if (!Number.isFinite(storedStart) || !shouldFollow) {
+      filterSection.dataset.embeddedCollectionStartY = String(measuredStart);
+    }
+
+    filterSection.classList.toggle("is-sticky", shouldFollow && visibleTop < stickyLimit);
+    filterSection.classList.toggle("is-embedded-sticky", shouldFollow);
     filterSection.classList.toggle("is-past-collections", hasSelection && visibleTop >= stickyLimit);
-    filterSection.style.setProperty("--af-embedded-sticky-top", `${stickyTop}px`);
-    filterSection.style.setProperty("--af-embedded-sticky-height", `${sectionHeight}px`);
-    filterSection.parentElement?.classList.toggle("has-embedded-sticky-placeholder", isWithinCollection);
-    filterSection.parentElement?.style.setProperty("--af-embedded-sticky-placeholder-height", `${sectionHeight}px`);
-    if (!isWithinCollection) filterSection.parentElement?.classList.remove("has-embedded-sticky-placeholder");
-    debugIframe("sticky collection", { active: isWithinCollection, hasSelection, visibleTop, sectionTop, stickyTop, stickyLimit, podcastBoundary: sectionBottom });
+    filterSection.style.setProperty("--af-embedded-sticky-translate", `${nextTranslate}px`);
+    debugIframe("sticky collection", { active: shouldFollow, hasSelection, visibleTop, sectionStart, translateY: nextTranslate, stickyLimit, podcastBoundary });
     return true;
   }
 
