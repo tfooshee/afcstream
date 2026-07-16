@@ -24,7 +24,6 @@
         channelUsername: "anchorfaith",
         channelSearchQuery: "Anchor Faith Church",
         latestPlaylistId: "",
-        highlightedPlaylistId: "highlighted-messages",
       },
       podcasts: [
         {
@@ -61,7 +60,6 @@
     },
 
     app: {
-      highlightedPlaylistId: "highlighted-messages",
       playlistFilters: [
         { id: "topic", label: "Topic", prefix: "Topic" },
         { id: "series", label: "Series", prefix: "Series" },

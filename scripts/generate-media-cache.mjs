@@ -18,6 +18,7 @@ const CACHE_VERSION = "1.1";
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY || "";
 const YOUTUBE_CHANNEL_HANDLE = process.env.YOUTUBE_CHANNEL_HANDLE || "anchorfaith";
 const REQUIRE_SPOTIFY_EPISODES = process.env.REQUIRE_SPOTIFY_EPISODES !== "0";
+const HIGHLIGHTED_PLAYLIST_TITLE = "This is Who We Are";
 
 const SPEAKER_PRIORITY = {
   "Ap. Earl Glisson": 100,
@@ -491,9 +492,9 @@ function dedupeVideosById(items = []) {
   });
 }
 
-function buildPlaylistCollectionGroups({ shelfConfigs = [], sermons = [], type = "", prefix = "" }) {
+function buildPlaylistCollectionGroups({ shelfConfigs = [], sermons = [], type = "", prefix = "", excludedPlaylistId = "" }) {
   const groups = shelfConfigs
-    .filter((shelf) => playlistStartsWith(shelf.title, prefix))
+    .filter((shelf) => shelf.playlistId !== excludedPlaylistId && playlistStartsWith(shelf.title, prefix))
     .map((shelf) => {
       const items = dedupeVideosById(
         sermons.filter((item) => (item.playlistIds || []).includes(shelf.playlistId))
@@ -518,9 +519,9 @@ function buildPlaylistCollectionGroups({ shelfConfigs = [], sermons = [], type =
   return sortTopicSeriesGroups(groups, type);
 }
 
-function buildSpeakerGroups({ shelfConfigs = [], sermons = [] }) {
+function buildSpeakerGroups({ shelfConfigs = [], sermons = [], excludedPlaylistId = "" }) {
   return shelfConfigs
-    .filter((shelf) => isSpeakerPlaylistTitle(shelf.title))
+    .filter((shelf) => shelf.playlistId !== excludedPlaylistId && isSpeakerPlaylistTitle(shelf.title))
     .map((shelf) => {
       const items = dedupeVideosById(
         sermons.filter((item) => (item.playlistIds || []).includes(shelf.playlistId))
@@ -552,14 +553,32 @@ function sermonsForPlaylist(sermons = [], playlistId = "") {
   ).filter((item) => !isUnavailableYouTubeVideo(item));
 }
 
+function playlistTitleMatches(value, expectedTitle) {
+  return String(value || "").trim().toLocaleLowerCase() === String(expectedTitle || "").trim().toLocaleLowerCase();
+}
+
 function findHighlightedShelf(shelfConfigs = []) {
-  const normalizedHighlight = "highlighted messages";
-  return (
-    shelfConfigs.find((shelf) => normalizeText(shelf.title) === normalizeText(normalizedHighlight)) ||
-    shelfConfigs.find((shelf) => normalizeText(shelf.title).includes("highlight")) ||
-    shelfConfigs.find((shelf) => !shelf.isLatestShelf) ||
-    null
-  );
+  return shelfConfigs.find((shelf) => playlistTitleMatches(shelf.title, HIGHLIGHTED_PLAYLIST_TITLE)) || null;
+}
+
+function sermonsForItemIds(sermons = [], itemIds = []) {
+  const sermonsById = new Map();
+  sermons.forEach((item) => {
+    [item.id, item.youtubeVideoId, item.youtubeId].filter(Boolean).forEach((id) => sermonsById.set(String(id), item));
+  });
+  return dedupeVideosById(itemIds.map((id) => sermonsById.get(String(id))).filter(Boolean)).filter((item) => !isUnavailableYouTubeVideo(item));
+}
+
+function playlistVideoIdsInOrder(playlistItems = []) {
+  const seen = new Set();
+  return [...playlistItems]
+    .sort((a, b) => Number(a.contentDetails?.position ?? Number.MAX_SAFE_INTEGER) - Number(b.contentDetails?.position ?? Number.MAX_SAFE_INTEGER))
+    .map((item) => item.contentDetails?.videoId || item.snippet?.resourceId?.videoId || "")
+    .filter((videoId) => {
+      if (!videoId || seen.has(videoId)) return false;
+      seen.add(videoId);
+      return true;
+    });
 }
 
 async function fetchYouTubeVideoDetails(videoIds = []) {
@@ -744,25 +763,33 @@ async function buildYouTubeCache() {
     }
   });
 
+  const highlightedShelf = findHighlightedShelf(visibleShelfConfigs);
+  const highlightedItemIds = highlightedShelf
+    ? playlistVideoIdsInOrder(playlistPages.get(highlightedShelf.playlistId) || [])
+    : [];
+  if (highlightedShelf) highlightedShelf.itemIds = highlightedItemIds;
+  const highlightedPlaylistId = highlightedShelf?.playlistId || "";
   const topicGroups = buildPlaylistCollectionGroups({
     shelfConfigs: visibleShelfConfigs,
     sermons,
     type: "topic",
     prefix: "Topic",
+    excludedPlaylistId: highlightedPlaylistId,
   });
   const seriesGroups = buildPlaylistCollectionGroups({
     shelfConfigs: visibleShelfConfigs,
     sermons,
     type: "series",
     prefix: "Series",
+    excludedPlaylistId: highlightedPlaylistId,
   });
   const speakerGroups = buildSpeakerGroups({
     shelfConfigs: visibleShelfConfigs,
     sermons,
+    excludedPlaylistId: highlightedPlaylistId,
   });
   const latestSermons = sermonsForPlaylist(sermons, uploadsPlaylistId);
-  const highlightedShelf = findHighlightedShelf(visibleShelfConfigs);
-  const highlightedMessages = highlightedShelf ? sermonsForPlaylist(sermons, highlightedShelf.playlistId) : [];
+  const highlightedMessages = highlightedShelf ? sermonsForItemIds(sermons, highlightedItemIds) : [];
 
   return {
     playlists,
@@ -771,7 +798,8 @@ async function buildYouTubeCache() {
     sermons,
     latestSermons,
     highlightedMessages,
-    highlightedPlaylistId: highlightedShelf?.playlistId || "",
+    highlightedPlaylistId,
+    highlightedPlaylistTitle: HIGHLIGHTED_PLAYLIST_TITLE,
     topicGroups,
     seriesGroups,
     speakerGroups,
@@ -1009,7 +1037,8 @@ function validateCache(cache) {
   if (!data.shelfConfigs?.length) errors.push("No YouTube shelves were generated.");
   if (!Object.keys(data.playlists || {}).length) errors.push("No YouTube playlists were generated.");
   if (!data.latestSermons?.length) errors.push("No latest sermons were generated.");
-  if (!data.highlightedMessages?.length) errors.push("No highlighted messages were generated.");
+  if (!data.highlightedPlaylistId) errors.push(`No ${HIGHLIGHTED_PLAYLIST_TITLE} playlist was generated.`);
+  if (!data.highlightedMessages?.length) errors.push(`No ${HIGHLIGHTED_PLAYLIST_TITLE} videos were generated.`);
   if (!data.topicGroups?.length) errors.push("No Topic groups were generated.");
   if (!data.seriesGroups?.length) errors.push("No Series groups were generated.");
   if (!data.speakerGroups?.length) errors.push("No Speaker groups were generated.");
@@ -1068,6 +1097,7 @@ async function main() {
       latestSermons: youtubeData.latestSermons,
       highlightedMessages: youtubeData.highlightedMessages,
       highlightedPlaylistId: youtubeData.highlightedPlaylistId,
+      highlightedPlaylistTitle: youtubeData.highlightedPlaylistTitle,
       topicGroups: youtubeData.topicGroups,
       seriesGroups: youtubeData.seriesGroups,
       speakerGroups: youtubeData.speakerGroups,
