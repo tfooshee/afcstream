@@ -123,105 +123,6 @@
   };
   const renderedShelfItemsById = new Map();
   let windowScrollFrame = 0;
-  let parentViewportFrame = 0;
-  const isEmbeddedFrame = window.parent !== window;
-  let parentViewportState = null;
-
-  function debugIframe(message, details = {}) {
-    if (!window.AFC_DEBUG_IFRAME) return;
-    console.log(`[AFC iframe] ${message}`, details);
-  }
-
-  function refreshHeroLayout() {
-    document.documentElement.style.setProperty("--af-layout-refresh-token", String(Date.now()));
-    window.requestAnimationFrame(() => window.dispatchEvent(new Event("resize")));
-  }
-
-  function embeddedNavOffset() {
-    return Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--af-webflow-nav-offset")) || 88;
-  }
-
-  function embeddedCollectionTopOffset() {
-    return Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--af-embedded-sticky-top-offset")) || 0;
-  }
-
-  function roundToDevicePixel(value) {
-    const dpr = window.devicePixelRatio || 1;
-    return Math.round(value * dpr) / dpr;
-  }
-
-  function updateEmbeddedModalPosition() {
-    if (!isEmbeddedFrame || !parentViewportState) return;
-    const navOffset = embeddedNavOffset();
-    const usableHeight = Math.max(320, parentViewportState.viewportHeight - navOffset);
-    const centerY = parentViewportState.visibleTopInIframe + navOffset + usableHeight / 2;
-    document.documentElement.style.setProperty("--af-visible-top-y", `${parentViewportState.visibleTopInIframe}px`);
-    document.documentElement.style.setProperty("--af-visible-center-y", `${centerY}px`);
-    document.documentElement.style.setProperty("--af-parent-viewport-height", `${parentViewportState.viewportHeight}px`);
-    debugIframe("modal center", { centerY, navOffset, parentViewportState });
-  }
-
-  function clearEmbeddedStickyState(filterSection) {
-    filterSection.classList.remove("is-embedded-sticky", "is-past-collections");
-    filterSection.style.removeProperty("--af-embedded-sticky-translate");
-    filterSection.removeAttribute("data-embedded-collection-start-y");
-  }
-
-  function updateEmbeddedCollectionStickyState() {
-    const filterSection = collectionFilterElement();
-    if (!filterSection || !isEmbeddedFrame || !parentViewportState) return false;
-
-    const hasSelection = filterSection.dataset.hasSelection === "true";
-    const offset = embeddedNavOffset() + 12 + embeddedCollectionTopOffset();
-    const currentTranslate = Number.parseFloat(filterSection.style.getPropertyValue("--af-embedded-sticky-translate")) || 0;
-    const sectionRect = filterSection.getBoundingClientRect();
-    const sectionHeight = filterSection.offsetHeight;
-    const podcastsRect = dom.podcasts && !dom.podcasts.hidden ? dom.podcasts.getBoundingClientRect() : null;
-    const measuredStart = sectionRect.top + window.scrollY - currentTranslate;
-    const storedStart = Number.parseFloat(filterSection.dataset.embeddedCollectionStartY || "");
-    const sectionStart = Number.isFinite(storedStart) ? storedStart : measuredStart;
-    const podcastBoundary = podcastsRect ? podcastsRect.top + window.scrollY : document.documentElement.scrollHeight;
-    const stickyLimit = Math.max(sectionStart, podcastBoundary - sectionHeight - 24);
-    const visibleTop = parentViewportState.visibleTopInIframe + offset;
-    const shouldFollow = hasSelection && visibleTop >= sectionStart && visibleTop < podcastBoundary;
-    const targetTranslate = shouldFollow ? Math.max(0, Math.min(visibleTop - sectionStart, stickyLimit - sectionStart)) : 0;
-    const nextTranslate = roundToDevicePixel(targetTranslate);
-
-    if (!Number.isFinite(storedStart) || !shouldFollow) {
-      filterSection.dataset.embeddedCollectionStartY = String(measuredStart);
-    }
-
-    filterSection.classList.toggle("is-sticky", shouldFollow && visibleTop < stickyLimit);
-    filterSection.classList.toggle("is-embedded-sticky", shouldFollow);
-    filterSection.classList.toggle("is-past-collections", hasSelection && visibleTop >= stickyLimit);
-    if (currentTranslate !== nextTranslate) {
-      filterSection.style.setProperty("--af-embedded-sticky-translate", `${nextTranslate}px`);
-    }
-    debugIframe("sticky collection", { active: shouldFollow, hasSelection, visibleTop, sectionStart, translateY: nextTranslate, stickyLimit, podcastBoundary });
-    return true;
-  }
-
-  function applyParentViewportState(nextState) {
-    if (!isEmbeddedFrame || !nextState || nextState.type !== "AFC_PARENT_VIEWPORT") return;
-    const normalized = {
-      scrollY: Number(nextState.scrollY) || 0,
-      iframeTop: Number(nextState.iframeTop) || 0,
-      viewportHeight: Math.max(0, Number(nextState.viewportHeight) || 0),
-      visibleTopInIframe: Math.max(0, Number(nextState.visibleTopInIframe) || 0),
-      visibleCenterInIframe: Math.max(0, Number(nextState.visibleCenterInIframe) || 0),
-    };
-    parentViewportState = normalized;
-    document.documentElement.classList.add("is-embedded-in-webflow");
-    debugIframe("received parent viewport", normalized);
-    updateEmbeddedModalPosition();
-    if (parentViewportFrame) return;
-    parentViewportFrame = window.requestAnimationFrame(() => {
-      parentViewportFrame = 0;
-      revealShelvesInViewport();
-      updateCollectionStickyState();
-      refreshHeroLayout();
-    });
-  }
 
   function iconPlay() {
     return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7V5Z"/></svg>';
@@ -3489,9 +3390,6 @@
   function updateCollectionStickyState() {
     const filterSection = collectionFilterElement();
     if (!filterSection) return;
-    if (updateEmbeddedCollectionStickyState()) return;
-
-    clearEmbeddedStickyState(filterSection);
     const offset = Number.parseFloat(getComputedStyle(filterSection).getPropertyValue("--sticky-header-offset")) || 80;
     const rect = filterSection.getBoundingClientRect();
     const isSticky = rect.top <= offset + 1;
@@ -3559,7 +3457,6 @@
     dom.hero.addEventListener("touchcancel", cancelHeroSwipe, { passive: true });
     window.addEventListener("scroll", handleWindowScroll, { passive: true });
     window.addEventListener("resize", updateCollectionStickyState, { passive: true });
-    window.addEventListener("message", (event) => applyParentViewportState(event.data));
     dom.primaryShelves.addEventListener("pointerdown", toggleSecondaryOptionsForTouch, { passive: true });
     dom.extraShelves.addEventListener("pointerdown", toggleSecondaryOptionsForTouch, { passive: true });
     updateCollectionStickyState();
