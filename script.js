@@ -13,6 +13,7 @@
   const appConfig = prototypeData.app || {};
   const CACHE_VERSION = "1.1-final";
   const CACHE_MAX_AGE_MS = 6 * 60 * 60 * 1000;
+  const HIGHLIGHTED_PLAYLIST_TITLE = "This is Who We Are";
   const bundledMediaCacheUrl =
     runtimeConfig.mediaCacheUrl ||
     runtimeConfig.dataSources?.mediaCacheUrl ||
@@ -797,6 +798,18 @@
     return `${minutes}:${String(seconds).padStart(2, "0")}`;
   }
 
+  function playlistVideoIdsInOrder(playlistItems = []) {
+    const seen = new Set();
+    return [...playlistItems]
+      .sort((a, b) => Number(a.contentDetails?.position ?? Number.MAX_SAFE_INTEGER) - Number(b.contentDetails?.position ?? Number.MAX_SAFE_INTEGER))
+      .map((item) => item.contentDetails?.videoId || item.snippet?.resourceId?.videoId || "")
+      .filter((videoId) => {
+        if (!videoId || seen.has(videoId)) return false;
+        seen.add(videoId);
+        return true;
+      });
+  }
+
   function videoItemFromYouTube(playlistConfig, playlistItem, detail) {
     const videoId = playlistItem.contentDetails?.videoId || playlistItem.snippet?.resourceId?.videoId || detail?.id || "";
     const snippet = detail?.snippet || playlistItem.snippet || {};
@@ -892,7 +905,7 @@
       if (uploadsPlaylistId) {
         realShelfConfigs.push({
           id: "latest-sermons",
-          title: "Latest Sermons",
+          title: "Recent Sermons",
           subtitle: "",
           mediaType: "video",
           playlistId: uploadsPlaylistId,
@@ -962,11 +975,10 @@
         return { ok: false, source: "youtube" };
       }
 
-      const configuredHighlight = config.highlightedPlaylistId || appConfig.highlightedPlaylistId || "";
-      appConfig.highlightedPlaylistId =
-        configuredHighlight && shelfConfigs.some((shelf) => shelf.playlistId === configuredHighlight)
-          ? configuredHighlight
-          : shelfConfigs.find((shelf) => !shelf.isLatestShelf)?.playlistId || "";
+      const highlightedShelf = shelfConfigs.find((shelf) => playlistTitleMatches(shelf.title));
+      if (highlightedShelf) {
+        highlightedShelf.itemIds = playlistVideoIdsInOrder(playlistPages.get(highlightedShelf.playlistId) || []);
+      }
       setDataState("youtube", "loaded", `Loaded ${shelfConfigs.length} YouTube shelves and ${sermons.length} videos.`);
       return { ok: true, source: "youtube" };
     } catch (error) {
@@ -1573,9 +1585,18 @@
   }
 
   function itemsForVideoShelf(config) {
-    return dedupeMediaItems(
+    const playlistItems = dedupeMediaItems(
       sermons.filter((item) => item.playlistIds.includes(config.playlistId) && !isUnavailableYouTubeVideo(item))
     );
+    const orderedItemIds = Array.isArray(config.itemIds) ? config.itemIds.map(String) : [];
+    if (!orderedItemIds.length) return playlistItems;
+
+    const itemById = new Map();
+    playlistItems.forEach((item) => {
+      [item.id, item.youtubeVideoId, item.youtubeId].filter(Boolean).forEach((id) => itemById.set(String(id), item));
+    });
+    const orderedItems = orderedItemIds.map((id) => itemById.get(id)).filter(Boolean);
+    return orderedItems.length ? dedupeMediaItems(orderedItems) : playlistItems;
   }
 
   function itemsForPodcastShelf(config, excludedItem) {
@@ -1621,6 +1642,14 @@
         };
       })
       .filter((feed) => feed.items.length > 0);
+  }
+
+  function playlistTitleMatches(value, expectedTitle = HIGHLIGHTED_PLAYLIST_TITLE) {
+    return String(value || "").trim().toLocaleLowerCase() === String(expectedTitle || "").trim().toLocaleLowerCase();
+  }
+
+  function highlightedPlaylistShelf() {
+    return allVideoPlaylists.find((playlist) => playlistTitleMatches(playlist.title)) || null;
   }
 
   function buildAllVideoPlaylists() {
@@ -2188,15 +2217,15 @@
     const latestShelf = rawLatestShelf
       ? {
           ...rawLatestShelf,
-          title: "Latest Sermons",
+          title: "Recent Sermons",
           subtitle: "",
           actions: rawLatestShelf.actions?.length ? rawLatestShelf.actions : appConfig.youtubeShelfActions || [],
         }
       : null;
-    const highlightedShelf = shelfByPlaylistId(appConfig.highlightedPlaylistId, {
-      title: "Highlighted Messages",
-      subtitle: "",
-    });
+    const rawHighlightedShelf = highlightedPlaylistShelf();
+    const highlightedShelf = rawHighlightedShelf
+      ? { ...rawHighlightedShelf, title: HIGHLIGHTED_PLAYLIST_TITLE, subtitle: "" }
+      : null;
     const visiblePodcastShelves = podcastShelves.filter((feed) => feed.items.length > 0);
 
     dom.primaryShelves.innerHTML = [
@@ -2355,15 +2384,15 @@
     const latestShelf = rawLatestShelf
       ? {
           ...rawLatestShelf,
-          title: "Latest Sermons",
+          title: "Recent Sermons",
           subtitle: "",
           actions: rawLatestShelf.actions?.length ? rawLatestShelf.actions : appConfig.youtubeShelfActions || [],
         }
       : null;
-    const highlightedShelf = shelfByPlaylistId(appConfig.highlightedPlaylistId, {
-      title: "Highlighted Messages",
-      subtitle: "",
-    });
+    const rawHighlightedShelf = highlightedPlaylistShelf();
+    const highlightedShelf = rawHighlightedShelf
+      ? { ...rawHighlightedShelf, title: HIGHLIGHTED_PLAYLIST_TITLE, subtitle: "" }
+      : null;
     const visibleCollectionGroups = moveCollectionGroupToFront(collectionGroupsForType(currentCollectionType), currentSelectedGroupId);
     const visiblePodcastShelves = podcastShelves.filter((feed) => feed.items.length > 0);
     const shelfMap = new Map();

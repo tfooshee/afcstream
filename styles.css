@@ -2517,14 +2517,14 @@ img {
   }
 }
 
-/* v1.1.7 visual polish: Webflow safe area, modal controls, seams, and rail alignment */
+/* v1.1.7 visual polish: modal controls, seams, and rail alignment */
 :root {
-  --af-embed-top-offset: 50px;
+  --af-app-top-offset: 50px;
   --sticky-header-offset: 80px;
 }
 
 .af-app {
-  padding-top: var(--af-embed-top-offset);
+  padding-top: var(--af-app-top-offset);
 }
 
 .af-hero,
@@ -2559,7 +2559,7 @@ img {
 }
 
 .af-modal {
-  padding-top: calc(var(--af-embed-top-offset) + clamp(1rem, 2.2vw, 2rem));
+  padding-top: calc(var(--af-app-top-offset) + clamp(1rem, 2.2vw, 2rem));
 }
 
 .af-modal__shell {
@@ -2833,13 +2833,13 @@ img {
 
 @media (max-width: 820px) {
   .af-modal {
-    padding: calc(var(--af-embed-top-offset) + env(safe-area-inset-top, 0px)) 0 0;
+    padding: calc(var(--af-app-top-offset) + env(safe-area-inset-top, 0px)) 0 0;
     place-items: stretch;
   }
 
   .af-modal__shell {
     width: 100%;
-    min-height: calc(100vh - var(--af-embed-top-offset));
+    min-height: calc(100vh - var(--af-app-top-offset));
     overflow: visible;
     border-radius: 5px 5px 0 0;
   }
@@ -3230,14 +3230,14 @@ body,
 
 .af-main::before {
   z-index: 0;
-  top: calc(-1 * var(--af-embed-top-offset, 0px));
+  top: calc(-1 * var(--af-app-top-offset, 0px));
   height: calc(clamp(46rem, 104vh, 68rem) - var(--af-intro-photo-trim));
   background: var(--hero-image) center top / cover no-repeat;
 }
 
 .af-main::after {
   z-index: 1;
-  top: calc(-1 * var(--af-embed-top-offset, 0px));
+  top: calc(-1 * var(--af-app-top-offset, 0px));
   height: clamp(58rem, 126vh, 82rem);
   background:
     linear-gradient(180deg, rgba(24, 15, 17, 0.18) 0%, rgba(24, 15, 17, 0) 15%),
@@ -3274,7 +3274,7 @@ body,
 }
 
 .af-hero__bg {
-  top: calc(-1 * var(--af-embed-top-offset, 0px)) !important;
+  top: calc(-1 * var(--af-app-top-offset, 0px)) !important;
   right: 0;
   bottom: calc(-1 * var(--hero-visual-bottom-extension)) !important;
   left: 0;
@@ -3306,7 +3306,7 @@ body,
 }
 
 .af-hero::after {
-  top: calc(-1 * var(--af-embed-top-offset, 0px)) !important;
+  top: calc(-1 * var(--af-app-top-offset, 0px)) !important;
   bottom: calc(-1 * var(--hero-overlay-tail)) !important;
   background:
     linear-gradient(180deg, rgba(24, 15, 17, 0.32) 0%, rgba(24, 15, 17, 0.08) 11%, rgba(24, 15, 17, 0) 23%),
