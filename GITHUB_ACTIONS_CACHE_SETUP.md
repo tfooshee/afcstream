@@ -1,7 +1,7 @@
 # Anchor Faith Streaming — GitHub Actions cache setup
 
 This project is designed so the public browser app does **not** fetch YouTube or Spotify live.
-Instead, GitHub Actions runs the cache generator, writes `media-cache.json` and `media-cache.js`, then deploys those generated files to GitHub Pages.
+Instead, GitHub Actions runs the cache generator and deploys the generated `media-cache.json` and `media-cache.js` inside the GitHub Pages artifact. The workflow does **not** commit regenerated cache files back to this repository.
 
 ## Required repository secrets
 
@@ -50,7 +50,7 @@ A healthy run should show non-zero values for:
 - podcastEpisodes
 - spotifyReadyPodcastEpisodes
 
-If those are non-zero, the generator is working. If the live page still looks stale, open:
+Spotify matching warnings do not fail a build: unmatched RSS episodes are deployed with RSS-audio fallback playback and can receive Spotify IDs on a later run. If the live page still looks stale, open:
 
 `https://tfooshee.github.io/afcstream/media-cache.json?v=test`
 
