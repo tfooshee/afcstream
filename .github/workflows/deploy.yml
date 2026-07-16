@@ -72,7 +72,6 @@ jobs:
           if (!summary.seriesGroups) failures.push('seriesGroups');
           if (!summary.speakerGroups) failures.push('speakerGroups');
           if (!summary.podcastEpisodes) failures.push('podcastEpisodes');
-          if (!summary.spotifyReadyPodcastEpisodes) failures.push('spotifyReadyPodcastEpisodes');
           if (failures.length) {
             throw new Error(`Generated cache failed required counts: ${failures.join(', ')}`);
           }

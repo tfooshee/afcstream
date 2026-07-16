@@ -17,7 +17,6 @@ await loadDotEnv();
 const CACHE_VERSION = "1.1";
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY || "";
 const YOUTUBE_CHANNEL_HANDLE = process.env.YOUTUBE_CHANNEL_HANDLE || "anchorfaith";
-const REQUIRE_SPOTIFY_EPISODES = process.env.REQUIRE_SPOTIFY_EPISODES !== "0";
 const HIGHLIGHTED_PLAYLIST_TITLE = "This is Who We Are";
 
 const SPEAKER_PRIORITY = {
@@ -839,7 +838,7 @@ async function fetchPodcastRss(source) {
     const title = xmlAnyTagText(block, ["title"]) || "Untitled episode";
     const rawDescription = xmlAnyTagText(block, ["content:encoded", "description", "itunes:summary"]);
     const description = cleanText(rawDescription);
-    const summaryDescription = previewDescription(description);
+    const publishedAt = xmlAnyTagText(block, ["pubDate", "published", "updated"]);
     const guid = xmlAnyTagText(block, ["guid"]) || `${source.id}-${index}`;
     const itemLink = xmlAnyTagText(block, ["link"]);
     const enclosureUrl = xmlAttribute(block, "enclosure", "url");
@@ -853,19 +852,22 @@ async function fetchPodcastRss(source) {
     const spotifyUrl = spotifyEpisodeId ? spotifyEpisodeUrl(spotifyEpisodeId) : "";
 
     return {
-      id: `${source.id}-${slugify(guid || title)}`,
+      id: `${source.id}-${slugify(guid || enclosureUrl || title)}`,
       mediaType: "audio",
       title,
       mainTitle: title,
       host: source.title,
       minister: source.title,
-      date: formatDate(xmlAnyTagText(block, ["pubDate", "published", "updated"])),
+      date: formatDate(publishedAt),
+      publishedAt,
       duration: xmlAnyTagText(block, ["itunes:duration", "duration"]),
-      description: summaryDescription,
+      description: previewDescription(description),
       rawDescription: description,
       fullDescription: description,
-      summaryDescription,
+      summaryDescription: previewDescription(description),
       rssGuid: guid,
+      guid,
+      enclosureUrl,
       thumbnail: artwork,
       artworkUrl: artwork,
       sourceUrl: source.rssUrl,
@@ -873,7 +875,7 @@ async function fetchPodcastRss(source) {
       externalUrl: spotifyUrl || itemLink || enclosureUrl || source.spotifyUrl,
       spotifyEpisodeId,
       spotifyEpisodeUrl: spotifyUrl,
-      spotifyUrl: spotifyUrl || source.spotifyUrl,
+      spotifyUrl,
       spotifyShowId: source.spotifyShowId,
       showSpotifyUrl: source.spotifyUrl,
       podcastId: source.id,
@@ -888,9 +890,7 @@ async function spotifyAccessToken() {
 
   const clientId = process.env.SPOTIFY_CLIENT_ID || "";
   const clientSecret = process.env.SPOTIFY_CLIENT_SECRET || "";
-  if (!clientId || !clientSecret) {
-    throw new Error("SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET are required.");
-  }
+  if (!clientId || !clientSecret) throw new Error("SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET are required.");
 
   const response = await fetch("https://accounts.spotify.com/api/token", {
     method: "POST",
@@ -911,15 +911,11 @@ async function fetchSpotifyShowEpisodes(showId, token) {
 
   const episodes = [];
   let url = `https://api.spotify.com/v1/shows/${showId}/episodes?limit=50&market=US`;
-
   while (url) {
-    const data = await fetchJson(url, `Spotify show ${showId}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const data = await fetchJson(url, `Spotify show ${showId}`, { headers: { Authorization: `Bearer ${token}` } });
     episodes.push(...(data.items || []));
     url = data.next || "";
   }
-
   return episodes;
 }
 
@@ -930,42 +926,90 @@ async function loadManualSpotifyMap() {
 
 function manualSpotifyMatch(episode, source, manualMap = {}) {
   const sourceMap = manualMap[source.id] || {};
-  const candidates = [
-    episode.rssGuid,
-    episode.id,
-    episode.title,
-    normalizeText(episode.title),
-  ].filter(Boolean);
+  const candidates = [episode.rssGuid, episode.id, episode.title, normalizeText(episode.title)].filter(Boolean);
+  return candidates.map((candidate) => sourceMap[candidate]).find(Boolean) || "";
+}
 
-  for (const candidate of candidates) {
-    const mapped = sourceMap[candidate];
-    if (mapped) return mapped;
-  }
+function timestampForEpisode(episode) {
+  const timestamp = Date.parse(episode.publishedAt || episode.release_date || episode.date || "");
+  return Number.isFinite(timestamp) ? timestamp : 0;
+}
 
-  return "";
+function titleSimilarity(left = "", right = "") {
+  const leftTokens = new Set(normalizeText(left).split(" ").filter(Boolean));
+  const rightTokens = new Set(normalizeText(right).split(" ").filter(Boolean));
+  if (!leftTokens.size || !rightTokens.size) return 0;
+  const shared = [...leftTokens].filter((token) => rightTokens.has(token)).length;
+  return shared / new Set([...leftTokens, ...rightTokens]).size;
 }
 
 function spotifyEpisodeMatch(episode, spotifyEpisodes = []) {
   const normalizedTitle = normalizeText(episode.title);
-  const episodeDateYear = String(episode.date || "").match(/\b\d{4}\b/)?.[0] || "";
+  const exact = spotifyEpisodes.find((candidate) => normalizeText(candidate.name) === normalizedTitle);
+  if (exact) return { episode: exact, method: "exact-title" };
 
-  return (
-    spotifyEpisodes.find((spotifyEpisode) => normalizeText(spotifyEpisode.name) === normalizedTitle) ||
-    spotifyEpisodes.find((spotifyEpisode) => {
-      const spotifyTitle = normalizeText(spotifyEpisode.name);
-      return spotifyTitle.includes(normalizedTitle) || normalizedTitle.includes(spotifyTitle);
-    }) ||
-    spotifyEpisodes.find((spotifyEpisode) => {
-      const spotifyYear = String(spotifyEpisode.release_date || "").slice(0, 4);
-      return episodeDateYear && spotifyYear === episodeDateYear && normalizeText(spotifyEpisode.name).split(" ")[0] === normalizedTitle.split(" ")[0];
-    }) ||
-    null
+  const rssTimestamp = timestampForEpisode(episode);
+  const strongCandidate = spotifyEpisodes
+    .map((candidate) => ({
+      candidate,
+      similarity: titleSimilarity(episode.title, candidate.name),
+      dateDifference: rssTimestamp ? Math.abs(timestampForEpisode(candidate) - rssTimestamp) : Number.POSITIVE_INFINITY,
+    }))
+    .filter(({ similarity, dateDifference }) => similarity >= 0.8 && dateDifference <= 4 * 24 * 60 * 60 * 1000)
+    .sort((a, b) => b.similarity - a.similarity || a.dateDifference - b.dateDifference)[0];
+
+  return strongCandidate ? { episode: strongCandidate.candidate, method: "title-and-date" } : { episode: null, method: "unmatched" };
+}
+
+function stablePodcastEpisodeKey(episode) {
+  return String(episode.rssGuid || episode.guid || episode.spotifyEpisodeId || episode.enclosureUrl || episode.audioUrl || episode.id);
+}
+
+function dedupeAndSortPodcastEpisodes(episodes = []) {
+  const seen = new Set();
+  return [...episodes]
+    .filter((episode) => {
+      const key = stablePodcastEpisodeKey(episode);
+      if (!key || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .sort((a, b) => timestampForEpisode(b) - timestampForEpisode(a));
+}
+
+async function readExistingPodcastEpisodes() {
+  if (!existsSync(mediaCacheJsonPath)) return [];
+  try {
+    const existing = JSON.parse(await readFile(mediaCacheJsonPath, "utf8"));
+    return Array.isArray(existing.data?.audioEpisodes) ? existing.data.audioEpisodes : [];
+  } catch (error) {
+    console.warn("Unable to read the existing podcast cache for source fallback.", error.message);
+    return [];
+  }
+}
+
+function logUnmatchedPodcastEpisode(source, episode) {
+  console.warn(
+    `[Podcast Spotify unmatched] podcast=${source.title}; title=${episode.title}; guid=${episode.rssGuid}; publishedAt=${episode.publishedAt || "unknown"}; fallback=${episode.audioUrl || episode.externalUrl || "none"}`
   );
 }
 
 async function buildPodcastCache() {
-  const token = await spotifyAccessToken();
-  const manualMap = await loadManualSpotifyMap();
+  let token = "";
+  try {
+    token = await spotifyAccessToken();
+  } catch (error) {
+    console.warn(`[Podcast Spotify unavailable] ${error.message}. RSS episodes will use their audio fallback until Spotify is available.`);
+  }
+
+  let manualMap = {};
+  try {
+    manualMap = await loadManualSpotifyMap();
+  } catch (error) {
+    console.warn(`[Podcast manual map unavailable] ${error.message}`);
+  }
+
+  const existingEpisodes = await readExistingPodcastEpisodes();
   const podcastShelfConfigs = podcastSources.map((source) => ({
     id: source.id,
     title: source.title,
@@ -980,59 +1024,85 @@ async function buildPodcastCache() {
   const audioEpisodes = [];
 
   for (const source of podcastSources) {
-    const rssEpisodes = await fetchPodcastRss(source);
-    const spotifyEpisodes = token ? await fetchSpotifyShowEpisodes(source.spotifyShowId, token) : [];
+    let rssEpisodes;
+    try {
+      rssEpisodes = await fetchPodcastRss(source);
+    } catch (error) {
+      const preserved = existingEpisodes.filter((episode) => episode.podcastId === source.id);
+      console.warn(`[Podcast source failed] podcast=${source.title}; preserving=${preserved.length}; error=${error.message}`);
+      audioEpisodes.push(...preserved);
+      continue;
+    }
+
+    let spotifyEpisodes = [];
+    if (token) {
+      try {
+        spotifyEpisodes = await fetchSpotifyShowEpisodes(source.spotifyShowId, token);
+      } catch (error) {
+        console.warn(`[Podcast Spotify source failed] podcast=${source.title}; error=${error.message}. RSS episodes will use fallback playback.`);
+      }
+    }
 
     rssEpisodes.forEach((episode) => {
-      let spotifyId = extractSpotifyEpisodeId(manualSpotifyMatch(episode, source, manualMap));
-      let spotifyEpisode = spotifyId
-        ? spotifyEpisodes.find((candidate) => candidate.id === spotifyId)
-        : spotifyEpisodeMatch(episode, spotifyEpisodes);
+      const manualSpotifyId = extractSpotifyEpisodeId(manualSpotifyMatch(episode, source, manualMap));
+      const rssSpotifyId = extractSpotifyEpisodeId(episode.spotifyEpisodeId || episode.spotifyEpisodeUrl);
+      let spotifyEpisode = null;
+      let spotifyMatchMethod = "unmatched";
+      let spotifyId = manualSpotifyId || rssSpotifyId;
 
-      if (!spotifyId && spotifyEpisode?.id) spotifyId = spotifyEpisode.id;
+      if (manualSpotifyId) {
+        spotifyMatchMethod = "manual-map";
+        spotifyEpisode = spotifyEpisodes.find((candidate) => candidate.id === manualSpotifyId) || null;
+      } else if (rssSpotifyId) {
+        spotifyMatchMethod = "rss-spotify-url";
+        spotifyEpisode = spotifyEpisodes.find((candidate) => candidate.id === rssSpotifyId) || null;
+      } else {
+        const match = spotifyEpisodeMatch(episode, spotifyEpisodes);
+        spotifyEpisode = match.episode;
+        spotifyMatchMethod = match.method;
+        if (spotifyEpisode?.id) spotifyId = spotifyEpisode.id;
+      }
+
       const episodeUrl = spotifyId ? spotifyEpisodeUrl(spotifyId) : "";
-      const spotifyArtwork = spotifyEpisode?.images?.[0]?.url || "";
-
+      console.log(
+        `[Podcast Spotify match] podcast=${source.title}; title=${episode.title}; method=${spotifyMatchMethod}; spotifyEpisodeId=${spotifyId || "none"}`
+      );
+      if (!spotifyId) logUnmatchedPodcastEpisode(source, episode);
       audioEpisodes.push({
         ...episode,
         spotifyEpisodeId: spotifyId,
         spotifyEpisodeUrl: episodeUrl,
-        spotifyUrl: episodeUrl || source.spotifyUrl,
-        externalUrl: episodeUrl || episode.externalUrl,
+        spotifyUrl: episodeUrl,
+        externalUrl: episodeUrl || episode.externalUrl || episode.audioUrl || source.spotifyUrl,
+        spotifyMatchMethod,
         duration: spotifyEpisode?.duration_ms ? formatMilliseconds(spotifyEpisode.duration_ms) : episode.duration,
-        thumbnail: spotifyArtwork || episode.thumbnail,
-        artworkUrl: spotifyArtwork || episode.artworkUrl,
+        thumbnail: spotifyEpisode?.images?.[0]?.url || episode.thumbnail,
+        artworkUrl: spotifyEpisode?.images?.[0]?.url || episode.artworkUrl,
       });
     });
   }
 
-  const spotifyReadyEpisodes = audioEpisodes.filter((episode) => extractSpotifyEpisodeId(episode.spotifyEpisodeId || episode.spotifyEpisodeUrl));
-
-  if (REQUIRE_SPOTIFY_EPISODES && spotifyReadyEpisodes.length !== audioEpisodes.length) {
-    const missing = audioEpisodes
-      .filter((episode) => !extractSpotifyEpisodeId(episode.spotifyEpisodeId || episode.spotifyEpisodeUrl))
-      .map((episode) => `${episode.podcastName}: ${episode.title}`)
-      .slice(0, 10);
-    throw new Error(
-      `Spotify episode mapping is incomplete. Missing ${audioEpisodes.length - spotifyReadyEpisodes.length} episode IDs. ` +
-        `Set SPOTIFY_CLIENT_ID/SPOTIFY_CLIENT_SECRET, add spotify-episode-map.json, or run with REQUIRE_SPOTIFY_EPISODES=0. ` +
-        `Examples: ${missing.join(" | ")}`
-    );
-  }
-
-  return {
-    podcastShelfConfigs,
-    audioEpisodes: REQUIRE_SPOTIFY_EPISODES ? spotifyReadyEpisodes : audioEpisodes,
-  };
+  const normalizedEpisodes = dedupeAndSortPodcastEpisodes(audioEpisodes);
+  const mainPodcastDiagnostics = normalizedEpisodes
+    .filter((episode) => episode.podcastId === "anchor-faith-church-podcast")
+    .slice(0, 20)
+    .map((episode) => ({
+      rssTitle: episode.title,
+      rssPublicationDate: episode.publishedAt,
+      rssGuid: episode.rssGuid,
+      rssEnclosureUrl: episode.audioUrl,
+      spotifyEpisodeId: episode.spotifyEpisodeId || "",
+      spotifyMatchMethod: episode.spotifyMatchMethod || "",
+      rssFallback: !episode.spotifyEpisodeId && Boolean(episode.audioUrl),
+    }));
+  console.log("Anchor Faith Church podcast diagnostics (20 newest RSS episodes):");
+  console.table(mainPodcastDiagnostics);
+  return { podcastShelfConfigs, audioEpisodes: normalizedEpisodes };
 }
 
 function validateCache(cache) {
   const data = cache.data || {};
   const errors = [];
-  const spotifyReadyEpisodes = (data.audioEpisodes || []).filter((episode) =>
-    extractSpotifyEpisodeId(episode.spotifyEpisodeId || episode.spotifyEpisodeUrl)
-  );
-
   if (!data.sermons?.length) errors.push("No YouTube sermons were generated.");
   if (!data.shelfConfigs?.length) errors.push("No YouTube shelves were generated.");
   if (!Object.keys(data.playlists || {}).length) errors.push("No YouTube playlists were generated.");
@@ -1043,10 +1113,6 @@ function validateCache(cache) {
   if (!data.seriesGroups?.length) errors.push("No Series groups were generated.");
   if (!data.speakerGroups?.length) errors.push("No Speaker groups were generated.");
   if (!data.audioEpisodes?.length) errors.push("No podcast episodes were generated.");
-  if (!spotifyReadyEpisodes.length) errors.push("No Spotify-ready podcast episodes were generated.");
-  if (REQUIRE_SPOTIFY_EPISODES && spotifyReadyEpisodes.length !== (data.audioEpisodes || []).length) {
-    errors.push("One or more podcast episodes is missing a Spotify episode ID.");
-  }
 
   if (errors.length) throw new Error(errors.join(" "));
 }

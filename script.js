@@ -1307,7 +1307,7 @@
       item.spotifyEpisodeId = spotifyEpisodeId || extractSpotifyEpisodeId(spotifyEpisodeHref);
       item.spotifyEpisodeUrl = spotifyEpisodeHref || (item.spotifyEpisodeId ? spotifyEpisodeUrl(item.spotifyEpisodeId) : "");
       item.showSpotifyUrl = item.showSpotifyUrl || "";
-      item.spotifyUrl = item.spotifyEpisodeUrl || item.spotifyUrl || item.showSpotifyUrl || "";
+      item.spotifyUrl = item.spotifyEpisodeUrl || item.spotifyUrl || "";
       item.embedUrl = spotifyEmbedHref || "";
       item.audioUrl = isLikelyAudioUrl(originalAudioUrl) ? originalAudioUrl : "";
       item.externalUrl = item.spotifyEpisodeUrl || item.externalUrl || item.audioUrl || item.sourceUrl || "";
@@ -1628,10 +1628,15 @@
     });
   }
 
+  function podcastPublishedTimestamp(item) {
+    const timestamp = Date.parse(item.publishedAt || item.date || "");
+    return Number.isFinite(timestamp) ? timestamp : 0;
+  }
+
   function buildPodcastShelves() {
     return podcastShelfConfigs
       .map((config) => {
-        const items = itemsForPodcastShelf(config);
+        const items = itemsForPodcastShelf(config).sort((a, b) => podcastPublishedTimestamp(b) - podcastPublishedTimestamp(a));
 
         return {
           ...config,
@@ -2759,10 +2764,16 @@
         : "";
     const externalButtons = [];
 
-    if (isAudio && item.spotifyUrl) {
+    if (isAudio && item.spotifyEpisodeUrl) {
       externalButtons.push(`
-        <a class="af-button af-button--secondary" href="${item.spotifyUrl}" target="_blank" rel="noreferrer">
+        <a class="af-button af-button--secondary" href="${item.spotifyEpisodeUrl}" target="_blank" rel="noreferrer">
           ${iconExternal()} Open on Spotify
+        </a>
+      `);
+    } else if (isAudio && item.externalUrl) {
+      externalButtons.push(`
+        <a class="af-button af-button--secondary" href="${item.externalUrl}" target="_blank" rel="noreferrer">
+          ${iconExternal()} Open Episode
         </a>
       `);
     } else if (!isAudio && item.externalUrl) {
@@ -2830,7 +2841,7 @@
     if (item.mediaType === "audio") {
       const playerSrc = embeddedPlayerUrl(item);
       return `
-        <div class="af-modal__audio-layout ${playerSrc ? "af-modal__audio-layout--spotify" : "af-modal__audio-layout--custom"}" data-player-shell data-player-state="ready">
+        <div class="af-modal__audio-layout ${playerSrc ? "af-modal__audio-layout--spotify" : "af-modal__audio-layout--custom"}" data-player-shell data-player-state="ready" data-player-source="${playerSrc ? "spotify" : "rss-audio"}">
           ${
             playerSrc
               ? `<div class="af-modal__spotify-shell">
