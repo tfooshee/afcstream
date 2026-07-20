@@ -3586,6 +3586,7 @@ body,
   --af-footer-cta-text: #180f11;
   --af-footer-cta-muted: rgba(24, 15, 17, 0.78);
   --af-footer-accent: #c2c9b1;
+  --af-footer-mono: "Inconsolata", "Courier New", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 .af-site-footer {
@@ -3625,6 +3626,7 @@ body,
   gap: 0.55rem;
   margin: 0 0 1rem;
   color: var(--af-footer-cta-text);
+  font-family: var(--af-footer-mono);
   font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 0.18em;
@@ -3669,6 +3671,9 @@ body,
   min-height: 3.2rem;
   padding-inline: 1rem;
   text-align: left;
+  font-family: var(--af-footer-mono);
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
 }
 
 .af-site-footer__cta .af-button--primary {
@@ -3690,9 +3695,10 @@ body,
   min-height: 2.75rem;
   padding-inline: 0.25rem;
   color: var(--af-footer-cta-muted);
+  font-family: var(--af-footer-mono);
   font-size: 0.88rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
   transition:
     color var(--af-motion-fast) ease,
@@ -3764,6 +3770,7 @@ body,
 .af-site-footer__group-title {
   margin: 0 0 0.9rem;
   color: var(--af-footer-accent);
+  font-family: var(--af-footer-mono);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.16em;
@@ -3832,7 +3839,12 @@ body,
   padding-block: 1.1rem 1.4rem;
   color: rgba(236, 237, 230, 0.6);
   background: var(--af-footer-bg);
+  font-family: var(--af-footer-mono);
   font-size: 0.82rem;
+}
+
+.af-site-footer__legal .af-site-footer__link {
+  font-family: var(--af-footer-mono);
 }
 
 .af-site-footer__legal-links {
