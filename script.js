@@ -2088,6 +2088,7 @@
         data-shelf-id="${shelfId}"
         data-media-type="${config.mediaType}"
         data-playlist-id="${config.playlistId || ""}"
+        ${config.htmlId ? `id="${escapeHtml(config.htmlId)}"` : ""}
         data-total-items="${items.length}"
         data-rendered-items="${visibleItems.length}"
         data-render-batch="${appendLimit}"
@@ -2178,7 +2179,7 @@
     const collapseControl = renderCollectionCollapseControl();
 
     return `
-      <section class="af-playlist-filter" data-component="playlist-filter-buttons" data-has-selection="${Boolean(
+      <section id="collections" class="af-playlist-filter" data-component="playlist-filter-buttons" data-has-selection="${Boolean(
         currentCollectionType
       )}" data-is-collapsed="${isCollectionCollapsed}" style="--active-filter-index:${activeIndex}">
         <div class="af-playlist-filter__copy">
@@ -2229,7 +2230,7 @@
       : null;
     const rawHighlightedShelf = highlightedPlaylistShelf();
     const highlightedShelf = rawHighlightedShelf
-      ? { ...rawHighlightedShelf, title: HIGHLIGHTED_PLAYLIST_TITLE, subtitle: "" }
+      ? { ...rawHighlightedShelf, title: HIGHLIGHTED_PLAYLIST_TITLE, subtitle: "", htmlId: "highlighted" }
       : null;
     const visiblePodcastShelves = podcastShelves.filter((feed) => feed.items.length > 0);
 
@@ -2396,7 +2397,7 @@
       : null;
     const rawHighlightedShelf = highlightedPlaylistShelf();
     const highlightedShelf = rawHighlightedShelf
-      ? { ...rawHighlightedShelf, title: HIGHLIGHTED_PLAYLIST_TITLE, subtitle: "" }
+      ? { ...rawHighlightedShelf, title: HIGHLIGHTED_PLAYLIST_TITLE, subtitle: "", htmlId: "highlighted" }
       : null;
     const visibleCollectionGroups = moveCollectionGroupToFront(collectionGroupsForType(currentCollectionType), currentSelectedGroupId);
     const visiblePodcastShelves = podcastShelves.filter((feed) => feed.items.length > 0);
