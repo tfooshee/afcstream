@@ -5,10 +5,6 @@ on:
     branches:
       - main
   workflow_dispatch:
-  schedule:
-    # Refresh the media cache once per day at 8:00 UTC.
-    # This keeps YouTube playlists and Spotify podcast episodes updated without manual work.
-    - cron: "0 8 * * *"
 
 permissions:
   contents: read
