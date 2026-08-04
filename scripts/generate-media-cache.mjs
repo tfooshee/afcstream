@@ -18,6 +18,17 @@ const CACHE_VERSION = "1.1";
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY || "";
 const YOUTUBE_CHANNEL_HANDLE = process.env.YOUTUBE_CHANNEL_HANDLE || "anchorfaith";
 const HIGHLIGHTED_PLAYLIST_TITLE = "This is Who We Are";
+const MAX_YOUTUBE_REQUESTS_PER_RUN = 300;
+const YOUTUBE_PAGE_LIMITS = Object.freeze({
+  playlistItems: 50,
+  playlists: 20,
+});
+
+let youtubeApiRequestCount = 0;
+
+function resetYouTubeRequestCount() {
+  youtubeApiRequestCount = 0;
+}
 
 const SPEAKER_PRIORITY = {
   "Ap. Earl Glisson": 100,
@@ -320,22 +331,89 @@ function youtubeApiUrl(endpoint, params = {}) {
   return url.toString();
 }
 
-async function fetchYouTubePages(endpoint, params = {}) {
-  const items = [];
-  let pageToken = "";
+function youtubeRequestContext(endpoint, context = {}) {
+  const parts = [`YouTube ${endpoint}.list`];
+  if (context.playlistTitle) parts.push(`playlist "${context.playlistTitle}"`);
+  if (context.playlistId) parts.push(`(${context.playlistId})`);
+  if (!context.playlistId && context.label) parts.push(`for ${context.label}`);
+  return parts.join(" ");
+}
 
-  do {
-    const data = await fetchJson(
-      youtubeApiUrl(endpoint, {
+function enforceYouTubeRequestLimit(endpoint, context = {}) {
+  if (youtubeApiRequestCount >= MAX_YOUTUBE_REQUESTS_PER_RUN) {
+    throw new Error(
+      `${youtubeRequestContext(endpoint, context)} reached the cache-run safety limit of ` +
+        `${MAX_YOUTUBE_REQUESTS_PER_RUN} total YouTube API requests.`
+    );
+  }
+}
+
+async function fetchYouTubeJson(endpoint, params = {}, context = {}) {
+  enforceYouTubeRequestLimit(endpoint, context);
+  youtubeApiRequestCount += 1;
+
+  try {
+    return await fetchJson(
+      youtubeApiUrl(endpoint, params),
+      `${youtubeRequestContext(endpoint, context)} (request ${youtubeApiRequestCount})`
+    );
+  } catch (error) {
+    throw new Error(`${youtubeRequestContext(endpoint, context)} failed: ${error.message}`);
+  }
+}
+
+async function fetchYouTubePages(endpoint, params = {}, context = {}) {
+  const items = [];
+  const seenPageTokens = new Set();
+  const maxPages = context.maxPages || YOUTUBE_PAGE_LIMITS[endpoint] || 20;
+  let pageToken = "";
+  let pageCount = 0;
+
+  while (true) {
+    pageCount += 1;
+    if (pageCount > maxPages) {
+      throw new Error(
+        `${youtubeRequestContext(endpoint, context)} exceeded the safety limit of ${maxPages} pages.`
+      );
+    }
+    if (pageToken && seenPageTokens.has(pageToken)) {
+      throw new Error(
+        `${youtubeRequestContext(endpoint, context)} returned repeated page token "${pageToken}" ` +
+          `before page ${pageCount}.`
+      );
+    }
+    if (pageToken) seenPageTokens.add(pageToken);
+
+    const data = await fetchYouTubeJson(
+      endpoint,
+      {
         maxResults: 50,
         ...params,
         pageToken,
-      }),
-      `YouTube ${endpoint}`
+      },
+      context
     );
-    items.push(...(data.items || []));
-    pageToken = data.nextPageToken || "";
-  } while (pageToken);
+    const pageItems = Array.isArray(data.items) ? data.items : [];
+    items.push(...pageItems);
+
+    if (endpoint === "playlistItems") {
+      console.log(
+        `[YouTube] playlistItems.list playlist="${context.playlistTitle || "Unknown playlist"}" ` +
+          `playlistId=${context.playlistId || "unknown"} page=${pageCount} items=${pageItems.length} ` +
+          `requests=${youtubeApiRequestCount}`
+      );
+    }
+
+    const nextPageToken = data.nextPageToken || "";
+    if (!nextPageToken) break;
+    if (seenPageTokens.has(nextPageToken) || nextPageToken === pageToken) {
+      throw new Error(
+        `${youtubeRequestContext(endpoint, context)} returned repeated nextPageToken "${nextPageToken}" ` +
+          `after page ${pageCount}.`
+      );
+    }
+    pageToken = nextPageToken;
+  }
 
   return items;
 }
@@ -350,39 +428,43 @@ async function resolveYouTubeChannel() {
 
   for (const handle of [...new Set(handles.filter(Boolean))]) {
     try {
-      const handleResult = await fetchJson(
-        youtubeApiUrl("channels", {
+      const handleResult = await fetchYouTubeJson(
+        "channels",
+        {
           part: "snippet,contentDetails",
           forHandle: handle,
           key: YOUTUBE_API_KEY,
-        }),
-        `YouTube channel by handle ${handle}`
+        },
+        { label: `channel handle ${handle}` }
       );
       if (handleResult.items?.[0]) return handleResult.items[0];
     } catch (error) {
+      if (/quota|dailyLimitExceeded/i.test(error.message)) throw error;
       console.warn(error.message);
     }
   }
 
-  const searchResult = await fetchJson(
-    youtubeApiUrl("search", {
+  const searchResult = await fetchYouTubeJson(
+    "search",
+    {
       part: "snippet",
       q: "Anchor Faith Church",
       type: "channel",
       key: YOUTUBE_API_KEY,
-    }),
-    "YouTube channel search"
+    },
+    { label: "Anchor Faith Church channel search" }
   );
   const channelId = searchResult.items?.[0]?.snippet?.channelId;
   if (!channelId) throw new Error("Could not resolve Anchor Faith YouTube channel.");
 
-  const channelResult = await fetchJson(
-    youtubeApiUrl("channels", {
+  const channelResult = await fetchYouTubeJson(
+    "channels",
+    {
       part: "snippet,contentDetails",
       id: channelId,
       key: YOUTUBE_API_KEY,
-    }),
-    "YouTube searched channel"
+    },
+    { label: `searched channel ${channelId}` }
   );
   return channelResult.items?.[0];
 }
@@ -586,13 +668,14 @@ async function fetchYouTubeVideoDetails(videoIds = []) {
 
   for (let index = 0; index < uniqueIds.length; index += 50) {
     const batch = uniqueIds.slice(index, index + 50);
-    const data = await fetchJson(
-      youtubeApiUrl("videos", {
+    const data = await fetchYouTubeJson(
+      "videos",
+      {
         part: "snippet,contentDetails",
         id: batch.join(","),
         key: YOUTUBE_API_KEY,
-      }),
-      "YouTube videos"
+      },
+      { label: `video detail batch ${Math.floor(index / 50) + 1}` }
     );
     (data.items || []).forEach((item) => details.set(item.id, item));
   }
@@ -612,6 +695,7 @@ function mergeVideo(collection, item) {
 }
 
 async function buildYouTubeCache() {
+  resetYouTubeRequestCount();
   const channel = await resolveYouTubeChannel();
   const channelId = channel.id;
   const uploadsPlaylistId = channel.contentDetails?.relatedPlaylists?.uploads || "";
@@ -644,6 +728,8 @@ async function buildYouTubeCache() {
     part: "snippet,contentDetails",
     channelId,
     key: YOUTUBE_API_KEY,
+  }, {
+    label: `channel ${channelId}`,
   });
 
   channelPlaylists.forEach((playlist) => {
@@ -671,14 +757,32 @@ async function buildYouTubeCache() {
   });
 
   const playlistPages = new Map();
+  const fetchedPlaylistIds = new Set();
   const videoIds = [];
 
   for (const shelf of shelfConfigs) {
-    const items = await fetchYouTubePages("playlistItems", {
-      part: "snippet,contentDetails",
-      playlistId: shelf.playlistId,
-      key: YOUTUBE_API_KEY,
-    });
+    if (!shelf.playlistId) continue;
+    if (fetchedPlaylistIds.has(shelf.playlistId)) {
+      console.log(
+        `[YouTube] Skipping duplicate playlist request playlist="${shelf.title || "Unknown playlist"}" ` +
+          `playlistId=${shelf.playlistId}`
+      );
+      continue;
+    }
+
+    fetchedPlaylistIds.add(shelf.playlistId);
+    const items = await fetchYouTubePages(
+      "playlistItems",
+      {
+        part: "snippet,contentDetails",
+        playlistId: shelf.playlistId,
+        key: YOUTUBE_API_KEY,
+      },
+      {
+        playlistId: shelf.playlistId,
+        playlistTitle: shelf.title,
+      }
+    );
     playlistPages.set(shelf.playlistId, items);
     items.forEach((item) => {
       const videoId = item.contentDetails?.videoId || item.snippet?.resourceId?.videoId || "";
@@ -1193,7 +1297,13 @@ async function main() {
   );
 }
 
-main().catch((error) => {
-  console.error(error.message);
-  process.exitCode = 1;
-});
+const isDirectRun = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+
+if (isDirectRun) {
+  main().catch((error) => {
+    console.error(`${error.message}\nExisting media cache files were preserved.`);
+    process.exitCode = 1;
+  });
+}
+
+export { fetchYouTubePages, resetYouTubeRequestCount };
