@@ -20,7 +20,7 @@ concurrency:
 
 jobs:
   build:
-    name: Generate media cache and package site
+    name: Validate media cache and package site
     runs-on: ubuntu-latest
 
     steps:
@@ -32,21 +32,43 @@ jobs:
         with:
           node-version: 24
 
-      - name: Install dependencies
+      - name: Install media refresh dependencies
+        if: github.event_name == 'workflow_dispatch'
         run: npm install --no-audit --no-fund
 
       - name: Generate real media cache
+        if: github.event_name == 'workflow_dispatch'
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
           SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
-        run: npm run generate:cache
+        run: |
+          set -euo pipefail
+          CACHE_BACKUP="${RUNNER_TEMP}/afc-media-cache-backup"
+          mkdir -p "${CACHE_BACKUP}"
+          cp media-cache.json media-cache.js "${CACHE_BACKUP}/"
 
-      - name: Verify generated cache
+          if ! npm run generate:cache; then
+            cp "${CACHE_BACKUP}/media-cache.json" media-cache.json
+            cp "${CACHE_BACKUP}/media-cache.js" media-cache.js
+            echo "::error::Media refresh failed; restored the checked-in cache files."
+            exit 1
+          fi
+
+      - name: Verify deployable media cache
         run: |
           node <<'NODE'
           const fs = require('fs');
+          const { execFileSync } = require('child_process');
+
+          for (const cacheFile of ['media-cache.json', 'media-cache.js']) {
+            if (!fs.existsSync(cacheFile)) {
+              throw new Error(`Required cache file is missing: ${cacheFile}`);
+            }
+          }
+
           const cache = JSON.parse(fs.readFileSync('media-cache.json', 'utf8'));
+          execFileSync(process.execPath, ['--check', 'media-cache.js'], { stdio: 'inherit' });
           const data = cache.data || {};
           const summary = {
             sermons: (data.sermons || []).length,
@@ -59,7 +81,7 @@ jobs:
             podcastEpisodes: (data.audioEpisodes || []).length,
             spotifyReadyPodcastEpisodes: (data.audioEpisodes || []).filter((episode) => episode.spotifyEpisodeId || episode.spotifyEpisodeUrl).length,
           };
-          console.log('Anchor Faith generated cache verification:');
+          console.log(`Anchor Faith ${process.env.GITHUB_EVENT_NAME === 'workflow_dispatch' ? 'generated' : 'checked-in'} cache verification:`);
           console.table(summary);
           const failures = [];
           if (!summary.sermons) failures.push('sermons');
