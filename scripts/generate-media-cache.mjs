@@ -42,6 +42,7 @@ const podcastSources = [
     rssUrl: "https://anchor.fm/s/128ece40/podcast/rss",
     spotifyShowId: "7sMWiLwUHPAqHyxYBQp7Qx",
     spotifyUrl: "https://open.spotify.com/show/7sMWiLwUHPAqHyxYBQp7Qx",
+    applePodcastUrl: "https://podcasts.apple.com/us/podcast/anchor-faith-church/id957917462",
     mediaType: "audioShelf",
   },
   {
@@ -50,6 +51,7 @@ const podcastSources = [
     rssUrl: "https://anchor.fm/s/f9eea9b8/podcast/rss",
     spotifyShowId: "7xu0obdpJbYpFT62IohTkl",
     spotifyUrl: "https://open.spotify.com/show/7xu0obdpJbYpFT62IohTkl",
+    applePodcastUrl: "https://podcasts.apple.com/us/podcast/the-crnt/id1765198769",
     mediaType: "audioShelf",
   },
   {
