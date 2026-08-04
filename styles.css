@@ -3752,7 +3752,7 @@ body,
 
 .af-site-footer__purpose,
 .af-site-footer__tagline,
-.af-site-footer__legal p {
+.af-site-footer__copyright {
   margin: 0;
 }
 
@@ -3835,6 +3835,7 @@ body,
 
 .af-site-footer__logo:focus-visible,
 .af-site-footer__link:focus-visible,
+.af-site-footer__copyright:focus-visible,
 .af-site-footer__back-to-top:focus-visible,
 .af-site-footer__text-link:focus-visible,
 .af-site-footer .af-button:focus-visible {
@@ -3858,6 +3859,16 @@ body,
 
 .af-site-footer__legal .af-site-footer__link {
   font-family: var(--af-footer-mono);
+}
+
+.af-site-footer__copyright {
+  width: fit-content;
+  color: inherit;
+  transition: color var(--af-motion-fast) ease;
+}
+
+.af-site-footer__copyright:hover {
+  color: var(--af-footer-text);
 }
 
 .af-site-footer__back-to-top {
@@ -3922,8 +3933,14 @@ html[data-platform="tv"] .af-site-footer {
 }
 
 @media (max-width: 640px) {
+  .af-site-footer__cta,
+  .af-site-footer__nav,
+  .af-site-footer__legal {
+    padding-inline: 24px;
+  }
+
   .af-site-footer__cta {
-    padding-block: 3.5rem 2.6rem;
+    padding-block: 3.5rem 24px;
   }
 
   .af-site-footer__title {
@@ -3940,21 +3957,43 @@ html[data-platform="tv"] .af-site-footer {
   }
 
   .af-site-footer__groups {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .af-site-footer__brand {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .af-site-footer__logo {
+    margin-inline: auto;
   }
 
   .af-site-footer__legal {
-    align-items: flex-start;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: clamp(0.68rem, 3vw, 0.78rem);
+  }
+
+  .af-site-footer__copyright,
+  .af-site-footer__back-to-top {
+    min-height: 2.75rem;
+    white-space: nowrap;
+  }
+
+  .af-site-footer__copyright {
+    display: inline-flex;
+    align-items: center;
   }
 
   .af-site-footer__back-to-top {
-    justify-self: start;
+    justify-self: end;
   }
 
   .af-site-footer__legal-links {
-    justify-content: flex-start;
-    justify-self: start;
+    display: none;
   }
 }
 
@@ -3965,6 +4004,7 @@ html[data-platform="tv"] .af-site-footer {
 
   .af-site-footer__text-link,
   .af-site-footer__link,
+  .af-site-footer__copyright,
   .af-site-footer__back-to-top,
   .af-site-footer__back-to-top-icon,
   .af-site-footer__link::after {
