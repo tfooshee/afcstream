@@ -34,6 +34,7 @@
           spotifyShowId: "7sMWiLwUHPAqHyxYBQp7Qx",
           sourceUrl: "https://open.spotify.com/show/7sMWiLwUHPAqHyxYBQp7Qx",
           spotifyUrl: "https://open.spotify.com/show/7sMWiLwUHPAqHyxYBQp7Qx",
+          applePodcastUrl: "https://podcasts.apple.com/us/podcast/anchor-faith-church/id957917462",
           mediaType: "audioShelf",
         },
         {
@@ -44,6 +45,7 @@
           spotifyShowId: "7xu0obdpJbYpFT62IohTkl",
           sourceUrl: "https://open.spotify.com/show/7xu0obdpJbYpFT62IohTkl",
           spotifyUrl: "https://open.spotify.com/show/7xu0obdpJbYpFT62IohTkl",
+          applePodcastUrl: "https://podcasts.apple.com/us/podcast/the-crnt/id1765198769",
           mediaType: "audioShelf",
         },
         {
