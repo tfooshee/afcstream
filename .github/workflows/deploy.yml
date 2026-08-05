@@ -5,14 +5,23 @@ on:
     branches:
       - main
   workflow_dispatch:
+  schedule:
+    # Monday and Thursday at 12:00 PM Eastern
+    - cron: "0 16 * * 1,4"
+    - cron: "0 17 * * 1,4"
+
+    # Tuesday at 6:31 PM Eastern
+    - cron: "31 22 * * 2"
+    - cron: "31 23 * * 2"
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  MEDIA_CACHE_BRANCH: media-cache
 
 concurrency:
   group: pages
@@ -22,22 +31,80 @@ jobs:
   build:
     name: Validate media cache and package site
     runs-on: ubuntu-latest
+    outputs:
+      should_deploy: ${{ steps.refresh_gate.outputs.should_deploy }}
+      should_refresh: ${{ steps.refresh_gate.outputs.should_refresh }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Determine whether media refresh should run
+        id: refresh_gate
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
+            echo "should_refresh=true" >> "$GITHUB_OUTPUT"
+            echo "should_deploy=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if [[ "${GITHUB_EVENT_NAME}" == "push" ]]; then
+            echo "should_refresh=false" >> "$GITHUB_OUTPUT"
+            echo "should_deploy=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if [[ "${GITHUB_EVENT_NAME}" != "schedule" ]]; then
+            echo "should_refresh=false" >> "$GITHUB_OUTPUT"
+            echo "should_deploy=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          EASTERN_DAY="$(TZ=America/New_York date +%u)"
+          EASTERN_TIME="$(TZ=America/New_York date +%H:%M)"
+          EASTERN_SLOT="${EASTERN_DAY}:${EASTERN_TIME}"
+
+          if [[ "${EASTERN_SLOT}" == "1:12:00" ]] || \
+             [[ "${EASTERN_SLOT}" == "2:18:31" ]] || \
+             [[ "${EASTERN_SLOT}" == "4:12:00" ]]; then
+            echo "should_refresh=true" >> "$GITHUB_OUTPUT"
+            echo "should_deploy=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "should_refresh=false" >> "$GITHUB_OUTPUT"
+            echo "should_deploy=false" >> "$GITHUB_OUTPUT"
+            echo "Skipping deployment for alternate DST schedule trigger at Eastern slot ${EASTERN_SLOT}."
+          fi
+
       - name: Setup Node
+        if: steps.refresh_gate.outputs.should_deploy == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: 24
 
+      - name: Restore latest persisted media cache
+        if: steps.refresh_gate.outputs.should_deploy == 'true' && steps.refresh_gate.outputs.should_refresh != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if ! git ls-remote --exit-code --heads origin "${MEDIA_CACHE_BRANCH}" >/dev/null; then
+            echo "::error::Persistent media cache branch '${MEDIA_CACHE_BRANCH}' was not found. Run a manual media refresh before deploying design-only changes."
+            exit 1
+          fi
+
+          git fetch --depth=1 origin "${MEDIA_CACHE_BRANCH}"
+          git checkout "origin/${MEDIA_CACHE_BRANCH}" -- media-cache.json media-cache.js
+          echo "Restored media-cache.json and media-cache.js from origin/${MEDIA_CACHE_BRANCH}."
+
       - name: Install media refresh dependencies
-        if: github.event_name == 'workflow_dispatch'
+        if: steps.refresh_gate.outputs.should_refresh == 'true'
         run: npm install --no-audit --no-fund
 
       - name: Generate real media cache
-        if: github.event_name == 'workflow_dispatch'
+        if: steps.refresh_gate.outputs.should_refresh == 'true'
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
@@ -56,6 +123,9 @@ jobs:
           fi
 
       - name: Verify deployable media cache
+        if: steps.refresh_gate.outputs.should_deploy == 'true'
+        env:
+          SHOULD_REFRESH: ${{ steps.refresh_gate.outputs.should_refresh }}
         run: |
           node <<'NODE'
           const fs = require('fs');
@@ -68,6 +138,14 @@ jobs:
           }
 
           const cache = JSON.parse(fs.readFileSync('media-cache.json', 'utf8'));
+          const vm = require('vm');
+          const context = { window: {} };
+          vm.runInNewContext(fs.readFileSync('media-cache.js', 'utf8'), context);
+          const scriptCache = context.window.AnchorFaithMediaCache;
+          if (JSON.stringify(cache) !== JSON.stringify(scriptCache)) {
+            throw new Error('media-cache.json and media-cache.js do not contain the same cache object.');
+          }
+
           execFileSync(process.execPath, ['--check', 'media-cache.js'], { stdio: 'inherit' });
           const data = cache.data || {};
           const summary = {
@@ -81,7 +159,7 @@ jobs:
             podcastEpisodes: (data.audioEpisodes || []).length,
             spotifyReadyPodcastEpisodes: (data.audioEpisodes || []).filter((episode) => episode.spotifyEpisodeId || episode.spotifyEpisodeUrl).length,
           };
-          console.log(`Anchor Faith ${process.env.GITHUB_EVENT_NAME === 'workflow_dispatch' ? 'generated' : 'checked-in'} cache verification:`);
+          console.log(`Anchor Faith ${process.env.SHOULD_REFRESH === 'true' ? 'generated' : 'checked-in'} cache verification:`);
           console.table(summary);
           const failures = [];
           if (!summary.sermons) failures.push('sermons');
@@ -95,7 +173,45 @@ jobs:
           }
           NODE
 
+      - name: Persist generated media cache
+        if: steps.refresh_gate.outputs.should_refresh == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          CACHE_STAGE="$(mktemp -d)"
+          CACHE_WORKTREE="$(mktemp -d)"
+          cp media-cache.json media-cache.js "${CACHE_STAGE}/"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if git ls-remote --exit-code --heads origin "${MEDIA_CACHE_BRANCH}" >/dev/null; then
+            git fetch --depth=1 origin "${MEDIA_CACHE_BRANCH}"
+            git worktree add --detach "${CACHE_WORKTREE}" "origin/${MEDIA_CACHE_BRANCH}"
+          else
+            git worktree add --detach "${CACHE_WORKTREE}"
+            git -C "${CACHE_WORKTREE}" checkout --orphan "${MEDIA_CACHE_BRANCH}"
+            git -C "${CACHE_WORKTREE}" rm -rf . >/dev/null 2>&1 || true
+          fi
+
+          cp "${CACHE_STAGE}/media-cache.json" "${CACHE_STAGE}/media-cache.js" "${CACHE_WORKTREE}/"
+          git -C "${CACHE_WORKTREE}" add media-cache.json media-cache.js
+
+          if git -C "${CACHE_WORKTREE}" diff --cached --quiet; then
+            echo "Generated media cache matches origin/${MEDIA_CACHE_BRANCH}; no cache branch update needed."
+            exit 0
+          fi
+
+          SHORT_SHA="${GITHUB_SHA::7}"
+          GENERATED_AT="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git -C "${CACHE_WORKTREE}" commit \
+            -m "Update generated media cache from main@${SHORT_SHA} (run ${GITHUB_RUN_NUMBER})" \
+            -m "Generated at ${GENERATED_AT} UTC by ${GITHUB_WORKFLOW}."
+          git -C "${CACHE_WORKTREE}" push origin "HEAD:${MEDIA_CACHE_BRANCH}"
+
       - name: Prepare GitHub Pages artifact
+        if: steps.refresh_gate.outputs.should_deploy == 'true'
         run: |
           BUILD_ID="${GITHUB_RUN_NUMBER}-${GITHUB_SHA::7}-$(date +%s)"
           mkdir -p _site
@@ -132,9 +248,11 @@ jobs:
           PY
 
       - name: Configure GitHub Pages
+        if: steps.refresh_gate.outputs.should_deploy == 'true'
         uses: actions/configure-pages@v5
 
       - name: Upload GitHub Pages artifact
+        if: steps.refresh_gate.outputs.should_deploy == 'true'
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
@@ -142,6 +260,7 @@ jobs:
   deploy:
     name: Deploy to GitHub Pages
     needs: build
+    if: needs.build.outputs.should_deploy == 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
