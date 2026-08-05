@@ -15,12 +15,13 @@ on:
     - cron: "31 23 * * 2"
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  MEDIA_CACHE_BRANCH: media-cache
 
 concurrency:
   group: pages
@@ -83,6 +84,21 @@ jobs:
         with:
           node-version: 24
 
+      - name: Restore latest persisted media cache
+        if: steps.refresh_gate.outputs.should_deploy == 'true' && steps.refresh_gate.outputs.should_refresh != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if ! git ls-remote --exit-code --heads origin "${MEDIA_CACHE_BRANCH}" >/dev/null; then
+            echo "::error::Persistent media cache branch '${MEDIA_CACHE_BRANCH}' was not found. Run a manual media refresh before deploying design-only changes."
+            exit 1
+          fi
+
+          git fetch --depth=1 origin "${MEDIA_CACHE_BRANCH}"
+          git checkout "origin/${MEDIA_CACHE_BRANCH}" -- media-cache.json media-cache.js
+          echo "Restored media-cache.json and media-cache.js from origin/${MEDIA_CACHE_BRANCH}."
+
       - name: Install media refresh dependencies
         if: steps.refresh_gate.outputs.should_refresh == 'true'
         run: npm install --no-audit --no-fund
@@ -122,6 +138,14 @@ jobs:
           }
 
           const cache = JSON.parse(fs.readFileSync('media-cache.json', 'utf8'));
+          const vm = require('vm');
+          const context = { window: {} };
+          vm.runInNewContext(fs.readFileSync('media-cache.js', 'utf8'), context);
+          const scriptCache = context.window.AnchorFaithMediaCache;
+          if (JSON.stringify(cache) !== JSON.stringify(scriptCache)) {
+            throw new Error('media-cache.json and media-cache.js do not contain the same cache object.');
+          }
+
           execFileSync(process.execPath, ['--check', 'media-cache.js'], { stdio: 'inherit' });
           const data = cache.data || {};
           const summary = {
@@ -148,6 +172,43 @@ jobs:
             throw new Error(`Generated cache failed required counts: ${failures.join(', ')}`);
           }
           NODE
+
+      - name: Persist generated media cache
+        if: steps.refresh_gate.outputs.should_refresh == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          CACHE_STAGE="$(mktemp -d)"
+          CACHE_WORKTREE="$(mktemp -d)"
+          cp media-cache.json media-cache.js "${CACHE_STAGE}/"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if git ls-remote --exit-code --heads origin "${MEDIA_CACHE_BRANCH}" >/dev/null; then
+            git fetch --depth=1 origin "${MEDIA_CACHE_BRANCH}"
+            git worktree add --detach "${CACHE_WORKTREE}" "origin/${MEDIA_CACHE_BRANCH}"
+          else
+            git worktree add --detach "${CACHE_WORKTREE}"
+            git -C "${CACHE_WORKTREE}" checkout --orphan "${MEDIA_CACHE_BRANCH}"
+            git -C "${CACHE_WORKTREE}" rm -rf . >/dev/null 2>&1 || true
+          fi
+
+          cp "${CACHE_STAGE}/media-cache.json" "${CACHE_STAGE}/media-cache.js" "${CACHE_WORKTREE}/"
+          git -C "${CACHE_WORKTREE}" add media-cache.json media-cache.js
+
+          if git -C "${CACHE_WORKTREE}" diff --cached --quiet; then
+            echo "Generated media cache matches origin/${MEDIA_CACHE_BRANCH}; no cache branch update needed."
+            exit 0
+          fi
+
+          SHORT_SHA="${GITHUB_SHA::7}"
+          GENERATED_AT="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git -C "${CACHE_WORKTREE}" commit \
+            -m "Update generated media cache from main@${SHORT_SHA} (run ${GITHUB_RUN_NUMBER})" \
+            -m "Generated at ${GENERATED_AT} UTC by ${GITHUB_WORKFLOW}."
+          git -C "${CACHE_WORKTREE}" push origin "HEAD:${MEDIA_CACHE_BRANCH}"
 
       - name: Prepare GitHub Pages artifact
         if: steps.refresh_gate.outputs.should_deploy == 'true'
