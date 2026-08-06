@@ -118,11 +118,13 @@ img {
 }
 
 .af-hero__brand {
+  --hero-logo-inset: clamp(1rem, 2.2vw, 2rem);
+
   position: absolute;
   z-index: 20;
-  top: clamp(1rem, 2.2vw, 2rem);
-  left: clamp(1rem, 2.2vw, 2rem);
-  width: clamp(11rem, 20vw, 18rem);
+  top: var(--hero-logo-inset);
+  left: var(--hero-logo-inset);
+  width: clamp(12rem, 24vw, 18rem);
   max-width: calc(100% - (2 * var(--af-page-pad)));
   pointer-events: none;
 }
