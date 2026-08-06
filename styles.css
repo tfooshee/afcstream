@@ -3789,7 +3789,7 @@ body,
   text-transform: uppercase;
 }
 
-@media (min-width: 1025px) {
+@media (min-width: 1024px) {
   .af-site-footer__brand {
     display: flex;
     flex-direction: column;
@@ -3931,7 +3931,7 @@ html[data-platform="tv"] .af-site-footer {
   display: none;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   .af-site-footer__cta-inner,
   .af-site-footer__nav {
     grid-template-columns: 1fr;
@@ -3948,11 +3948,11 @@ html[data-platform="tv"] .af-site-footer {
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .af-site-footer__cta,
   .af-site-footer__nav,
   .af-site-footer__legal {
-    padding-inline: 28px;
+    padding-inline: clamp(28px, calc(52.5vw - 140px), 49px);
   }
 
   .af-site-footer__cta {
@@ -3961,6 +3961,7 @@ html[data-platform="tv"] .af-site-footer {
 
   .af-site-footer__nav {
     gap: 0;
+    padding-top: 3.3rem;
   }
 
   .af-site-footer__title {
@@ -3984,13 +3985,13 @@ html[data-platform="tv"] .af-site-footer {
   .af-site-footer__brand {
     justify-items: center;
     gap: 0;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3.75rem;
     text-align: center;
   }
 
   .af-site-footer__logo {
     width: min(100%, 23rem);
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     margin-inline: auto;
   }
 
