@@ -278,4 +278,4 @@ jobs:
           GITHUB_SHA: ${{ env.PAGES_BUILD_VERSION }}
         with:
           artifact_name: ${{ env.PAGES_ARTIFACT_NAME }}
-          timeout: 1200000
+          timeout: 600000
