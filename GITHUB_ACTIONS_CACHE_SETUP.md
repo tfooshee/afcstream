@@ -1,7 +1,6 @@
 # Anchor Faith Streaming — GitHub Actions cache setup
 
-This project is designed so the public browser app does **not** fetch YouTube or Spotify live.
-Instead, GitHub Actions runs the cache generator during approved refresh events, validates the generated `media-cache.json` and `media-cache.js`, and persists those two files on the dedicated `media-cache` branch. Normal design/code deployments retrieve that branch's latest valid cache before packaging the GitHub Pages artifact, so a design-only deployment cannot revert the live site to older seeded cache files committed on `main`.
+The browser app does **not** fetch YouTube, Spotify, or podcast RSS feeds at runtime. The latest validated `media-cache.json` and `media-cache.js` are committed directly to `main`, alongside the application code. This makes `main` the single source of truth for every GitHub Pages deployment.
 
 ## Required repository secrets
 
@@ -27,59 +26,58 @@ Set source to:
 
 `GitHub Actions`
 
-## Automatic refresh cadence
+## Deployment and refresh behavior
 
-The workflow runs:
+The workflow runs in three modes:
 
-- on every push to `main`, using the latest persisted cache from the `media-cache` branch without contacting YouTube, Spotify, or podcast RSS feeds
-- manually with `workflow_dispatch`, performing a full media refresh before deployment
-- on approved scheduled refreshes for Monday and Thursday at `12:00 PM America/New_York`, plus Tuesday at `6:31 PM America/New_York`
+- **Push to `main`:** validates the cache already committed to `main`, packages the site, and deploys it. This path does not install media-refresh dependencies, expose media secrets, call external media APIs, or run the cache generator.
+- **Manual `workflow_dispatch`:** generates fresh media from YouTube, podcast RSS, and Spotify; validates both cache files; commits the pair directly to `main`; and deploys the same validated workspace.
+- **Approved schedule:** performs the same refresh, commit, and deployment as a manual run on Monday and Thursday at `12:00 PM America/New_York`, plus Tuesday at `6:31 PM America/New_York`.
 
-The workflow includes both EST and EDT cron entries for each scheduled refresh window, then uses an `America/New_York` gate to approve only the intended local times. Alternate DST cron triggers make no media API requests and do not deploy.
+The workflow includes both EST and EDT cron possibilities for each scheduled window, then checks the current `America/New_York` day and time. An alternate DST cron invocation stops before dependency installation, external media requests, cache generation, artifact upload, or deployment.
 
-## Persistent generated cache branch
+## Cache persistence and safety
 
-The latest successful generated cache is stored on the `media-cache` branch as:
+The durable generated files are:
 
 - `media-cache.json`
 - `media-cache.js`
 
-Do not use the `media-cache` branch for ordinary application development. It exists only so separate workflow runs can reuse the most recently validated media cache.
+Both files are validated and committed together. Validation confirms that:
 
-During a manual or approved scheduled refresh, the workflow:
+- `media-cache.json` parses successfully,
+- `media-cache.js` has valid JavaScript syntax,
+- both files contain the same cache object, and
+- required sermon, playlist, collection, and podcast counts are non-zero.
 
-1. checks out the application code,
-2. generates fresh media from YouTube, podcast RSS, and Spotify,
-3. validates both cache files and confirms they contain the same cache object,
-4. updates the `media-cache` branch only after validation succeeds,
-5. deploys the site with the newly generated cache.
+Before a refresh pushes its cache commit, it fetches the latest `origin/main`. If `main` advanced while media was being generated, the workflow replays only the two validated cache files onto the new tip, validates them again, and uses a normal fast-forward push. It never force-pushes or overwrites intervening design changes.
 
-If generation or validation fails, the workflow restores the checked-in cache files in the temporary runner, does **not** update the `media-cache` branch, and fails visibly. The last valid persisted cache remains available for future design/code deployments.
+If generation, validation, or the safe push fails, no partial cache is deployed and the last validated cache committed to `main` remains unchanged. If a normal design deployment finds invalid cache files on `main`, it fails clearly instead of falling back to placeholder content.
 
-During a push to `main`, the workflow:
+## Deprecated `media-cache` branch
 
-1. checks out the latest application code,
-2. restores `media-cache.json` and `media-cache.js` from the `media-cache` branch,
-3. validates the restored cache,
-4. deploys the site with the latest code and latest persisted media.
+The `media-cache` branch is no longer read or updated by the deployment workflow. It remains temporarily available only as a rollback source during migration and can be removed after the simplified deployment and refresh paths have both been verified.
 
-If the `media-cache` branch is unavailable or invalid, the workflow fails safely instead of deploying older seeded media from `main`.
+## Manual refresh
+
+1. Open `Actions` in the repository.
+2. Select `Build and deploy Anchor Faith Streaming`.
+3. Choose `Run workflow` on `main`.
+4. Confirm the run generates and validates the media cache, creates one commit containing both cache files when content changed, uploads the standard `github-pages` artifact, and completes the Pages deployment.
+
+The workflow-generated cache commit uses the current run number and records the source `main` SHA and generation timestamp in the commit body.
 
 ## What to check in Actions
 
-After the workflow runs, open the workflow log and look for the cache summary.
-A healthy run should show non-zero values for:
+A healthy validation summary reports non-zero values for:
 
 - sermons
 - playlists
-- topicGroups
-- seriesGroups
-- speakerGroups
-- podcastEpisodes
-- spotifyReadyPodcastEpisodes
+- topic groups
+- series groups
+- speaker groups
+- podcast episodes
 
-Spotify matching warnings do not fail a build: unmatched RSS episodes are deployed with RSS-audio fallback playback and can receive Spotify IDs on a later run. If the live page still looks stale, open:
+Spotify matching warnings do not fail a build: unmatched RSS episodes are deployed with RSS-audio fallback playback and can receive Spotify IDs on a later refresh. To inspect the deployed cache, open:
 
 `https://tfooshee.github.io/afcstream/media-cache.json?v=test`
-
-and verify that the deployed cache contains the generated counts.
