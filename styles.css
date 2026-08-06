@@ -120,9 +120,9 @@ img {
 .af-hero__brand {
   position: absolute;
   z-index: 20;
-  top: clamp(1rem, 3vw, 2.75rem);
-  left: var(--af-page-pad);
-  width: clamp(8.5rem, 16vw, 14rem);
+  top: clamp(1rem, 2.2vw, 2rem);
+  left: clamp(1rem, 2.2vw, 2rem);
+  width: clamp(11rem, 20vw, 18rem);
   max-width: calc(100% - (2 * var(--af-page-pad)));
   pointer-events: none;
 }
