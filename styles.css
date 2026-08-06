@@ -117,6 +117,23 @@ img {
   animation: af-hero-in var(--af-motion-slow) var(--af-motion-ease) 120ms forwards;
 }
 
+.af-hero__brand {
+  position: absolute;
+  z-index: 20;
+  top: clamp(1rem, 3vw, 2.75rem);
+  left: var(--af-page-pad);
+  width: clamp(8.5rem, 16vw, 14rem);
+  max-width: calc(100% - (2 * var(--af-page-pad)));
+  pointer-events: none;
+}
+
+.af-hero__brand-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
 .af-hero__content--carousel {
   opacity: 1;
   transform: none;
