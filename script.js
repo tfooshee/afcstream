@@ -1831,22 +1831,9 @@
     return `<p class="af-cache-status" aria-live="polite">Updating...</p>`;
   }
 
-  function renderHeroBrand() {
-    return `
-      <div class="af-hero__brand">
-        <img
-          class="af-hero__brand-image"
-          src="https://cdn.prod.website-files.com/69e675a0058f39ac2841bda1/6a74f4f06f2ffdba6859ec3b_AFC_Logo.svg"
-          alt="Anchor Faith"
-        />
-      </div>
-    `;
-  }
-
   function renderGracefulEmptyState() {
     dom.hero.classList.add("af-hero--state");
     dom.hero.innerHTML = `
-      ${renderHeroBrand()}
       <div class="af-hero__content">
         <p class="af-kicker">Anchor Faith Streaming</p>
         <h1 class="af-hero__title">Anchor Faith Streaming</h1>
@@ -1948,7 +1935,6 @@
     if (!heroItems.length) {
       dom.hero.classList.add("af-hero--state");
       dom.hero.innerHTML = `
-        ${renderHeroBrand()}
         <div class="af-hero__content">
           <p class="af-kicker">Anchor Faith Streaming</p>
           <h1 class="af-hero__title">Anchor Faith Streaming</h1>
@@ -1970,7 +1956,6 @@
     introSurface?.style.setProperty("--hero-prev-image", heroPrevImage ? `url("${heroPrevImage}")` : "none");
     const heroMeta = [featured.minister, featured.date].filter(Boolean).join(" • ");
     dom.hero.innerHTML = `
-      ${renderHeroBrand()}
       ${heroPrevImage ? `<div class="af-hero__bg af-hero__bg--previous" aria-hidden="true"></div>` : ""}
       <div class="af-hero__bg af-hero__bg--current" aria-hidden="true"></div>
       <div class="af-hero__content af-hero__content--carousel" data-cms-item-id="${featured.id}" data-hero-slide="${heroSlideIndex}">

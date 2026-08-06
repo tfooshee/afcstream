@@ -68,6 +68,7 @@ img {
 }
 
 .af-app {
+  position: relative;
   min-height: 100vh;
   overflow: clip;
 }
@@ -121,11 +122,13 @@ img {
   --hero-logo-inset: clamp(1rem, 2.2vw, 2rem);
 
   position: absolute;
-  z-index: 20;
+  z-index: 30;
   top: var(--hero-logo-inset);
   left: var(--hero-logo-inset);
-  width: clamp(12rem, 24vw, 18rem);
+  width: clamp(12rem, 42vw, 18rem);
   max-width: calc(100% - (2 * var(--af-page-pad)));
+  margin: 0;
+  transform: none;
   pointer-events: none;
 }
 
