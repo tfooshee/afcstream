@@ -22,10 +22,12 @@ permissions:
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
   MEDIA_CACHE_BRANCH: media-cache
+  PAGES_ARTIFACT_NAME: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
+  PAGES_BUILD_VERSION: ${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
 
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -255,6 +257,7 @@ jobs:
         if: steps.refresh_gate.outputs.should_deploy == 'true'
         uses: actions/upload-pages-artifact@v3
         with:
+          name: ${{ env.PAGES_ARTIFACT_NAME }}
           path: _site
 
   deploy:
@@ -270,3 +273,9 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        env:
+          # deploy-pages uses GITHUB_SHA as the Pages API's pages_build_version.
+          GITHUB_SHA: ${{ env.PAGES_BUILD_VERSION }}
+        with:
+          artifact_name: ${{ env.PAGES_ARTIFACT_NAME }}
+          timeout: 1200000
