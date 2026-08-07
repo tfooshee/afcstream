@@ -7,5 +7,8 @@
     "generate:cache": "node scripts/generate-media-cache.mjs",
     "validate:cache": "node scripts/validate-media-cache.mjs",
     "serve": "npx serve ."
+  },
+  "dependencies": {
+    "sharp": "0.34.3"
   }
 }

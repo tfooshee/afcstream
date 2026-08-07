@@ -3,7 +3,7 @@ import test from "node:test";
 
 await import("../podcast-media-session.js");
 
-const { artworkCandidates, createPodcastMediaSession, inspectArtworkCandidate, metadataForPodcastEpisode, resolvePodcastArtwork } =
+const { artworkCandidates, createPodcastMediaSession, metadataForPodcastEpisode } =
   globalThis.AnchorFaithPodcastMediaSession;
 
 class FakeAudio extends EventTarget {
@@ -54,10 +54,7 @@ const anchorEpisode = {
   mediaType: "audio",
   mainTitle: "Hear From Heaven - Kingdom Prayer",
   podcastName: "Anchor Faith Church Podcast",
-  episodeArtworkUrl: "https://images.example/anchor-episode.jpg",
-  episodeArtworkWidth: 640,
-  episodeArtworkHeight: 640,
-  episodeArtworkType: "image/jpeg",
+  podcastId: "anchor-faith-church-podcast",
 };
 
 const currentEpisode = {
@@ -65,93 +62,49 @@ const currentEpisode = {
   mediaType: "audio",
   mainTitle: "Left on Read - Pastor Chase Glisson",
   podcastName: "The.Crnt Podcast",
-  episodeArtworkUrl: "https://images.example/the-crnt.webp",
-  episodeArtworkWidth: 512,
-  episodeArtworkHeight: 512,
-  episodeArtworkType: "image/webp",
+  podcastId: "the-current-podcast",
 };
 
 test("maps Anchor Faith Church episode metadata", () => {
-  assert.deepEqual(metadataForPodcastEpisode(anchorEpisode), {
+  assert.deepEqual(metadataForPodcastEpisode(anchorEpisode, "https://stream.anchor.faith/"), {
     title: "Hear From Heaven - Kingdom Prayer",
     artist: "Anchor Faith Church",
     album: "Anchor Faith Church",
-    artwork: [{ src: "https://images.example/anchor-episode.jpg", sizes: "640x640", type: "image/jpeg" }],
+    artwork: [{ src: "https://stream.anchor.faith/assets/podcast-artwork/anchor-faith-church.jpg", sizes: "512x512", type: "image/jpeg" }],
   });
 });
 
 test("maps The.Crnt episode metadata", () => {
-  assert.deepEqual(metadataForPodcastEpisode(currentEpisode), {
+  assert.deepEqual(metadataForPodcastEpisode(currentEpisode, "https://stream.anchor.faith/"), {
     title: "Left on Read - Pastor Chase Glisson",
     artist: "The.Crnt",
     album: "The.Crnt",
-    artwork: [{ src: "https://images.example/the-crnt.webp", sizes: "512x512", type: "image/webp" }],
+    artwork: [{ src: "https://stream.anchor.faith/assets/podcast-artwork/the-crnt.jpg", sizes: "512x512", type: "image/jpeg" }],
   });
 });
 
-test("uses episode, show, and fallback artwork priority and rejects non-HTTPS artwork", () => {
+test("uses only same-origin local episode or show artwork", () => {
   assert.deepEqual(
-    artworkCandidates({
-      episodeArtworkUrl: "https://images.example/episode.jpg",
-      podcastArtworkUrl: "https://images.example/show.jpg",
-      spotifyArtworkUrl: "https://images.example/spotify.jpg",
-      fallbackArtworkUrl: "https://images.example/fallback.jpg",
-    }).map(({ src }) => src),
+    artworkCandidates(
+      {
+        podcastId: "anchor-faith-church-podcast",
+        localEpisodeArtworkUrl: "./assets/podcast-artwork/special-episode.jpg",
+        episodeArtworkUrl: "https://remote.example/untrusted.jpg",
+      },
+      "https://stream.anchor.faith/"
+    ).map(({ src }) => src),
     [
-      "https://images.example/episode.jpg",
-      "https://images.example/show.jpg",
-      "https://images.example/spotify.jpg",
-      "https://images.example/fallback.jpg",
+      "https://stream.anchor.faith/assets/podcast-artwork/special-episode.jpg",
+      "https://stream.anchor.faith/assets/podcast-artwork/anchor-faith-church.jpg",
     ]
   );
-  assert.deepEqual(artworkCandidates({ artworkUrl: "http://images.example/insecure.jpg" }), []);
-});
-
-test("inspects real response type and intrinsic dimensions without inventing descriptor data", async () => {
-  class FakeImage {
-    set src(value) {
-      this.currentSrc = value;
-      this.naturalWidth = 512;
-      this.naturalHeight = 512;
-      queueMicrotask(() => this.onload());
-    }
-  }
-  const descriptor = await inspectArtworkCandidate(
-    { src: "https://images.example/artwork" },
-    {
-      Image: FakeImage,
-      fetch: async () => ({ ok: true, headers: { get: () => "image/png" } }),
-    }
+  assert.deepEqual(
+    artworkCandidates(
+      { podcastId: "unknown", localPodcastArtworkUrl: "https://remote.example/untrusted.jpg" },
+      "https://stream.anchor.faith/"
+    ),
+    []
   );
-  assert.deepEqual(descriptor, {
-    src: "https://images.example/artwork",
-    sizes: "512x512",
-    type: "image/png",
-  });
-});
-
-test("prefers a verified square show image when episode artwork is not square", async () => {
-  class FakeImage {
-    set src(value) {
-      const isEpisode = value.includes("episode");
-      this.naturalWidth = isEpisode ? 1200 : 512;
-      this.naturalHeight = isEpisode ? 630 : 512;
-      queueMicrotask(() => this.onload());
-    }
-  }
-  const artwork = await resolvePodcastArtwork(
-    {
-      episodeArtworkUrl: "https://images.example/episode.jpg",
-      podcastArtworkUrl: "https://images.example/show.jpg",
-    },
-    {
-      Image: FakeImage,
-      fetch: async () => ({ ok: true, headers: { get: () => "image/jpeg" } }),
-    }
-  );
-  assert.deepEqual(artwork, [
-    { src: "https://images.example/show.jpg", sizes: "512x512", type: "image/jpeg" },
-  ]);
 });
 
 test("switches metadata and connects playback, seek, and position controls", async () => {
@@ -159,7 +112,7 @@ test("switches metadata and connects playback, seek, and position controls", asy
   const controller = createPodcastMediaSession({
     navigator: environment.navigator,
     MediaMetadata: environment.FakeMediaMetadata,
-    resolveArtwork: async (episode) => metadataForPodcastEpisode(episode).artwork,
+    baseUrl: "https://stream.anchor.faith/",
   });
   const firstAudio = new FakeAudio();
   const secondAudio = new FakeAudio();
@@ -186,6 +139,10 @@ test("switches metadata and connects playback, seek, and position controls", asy
   await Promise.resolve();
   assert.equal(environment.mediaSession.metadata.title, currentEpisode.mainTitle);
   assert.equal(environment.mediaSession.metadata.artist, "The.Crnt");
+  assert.equal(
+    environment.mediaSession.metadata.artwork[0].src,
+    "https://stream.anchor.faith/assets/podcast-artwork/the-crnt.jpg"
+  );
   assert.ok(environment.positions.some((value) => value?.duration === 120 && value.position === 30));
 });
 
