@@ -934,7 +934,7 @@ function xmlAttribute(block = "", tagName = "", attribute = "") {
 
 async function fetchPodcastRss(source) {
   const xml = await fetchText(source.rssUrl, `${source.title} RSS`);
-  const channelArtwork =
+  const podcastArtworkUrl =
     xmlAttribute(xml, "itunes:image", "href") ||
     xmlAnyTagText(xmlTagText(xml, "image"), ["url"]) ||
     xmlAnyTagText(xml, ["url"]);
@@ -948,11 +948,12 @@ async function fetchPodcastRss(source) {
     const guid = xmlAnyTagText(block, ["guid"]) || `${source.id}-${index}`;
     const itemLink = xmlAnyTagText(block, ["link"]);
     const enclosureUrl = xmlAttribute(block, "enclosure", "url");
-    const artwork =
+    const episodeArtworkUrl =
       xmlAttribute(block, "itunes:image", "href") ||
       xmlAttribute(block, "media:thumbnail", "url") ||
       xmlAttribute(block, "media:content", "url") ||
-      channelArtwork;
+      "";
+    const artwork = episodeArtworkUrl || podcastArtworkUrl;
     const spotifyCandidate = [itemLink, guid, rawDescription].find((value) => extractSpotifyEpisodeId(value)) || "";
     const spotifyEpisodeId = extractSpotifyEpisodeId(spotifyCandidate);
     const spotifyUrl = spotifyEpisodeId ? spotifyEpisodeUrl(spotifyEpisodeId) : "";
@@ -976,6 +977,8 @@ async function fetchPodcastRss(source) {
       enclosureUrl,
       thumbnail: artwork,
       artworkUrl: artwork,
+      episodeArtworkUrl,
+      podcastArtworkUrl,
       sourceUrl: source.rssUrl,
       audioUrl: enclosureUrl,
       externalUrl: spotifyUrl || itemLink || enclosureUrl || source.spotifyUrl,
@@ -1174,6 +1177,7 @@ async function buildPodcastCache() {
         `[Podcast Spotify match] podcast=${source.title}; title=${episode.title}; method=${spotifyMatchMethod}; spotifyEpisodeId=${spotifyId || "none"}`
       );
       if (!spotifyId) logUnmatchedPodcastEpisode(source, episode);
+      const spotifyArtwork = spotifyEpisode?.images?.[0];
       audioEpisodes.push({
         ...episode,
         spotifyEpisodeId: spotifyId,
@@ -1182,8 +1186,11 @@ async function buildPodcastCache() {
         externalUrl: episodeUrl || episode.externalUrl || episode.audioUrl || source.spotifyUrl,
         spotifyMatchMethod,
         duration: spotifyEpisode?.duration_ms ? formatMilliseconds(spotifyEpisode.duration_ms) : episode.duration,
-        thumbnail: spotifyEpisode?.images?.[0]?.url || episode.thumbnail,
-        artworkUrl: spotifyEpisode?.images?.[0]?.url || episode.artworkUrl,
+        thumbnail: spotifyArtwork?.url || episode.thumbnail,
+        artworkUrl: spotifyArtwork?.url || episode.artworkUrl,
+        spotifyArtworkUrl: spotifyArtwork?.url || "",
+        spotifyArtworkWidth: spotifyArtwork?.width,
+        spotifyArtworkHeight: spotifyArtwork?.height,
       });
     });
   }
