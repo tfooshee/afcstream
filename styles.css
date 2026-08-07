@@ -3609,6 +3609,12 @@ body,
   --af-footer-cta-muted: rgba(24, 15, 17, 0.78);
   --af-footer-accent: #c2c9b1;
   --af-footer-mono: "Inconsolata", "Courier New", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --af-footer-edge-inset: clamp(44px, 4vw, 64px);
+  --af-footer-inline-pad: calc(var(--af-page-pad) + var(--af-footer-edge-inset));
+  --af-footer-centered-pad: max(
+    var(--af-footer-inline-pad),
+    calc((100vw - 88rem) / 2 + var(--af-page-pad))
+  );
 }
 
 .af-site-footer {
@@ -3624,7 +3630,7 @@ body,
 .af-site-footer__cta,
 .af-site-footer__nav,
 .af-site-footer__legal {
-  padding-inline: var(--af-page-pad);
+  padding-inline: var(--af-footer-inline-pad);
 }
 
 .af-site-footer__cta {
@@ -3747,7 +3753,7 @@ body,
   grid-template-columns: minmax(15rem, 1fr) auto;
   gap: clamp(2rem, 6vw, 6rem);
   margin: 0;
-  padding-inline: max(var(--af-page-pad), calc((100vw - 88rem) / 2 + var(--af-page-pad)));
+  padding-inline: var(--af-footer-centered-pad);
   padding-block: clamp(2.2rem, 5vw, 4rem);
   background: var(--af-footer-nav-bg);
 }
@@ -3887,7 +3893,7 @@ body,
   align-items: center;
   gap: 1rem;
   margin: 0;
-  padding-inline: max(var(--af-page-pad), calc((100vw - 88rem) / 2 + var(--af-page-pad)));
+  padding-inline: var(--af-footer-centered-pad);
   padding-block: 1.1rem 1.4rem;
   color: rgba(236, 237, 230, 0.6);
   background: var(--af-footer-bg);
@@ -3953,7 +3959,78 @@ html[data-platform="tv"] .af-site-footer {
   display: none;
 }
 
-@media (max-width: 1023px) {
+/* Portrait tablet hybrid: desktop CTA, centered brand, compact navigation unit. */
+@media (orientation: portrait) and (min-width: 768px) and (max-width: 1023px) {
+  .af-site-footer {
+    --af-footer-edge-inset: clamp(44px, 6vw, 56px);
+    --af-footer-inline-pad: calc(var(--af-page-pad) + var(--af-footer-edge-inset));
+    --af-footer-centered-pad: var(--af-footer-inline-pad);
+  }
+
+  .af-site-footer__cta {
+    padding-block: clamp(4rem, 8vw, 6rem) clamp(2.75rem, 6vw, 4rem);
+  }
+
+  .af-site-footer__cta-inner {
+    grid-template-columns: minmax(0, 1fr) minmax(15rem, 0.46fr);
+    gap: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  .af-site-footer__title {
+    font-size: clamp(3.5rem, 8vw, 5.5rem);
+  }
+
+  .af-site-footer__copy {
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+  }
+
+  .af-site-footer__actions {
+    padding: 0.9rem;
+  }
+
+  .af-site-footer__nav {
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+    padding-block: 3.5rem;
+  }
+
+  .af-site-footer__brand {
+    justify-items: center;
+    gap: 0;
+    text-align: center;
+  }
+
+  .af-site-footer__logo {
+    width: min(100%, 23rem);
+    margin: 0 auto 2.5rem;
+  }
+
+  .af-site-footer__purpose {
+    margin: 0 0 1rem;
+  }
+
+  .af-site-footer__groups {
+    grid-template-columns: repeat(2, minmax(10rem, 12rem));
+    gap: clamp(2rem, 5vw, 3rem);
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  .af-site-footer__legal {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .af-site-footer__back-to-top {
+    justify-self: end;
+  }
+
+  .af-site-footer__legal-links {
+    display: none;
+  }
+}
+
+/* Approved portrait-phone composition. Keep these values stable. */
+@media (orientation: portrait) and (max-width: 767px) {
   .af-site-footer__cta-inner,
   .af-site-footer__nav {
     grid-template-columns: 1fr;
@@ -3963,14 +4040,6 @@ html[data-platform="tv"] .af-site-footer {
     max-width: 32rem;
   }
 
-  .af-site-footer__groups {
-    grid-template-columns: repeat(2, minmax(10rem, 1fr));
-    width: 100%;
-    margin-left: 0;
-  }
-}
-
-@media (max-width: 768px) {
   .af-site-footer__cta,
   .af-site-footer__nav,
   .af-site-footer__legal {
@@ -4002,6 +4071,8 @@ html[data-platform="tv"] .af-site-footer {
   .af-site-footer__groups {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
+    width: 100%;
+    margin-left: 0;
   }
 
   .af-site-footer__brand {
@@ -4058,6 +4129,113 @@ html[data-platform="tv"] .af-site-footer {
 
   .af-site-footer__legal-links {
     display: none;
+  }
+}
+
+/* Phones and compact dual-screen devices use a scaled desktop composition in landscape. */
+@media (orientation: landscape) and (max-width: 950px) and (max-height: 600px) {
+  .af-site-footer {
+    --af-footer-edge-inset: clamp(24px, 4vw, 44px);
+    --af-footer-inline-pad: calc(var(--af-page-pad) + var(--af-footer-edge-inset));
+    --af-footer-centered-pad: var(--af-footer-inline-pad);
+  }
+
+  .af-site-footer__cta {
+    padding-block: clamp(2rem, 7vh, 3rem);
+  }
+
+  .af-site-footer__cta-inner {
+    grid-template-columns: minmax(0, 1fr) minmax(13rem, 0.44fr);
+    gap: clamp(1.25rem, 4vw, 2.75rem);
+  }
+
+  .af-site-footer__eyebrow {
+    margin-bottom: 0.65rem;
+    font-size: 0.68rem;
+  }
+
+  .af-site-footer__title {
+    font-size: clamp(2.5rem, 7vw, 4.75rem);
+  }
+
+  .af-site-footer__copy {
+    margin-top: 1rem;
+    font-size: clamp(0.9rem, 1.7vw, 1.05rem);
+    line-height: 1.5;
+  }
+
+  .af-site-footer__actions {
+    gap: 0.55rem;
+    padding: 0.7rem;
+  }
+
+  .af-site-footer__button {
+    min-height: 2.75rem;
+    padding-inline: 0.8rem;
+    font-size: clamp(0.72rem, 1.5vw, 0.86rem);
+  }
+
+  .af-site-footer__button--reading {
+    min-height: 3.4rem;
+    padding-block: 0.4rem;
+  }
+
+  .af-site-footer__text-link {
+    min-height: 2.35rem;
+    font-size: clamp(0.72rem, 1.5vw, 0.82rem);
+  }
+
+  .af-site-footer__nav {
+    grid-template-columns: minmax(12rem, 1fr) auto;
+    gap: clamp(1.25rem, 4vw, 3rem);
+    padding-block: clamp(2rem, 8vh, 3rem);
+  }
+
+  .af-site-footer__brand {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    gap: 0.7rem;
+  }
+
+  .af-site-footer__logo {
+    width: clamp(10rem, 25vw, 15rem);
+    padding: 0;
+  }
+
+  .af-site-footer__purpose {
+    margin-top: auto;
+    font-size: clamp(0.82rem, 1.5vw, 0.95rem);
+  }
+
+  .af-site-footer__tagline,
+  .af-site-footer__group-title {
+    font-size: clamp(0.62rem, 1.2vw, 0.7rem);
+  }
+
+  .af-site-footer__groups {
+    grid-template-columns: repeat(2, minmax(8.5rem, 10rem));
+    gap: clamp(1rem, 3vw, 2rem);
+    width: fit-content;
+    margin-left: auto;
+  }
+
+  .af-site-footer__group-title {
+    margin-bottom: 0.75rem;
+  }
+
+  .af-site-footer__link-list {
+    gap: 0.2rem;
+  }
+
+  .af-site-footer__link {
+    min-height: 1.7rem;
+    font-size: clamp(0.76rem, 1.4vw, 0.9rem);
+  }
+
+  .af-site-footer__legal {
+    padding-block: 0.75rem 0.9rem;
+    font-size: clamp(0.66rem, 1.2vw, 0.78rem);
   }
 }
 
