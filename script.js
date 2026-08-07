@@ -1029,7 +1029,7 @@
     if (parserError) throw new Error(`${source.title} RSS could not be parsed.`);
 
     const channel = doc.querySelector("channel");
-    const channelArtwork =
+    const podcastArtworkUrl =
       childAttribute(channel, ["image"], "href") ||
       childText(channel?.querySelector("image"), ["url"]) ||
       childAttribute(channel, ["image"], "url") ||
@@ -1038,11 +1038,12 @@
     return [...doc.querySelectorAll("item")].map((item, index) => {
       const guid = childText(item, ["guid"]) || `${source.id}-${index}`;
       const enclosure = [...item.children].find((child) => child.localName.toLowerCase() === "enclosure");
-      const artwork =
+      const episodeArtworkUrl =
         childAttribute(item, ["image"], "href") ||
         childAttribute(item, ["thumbnail"], "url") ||
         childAttribute(item, ["content"], "url") ||
-        channelArtwork;
+        "";
+      const artwork = episodeArtworkUrl || podcastArtworkUrl;
       const title = childText(item, ["title"]) || "Untitled episode";
       const description = childText(item, ["description", "summary", "encoded"]);
       const itemLink = childText(item, ["link"]);
@@ -1074,6 +1075,8 @@
         rssGuid: guid,
         thumbnail: artwork,
         artworkUrl: artwork,
+        episodeArtworkUrl,
+        podcastArtworkUrl,
         sourceUrl: source.rssUrl,
         audioUrl,
         externalUrl: resolvedSpotifyEpisodeUrl || itemLink || audioUrl || source.sourceUrl || "",
