@@ -1,6 +1,11 @@
 (function () {
   const prototypeData = window.AnchorFaithPrototypeData || {};
   const runtimeConfig = window.AnchorFaithStreamingConfig || {};
+  const podcastMediaSession = window.AnchorFaithPodcastMediaSession?.createPodcastMediaSession() || {
+    bind: () => false,
+    clear: () => {},
+    updatePositionState: () => {},
+  };
   const dataSourceConfig = mergeDataSourceConfig(prototypeData.dataSources || {}, runtimeConfig.dataSources || runtimeConfig);
   const playlists = prototypeData.playlists || {};
   let sermons = [];
@@ -3224,6 +3229,8 @@
     const audio = player.querySelector("[data-custom-audio]");
     if (!audio) return;
     player.dataset.audioBound = "true";
+    const episode = findMediaItemById(activeModalId, "audio");
+    podcastMediaSession.bind(audio, episode);
     audio.addEventListener("loadedmetadata", () => updateCustomAudioProgress(player));
     audio.addEventListener("timeupdate", () => updateCustomAudioProgress(player));
     audio.addEventListener("pause", () => setCustomAudioPlaying(player, false));
@@ -3276,6 +3283,12 @@
     const mode = options.mode || "details";
     const cmsUrl = options.cmsUrl;
     const alreadyOpen = dom.modal.classList.contains("is-open");
+    if (alreadyOpen) {
+      dom.modal.querySelectorAll("audio").forEach((audio) => {
+        audio.pause();
+        podcastMediaSession.clear(audio);
+      });
+    }
     activeModalId = item.id;
     item.cmsUrl = cmsUrl || item.cmsUrl;
     renderModal(item, mode);
@@ -3294,6 +3307,7 @@
     dom.modal.querySelectorAll("audio").forEach((audio) => {
       audio.pause();
       audio.currentTime = 0;
+      podcastMediaSession.clear(audio);
     });
     dom.modal.classList.remove("is-open");
     dom.modal.setAttribute("aria-hidden", "true");
