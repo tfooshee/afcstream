@@ -105,6 +105,8 @@ jobs:
 
           CACHE_STAGE="$(mktemp -d)"
           cp media-cache.json media-cache.js "${CACHE_STAGE}/"
+          mkdir -p "${CACHE_STAGE}/assets/podcast-artwork"
+          cp assets/podcast-artwork/* "${CACHE_STAGE}/assets/podcast-artwork/"
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -114,9 +116,11 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             cp "${CACHE_STAGE}/media-cache.json" "${CACHE_STAGE}/media-cache.js" .
+            mkdir -p assets/podcast-artwork
+            cp "${CACHE_STAGE}/assets/podcast-artwork/"* assets/podcast-artwork/
 
             CACHE_LABEL="Replayed generated" npm run validate:cache
-            git add media-cache.json media-cache.js
+            git add media-cache.json media-cache.js assets/podcast-artwork
 
             if git diff --cached --quiet; then
               echo "Generated media cache is unchanged; no cache commit is needed."

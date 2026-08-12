@@ -4,6 +4,21 @@
     return name.replace(/\s+Podcast$/i, "") || name;
   }
 
+  const LOCAL_SHOW_ARTWORK = Object.freeze({
+    "anchor-faith-church-podcast": {
+      src: "./assets/podcast-artwork/anchor-faith-church.jpg",
+      width: 512,
+      height: 512,
+      type: "image/jpeg",
+    },
+    "the-current-podcast": {
+      src: "./assets/podcast-artwork/the-crnt.jpg",
+      width: 512,
+      height: 512,
+      type: "image/jpeg",
+    },
+  });
+
   function absoluteHttpsUrl(candidate = "", baseUrl = "") {
     if (!candidate) return "";
     try {
@@ -14,32 +29,38 @@
     }
   }
 
+  function sameOriginArtwork(candidate = {}, baseUrl = "") {
+    const src = absoluteHttpsUrl(candidate.src, baseUrl);
+    if (!src) return null;
+    try {
+      const expectedOrigin = new URL(baseUrl || "https://anchor.faith/").origin;
+      if (new URL(src).origin !== expectedOrigin) return null;
+    } catch {
+      return null;
+    }
+    return { ...candidate, src };
+  }
+
   function artworkCandidates(episode = {}, baseUrl = "") {
+    const showFallback = LOCAL_SHOW_ARTWORK[episode.podcastId] || null;
     const candidates = [
       {
-        src: episode.episodeArtworkUrl,
-        width: episode.episodeArtworkWidth,
-        height: episode.episodeArtworkHeight,
-        type: episode.episodeArtworkType,
+        src: episode.localEpisodeArtworkUrl,
+        width: episode.localEpisodeArtworkWidth,
+        height: episode.localEpisodeArtworkHeight,
+        type: episode.localEpisodeArtworkType,
       },
       {
-        src: episode.podcastArtworkUrl || episode.showArtworkUrl,
-        width: episode.podcastArtworkWidth || episode.showArtworkWidth,
-        height: episode.podcastArtworkHeight || episode.showArtworkHeight,
-        type: episode.podcastArtworkType || episode.showArtworkType,
+        src: episode.localPodcastArtworkUrl || showFallback?.src,
+        width: episode.localPodcastArtworkWidth || showFallback?.width,
+        height: episode.localPodcastArtworkHeight || showFallback?.height,
+        type: episode.localPodcastArtworkType || showFallback?.type,
       },
-      {
-        src: episode.spotifyArtworkUrl || episode.artworkUrl,
-        width: episode.spotifyArtworkWidth || episode.artworkWidth,
-        height: episode.spotifyArtworkHeight || episode.artworkHeight,
-        type: episode.spotifyArtworkType || episode.artworkType,
-      },
-      { src: episode.thumbnail || episode.image },
-      { src: episode.fallbackArtworkUrl },
     ];
     const seen = new Set();
     return candidates
-      .map((candidate) => ({ ...candidate, src: absoluteHttpsUrl(candidate.src, baseUrl) }))
+      .map((candidate) => sameOriginArtwork(candidate, baseUrl))
+      .filter(Boolean)
       .filter((candidate) => {
         if (!candidate.src || seen.has(candidate.src)) return false;
         seen.add(candidate.src);
@@ -65,46 +86,6 @@
     return descriptor;
   }
 
-  function inspectArtworkCandidate(candidate, options = {}) {
-    const fetchImplementation = options.fetch;
-    const ImageClass = options.Image;
-    const typePromise = typeof fetchImplementation === "function"
-      ? fetchImplementation(candidate.src, { method: "HEAD", mode: "cors", cache: "force-cache" })
-          .then((response) => response.ok ? validImageType(response.headers?.get("content-type")) : "")
-          .catch(() => "")
-      : Promise.resolve("");
-    const dimensionsPromise = typeof ImageClass === "function"
-      ? new Promise((resolve) => {
-          const image = new ImageClass();
-          image.onload = () => resolve({ width: image.naturalWidth, height: image.naturalHeight });
-          image.onerror = () => resolve({ width: 0, height: 0 });
-          image.src = candidate.src;
-        })
-      : Promise.resolve({ width: 0, height: 0 });
-
-    return Promise.all([typePromise, dimensionsPromise]).then(([type, dimensions]) =>
-      artworkDescriptor({
-        ...candidate,
-        type: type || candidate.type,
-        width: dimensions.width || candidate.width,
-        height: dimensions.height || candidate.height,
-      })
-    );
-  }
-
-  async function resolvePodcastArtwork(episode = {}, options = {}) {
-    const candidates = artworkCandidates(episode, options.baseUrl);
-    let fallbackDescriptor = null;
-    for (const candidate of candidates) {
-      const descriptor = await inspectArtworkCandidate(candidate, options);
-      if (!descriptor) continue;
-      fallbackDescriptor ||= descriptor;
-      const [width, height] = String(descriptor.sizes || "").split("x").map(Number);
-      if (width > 0 && width === height) return [descriptor];
-    }
-    return fallbackDescriptor ? [fallbackDescriptor] : [];
-  }
-
   function metadataForPodcastEpisode(episode = {}, baseUrl = "") {
     const podcastName = podcastDisplayName(episode);
     const artwork = artworkCandidates(episode, baseUrl).map(artworkDescriptor).filter(Boolean).slice(0, 1);
@@ -122,14 +103,8 @@
     const baseUrl = options.baseUrl || root.location?.href || "https://anchor.faith/";
     const mediaSession = targetNavigator?.mediaSession;
     const supported = Boolean(mediaSession && typeof MediaMetadataClass === "function");
-    const resolveArtwork = options.resolveArtwork || ((episode) => resolvePodcastArtwork(episode, {
-      baseUrl,
-      fetch: options.fetch || root.fetch?.bind(root),
-      Image: options.Image || root.Image,
-    }));
     let activeAudio = null;
     let activeCleanup = null;
-    let bindingId = 0;
 
     function safelySetActionHandler(action, handler) {
       if (!supported || typeof mediaSession.setActionHandler !== "function") return;
@@ -202,7 +177,6 @@
       if (activeCleanup) activeCleanup();
       activeCleanup = null;
       activeAudio = null;
-      bindingId += 1;
       if (!supported) return;
       setPlaybackState("none");
       try {
@@ -220,7 +194,6 @@
       if (!supported || !audio || !episode || episode.mediaType !== "audio") return false;
       clear();
       activeAudio = audio;
-      const currentBindingId = bindingId;
       const metadata = metadataForPodcastEpisode(episode, baseUrl);
       const onPlay = () => {
         try {
@@ -231,14 +204,6 @@
         registerActions();
         setPlaybackState("playing");
         updatePositionState();
-        Promise.resolve(resolveArtwork(episode)).then((artwork) => {
-          if (activeAudio !== audio || bindingId !== currentBindingId || !Array.isArray(artwork) || !artwork.length) return;
-          try {
-            mediaSession.metadata = new MediaMetadataClass({ ...metadata, artwork });
-          } catch {
-            // Retain the valid title metadata if enriched artwork is rejected.
-          }
-        }).catch(() => {});
       };
       const onPause = () => setPlaybackState(audio.ended ? "none" : "paused");
       const onEnded = () => {
@@ -274,10 +239,10 @@
     artworkCandidates,
     artworkDescriptor,
     createPodcastMediaSession,
-    inspectArtworkCandidate,
+    LOCAL_SHOW_ARTWORK,
     metadataForPodcastEpisode,
     podcastDisplayName,
-    resolvePodcastArtwork,
+    sameOriginArtwork,
     validImageType,
   };
 })(typeof window !== "undefined" ? window : globalThis);

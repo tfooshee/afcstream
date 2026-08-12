@@ -4,10 +4,43 @@ import vm from "node:vm";
 
 const JSON_CACHE_PATH = "media-cache.json";
 const SCRIPT_CACHE_PATH = "media-cache.js";
+const PODCAST_ARTWORK_PATHS = [
+  "assets/podcast-artwork/anchor-faith-church.jpg",
+  "assets/podcast-artwork/the-crnt.jpg",
+];
+
+function jpegDimensions(filePath) {
+  const data = fs.readFileSync(filePath);
+  if (data[0] !== 0xff || data[1] !== 0xd8) throw new Error(`Podcast artwork is not JPEG: ${filePath}`);
+  let offset = 2;
+  while (offset < data.length - 9) {
+    if (data[offset] !== 0xff) {
+      offset += 1;
+      continue;
+    }
+    const marker = data[offset + 1];
+    offset += 2;
+    if (marker === 0xd8 || marker === 0xd9) continue;
+    const length = data.readUInt16BE(offset);
+    if (marker >= 0xc0 && marker <= 0xc3) {
+      return { height: data.readUInt16BE(offset + 3), width: data.readUInt16BE(offset + 5) };
+    }
+    offset += length;
+  }
+  throw new Error(`Podcast artwork dimensions are unavailable: ${filePath}`);
+}
 
 for (const cacheFile of [JSON_CACHE_PATH, SCRIPT_CACHE_PATH]) {
   if (!fs.existsSync(cacheFile)) {
     throw new Error(`Required cache file is missing: ${cacheFile}`);
+  }
+}
+
+for (const artworkPath of PODCAST_ARTWORK_PATHS) {
+  if (!fs.existsSync(artworkPath)) throw new Error(`Required podcast artwork is missing: ${artworkPath}`);
+  const { width, height } = jpegDimensions(artworkPath);
+  if (width !== 512 || height !== 512) {
+    throw new Error(`Podcast artwork must be 512x512: ${artworkPath} is ${width}x${height}`);
   }
 }
 

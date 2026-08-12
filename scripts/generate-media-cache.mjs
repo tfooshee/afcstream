@@ -1,15 +1,17 @@
 #!/usr/bin/env node
 
-import { readFile, rename, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import sharp from "sharp";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const appDir = path.resolve(__dirname, "..");
 const mediaCacheJsonPath = path.join(appDir, "media-cache.json");
 const mediaCacheJsPath = path.join(appDir, "media-cache.js");
 const spotifyMapPath = path.join(appDir, "spotify-episode-map.json");
+const podcastArtworkDir = path.join(appDir, "assets", "podcast-artwork");
 const envPath = path.join(appDir, ".env");
 
 await loadDotEnv();
@@ -44,6 +46,7 @@ const podcastSources = [
     spotifyUrl: "https://open.spotify.com/show/7sMWiLwUHPAqHyxYBQp7Qx",
     applePodcastUrl: "https://podcasts.apple.com/us/podcast/anchor-faith-church/id957917462",
     mediaType: "audioShelf",
+    localArtworkFile: "anchor-faith-church.jpg",
   },
   {
     id: "the-current-podcast",
@@ -53,6 +56,7 @@ const podcastSources = [
     spotifyUrl: "https://open.spotify.com/show/7xu0obdpJbYpFT62IohTkl",
     applePodcastUrl: "https://podcasts.apple.com/us/podcast/the-crnt/id1765198769",
     mediaType: "audioShelf",
+    localArtworkFile: "the-crnt.jpg",
   },
   {
     id: "kingdom-first-business-alliance-podcast",
@@ -63,6 +67,63 @@ const podcastSources = [
     mediaType: "audioShelf",
   },
 ];
+
+const LOCAL_PODCAST_ARTWORK_SIZE = 512;
+
+async function validateLocalPodcastArtwork(filePath) {
+  const metadata = await sharp(filePath).metadata();
+  if (
+    metadata.format !== "jpeg" ||
+    metadata.width !== LOCAL_PODCAST_ARTWORK_SIZE ||
+    metadata.height !== LOCAL_PODCAST_ARTWORK_SIZE
+  ) {
+    throw new Error(
+      `Local podcast artwork must be a ${LOCAL_PODCAST_ARTWORK_SIZE}x${LOCAL_PODCAST_ARTWORK_SIZE} JPEG: ${filePath}`
+    );
+  }
+}
+
+async function refreshLocalPodcastArtwork(source, episodes = []) {
+  if (!source.localArtworkFile) return null;
+  const outputPath = path.join(podcastArtworkDir, source.localArtworkFile);
+  const localUrl = `./assets/podcast-artwork/${source.localArtworkFile}`;
+  const sourceUrl = episodes.map((episode) => episode.podcastArtworkUrl).find(Boolean) ||
+    episodes.map((episode) => episode.episodeArtworkUrl).find(Boolean);
+
+  try {
+    if (!sourceUrl) throw new Error("RSS did not provide podcast artwork");
+    const response = await fetch(sourceUrl);
+    if (!response.ok) throw new Error(`artwork request returned ${response.status}`);
+    const contentType = String(response.headers.get("content-type") || "").split(";")[0].toLowerCase();
+    if (!contentType.startsWith("image/")) throw new Error(`artwork response was ${contentType || "not an image"}`);
+    const input = Buffer.from(await response.arrayBuffer());
+    const metadata = await sharp(input).metadata();
+    if (!metadata.width || !metadata.height) throw new Error("artwork dimensions are unavailable");
+    if (Math.min(metadata.width, metadata.height) < LOCAL_PODCAST_ARTWORK_SIZE) {
+      throw new Error(`artwork is only ${metadata.width}x${metadata.height}; refusing to upscale`);
+    }
+
+    await mkdir(podcastArtworkDir, { recursive: true });
+    const temporaryPath = `${outputPath}.tmp`;
+    await sharp(input)
+      .resize(LOCAL_PODCAST_ARTWORK_SIZE, LOCAL_PODCAST_ARTWORK_SIZE, { fit: "cover", position: "centre" })
+      .jpeg({ quality: 90, chromaSubsampling: "4:4:4" })
+      .toFile(temporaryPath);
+    await validateLocalPodcastArtwork(temporaryPath);
+    await rename(temporaryPath, outputPath);
+  } catch (error) {
+    if (!existsSync(outputPath)) throw new Error(`[Podcast artwork] ${source.title}: ${error.message}`);
+    await validateLocalPodcastArtwork(outputPath);
+    console.warn(`[Podcast artwork] ${source.title}: ${error.message}; preserving validated local artwork.`);
+  }
+
+  return {
+    localPodcastArtworkUrl: localUrl,
+    localPodcastArtworkWidth: LOCAL_PODCAST_ARTWORK_SIZE,
+    localPodcastArtworkHeight: LOCAL_PODCAST_ARTWORK_SIZE,
+    localPodcastArtworkType: "image/jpeg",
+  };
+}
 
 async function loadDotEnv() {
   if (!existsSync(envPath)) return;
@@ -1142,6 +1203,7 @@ async function buildPodcastCache() {
       audioEpisodes.push(...preserved);
       continue;
     }
+    const localArtwork = await refreshLocalPodcastArtwork(source, rssEpisodes);
 
     let spotifyEpisodes = [];
     if (token) {
@@ -1180,6 +1242,7 @@ async function buildPodcastCache() {
       const spotifyArtwork = spotifyEpisode?.images?.[0];
       audioEpisodes.push({
         ...episode,
+        ...(localArtwork || {}),
         spotifyEpisodeId: spotifyId,
         spotifyEpisodeUrl: episodeUrl,
         spotifyUrl: episodeUrl,
