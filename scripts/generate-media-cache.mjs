@@ -47,7 +47,6 @@ const podcastSources = [
     applePodcastUrl: "https://podcasts.apple.com/us/podcast/anchor-faith-church/id957917462",
     mediaType: "audioShelf",
     localArtworkFile: "anchor-faith-church.jpg",
-    required: true,
   },
   {
     id: "the-current-podcast",
@@ -58,7 +57,6 @@ const podcastSources = [
     applePodcastUrl: "https://podcasts.apple.com/us/podcast/the-crnt/id1765198769",
     mediaType: "audioShelf",
     localArtworkFile: "the-crnt.jpg",
-    required: true,
   },
   {
     id: "kingdom-first-business-alliance-podcast",
@@ -68,7 +66,7 @@ const podcastSources = [
     spotifyUrl: "https://open.spotify.com/show/4rbu39RRiyRqVWzlfFk77I",
     mediaType: "audioShelf",
   },
-];
+].map((source) => ({ ...source, required: true }));
 
 const LOCAL_PODCAST_ARTWORK_SIZE = 512;
 
@@ -1456,6 +1454,7 @@ if (isDirectRun) {
 }
 
 export {
+  buildPodcastCache,
   fetchPodcastRss,
   fetchYouTubePages,
   parsePodcastRss,

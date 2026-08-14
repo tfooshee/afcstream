@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
+  buildPodcastCache,
   fetchPodcastRss,
   fetchYouTubePages,
   parsePodcastRss,
@@ -144,4 +145,40 @@ test("podcast RSS requests accept XML, follow redirects, and expose current epis
   assert.equal(request.options.redirect, "follow");
   assert.match(request.options.headers.Accept, /application\/rss\+xml/);
   assert.match(request.options.headers["User-Agent"], /AnchorFaithMediaCache/);
+});
+
+test("a Kingdom First Business Alliance RSS failure rejects the complete podcast refresh", async (t) => {
+  const originalFetch = globalThis.fetch;
+  const originalGithubActions = process.env.GITHUB_ACTIONS;
+  t.after(() => {
+    globalThis.fetch = originalFetch;
+    if (originalGithubActions === undefined) delete process.env.GITHUB_ACTIONS;
+    else process.env.GITHUB_ACTIONS = originalGithubActions;
+  });
+  delete process.env.GITHUB_ACTIONS;
+
+  globalThis.fetch = async (url) => {
+    if (url === "https://anchor.fm/s/10ef5931c/podcast/rss") {
+      return {
+        ok: false,
+        status: 503,
+        statusText: "Service Unavailable",
+        url,
+        text: async () => "feed temporarily unavailable",
+      };
+    }
+    return {
+      ok: true,
+      status: 200,
+      url,
+      redirected: false,
+      headers: new Headers({ "content-type": "application/rss+xml; charset=utf-8" }),
+      text: async () => podcastRss(),
+    };
+  };
+
+  await assert.rejects(
+    buildPodcastCache(),
+    /Required podcast RSS refresh failed.*Kingdom First Business Alliance Podcast.*HTTP 503 Service Unavailable/
+  );
 });
