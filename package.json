@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "generate:cache": "node scripts/generate-media-cache.mjs",
+    "test": "node --test scripts/*.test.mjs",
     "validate:cache": "node scripts/validate-media-cache.mjs",
     "serve": "npx serve ."
   },

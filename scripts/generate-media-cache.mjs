@@ -66,7 +66,7 @@ const podcastSources = [
     spotifyUrl: "https://open.spotify.com/show/4rbu39RRiyRqVWzlfFk77I",
     mediaType: "audioShelf",
   },
-];
+].map((source) => ({ ...source, required: true }));
 
 const LOCAL_PODCAST_ARTWORK_SIZE = 512;
 
@@ -381,9 +381,29 @@ async function fetchJson(url, label, options = {}) {
 }
 
 async function fetchText(url, label, options = {}) {
-  const response = await fetch(url, options);
-  if (!response.ok) throw new Error(`${label} failed with ${response.status}: ${response.statusText}`);
-  return response.text();
+  const response = await fetch(url, {
+    redirect: "follow",
+    ...options,
+    headers: {
+      Accept: "application/rss+xml, application/xml, text/xml;q=0.9, */*;q=0.8",
+      "User-Agent": "AnchorFaithMediaCache/1.1 (+https://stream.anchor.faith/)",
+      ...options.headers,
+    },
+  });
+  if (!response.ok) {
+    const body = await response.text().catch(() => "");
+    throw new Error(
+      `${label} failed with HTTP ${response.status} ${response.statusText}; ` +
+        `finalUrl=${response.url || url}; body=${body.slice(0, 200) || "empty"}`
+    );
+  }
+  return {
+    text: await response.text(),
+    status: response.status,
+    finalUrl: response.url || url,
+    redirected: Boolean(response.redirected || (response.url && response.url !== url)),
+    contentType: response.headers.get("content-type") || "",
+  };
 }
 
 function youtubeApiUrl(endpoint, params = {}) {
@@ -993,8 +1013,10 @@ function xmlAttribute(block = "", tagName = "", attribute = "") {
   return decodeHtmlEntities(match?.[1] || "").trim();
 }
 
-async function fetchPodcastRss(source) {
-  const xml = await fetchText(source.rssUrl, `${source.title} RSS`);
+function parsePodcastRss(source, xml) {
+  if (!/<(?:rss|feed)\b/i.test(xml) || !/<(?:channel|entry)\b/i.test(xml)) {
+    throw new Error("response is not recognizable podcast RSS/XML");
+  }
   const podcastArtworkUrl =
     xmlAttribute(xml, "itunes:image", "href") ||
     xmlAnyTagText(xmlTagText(xml, "image"), ["url"]) ||
@@ -1053,6 +1075,45 @@ async function fetchPodcastRss(source) {
       tags: ["Podcast", source.title],
     };
   });
+}
+
+function validatePodcastEpisodes(source, episodes) {
+  if (!episodes.length) throw new Error("RSS returned no <item> entries");
+  const newest = episodes[0];
+  if (!String(newest?.title || "").trim() || newest.title === "Untitled episode") {
+    throw new Error("newest RSS episode has no valid title");
+  }
+  if (!Number.isFinite(Date.parse(newest.publishedAt || ""))) {
+    throw new Error(`newest RSS episode "${newest.title}" has no valid publication date`);
+  }
+  if (!String(newest.audioUrl || newest.enclosureUrl || "").trim()) {
+    throw new Error(`newest RSS episode "${newest.title}" has no enclosure/audio URL`);
+  }
+  return newest;
+}
+
+async function fetchPodcastRss(source) {
+  const response = await fetchText(source.rssUrl, `${source.title} RSS`);
+  const episodes = parsePodcastRss(source, response.text);
+  const newest = validatePodcastEpisodes(source, episodes);
+  console.log("[Podcast RSS success]");
+  console.log(`podcast=${source.title}`);
+  console.log(`httpStatus=${response.status}`);
+  console.log(`redirected=${response.redirected}`);
+  console.log(`finalUrl=${response.finalUrl}`);
+  console.log(`contentType=${response.contentType || "unknown"}`);
+  console.log(`episodes=${episodes.length}`);
+  console.log(`newestTitle=${newest.title}`);
+  console.log(`newestPublishedAt=${newest.publishedAt}`);
+  dedupeAndSortPodcastEpisodes(episodes)
+    .slice(0, 5)
+    .forEach((episode, index) => {
+      console.log(
+        `[Podcast RSS newest] podcast=${source.title}; rank=${index + 1}; ` +
+          `title=${episode.title}; publishedAt=${episode.publishedAt}`
+      );
+    });
+  return episodes;
 }
 
 async function spotifyAccessToken() {
@@ -1192,6 +1253,7 @@ async function buildPodcastCache() {
     applePodcastUrl: source.applePodcastUrl || "",
   }));
   const audioEpisodes = [];
+  const requiredSourceFailures = [];
 
   for (const source of podcastSources) {
     let rssEpisodes;
@@ -1199,8 +1261,15 @@ async function buildPodcastCache() {
       rssEpisodes = await fetchPodcastRss(source);
     } catch (error) {
       const preserved = existingEpisodes.filter((episode) => episode.podcastId === source.id);
-      console.warn(`[Podcast source failed] podcast=${source.title}; preserving=${preserved.length}; error=${error.message}`);
+      const diagnostic =
+        `[Podcast RSS failure] podcast=${source.title}; required=${Boolean(source.required)}; ` +
+        `preserving=${preserved.length}; error=${error.message}`;
+      console.error(diagnostic);
+      if (source.required && process.env.GITHUB_ACTIONS === "true") {
+        console.error(`::error title=Required podcast RSS failed::${diagnostic}`);
+      }
       audioEpisodes.push(...preserved);
+      if (source.required) requiredSourceFailures.push(diagnostic);
       continue;
     }
     const localArtwork = await refreshLocalPodcastArtwork(source, rssEpisodes);
@@ -1256,6 +1325,12 @@ async function buildPodcastCache() {
         spotifyArtworkHeight: spotifyArtwork?.height,
       });
     });
+  }
+
+  if (requiredSourceFailures.length) {
+    throw new Error(
+      `Required podcast RSS refresh failed; refusing to write a partially refreshed cache. ${requiredSourceFailures.join(" | ")}`
+    );
   }
 
   const normalizedEpisodes = dedupeAndSortPodcastEpisodes(audioEpisodes);
@@ -1378,4 +1453,11 @@ if (isDirectRun) {
   });
 }
 
-export { fetchYouTubePages, resetYouTubeRequestCount };
+export {
+  buildPodcastCache,
+  fetchPodcastRss,
+  fetchYouTubePages,
+  parsePodcastRss,
+  resetYouTubeRequestCount,
+  validatePodcastEpisodes,
+};
