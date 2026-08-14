@@ -6,6 +6,7 @@
     clear: () => {},
     updatePositionState: () => {},
   };
+  const getVideoCardMetadata = window.AnchorFaithVideoCardMetadata?.getVideoCardMetadata;
   const dataSourceConfig = mergeDataSourceConfig(prototypeData.dataSources || {}, runtimeConfig.dataSources || runtimeConfig);
   const playlists = prototypeData.playlists || {};
   let sermons = [];
@@ -2000,10 +2001,15 @@
   }
 
   function renderMediaCard(item) {
-    const meta = itemMeta(item);
-    const bodyMeta = item.mediaType === "audio"
-      ? [item.date].filter(Boolean).join(" · ")
-      : [meta[0], item.date].filter(Boolean).join(" · ");
+    const videoMetadata = item.mediaType === "video" ? getVideoCardMetadata?.(item, APPROVED_SPEAKERS) : null;
+    const cardSubtitle = videoMetadata
+      ? videoMetadata.hasSubtitle ? videoMetadata.subtitle : videoMetadata.speaker
+      : item.subtitle;
+    const bodyMeta = videoMetadata
+      ? videoMetadata.hasSubtitle
+        ? [videoMetadata.speaker, videoMetadata.date].filter(Boolean).join(" • ")
+        : videoMetadata.date
+      : [item.date].filter(Boolean).join(" · ");
     const ariaAction = item.mediaType === "audio" ? "Open audio episode" : "Open sermon";
     const lookupId = mediaLookupId(item);
     return `
@@ -2026,7 +2032,7 @@
         </span>
         <span class="af-media-card__body">
           <span class="af-media-card__title">${item.mainTitle || item.title}</span>
-          ${item.subtitle ? `<span class="af-media-card__subtitle">${item.subtitle}</span>` : ""}
+          ${cardSubtitle ? `<span class="af-media-card__subtitle">${cardSubtitle}</span>` : ""}
           <span class="af-media-card__meta">${bodyMeta}</span>
         </span>
       </button>
