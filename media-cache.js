@@ -1,6 +1,6 @@
 (function () {
   window.AnchorFaithMediaCache = {
-  "lastUpdated": "2026-08-31T21:08:51.251Z",
+  "lastUpdated": "2026-09-02T00:26:07.741Z",
   "source": "youtube-rss-spotify-generated",
   "version": "1.1",
   "data": {
@@ -143,9 +143,9 @@
         "id": "PLB99bUifKuNk",
         "title": "Speaker | P. Darrell Huffman",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/GFsiPCasyf4/maxresdefault.jpg",
-        "itemCount": 3,
-        "publishedAt": "2026-07-06T19:11:28.910697Z"
+        "thumbnailUrl": "https://i.ytimg.com/vi/RpjFutwHkjc/maxresdefault.jpg",
+        "itemCount": 4,
+        "publishedAt": "2026-07-06T19:11:28.91069747Z"
       },
       "PLT7_bub3DAMo": {
         "id": "PLT7_bub3DAMo",
@@ -391,8 +391,8 @@
         "id": "PL_b7G2GPm-jD-Z_uRoBJo_75aEts0PP_1",
         "title": "Topic | Purpose",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/9Ns2-vwV-mM/maxresdefault.jpg",
-        "itemCount": 6,
+        "thumbnailUrl": "https://i.ytimg.com/vi/RpjFutwHkjc/maxresdefault.jpg",
+        "itemCount": 7,
         "publishedAt": "2025-03-06T13:55:02.402734Z"
       },
       "PL_b7G2GPm-jBspvnIy0XWnTGXSiY6Bnni": {
@@ -551,8 +551,8 @@
         "id": "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3",
         "title": "Latest Sermons",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/n4rnzfkNxjg/maxresdefault.jpg",
-        "itemCount": 419,
+        "thumbnailUrl": "https://i.ytimg.com/vi/RpjFutwHkjc/maxresdefault.jpg",
+        "itemCount": 420,
         "publishedAt": "2019-03-06T15:36:23.175978Z"
       }
     },
@@ -657,7 +657,7 @@
         "title": "Speaker | P. Darrell Huffman",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/GFsiPCasyf4/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/RpjFutwHkjc/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PLB99bUifKuNk"
       },
@@ -936,7 +936,7 @@
         "title": "Topic | Purpose",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/9Ns2-vwV-mM/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/RpjFutwHkjc/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PL_b7G2GPm-jD-Z_uRoBJo_75aEts0PP_1"
       },
@@ -1116,12 +1116,52 @@
         "title": "Latest Sermons",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/n4rnzfkNxjg/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/RpjFutwHkjc/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
       }
     ],
     "latestSermons": [
+      {
+        "id": "RpjFutwHkjc",
+        "mediaType": "video",
+        "rawTitle": "Becoming Kingdom Influencers | P. Darrell Huffman",
+        "mainTitle": "Becoming Kingdom Influencers",
+        "subtitle": "P. Darrell Huffman",
+        "minister": "",
+        "canonicalSpeaker": null,
+        "speaker": null,
+        "title": "Becoming Kingdom Influencers",
+        "date": "September 1, 2026",
+        "publishedAt": "2026-09-01T22:30:06Z",
+        "duration": "57:22",
+        "description": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "summaryDescription": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "youtubeDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "youtubeVideoId": "RpjFutwHkjc",
+        "youtubeId": "RpjFutwHkjc",
+        "thumbnail": "https://i.ytimg.com/vi/RpjFutwHkjc/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/RpjFutwHkjc/maxresdefault.jpg",
+        "heroImage": "https://i.ytimg.com/vi/RpjFutwHkjc/maxresdefault.jpg",
+        "embedUrl": "https://www.youtube.com/embed/RpjFutwHkjc?rel=0",
+        "externalUrl": "https://www.youtube.com/watch?v=RpjFutwHkjc",
+        "externalActionLabel": "Play on YouTube",
+        "playlistIds": [
+          "UU5k7VFwx3xZkBdGNWEDqMlQ",
+          "PLB99bUifKuNk",
+          "PL_b7G2GPm-jD-Z_uRoBJo_75aEts0PP_1",
+          "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
+        ],
+        "tags": [
+          "Latest Sermons",
+          "Speaker | P. Darrell Huffman",
+          "Topic | Purpose"
+        ],
+        "playlistTitle": "Latest Sermons",
+        "featured": true
+      },
       {
         "id": "n4rnzfkNxjg",
         "mediaType": "video",
@@ -1160,7 +1200,7 @@
           "Speaker | Ap. Earl Glisson"
         ],
         "playlistTitle": "Latest Sermons",
-        "featured": true
+        "featured": false
       },
       {
         "id": "eT8pzFHQNH8",
@@ -18075,8 +18115,9 @@
         "playlistId": "PL_b7G2GPm-jD-Z_uRoBJo_75aEts0PP_1",
         "rawCollectionTitle": "Topic | Purpose",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/9Ns2-vwV-mM/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/RpjFutwHkjc/maxresdefault.jpg",
         "itemIds": [
+          "RpjFutwHkjc",
           "9Ns2-vwV-mM",
           "kqXTWPSVnp4",
           "bfBdnqQ4Q4k",
@@ -18808,6 +18849,25 @@
         ]
       },
       {
+        "id": "collection-speaker-plb99buifkunk",
+        "title": "P. Darrell Huffman",
+        "optionLabel": "P. Darrell Huffman",
+        "collectionType": "speaker",
+        "mediaType": "video",
+        "playlistId": "PLB99bUifKuNk",
+        "rawCollectionTitle": "Speaker | P. Darrell Huffman",
+        "priority": 0,
+        "newestVideoPublishedAt": "2026-09-01T22:30:06Z",
+        "description": "",
+        "thumbnailUrl": "https://i.ytimg.com/vi/RpjFutwHkjc/maxresdefault.jpg",
+        "itemIds": [
+          "RpjFutwHkjc",
+          "GFsiPCasyf4",
+          "4NW4tLJ68zc",
+          "sV2_MCpCT0Y"
+        ]
+      },
+      {
         "id": "collection-speaker-plgq6xffhsxpa",
         "title": "Randy Clay",
         "optionLabel": "Randy Clay",
@@ -18994,24 +19054,6 @@
         "itemIds": [
           "MxlE4IVL7Zo",
           "Dvf1u276ASU"
-        ]
-      },
-      {
-        "id": "collection-speaker-plb99buifkunk",
-        "title": "P. Darrell Huffman",
-        "optionLabel": "P. Darrell Huffman",
-        "collectionType": "speaker",
-        "mediaType": "video",
-        "playlistId": "PLB99bUifKuNk",
-        "rawCollectionTitle": "Speaker | P. Darrell Huffman",
-        "priority": 0,
-        "newestVideoPublishedAt": "2024-05-02T22:30:02Z",
-        "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/GFsiPCasyf4/maxresdefault.jpg",
-        "itemIds": [
-          "GFsiPCasyf4",
-          "4NW4tLJ68zc",
-          "sV2_MCpCT0Y"
         ]
       },
       {
@@ -19385,8 +19427,9 @@
           "playlistId": "PL_b7G2GPm-jD-Z_uRoBJo_75aEts0PP_1",
           "rawCollectionTitle": "Topic | Purpose",
           "description": "",
-          "thumbnailUrl": "https://i.ytimg.com/vi/9Ns2-vwV-mM/maxresdefault.jpg",
+          "thumbnailUrl": "https://i.ytimg.com/vi/RpjFutwHkjc/maxresdefault.jpg",
           "itemIds": [
+            "RpjFutwHkjc",
             "9Ns2-vwV-mM",
             "kqXTWPSVnp4",
             "bfBdnqQ4Q4k",
@@ -20118,6 +20161,25 @@
           ]
         },
         {
+          "id": "collection-speaker-plb99buifkunk",
+          "title": "P. Darrell Huffman",
+          "optionLabel": "P. Darrell Huffman",
+          "collectionType": "speaker",
+          "mediaType": "video",
+          "playlistId": "PLB99bUifKuNk",
+          "rawCollectionTitle": "Speaker | P. Darrell Huffman",
+          "priority": 0,
+          "newestVideoPublishedAt": "2026-09-01T22:30:06Z",
+          "description": "",
+          "thumbnailUrl": "https://i.ytimg.com/vi/RpjFutwHkjc/maxresdefault.jpg",
+          "itemIds": [
+            "RpjFutwHkjc",
+            "GFsiPCasyf4",
+            "4NW4tLJ68zc",
+            "sV2_MCpCT0Y"
+          ]
+        },
+        {
           "id": "collection-speaker-plgq6xffhsxpa",
           "title": "Randy Clay",
           "optionLabel": "Randy Clay",
@@ -20307,24 +20369,6 @@
           ]
         },
         {
-          "id": "collection-speaker-plb99buifkunk",
-          "title": "P. Darrell Huffman",
-          "optionLabel": "P. Darrell Huffman",
-          "collectionType": "speaker",
-          "mediaType": "video",
-          "playlistId": "PLB99bUifKuNk",
-          "rawCollectionTitle": "Speaker | P. Darrell Huffman",
-          "priority": 0,
-          "newestVideoPublishedAt": "2024-05-02T22:30:02Z",
-          "description": "",
-          "thumbnailUrl": "https://i.ytimg.com/vi/GFsiPCasyf4/maxresdefault.jpg",
-          "itemIds": [
-            "GFsiPCasyf4",
-            "4NW4tLJ68zc",
-            "sV2_MCpCT0Y"
-          ]
-        },
-        {
           "id": "collection-speaker-plggesf59f-da",
           "title": "Brandon Hicks",
           "optionLabel": "Brandon Hicks",
@@ -20380,6 +20424,46 @@
     ],
     "sermons": [
       {
+        "id": "RpjFutwHkjc",
+        "mediaType": "video",
+        "rawTitle": "Becoming Kingdom Influencers | P. Darrell Huffman",
+        "mainTitle": "Becoming Kingdom Influencers",
+        "subtitle": "P. Darrell Huffman",
+        "minister": "",
+        "canonicalSpeaker": null,
+        "speaker": null,
+        "title": "Becoming Kingdom Influencers",
+        "date": "September 1, 2026",
+        "publishedAt": "2026-09-01T22:30:06Z",
+        "duration": "57:22",
+        "description": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "summaryDescription": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "youtubeDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "youtubeVideoId": "RpjFutwHkjc",
+        "youtubeId": "RpjFutwHkjc",
+        "thumbnail": "https://i.ytimg.com/vi/RpjFutwHkjc/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/RpjFutwHkjc/maxresdefault.jpg",
+        "heroImage": "https://i.ytimg.com/vi/RpjFutwHkjc/maxresdefault.jpg",
+        "embedUrl": "https://www.youtube.com/embed/RpjFutwHkjc?rel=0",
+        "externalUrl": "https://www.youtube.com/watch?v=RpjFutwHkjc",
+        "externalActionLabel": "Play on YouTube",
+        "playlistIds": [
+          "UU5k7VFwx3xZkBdGNWEDqMlQ",
+          "PLB99bUifKuNk",
+          "PL_b7G2GPm-jD-Z_uRoBJo_75aEts0PP_1",
+          "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
+        ],
+        "tags": [
+          "Latest Sermons",
+          "Speaker | P. Darrell Huffman",
+          "Topic | Purpose"
+        ],
+        "playlistTitle": "Latest Sermons",
+        "featured": true
+      },
+      {
         "id": "n4rnzfkNxjg",
         "mediaType": "video",
         "rawTitle": "Gifted | Kingdom Discipline | Ap. Earl Glisson",
@@ -20417,7 +20501,7 @@
           "Speaker | Ap. Earl Glisson"
         ],
         "playlistTitle": "Latest Sermons",
-        "featured": true
+        "featured": false
       },
       {
         "id": "eT8pzFHQNH8",
@@ -36762,6 +36846,50 @@
       }
     ],
     "audioEpisodes": [
+      {
+        "id": "anchor-faith-church-podcast-267d3648-90bd-4322-a309-dcaf8b55c942",
+        "mediaType": "audio",
+        "title": "Becoming Kingdom Influencers | P. Darrell Huffman",
+        "mainTitle": "Becoming Kingdom Influencers | P. Darrell Huffman",
+        "host": "Anchor Faith Church Podcast",
+        "minister": "Anchor Faith Church Podcast",
+        "date": "September 1, 2026",
+        "publishedAt": "Tue, 01 Sep 2026 16:18:20 GMT",
+        "duration": "57:21",
+        "description": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "summaryDescription": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rssGuid": "267d3648-90bd-4322-a309-dcaf8b55c942",
+        "guid": "267d3648-90bd-4322-a309-dcaf8b55c942",
+        "enclosureUrl": "https://anchor.fm/s/128ece40/podcast/play/125046867/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-8-1%2Faf5b9836-b26c-8875-1feb-6340788c6bbb.mp3",
+        "thumbnail": "https://i.scdn.co/image/ab6765630000ba8ad9798cb7c01a2eec1d7af5ec",
+        "artworkUrl": "https://i.scdn.co/image/ab6765630000ba8ad9798cb7c01a2eec1d7af5ec",
+        "episodeArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_episode/3013488/3013488-1788280060644-995041b2b4425.jpg",
+        "podcastArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/3013488/3013488-1782995684800-84c230b79db71.jpg",
+        "sourceUrl": "https://anchor.fm/s/128ece40/podcast/rss",
+        "audioUrl": "https://anchor.fm/s/128ece40/podcast/play/125046867/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-8-1%2Faf5b9836-b26c-8875-1feb-6340788c6bbb.mp3",
+        "externalUrl": "https://open.spotify.com/episode/7CWabQsxvNwECTTXoqCA8p",
+        "spotifyEpisodeId": "7CWabQsxvNwECTTXoqCA8p",
+        "spotifyEpisodeUrl": "https://open.spotify.com/episode/7CWabQsxvNwECTTXoqCA8p",
+        "spotifyUrl": "https://open.spotify.com/episode/7CWabQsxvNwECTTXoqCA8p",
+        "spotifyShowId": "7sMWiLwUHPAqHyxYBQp7Qx",
+        "showSpotifyUrl": "https://open.spotify.com/show/7sMWiLwUHPAqHyxYBQp7Qx",
+        "podcastId": "anchor-faith-church-podcast",
+        "podcastName": "Anchor Faith Church Podcast",
+        "tags": [
+          "Podcast",
+          "Anchor Faith Church Podcast"
+        ],
+        "localPodcastArtworkUrl": "./assets/podcast-artwork/anchor-faith-church.jpg",
+        "localPodcastArtworkWidth": 512,
+        "localPodcastArtworkHeight": 512,
+        "localPodcastArtworkType": "image/jpeg",
+        "spotifyMatchMethod": "exact-title",
+        "spotifyArtworkUrl": "https://i.scdn.co/image/ab6765630000ba8ad9798cb7c01a2eec1d7af5ec",
+        "spotifyArtworkWidth": 640,
+        "spotifyArtworkHeight": 640
+      },
       {
         "id": "anchor-faith-church-podcast-a33b14e0-2259-4841-9319-6729a768d32c",
         "mediaType": "audio",
