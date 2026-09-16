@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-14T19:57:46.273Z",
+  "lastUpdated": "2026-09-16T00:42:56.524Z",
   "source": "youtube-rss-spotify-generated",
   "version": "1.1",
   "data": {
@@ -550,8 +550,8 @@
         "id": "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3",
         "title": "Latest Sermons",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/J_ill2x8Dg0/maxresdefault.jpg",
-        "itemCount": 421,
+        "thumbnailUrl": "https://i.ytimg.com/vi/WlRy4Uo2Lwo/maxresdefault.jpg",
+        "itemCount": 422,
         "publishedAt": "2019-03-06T15:36:23.175978Z"
       }
     },
@@ -1115,12 +1115,48 @@
         "title": "Latest Sermons",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/J_ill2x8Dg0/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/WlRy4Uo2Lwo/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
       }
     ],
     "latestSermons": [
+      {
+        "id": "WlRy4Uo2Lwo",
+        "mediaType": "video",
+        "rawTitle": "The Spiritual DNA of a Disciple | Ap. Tim Rogers",
+        "mainTitle": "The Spiritual DNA of a Disciple",
+        "subtitle": "Ap. Tim Rogers",
+        "minister": "",
+        "canonicalSpeaker": null,
+        "speaker": null,
+        "title": "The Spiritual DNA of a Disciple",
+        "date": "September 15, 2026",
+        "publishedAt": "2026-09-15T22:41:01Z",
+        "duration": "39:04",
+        "description": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "summaryDescription": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "youtubeDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "youtubeVideoId": "WlRy4Uo2Lwo",
+        "youtubeId": "WlRy4Uo2Lwo",
+        "thumbnail": "https://i.ytimg.com/vi/WlRy4Uo2Lwo/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/WlRy4Uo2Lwo/maxresdefault.jpg",
+        "heroImage": "https://i.ytimg.com/vi/WlRy4Uo2Lwo/maxresdefault.jpg",
+        "embedUrl": "https://www.youtube.com/embed/WlRy4Uo2Lwo?rel=0",
+        "externalUrl": "https://www.youtube.com/watch?v=WlRy4Uo2Lwo",
+        "externalActionLabel": "Play on YouTube",
+        "playlistIds": [
+          "UU5k7VFwx3xZkBdGNWEDqMlQ",
+          "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
+        ],
+        "tags": [
+          "Latest Sermons"
+        ],
+        "playlistTitle": "Latest Sermons",
+        "featured": true
+      },
       {
         "id": "J_ill2x8Dg0",
         "mediaType": "video",
@@ -1159,7 +1195,7 @@
           "Topic | Life"
         ],
         "playlistTitle": "Latest Sermons",
-        "featured": true
+        "featured": false
       },
       {
         "id": "RpjFutwHkjc",
@@ -20467,6 +20503,42 @@
     ],
     "sermons": [
       {
+        "id": "WlRy4Uo2Lwo",
+        "mediaType": "video",
+        "rawTitle": "The Spiritual DNA of a Disciple | Ap. Tim Rogers",
+        "mainTitle": "The Spiritual DNA of a Disciple",
+        "subtitle": "Ap. Tim Rogers",
+        "minister": "",
+        "canonicalSpeaker": null,
+        "speaker": null,
+        "title": "The Spiritual DNA of a Disciple",
+        "date": "September 15, 2026",
+        "publishedAt": "2026-09-15T22:41:01Z",
+        "duration": "39:04",
+        "description": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "summaryDescription": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "youtubeDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "youtubeVideoId": "WlRy4Uo2Lwo",
+        "youtubeId": "WlRy4Uo2Lwo",
+        "thumbnail": "https://i.ytimg.com/vi/WlRy4Uo2Lwo/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/WlRy4Uo2Lwo/maxresdefault.jpg",
+        "heroImage": "https://i.ytimg.com/vi/WlRy4Uo2Lwo/maxresdefault.jpg",
+        "embedUrl": "https://www.youtube.com/embed/WlRy4Uo2Lwo?rel=0",
+        "externalUrl": "https://www.youtube.com/watch?v=WlRy4Uo2Lwo",
+        "externalActionLabel": "Play on YouTube",
+        "playlistIds": [
+          "UU5k7VFwx3xZkBdGNWEDqMlQ",
+          "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
+        ],
+        "tags": [
+          "Latest Sermons"
+        ],
+        "playlistTitle": "Latest Sermons",
+        "featured": true
+      },
+      {
         "id": "J_ill2x8Dg0",
         "mediaType": "video",
         "rawTitle": "Bear With Me | Kingdom Disciples | Ap. Earl Glisson",
@@ -20504,7 +20576,7 @@
           "Topic | Life"
         ],
         "playlistTitle": "Latest Sermons",
-        "featured": true
+        "featured": false
       },
       {
         "id": "RpjFutwHkjc",
@@ -36929,6 +37001,50 @@
       }
     ],
     "audioEpisodes": [
+      {
+        "id": "anchor-faith-church-podcast-39f02fcf-a9eb-494c-8200-6314159d7c42",
+        "mediaType": "audio",
+        "title": "The Spiritual DNA of a Disciple | Ap. Tim Rogers",
+        "mainTitle": "The Spiritual DNA of a Disciple | Ap. Tim Rogers",
+        "host": "Anchor Faith Church Podcast",
+        "minister": "Anchor Faith Church Podcast",
+        "date": "September 15, 2026",
+        "publishedAt": "Tue, 15 Sep 2026 22:41:32 GMT",
+        "duration": "39:03",
+        "description": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "summaryDescription": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rssGuid": "39f02fcf-a9eb-494c-8200-6314159d7c42",
+        "guid": "39f02fcf-a9eb-494c-8200-6314159d7c42",
+        "enclosureUrl": "https://anchor.fm/s/128ece40/podcast/play/125794212/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-8-15%2Fa36595f4-262b-1d3c-a17b-d6643a67a662.mp3",
+        "thumbnail": "https://i.scdn.co/image/ab6765630000ba8a6e76cdc05978bd99b895d5c9",
+        "artworkUrl": "https://i.scdn.co/image/ab6765630000ba8a6e76cdc05978bd99b895d5c9",
+        "episodeArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_episode/3013488/3013488-1789512065269-ff51a024bc99.jpg",
+        "podcastArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/3013488/3013488-1782995684800-84c230b79db71.jpg",
+        "sourceUrl": "https://anchor.fm/s/128ece40/podcast/rss",
+        "audioUrl": "https://anchor.fm/s/128ece40/podcast/play/125794212/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-8-15%2Fa36595f4-262b-1d3c-a17b-d6643a67a662.mp3",
+        "externalUrl": "https://open.spotify.com/episode/626LZYmX0YuI4We6MasUVj",
+        "spotifyEpisodeId": "626LZYmX0YuI4We6MasUVj",
+        "spotifyEpisodeUrl": "https://open.spotify.com/episode/626LZYmX0YuI4We6MasUVj",
+        "spotifyUrl": "https://open.spotify.com/episode/626LZYmX0YuI4We6MasUVj",
+        "spotifyShowId": "7sMWiLwUHPAqHyxYBQp7Qx",
+        "showSpotifyUrl": "https://open.spotify.com/show/7sMWiLwUHPAqHyxYBQp7Qx",
+        "podcastId": "anchor-faith-church-podcast",
+        "podcastName": "Anchor Faith Church Podcast",
+        "tags": [
+          "Podcast",
+          "Anchor Faith Church Podcast"
+        ],
+        "localPodcastArtworkUrl": "./assets/podcast-artwork/anchor-faith-church.jpg",
+        "localPodcastArtworkWidth": 512,
+        "localPodcastArtworkHeight": 512,
+        "localPodcastArtworkType": "image/jpeg",
+        "spotifyMatchMethod": "exact-title",
+        "spotifyArtworkUrl": "https://i.scdn.co/image/ab6765630000ba8a6e76cdc05978bd99b895d5c9",
+        "spotifyArtworkWidth": 640,
+        "spotifyArtworkHeight": 640
+      },
       {
         "id": "anchor-faith-church-podcast-2f6646e0-0221-4d8a-b488-08d73093783a",
         "mediaType": "audio",
