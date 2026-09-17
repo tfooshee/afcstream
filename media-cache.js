@@ -1,6 +1,6 @@
 (function () {
   window.AnchorFaithMediaCache = {
-  "lastUpdated": "2026-09-16T00:42:56.524Z",
+  "lastUpdated": "2026-09-17T19:19:53.378Z",
   "source": "youtube-rss-spotify-generated",
   "version": "1.1",
   "data": {
@@ -81,7 +81,7 @@
         "description": "",
         "thumbnailUrl": "https://i.ytimg.com/vi/n4rnzfkNxjg/maxresdefault.jpg",
         "itemCount": 2,
-        "publishedAt": "2026-08-17T16:45:20.200709Z"
+        "publishedAt": "2026-08-17T16:45:20.200709357Z"
       },
       "PLaRtahNWSQqc": {
         "id": "PLaRtahNWSQqc",
