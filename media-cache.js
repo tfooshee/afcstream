@@ -1,6 +1,6 @@
 (function () {
   window.AnchorFaithMediaCache = {
-  "lastUpdated": "2026-09-17T19:19:53.378Z",
+  "lastUpdated": "2026-09-21T20:08:26.214Z",
   "source": "youtube-rss-spotify-generated",
   "version": "1.1",
   "data": {
@@ -81,7 +81,7 @@
         "description": "",
         "thumbnailUrl": "https://i.ytimg.com/vi/n4rnzfkNxjg/maxresdefault.jpg",
         "itemCount": 2,
-        "publishedAt": "2026-08-17T16:45:20.200709357Z"
+        "publishedAt": "2026-08-17T16:45:20.200709Z"
       },
       "PLaRtahNWSQqc": {
         "id": "PLaRtahNWSQqc",
@@ -145,7 +145,7 @@
         "description": "",
         "thumbnailUrl": "https://i.ytimg.com/vi/RpjFutwHkjc/maxresdefault.jpg",
         "itemCount": 4,
-        "publishedAt": "2026-07-06T19:11:28.91069747Z"
+        "publishedAt": "2026-07-06T19:11:28.910697Z"
       },
       "PLT7_bub3DAMo": {
         "id": "PLT7_bub3DAMo",
