@@ -1,6 +1,6 @@
 (function () {
   window.AnchorFaithMediaCache = {
-  "lastUpdated": "2026-09-21T20:08:26.214Z",
+  "lastUpdated": "2026-09-23T00:51:55.504Z",
   "source": "youtube-rss-spotify-generated",
   "version": "1.1",
   "data": {
@@ -207,7 +207,7 @@
         "id": "PLMBRtLWv06Ag",
         "title": "Speaker | Ap. Earl Glisson",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/J_ill2x8Dg0/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Ym5rd0izRDg/maxresdefault.jpg",
         "itemCount": 316,
         "publishedAt": "2026-07-06T13:40:39.553767Z"
       },
@@ -551,7 +551,7 @@
         "id": "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3",
         "title": "Latest Sermons",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/WlRy4Uo2Lwo/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Ym5rd0izRDg/maxresdefault.jpg",
         "itemCount": 422,
         "publishedAt": "2019-03-06T15:36:23.175978Z"
       }
@@ -729,7 +729,7 @@
         "title": "Speaker | Ap. Earl Glisson",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/J_ill2x8Dg0/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Ym5rd0izRDg/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PLMBRtLWv06Ag"
       },
@@ -1116,12 +1116,50 @@
         "title": "Latest Sermons",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/WlRy4Uo2Lwo/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Ym5rd0izRDg/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
       }
     ],
     "latestSermons": [
+      {
+        "id": "Ym5rd0izRDg",
+        "mediaType": "video",
+        "rawTitle": "Testify | Kingdom Witness | Ap. Earl Glisson",
+        "mainTitle": "Testify",
+        "subtitle": "Kingdom Witness",
+        "minister": "Ap. Earl Glisson",
+        "canonicalSpeaker": "Ap. Earl Glisson",
+        "speaker": "Ap. Earl Glisson",
+        "title": "Testify",
+        "date": "September 22, 2026",
+        "publishedAt": "2026-09-22T22:00:31Z",
+        "duration": "32:09",
+        "description": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "summaryDescription": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "youtubeDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "youtubeVideoId": "Ym5rd0izRDg",
+        "youtubeId": "Ym5rd0izRDg",
+        "thumbnail": "https://i.ytimg.com/vi/Ym5rd0izRDg/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Ym5rd0izRDg/maxresdefault.jpg",
+        "heroImage": "https://i.ytimg.com/vi/Ym5rd0izRDg/maxresdefault.jpg",
+        "embedUrl": "https://www.youtube.com/embed/Ym5rd0izRDg?rel=0",
+        "externalUrl": "https://www.youtube.com/watch?v=Ym5rd0izRDg",
+        "externalActionLabel": "Play on YouTube",
+        "playlistIds": [
+          "UU5k7VFwx3xZkBdGNWEDqMlQ",
+          "PLMBRtLWv06Ag",
+          "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
+        ],
+        "tags": [
+          "Latest Sermons",
+          "Speaker | Ap. Earl Glisson"
+        ],
+        "playlistTitle": "Latest Sermons",
+        "featured": true
+      },
       {
         "id": "WlRy4Uo2Lwo",
         "mediaType": "video",
@@ -1156,7 +1194,7 @@
           "Latest Sermons"
         ],
         "playlistTitle": "Latest Sermons",
-        "featured": true
+        "featured": false
       },
       {
         "id": "J_ill2x8Dg0",
@@ -18558,10 +18596,11 @@
         "playlistId": "PLMBRtLWv06Ag",
         "rawCollectionTitle": "Speaker | Ap. Earl Glisson",
         "priority": 100,
-        "newestVideoPublishedAt": "2026-09-08T22:30:06Z",
+        "newestVideoPublishedAt": "2026-09-22T22:00:31Z",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/J_ill2x8Dg0/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Ym5rd0izRDg/maxresdefault.jpg",
         "itemIds": [
+          "Ym5rd0izRDg",
           "J_ill2x8Dg0",
           "n4rnzfkNxjg",
           "eT8pzFHQNH8",
@@ -19872,10 +19911,11 @@
           "playlistId": "PLMBRtLWv06Ag",
           "rawCollectionTitle": "Speaker | Ap. Earl Glisson",
           "priority": 100,
-          "newestVideoPublishedAt": "2026-09-08T22:30:06Z",
+          "newestVideoPublishedAt": "2026-09-22T22:00:31Z",
           "description": "",
-          "thumbnailUrl": "https://i.ytimg.com/vi/J_ill2x8Dg0/maxresdefault.jpg",
+          "thumbnailUrl": "https://i.ytimg.com/vi/Ym5rd0izRDg/maxresdefault.jpg",
           "itemIds": [
+            "Ym5rd0izRDg",
             "J_ill2x8Dg0",
             "n4rnzfkNxjg",
             "eT8pzFHQNH8",
@@ -20504,6 +20544,44 @@
     ],
     "sermons": [
       {
+        "id": "Ym5rd0izRDg",
+        "mediaType": "video",
+        "rawTitle": "Testify | Kingdom Witness | Ap. Earl Glisson",
+        "mainTitle": "Testify",
+        "subtitle": "Kingdom Witness",
+        "minister": "Ap. Earl Glisson",
+        "canonicalSpeaker": "Ap. Earl Glisson",
+        "speaker": "Ap. Earl Glisson",
+        "title": "Testify",
+        "date": "September 22, 2026",
+        "publishedAt": "2026-09-22T22:00:31Z",
+        "duration": "32:09",
+        "description": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "summaryDescription": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "youtubeDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "youtubeVideoId": "Ym5rd0izRDg",
+        "youtubeId": "Ym5rd0izRDg",
+        "thumbnail": "https://i.ytimg.com/vi/Ym5rd0izRDg/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Ym5rd0izRDg/maxresdefault.jpg",
+        "heroImage": "https://i.ytimg.com/vi/Ym5rd0izRDg/maxresdefault.jpg",
+        "embedUrl": "https://www.youtube.com/embed/Ym5rd0izRDg?rel=0",
+        "externalUrl": "https://www.youtube.com/watch?v=Ym5rd0izRDg",
+        "externalActionLabel": "Play on YouTube",
+        "playlistIds": [
+          "UU5k7VFwx3xZkBdGNWEDqMlQ",
+          "PLMBRtLWv06Ag",
+          "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
+        ],
+        "tags": [
+          "Latest Sermons",
+          "Speaker | Ap. Earl Glisson"
+        ],
+        "playlistTitle": "Latest Sermons",
+        "featured": true
+      },
+      {
         "id": "WlRy4Uo2Lwo",
         "mediaType": "video",
         "rawTitle": "The Spiritual DNA of a Disciple | Ap. Tim Rogers",
@@ -20537,7 +20615,7 @@
           "Latest Sermons"
         ],
         "playlistTitle": "Latest Sermons",
-        "featured": true
+        "featured": false
       },
       {
         "id": "J_ill2x8Dg0",
@@ -37002,6 +37080,50 @@
       }
     ],
     "audioEpisodes": [
+      {
+        "id": "anchor-faith-church-podcast-236b42d1-da7b-4676-8fa8-52656ca44d26",
+        "mediaType": "audio",
+        "title": "Testify | Kingdom Witness | Ap. Earl Glisson",
+        "mainTitle": "Testify | Kingdom Witness | Ap. Earl Glisson",
+        "host": "Anchor Faith Church Podcast",
+        "minister": "Anchor Faith Church Podcast",
+        "date": "September 21, 2026",
+        "publishedAt": "Mon, 21 Sep 2026 19:07:30 GMT",
+        "duration": "32:08",
+        "description": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "summaryDescription": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rssGuid": "236b42d1-da7b-4676-8fa8-52656ca44d26",
+        "guid": "236b42d1-da7b-4676-8fa8-52656ca44d26",
+        "enclosureUrl": "https://anchor.fm/s/128ece40/podcast/play/126097267/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-8-21%2F9cba6530-b08a-408f-5241-944bc57b2e69.m4a",
+        "thumbnail": "https://i.scdn.co/image/ab6765630000ba8a325b720ce81cc6778a431f21",
+        "artworkUrl": "https://i.scdn.co/image/ab6765630000ba8a325b720ce81cc6778a431f21",
+        "episodeArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_episode/3013488/3013488-1790020386586-b7b010e01bda9.jpg",
+        "podcastArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/3013488/3013488-1782995684800-84c230b79db71.jpg",
+        "sourceUrl": "https://anchor.fm/s/128ece40/podcast/rss",
+        "audioUrl": "https://anchor.fm/s/128ece40/podcast/play/126097267/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-8-21%2F9cba6530-b08a-408f-5241-944bc57b2e69.m4a",
+        "externalUrl": "https://open.spotify.com/episode/5tKWXgSHMeUnjooyLcs17C",
+        "spotifyEpisodeId": "5tKWXgSHMeUnjooyLcs17C",
+        "spotifyEpisodeUrl": "https://open.spotify.com/episode/5tKWXgSHMeUnjooyLcs17C",
+        "spotifyUrl": "https://open.spotify.com/episode/5tKWXgSHMeUnjooyLcs17C",
+        "spotifyShowId": "7sMWiLwUHPAqHyxYBQp7Qx",
+        "showSpotifyUrl": "https://open.spotify.com/show/7sMWiLwUHPAqHyxYBQp7Qx",
+        "podcastId": "anchor-faith-church-podcast",
+        "podcastName": "Anchor Faith Church Podcast",
+        "tags": [
+          "Podcast",
+          "Anchor Faith Church Podcast"
+        ],
+        "localPodcastArtworkUrl": "./assets/podcast-artwork/anchor-faith-church.jpg",
+        "localPodcastArtworkWidth": 512,
+        "localPodcastArtworkHeight": 512,
+        "localPodcastArtworkType": "image/jpeg",
+        "spotifyMatchMethod": "exact-title",
+        "spotifyArtworkUrl": "https://i.scdn.co/image/ab6765630000ba8a325b720ce81cc6778a431f21",
+        "spotifyArtworkWidth": 640,
+        "spotifyArtworkHeight": 640
+      },
       {
         "id": "anchor-faith-church-podcast-39f02fcf-a9eb-494c-8200-6314159d7c42",
         "mediaType": "audio",
