@@ -1,6 +1,6 @@
 (function () {
   window.AnchorFaithMediaCache = {
-  "lastUpdated": "2026-09-23T00:51:55.504Z",
+  "lastUpdated": "2026-09-24T19:31:35.389Z",
   "source": "youtube-rss-spotify-generated",
   "version": "1.1",
   "data": {
@@ -80,7 +80,7 @@
         "title": "Topic | Discipline",
         "description": "",
         "thumbnailUrl": "https://i.ytimg.com/vi/n4rnzfkNxjg/maxresdefault.jpg",
-        "itemCount": 2,
+        "itemCount": 1,
         "publishedAt": "2026-08-17T16:45:20.200709Z"
       },
       "PLaRtahNWSQqc": {
