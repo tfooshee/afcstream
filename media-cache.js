@@ -1,6 +1,6 @@
 (function () {
   window.AnchorFaithMediaCache = {
-  "lastUpdated": "2026-09-28T21:25:34.298Z",
+  "lastUpdated": "2026-09-30T01:27:26.861Z",
   "source": "youtube-rss-spotify-generated",
   "version": "1.1",
   "data": {
@@ -175,8 +175,8 @@
         "id": "PLYS5NwJkobuA",
         "title": "Speaker | P. Chase Glisson",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/uc_ACtKWpJg/maxresdefault.jpg",
-        "itemCount": 5,
+        "thumbnailUrl": "https://i.ytimg.com/vi/sgIwLyuXge4/maxresdefault.jpg",
+        "itemCount": 6,
         "publishedAt": "2026-07-06T13:43:12.191956Z"
       },
       "PLDipE8M0XdWc": {
@@ -263,8 +263,8 @@
         "id": "PL_b7G2GPm-jCDqrAJkle-LQr6ZM63Iq3B",
         "title": "Topic | Submission",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/nHYqWouGXEE/maxresdefault.jpg",
-        "itemCount": 6,
+        "thumbnailUrl": "https://i.ytimg.com/vi/sgIwLyuXge4/maxresdefault.jpg",
+        "itemCount": 7,
         "publishedAt": "2026-03-31T14:26:18.378604Z"
       },
       "PL_b7G2GPm-jDV5VAEEfby7RA-j03CGKjI": {
@@ -551,8 +551,8 @@
         "id": "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3",
         "title": "Latest Sermons",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Ym5rd0izRDg/maxresdefault.jpg",
-        "itemCount": 422,
+        "thumbnailUrl": "https://i.ytimg.com/vi/sgIwLyuXge4/maxresdefault.jpg",
+        "itemCount": 423,
         "publishedAt": "2019-03-06T15:36:23.175978Z"
       }
     },
@@ -693,7 +693,7 @@
         "title": "Speaker | P. Chase Glisson",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/uc_ACtKWpJg/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/sgIwLyuXge4/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PLYS5NwJkobuA"
       },
@@ -792,7 +792,7 @@
         "title": "Topic | Submission",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/nHYqWouGXEE/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/sgIwLyuXge4/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PL_b7G2GPm-jCDqrAJkle-LQr6ZM63Iq3B"
       },
@@ -1116,12 +1116,52 @@
         "title": "Latest Sermons",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Ym5rd0izRDg/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/sgIwLyuXge4/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
       }
     ],
     "latestSermons": [
+      {
+        "id": "sgIwLyuXge4",
+        "mediaType": "video",
+        "rawTitle": "Give Me Barabbas | The Battle of Wills | P. Chase Glisson",
+        "mainTitle": "Give Me Barabbas",
+        "subtitle": "The Battle of Wills",
+        "minister": "P. Chase Glisson",
+        "canonicalSpeaker": "P. Chase Glisson",
+        "speaker": "P. Chase Glisson",
+        "title": "Give Me Barabbas",
+        "date": "September 29, 2026",
+        "publishedAt": "2026-09-29T22:30:13Z",
+        "duration": "52:02",
+        "description": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "summaryDescription": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "youtubeDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "youtubeVideoId": "sgIwLyuXge4",
+        "youtubeId": "sgIwLyuXge4",
+        "thumbnail": "https://i.ytimg.com/vi/sgIwLyuXge4/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/sgIwLyuXge4/maxresdefault.jpg",
+        "heroImage": "https://i.ytimg.com/vi/sgIwLyuXge4/maxresdefault.jpg",
+        "embedUrl": "https://www.youtube.com/embed/sgIwLyuXge4?rel=0",
+        "externalUrl": "https://www.youtube.com/watch?v=sgIwLyuXge4",
+        "externalActionLabel": "Play on YouTube",
+        "playlistIds": [
+          "UU5k7VFwx3xZkBdGNWEDqMlQ",
+          "PLYS5NwJkobuA",
+          "PL_b7G2GPm-jCDqrAJkle-LQr6ZM63Iq3B",
+          "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
+        ],
+        "tags": [
+          "Latest Sermons",
+          "Speaker | P. Chase Glisson",
+          "Topic | Submission"
+        ],
+        "playlistTitle": "Latest Sermons",
+        "featured": true
+      },
       {
         "id": "Ym5rd0izRDg",
         "mediaType": "video",
@@ -1158,7 +1198,7 @@
           "Speaker | Ap. Earl Glisson"
         ],
         "playlistTitle": "Latest Sermons",
-        "featured": true
+        "featured": false
       },
       {
         "id": "WlRy4Uo2Lwo",
@@ -18330,8 +18370,9 @@
         "playlistId": "PL_b7G2GPm-jCDqrAJkle-LQr6ZM63Iq3B",
         "rawCollectionTitle": "Topic | Submission",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/nHYqWouGXEE/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/sgIwLyuXge4/maxresdefault.jpg",
         "itemIds": [
+          "sgIwLyuXge4",
           "nHYqWouGXEE",
           "QB_lD-9XJAg",
           "OdAl2-i8q_Y",
@@ -18966,6 +19007,27 @@
         ]
       },
       {
+        "id": "collection-speaker-plys5nwjkobua",
+        "title": "P. Chase Glisson",
+        "optionLabel": "P. Chase Glisson",
+        "collectionType": "speaker",
+        "mediaType": "video",
+        "playlistId": "PLYS5NwJkobuA",
+        "rawCollectionTitle": "Speaker | P. Chase Glisson",
+        "priority": 0,
+        "newestVideoPublishedAt": "2026-09-29T22:30:13Z",
+        "description": "",
+        "thumbnailUrl": "https://i.ytimg.com/vi/sgIwLyuXge4/maxresdefault.jpg",
+        "itemIds": [
+          "sgIwLyuXge4",
+          "uc_ACtKWpJg",
+          "Raznj0gbY1o",
+          "9Ns2-vwV-mM",
+          "bfBdnqQ4Q4k",
+          "N-Qw73vaawY"
+        ]
+      },
+      {
         "id": "collection-speaker-plb99buifkunk",
         "title": "P. Darrell Huffman",
         "optionLabel": "P. Darrell Huffman",
@@ -19055,26 +19117,6 @@
           "SYv-LU0whi8",
           "yXUgUFuOg5w",
           "H5h2NY4n678"
-        ]
-      },
-      {
-        "id": "collection-speaker-plys5nwjkobua",
-        "title": "P. Chase Glisson",
-        "optionLabel": "P. Chase Glisson",
-        "collectionType": "speaker",
-        "mediaType": "video",
-        "playlistId": "PLYS5NwJkobuA",
-        "rawCollectionTitle": "Speaker | P. Chase Glisson",
-        "priority": 0,
-        "newestVideoPublishedAt": "2026-05-21T22:30:15Z",
-        "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/uc_ACtKWpJg/maxresdefault.jpg",
-        "itemIds": [
-          "uc_ACtKWpJg",
-          "Raznj0gbY1o",
-          "9Ns2-vwV-mM",
-          "bfBdnqQ4Q4k",
-          "N-Qw73vaawY"
         ]
       },
       {
@@ -19645,8 +19687,9 @@
           "playlistId": "PL_b7G2GPm-jCDqrAJkle-LQr6ZM63Iq3B",
           "rawCollectionTitle": "Topic | Submission",
           "description": "",
-          "thumbnailUrl": "https://i.ytimg.com/vi/nHYqWouGXEE/maxresdefault.jpg",
+          "thumbnailUrl": "https://i.ytimg.com/vi/sgIwLyuXge4/maxresdefault.jpg",
           "itemIds": [
+            "sgIwLyuXge4",
             "nHYqWouGXEE",
             "QB_lD-9XJAg",
             "OdAl2-i8q_Y",
@@ -20281,6 +20324,27 @@
           ]
         },
         {
+          "id": "collection-speaker-plys5nwjkobua",
+          "title": "P. Chase Glisson",
+          "optionLabel": "P. Chase Glisson",
+          "collectionType": "speaker",
+          "mediaType": "video",
+          "playlistId": "PLYS5NwJkobuA",
+          "rawCollectionTitle": "Speaker | P. Chase Glisson",
+          "priority": 0,
+          "newestVideoPublishedAt": "2026-09-29T22:30:13Z",
+          "description": "",
+          "thumbnailUrl": "https://i.ytimg.com/vi/sgIwLyuXge4/maxresdefault.jpg",
+          "itemIds": [
+            "sgIwLyuXge4",
+            "uc_ACtKWpJg",
+            "Raznj0gbY1o",
+            "9Ns2-vwV-mM",
+            "bfBdnqQ4Q4k",
+            "N-Qw73vaawY"
+          ]
+        },
+        {
           "id": "collection-speaker-plb99buifkunk",
           "title": "P. Darrell Huffman",
           "optionLabel": "P. Darrell Huffman",
@@ -20370,26 +20434,6 @@
             "SYv-LU0whi8",
             "yXUgUFuOg5w",
             "H5h2NY4n678"
-          ]
-        },
-        {
-          "id": "collection-speaker-plys5nwjkobua",
-          "title": "P. Chase Glisson",
-          "optionLabel": "P. Chase Glisson",
-          "collectionType": "speaker",
-          "mediaType": "video",
-          "playlistId": "PLYS5NwJkobuA",
-          "rawCollectionTitle": "Speaker | P. Chase Glisson",
-          "priority": 0,
-          "newestVideoPublishedAt": "2026-05-21T22:30:15Z",
-          "description": "",
-          "thumbnailUrl": "https://i.ytimg.com/vi/uc_ACtKWpJg/maxresdefault.jpg",
-          "itemIds": [
-            "uc_ACtKWpJg",
-            "Raznj0gbY1o",
-            "9Ns2-vwV-mM",
-            "bfBdnqQ4Q4k",
-            "N-Qw73vaawY"
           ]
         },
         {
@@ -20544,6 +20588,46 @@
     ],
     "sermons": [
       {
+        "id": "sgIwLyuXge4",
+        "mediaType": "video",
+        "rawTitle": "Give Me Barabbas | The Battle of Wills | P. Chase Glisson",
+        "mainTitle": "Give Me Barabbas",
+        "subtitle": "The Battle of Wills",
+        "minister": "P. Chase Glisson",
+        "canonicalSpeaker": "P. Chase Glisson",
+        "speaker": "P. Chase Glisson",
+        "title": "Give Me Barabbas",
+        "date": "September 29, 2026",
+        "publishedAt": "2026-09-29T22:30:13Z",
+        "duration": "52:02",
+        "description": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "summaryDescription": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "youtubeDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "youtubeVideoId": "sgIwLyuXge4",
+        "youtubeId": "sgIwLyuXge4",
+        "thumbnail": "https://i.ytimg.com/vi/sgIwLyuXge4/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/sgIwLyuXge4/maxresdefault.jpg",
+        "heroImage": "https://i.ytimg.com/vi/sgIwLyuXge4/maxresdefault.jpg",
+        "embedUrl": "https://www.youtube.com/embed/sgIwLyuXge4?rel=0",
+        "externalUrl": "https://www.youtube.com/watch?v=sgIwLyuXge4",
+        "externalActionLabel": "Play on YouTube",
+        "playlistIds": [
+          "UU5k7VFwx3xZkBdGNWEDqMlQ",
+          "PLYS5NwJkobuA",
+          "PL_b7G2GPm-jCDqrAJkle-LQr6ZM63Iq3B",
+          "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
+        ],
+        "tags": [
+          "Latest Sermons",
+          "Speaker | P. Chase Glisson",
+          "Topic | Submission"
+        ],
+        "playlistTitle": "Latest Sermons",
+        "featured": true
+      },
+      {
         "id": "Ym5rd0izRDg",
         "mediaType": "video",
         "rawTitle": "Testify | Kingdom Witness | Ap. Earl Glisson",
@@ -20579,7 +20663,7 @@
           "Speaker | Ap. Earl Glisson"
         ],
         "playlistTitle": "Latest Sermons",
-        "featured": true
+        "featured": false
       },
       {
         "id": "WlRy4Uo2Lwo",
@@ -37080,6 +37164,50 @@
       }
     ],
     "audioEpisodes": [
+      {
+        "id": "anchor-faith-church-podcast-1de14690-32d3-4d4e-8abc-433e4000d998",
+        "mediaType": "audio",
+        "title": "Give Me Barabbas | The Battle of Wills | P. Chase Glisson",
+        "mainTitle": "Give Me Barabbas | The Battle of Wills | P. Chase Glisson",
+        "host": "Anchor Faith Church Podcast",
+        "minister": "Anchor Faith Church Podcast",
+        "date": "September 29, 2026",
+        "publishedAt": "Tue, 29 Sep 2026 21:11:09 GMT",
+        "duration": "52:02",
+        "description": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "summaryDescription": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rssGuid": "1de14690-32d3-4d4e-8abc-433e4000d998",
+        "guid": "1de14690-32d3-4d4e-8abc-433e4000d998",
+        "enclosureUrl": "https://anchor.fm/s/128ece40/podcast/play/126517885/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-8-29%2F3f6baa49-19f6-189f-3df5-2199eb29579e.mp3",
+        "thumbnail": "https://i.scdn.co/image/ab6765630000ba8ac6f189635a2d4cbc33f3dbdb",
+        "artworkUrl": "https://i.scdn.co/image/ab6765630000ba8ac6f189635a2d4cbc33f3dbdb",
+        "episodeArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_episode/3013488/3013488-1790716221239-e9f68bc0adac.jpg",
+        "podcastArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/3013488/3013488-1782995684800-84c230b79db71.jpg",
+        "sourceUrl": "https://anchor.fm/s/128ece40/podcast/rss",
+        "audioUrl": "https://anchor.fm/s/128ece40/podcast/play/126517885/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-8-29%2F3f6baa49-19f6-189f-3df5-2199eb29579e.mp3",
+        "externalUrl": "https://open.spotify.com/episode/4dPytqT1V2wZKPm3krfd5Q",
+        "spotifyEpisodeId": "4dPytqT1V2wZKPm3krfd5Q",
+        "spotifyEpisodeUrl": "https://open.spotify.com/episode/4dPytqT1V2wZKPm3krfd5Q",
+        "spotifyUrl": "https://open.spotify.com/episode/4dPytqT1V2wZKPm3krfd5Q",
+        "spotifyShowId": "7sMWiLwUHPAqHyxYBQp7Qx",
+        "showSpotifyUrl": "https://open.spotify.com/show/7sMWiLwUHPAqHyxYBQp7Qx",
+        "podcastId": "anchor-faith-church-podcast",
+        "podcastName": "Anchor Faith Church Podcast",
+        "tags": [
+          "Podcast",
+          "Anchor Faith Church Podcast"
+        ],
+        "localPodcastArtworkUrl": "./assets/podcast-artwork/anchor-faith-church.jpg",
+        "localPodcastArtworkWidth": 512,
+        "localPodcastArtworkHeight": 512,
+        "localPodcastArtworkType": "image/jpeg",
+        "spotifyMatchMethod": "exact-title",
+        "spotifyArtworkUrl": "https://i.scdn.co/image/ab6765630000ba8ac6f189635a2d4cbc33f3dbdb",
+        "spotifyArtworkWidth": 640,
+        "spotifyArtworkHeight": 640
+      },
       {
         "id": "anchor-faith-church-podcast-92f758b7-74e3-4270-843d-9b59ddc80715",
         "mediaType": "audio",
