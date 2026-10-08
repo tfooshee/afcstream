@@ -1,6 +1,6 @@
 (function () {
   window.AnchorFaithMediaCache = {
-  "lastUpdated": "2026-10-08T14:15:16.383Z",
+  "lastUpdated": "2026-10-08T20:52:52.210Z",
   "source": "youtube-rss-spotify-generated",
   "version": "1.1",
   "data": {
@@ -37248,50 +37248,6 @@
       }
     ],
     "audioEpisodes": [
-      {
-        "id": "the-current-podcast-b4428017-40fa-4357-b617-7e06cd93aa0d",
-        "mediaType": "audio",
-        "title": "Kn(own) Part 4 | Claimed | P. Chase Glisson",
-        "mainTitle": "Kn(own) Part 4 | Claimed | P. Chase Glisson",
-        "host": "The.Crnt Podcast",
-        "minister": "The.Crnt Podcast",
-        "date": "October 8, 2026",
-        "publishedAt": "Thu, 08 Oct 2026 13:22:49 GMT",
-        "duration": "37:17",
-        "description": "Salvation doesn't just mean that Jesus belongs in your life, it means that your life belongs to Jesus.\nLearn more about The Current:...",
-        "rawDescription": "Salvation doesn't just mean that Jesus belongs in your life, it means that your life belongs to Jesus.\n\n\nLearn more about The Current: https://anchorfaith.com/tclinks/",
-        "fullDescription": "Salvation doesn't just mean that Jesus belongs in your life, it means that your life belongs to Jesus.\n\n\nLearn more about The Current: https://anchorfaith.com/tclinks/",
-        "summaryDescription": "Salvation doesn't just mean that Jesus belongs in your life, it means that your life belongs to Jesus.\nLearn more about The Current:...",
-        "rssGuid": "b4428017-40fa-4357-b617-7e06cd93aa0d",
-        "guid": "b4428017-40fa-4357-b617-7e06cd93aa0d",
-        "enclosureUrl": "https://anchor.fm/s/f9eea9b8/podcast/play/127109278/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-9-8%2F7d402078-d32e-e81a-326a-28b76d6706f5.mp3",
-        "thumbnail": "https://i.scdn.co/image/ab6765630000ba8a67985571fc1f957906c23f15",
-        "artworkUrl": "https://i.scdn.co/image/ab6765630000ba8a67985571fc1f957906c23f15",
-        "episodeArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_episode/41831678/41831678-1791465653662-9bfb9f5d2b39c.jpg",
-        "podcastArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/41831678/41831678-1736449271448-1b71638c40287.jpg",
-        "sourceUrl": "https://anchor.fm/s/f9eea9b8/podcast/rss",
-        "audioUrl": "https://anchor.fm/s/f9eea9b8/podcast/play/127109278/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-9-8%2F7d402078-d32e-e81a-326a-28b76d6706f5.mp3",
-        "externalUrl": "https://open.spotify.com/episode/4H2XBF9RrC2i3OfI378YHi",
-        "spotifyEpisodeId": "4H2XBF9RrC2i3OfI378YHi",
-        "spotifyEpisodeUrl": "https://open.spotify.com/episode/4H2XBF9RrC2i3OfI378YHi",
-        "spotifyUrl": "https://open.spotify.com/episode/4H2XBF9RrC2i3OfI378YHi",
-        "spotifyShowId": "7xu0obdpJbYpFT62IohTkl",
-        "showSpotifyUrl": "https://open.spotify.com/show/7xu0obdpJbYpFT62IohTkl",
-        "podcastId": "the-current-podcast",
-        "podcastName": "The.Crnt Podcast",
-        "tags": [
-          "Podcast",
-          "The.Crnt Podcast"
-        ],
-        "localPodcastArtworkUrl": "./assets/podcast-artwork/the-crnt.jpg",
-        "localPodcastArtworkWidth": 512,
-        "localPodcastArtworkHeight": 512,
-        "localPodcastArtworkType": "image/jpeg",
-        "spotifyMatchMethod": "exact-title",
-        "spotifyArtworkUrl": "https://i.scdn.co/image/ab6765630000ba8a67985571fc1f957906c23f15",
-        "spotifyArtworkWidth": 640,
-        "spotifyArtworkHeight": 640
-      },
       {
         "id": "kingdom-first-business-alliance-podcast-10fa2071-117f-4388-a519-ab7695491558",
         "mediaType": "audio",
