@@ -1,6 +1,6 @@
 (function () {
   window.AnchorFaithMediaCache = {
-  "lastUpdated": "2026-10-05T22:13:04.545Z",
+  "lastUpdated": "2026-10-08T14:15:16.383Z",
   "source": "youtube-rss-spotify-generated",
   "version": "1.1",
   "data": {
@@ -167,8 +167,8 @@
         "id": "PLRZltdv2x4qE",
         "title": "Speaker | P. Joshua Clay",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/K9kAK7vn--s/maxresdefault.jpg",
-        "itemCount": 4,
+        "thumbnailUrl": "https://i.ytimg.com/vi/SQ6dwikl1HM/maxresdefault.jpg",
+        "itemCount": 5,
         "publishedAt": "2026-07-06T13:43:46.913766Z"
       },
       "PLYS5NwJkobuA": {
@@ -463,8 +463,8 @@
         "id": "PL_b7G2GPm-jCXvcQK-tqCVLUNzN8rDD5y",
         "title": "Topic | Faith",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/9rrjoa5Hvdk/maxresdefault.jpg",
-        "itemCount": 25,
+        "thumbnailUrl": "https://i.ytimg.com/vi/SQ6dwikl1HM/maxresdefault.jpg",
+        "itemCount": 26,
         "publishedAt": "2025-03-06T13:47:08.893558Z"
       },
       "PL_b7G2GPm-jCv6ZSEwzc_3X2Ois_izLlx": {
@@ -551,8 +551,8 @@
         "id": "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3",
         "title": "Latest Sermons",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/sgIwLyuXge4/maxresdefault.jpg",
-        "itemCount": 423,
+        "thumbnailUrl": "https://i.ytimg.com/vi/SQ6dwikl1HM/maxresdefault.jpg",
+        "itemCount": 424,
         "publishedAt": "2019-03-06T15:36:23.175978Z"
       }
     },
@@ -684,7 +684,7 @@
         "title": "Speaker | P. Joshua Clay",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/K9kAK7vn--s/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/SQ6dwikl1HM/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PLRZltdv2x4qE"
       },
@@ -1017,7 +1017,7 @@
         "title": "Topic | Faith",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/9rrjoa5Hvdk/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/SQ6dwikl1HM/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PL_b7G2GPm-jCXvcQK-tqCVLUNzN8rDD5y"
       },
@@ -1116,12 +1116,52 @@
         "title": "Latest Sermons",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/sgIwLyuXge4/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/SQ6dwikl1HM/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
       }
     ],
     "latestSermons": [
+      {
+        "id": "SQ6dwikl1HM",
+        "mediaType": "video",
+        "rawTitle": "The Brave and Faithful | Kingdom Courage | P. Joshua Clay",
+        "mainTitle": "The Brave and Faithful",
+        "subtitle": "Kingdom Courage",
+        "minister": "P. Joshua Clay",
+        "canonicalSpeaker": "P. Joshua Clay",
+        "speaker": "P. Joshua Clay",
+        "title": "The Brave and Faithful",
+        "date": "October 6, 2026",
+        "publishedAt": "2026-10-06T22:30:36Z",
+        "duration": "56:07",
+        "description": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "summaryDescription": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "youtubeDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "youtubeVideoId": "SQ6dwikl1HM",
+        "youtubeId": "SQ6dwikl1HM",
+        "thumbnail": "https://i.ytimg.com/vi/SQ6dwikl1HM/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/SQ6dwikl1HM/maxresdefault.jpg",
+        "heroImage": "https://i.ytimg.com/vi/SQ6dwikl1HM/maxresdefault.jpg",
+        "embedUrl": "https://www.youtube.com/embed/SQ6dwikl1HM?rel=0",
+        "externalUrl": "https://www.youtube.com/watch?v=SQ6dwikl1HM",
+        "externalActionLabel": "Play on YouTube",
+        "playlistIds": [
+          "UU5k7VFwx3xZkBdGNWEDqMlQ",
+          "PLRZltdv2x4qE",
+          "PL_b7G2GPm-jCXvcQK-tqCVLUNzN8rDD5y",
+          "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
+        ],
+        "tags": [
+          "Latest Sermons",
+          "Speaker | P. Joshua Clay",
+          "Topic | Faith"
+        ],
+        "playlistTitle": "Latest Sermons",
+        "featured": true
+      },
       {
         "id": "sgIwLyuXge4",
         "mediaType": "video",
@@ -1160,7 +1200,7 @@
           "Topic | Submission"
         ],
         "playlistTitle": "Latest Sermons",
-        "featured": true
+        "featured": false
       },
       {
         "id": "Ym5rd0izRDg",
@@ -18002,8 +18042,9 @@
         "playlistId": "PL_b7G2GPm-jCXvcQK-tqCVLUNzN8rDD5y",
         "rawCollectionTitle": "Topic | Faith",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/9rrjoa5Hvdk/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/SQ6dwikl1HM/maxresdefault.jpg",
         "itemIds": [
+          "SQ6dwikl1HM",
           "9rrjoa5Hvdk",
           "TVwaCtxKJRU",
           "AIcY-R7oQRM",
@@ -19007,6 +19048,26 @@
         ]
       },
       {
+        "id": "collection-speaker-plrzltdv2x4qe",
+        "title": "P. Joshua Clay",
+        "optionLabel": "P. Joshua Clay",
+        "collectionType": "speaker",
+        "mediaType": "video",
+        "playlistId": "PLRZltdv2x4qE",
+        "rawCollectionTitle": "Speaker | P. Joshua Clay",
+        "priority": 0,
+        "newestVideoPublishedAt": "2026-10-06T22:30:36Z",
+        "description": "",
+        "thumbnailUrl": "https://i.ytimg.com/vi/SQ6dwikl1HM/maxresdefault.jpg",
+        "itemIds": [
+          "SQ6dwikl1HM",
+          "K9kAK7vn--s",
+          "yFZJYTBdf-Y",
+          "vLMO8i3lbQs",
+          "b32kc8u_vvA"
+        ]
+      },
+      {
         "id": "collection-speaker-plys5nwjkobua",
         "title": "P. Chase Glisson",
         "optionLabel": "P. Chase Glisson",
@@ -19061,25 +19122,6 @@
         "itemIds": [
           "_hRfHd_WOO4",
           "8FLOC1Qw5lc"
-        ]
-      },
-      {
-        "id": "collection-speaker-plrzltdv2x4qe",
-        "title": "P. Joshua Clay",
-        "optionLabel": "P. Joshua Clay",
-        "collectionType": "speaker",
-        "mediaType": "video",
-        "playlistId": "PLRZltdv2x4qE",
-        "rawCollectionTitle": "Speaker | P. Joshua Clay",
-        "priority": 0,
-        "newestVideoPublishedAt": "2026-06-02T22:30:30Z",
-        "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/K9kAK7vn--s/maxresdefault.jpg",
-        "itemIds": [
-          "K9kAK7vn--s",
-          "yFZJYTBdf-Y",
-          "vLMO8i3lbQs",
-          "b32kc8u_vvA"
         ]
       },
       {
@@ -19319,8 +19361,9 @@
           "playlistId": "PL_b7G2GPm-jCXvcQK-tqCVLUNzN8rDD5y",
           "rawCollectionTitle": "Topic | Faith",
           "description": "",
-          "thumbnailUrl": "https://i.ytimg.com/vi/9rrjoa5Hvdk/maxresdefault.jpg",
+          "thumbnailUrl": "https://i.ytimg.com/vi/SQ6dwikl1HM/maxresdefault.jpg",
           "itemIds": [
+            "SQ6dwikl1HM",
             "9rrjoa5Hvdk",
             "TVwaCtxKJRU",
             "AIcY-R7oQRM",
@@ -20324,6 +20367,26 @@
           ]
         },
         {
+          "id": "collection-speaker-plrzltdv2x4qe",
+          "title": "P. Joshua Clay",
+          "optionLabel": "P. Joshua Clay",
+          "collectionType": "speaker",
+          "mediaType": "video",
+          "playlistId": "PLRZltdv2x4qE",
+          "rawCollectionTitle": "Speaker | P. Joshua Clay",
+          "priority": 0,
+          "newestVideoPublishedAt": "2026-10-06T22:30:36Z",
+          "description": "",
+          "thumbnailUrl": "https://i.ytimg.com/vi/SQ6dwikl1HM/maxresdefault.jpg",
+          "itemIds": [
+            "SQ6dwikl1HM",
+            "K9kAK7vn--s",
+            "yFZJYTBdf-Y",
+            "vLMO8i3lbQs",
+            "b32kc8u_vvA"
+          ]
+        },
+        {
           "id": "collection-speaker-plys5nwjkobua",
           "title": "P. Chase Glisson",
           "optionLabel": "P. Chase Glisson",
@@ -20378,25 +20441,6 @@
           "itemIds": [
             "_hRfHd_WOO4",
             "8FLOC1Qw5lc"
-          ]
-        },
-        {
-          "id": "collection-speaker-plrzltdv2x4qe",
-          "title": "P. Joshua Clay",
-          "optionLabel": "P. Joshua Clay",
-          "collectionType": "speaker",
-          "mediaType": "video",
-          "playlistId": "PLRZltdv2x4qE",
-          "rawCollectionTitle": "Speaker | P. Joshua Clay",
-          "priority": 0,
-          "newestVideoPublishedAt": "2026-06-02T22:30:30Z",
-          "description": "",
-          "thumbnailUrl": "https://i.ytimg.com/vi/K9kAK7vn--s/maxresdefault.jpg",
-          "itemIds": [
-            "K9kAK7vn--s",
-            "yFZJYTBdf-Y",
-            "vLMO8i3lbQs",
-            "b32kc8u_vvA"
           ]
         },
         {
@@ -20588,6 +20632,46 @@
     ],
     "sermons": [
       {
+        "id": "SQ6dwikl1HM",
+        "mediaType": "video",
+        "rawTitle": "The Brave and Faithful | Kingdom Courage | P. Joshua Clay",
+        "mainTitle": "The Brave and Faithful",
+        "subtitle": "Kingdom Courage",
+        "minister": "P. Joshua Clay",
+        "canonicalSpeaker": "P. Joshua Clay",
+        "speaker": "P. Joshua Clay",
+        "title": "The Brave and Faithful",
+        "date": "October 6, 2026",
+        "publishedAt": "2026-10-06T22:30:36Z",
+        "duration": "56:07",
+        "description": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "summaryDescription": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "youtubeDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "youtubeVideoId": "SQ6dwikl1HM",
+        "youtubeId": "SQ6dwikl1HM",
+        "thumbnail": "https://i.ytimg.com/vi/SQ6dwikl1HM/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/SQ6dwikl1HM/maxresdefault.jpg",
+        "heroImage": "https://i.ytimg.com/vi/SQ6dwikl1HM/maxresdefault.jpg",
+        "embedUrl": "https://www.youtube.com/embed/SQ6dwikl1HM?rel=0",
+        "externalUrl": "https://www.youtube.com/watch?v=SQ6dwikl1HM",
+        "externalActionLabel": "Play on YouTube",
+        "playlistIds": [
+          "UU5k7VFwx3xZkBdGNWEDqMlQ",
+          "PLRZltdv2x4qE",
+          "PL_b7G2GPm-jCXvcQK-tqCVLUNzN8rDD5y",
+          "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
+        ],
+        "tags": [
+          "Latest Sermons",
+          "Speaker | P. Joshua Clay",
+          "Topic | Faith"
+        ],
+        "playlistTitle": "Latest Sermons",
+        "featured": true
+      },
+      {
         "id": "sgIwLyuXge4",
         "mediaType": "video",
         "rawTitle": "Give Me Barabbas | The Battle of Wills | P. Chase Glisson",
@@ -20625,7 +20709,7 @@
           "Topic | Submission"
         ],
         "playlistTitle": "Latest Sermons",
-        "featured": true
+        "featured": false
       },
       {
         "id": "Ym5rd0izRDg",
@@ -37164,6 +37248,134 @@
       }
     ],
     "audioEpisodes": [
+      {
+        "id": "the-current-podcast-b4428017-40fa-4357-b617-7e06cd93aa0d",
+        "mediaType": "audio",
+        "title": "Kn(own) Part 4 | Claimed | P. Chase Glisson",
+        "mainTitle": "Kn(own) Part 4 | Claimed | P. Chase Glisson",
+        "host": "The.Crnt Podcast",
+        "minister": "The.Crnt Podcast",
+        "date": "October 8, 2026",
+        "publishedAt": "Thu, 08 Oct 2026 13:22:49 GMT",
+        "duration": "37:17",
+        "description": "Salvation doesn't just mean that Jesus belongs in your life, it means that your life belongs to Jesus.\nLearn more about The Current:...",
+        "rawDescription": "Salvation doesn't just mean that Jesus belongs in your life, it means that your life belongs to Jesus.\n\n\nLearn more about The Current: https://anchorfaith.com/tclinks/",
+        "fullDescription": "Salvation doesn't just mean that Jesus belongs in your life, it means that your life belongs to Jesus.\n\n\nLearn more about The Current: https://anchorfaith.com/tclinks/",
+        "summaryDescription": "Salvation doesn't just mean that Jesus belongs in your life, it means that your life belongs to Jesus.\nLearn more about The Current:...",
+        "rssGuid": "b4428017-40fa-4357-b617-7e06cd93aa0d",
+        "guid": "b4428017-40fa-4357-b617-7e06cd93aa0d",
+        "enclosureUrl": "https://anchor.fm/s/f9eea9b8/podcast/play/127109278/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-9-8%2F7d402078-d32e-e81a-326a-28b76d6706f5.mp3",
+        "thumbnail": "https://i.scdn.co/image/ab6765630000ba8a67985571fc1f957906c23f15",
+        "artworkUrl": "https://i.scdn.co/image/ab6765630000ba8a67985571fc1f957906c23f15",
+        "episodeArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_episode/41831678/41831678-1791465653662-9bfb9f5d2b39c.jpg",
+        "podcastArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/41831678/41831678-1736449271448-1b71638c40287.jpg",
+        "sourceUrl": "https://anchor.fm/s/f9eea9b8/podcast/rss",
+        "audioUrl": "https://anchor.fm/s/f9eea9b8/podcast/play/127109278/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-9-8%2F7d402078-d32e-e81a-326a-28b76d6706f5.mp3",
+        "externalUrl": "https://open.spotify.com/episode/4H2XBF9RrC2i3OfI378YHi",
+        "spotifyEpisodeId": "4H2XBF9RrC2i3OfI378YHi",
+        "spotifyEpisodeUrl": "https://open.spotify.com/episode/4H2XBF9RrC2i3OfI378YHi",
+        "spotifyUrl": "https://open.spotify.com/episode/4H2XBF9RrC2i3OfI378YHi",
+        "spotifyShowId": "7xu0obdpJbYpFT62IohTkl",
+        "showSpotifyUrl": "https://open.spotify.com/show/7xu0obdpJbYpFT62IohTkl",
+        "podcastId": "the-current-podcast",
+        "podcastName": "The.Crnt Podcast",
+        "tags": [
+          "Podcast",
+          "The.Crnt Podcast"
+        ],
+        "localPodcastArtworkUrl": "./assets/podcast-artwork/the-crnt.jpg",
+        "localPodcastArtworkWidth": 512,
+        "localPodcastArtworkHeight": 512,
+        "localPodcastArtworkType": "image/jpeg",
+        "spotifyMatchMethod": "exact-title",
+        "spotifyArtworkUrl": "https://i.scdn.co/image/ab6765630000ba8a67985571fc1f957906c23f15",
+        "spotifyArtworkWidth": 640,
+        "spotifyArtworkHeight": 640
+      },
+      {
+        "id": "kingdom-first-business-alliance-podcast-10fa2071-117f-4388-a519-ab7695491558",
+        "mediaType": "audio",
+        "title": "October 2026 Session",
+        "mainTitle": "October 2026 Session",
+        "host": "Kingdom First Business Alliance Podcast",
+        "minister": "Kingdom First Business Alliance Podcast",
+        "date": "October 7, 2026",
+        "publishedAt": "Wed, 07 Oct 2026 17:32:35 GMT",
+        "duration": "18:41",
+        "description": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "summaryDescription": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rssGuid": "10fa2071-117f-4388-a519-ab7695491558",
+        "guid": "10fa2071-117f-4388-a519-ab7695491558",
+        "enclosureUrl": "https://anchor.fm/s/10ef5931c/podcast/play/127043800/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-9-7%2F5657df71-d444-c86f-0721-96c4163c0ac0.mp3",
+        "thumbnail": "https://i.scdn.co/image/ab6765630000ba8a554374b637c9123fc728d7c8",
+        "artworkUrl": "https://i.scdn.co/image/ab6765630000ba8a554374b637c9123fc728d7c8",
+        "episodeArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/45359423/45359423-1770821582639-b68b2c7e1c5ab.jpg",
+        "podcastArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/45359423/45359423-1770821582639-b68b2c7e1c5ab.jpg",
+        "sourceUrl": "https://anchor.fm/s/10ef5931c/podcast/rss",
+        "audioUrl": "https://anchor.fm/s/10ef5931c/podcast/play/127043800/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-9-7%2F5657df71-d444-c86f-0721-96c4163c0ac0.mp3",
+        "externalUrl": "https://open.spotify.com/episode/2FSjzLX4W3zm2a9emEZo6S",
+        "spotifyEpisodeId": "2FSjzLX4W3zm2a9emEZo6S",
+        "spotifyEpisodeUrl": "https://open.spotify.com/episode/2FSjzLX4W3zm2a9emEZo6S",
+        "spotifyUrl": "https://open.spotify.com/episode/2FSjzLX4W3zm2a9emEZo6S",
+        "spotifyShowId": "4rbu39RRiyRqVWzlfFk77I",
+        "showSpotifyUrl": "https://open.spotify.com/show/4rbu39RRiyRqVWzlfFk77I",
+        "podcastId": "kingdom-first-business-alliance-podcast",
+        "podcastName": "Kingdom First Business Alliance Podcast",
+        "tags": [
+          "Podcast",
+          "Kingdom First Business Alliance Podcast"
+        ],
+        "spotifyMatchMethod": "exact-title",
+        "spotifyArtworkUrl": "https://i.scdn.co/image/ab6765630000ba8a554374b637c9123fc728d7c8",
+        "spotifyArtworkWidth": 640,
+        "spotifyArtworkHeight": 640
+      },
+      {
+        "id": "anchor-faith-church-podcast-a70f475b-b698-4c13-b644-b26d574432b2",
+        "mediaType": "audio",
+        "title": "The Brave and Faithful | Kingdom Courage | P. Joshua Clay",
+        "mainTitle": "The Brave and Faithful | Kingdom Courage | P. Joshua Clay",
+        "host": "Anchor Faith Church Podcast",
+        "minister": "Anchor Faith Church Podcast",
+        "date": "October 6, 2026",
+        "publishedAt": "Tue, 06 Oct 2026 19:24:05 GMT",
+        "duration": "56:06",
+        "description": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "summaryDescription": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rssGuid": "a70f475b-b698-4c13-b644-b26d574432b2",
+        "guid": "a70f475b-b698-4c13-b644-b26d574432b2",
+        "enclosureUrl": "https://anchor.fm/s/128ece40/podcast/play/126962148/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-9-6%2Fad740f3a-8db1-1654-96f2-077ff3f2ed5f.mp3",
+        "thumbnail": "https://i.scdn.co/image/ab6765630000ba8a40a8d1681253ab4704207822",
+        "artworkUrl": "https://i.scdn.co/image/ab6765630000ba8a40a8d1681253ab4704207822",
+        "episodeArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_episode/3013488/3013488-1791413989550-ad9e9bd52cb88.jpg",
+        "podcastArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/3013488/3013488-1782995684800-84c230b79db71.jpg",
+        "sourceUrl": "https://anchor.fm/s/128ece40/podcast/rss",
+        "audioUrl": "https://anchor.fm/s/128ece40/podcast/play/126962148/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-9-6%2Fad740f3a-8db1-1654-96f2-077ff3f2ed5f.mp3",
+        "externalUrl": "https://open.spotify.com/episode/6NaJeGQPjaq8QGXDGLAbGc",
+        "spotifyEpisodeId": "6NaJeGQPjaq8QGXDGLAbGc",
+        "spotifyEpisodeUrl": "https://open.spotify.com/episode/6NaJeGQPjaq8QGXDGLAbGc",
+        "spotifyUrl": "https://open.spotify.com/episode/6NaJeGQPjaq8QGXDGLAbGc",
+        "spotifyShowId": "7sMWiLwUHPAqHyxYBQp7Qx",
+        "showSpotifyUrl": "https://open.spotify.com/show/7sMWiLwUHPAqHyxYBQp7Qx",
+        "podcastId": "anchor-faith-church-podcast",
+        "podcastName": "Anchor Faith Church Podcast",
+        "tags": [
+          "Podcast",
+          "Anchor Faith Church Podcast"
+        ],
+        "localPodcastArtworkUrl": "./assets/podcast-artwork/anchor-faith-church.jpg",
+        "localPodcastArtworkWidth": 512,
+        "localPodcastArtworkHeight": 512,
+        "localPodcastArtworkType": "image/jpeg",
+        "spotifyMatchMethod": "exact-title",
+        "spotifyArtworkUrl": "https://i.scdn.co/image/ab6765630000ba8a40a8d1681253ab4704207822",
+        "spotifyArtworkWidth": 640,
+        "spotifyArtworkHeight": 640
+      },
       {
         "id": "the-current-podcast-bb629610-1e71-4484-9a5b-8d2972c7ea0b",
         "mediaType": "audio",
