@@ -1,6 +1,6 @@
 (function () {
   window.AnchorFaithMediaCache = {
-  "lastUpdated": "2026-10-12T22:37:44.892Z",
+  "lastUpdated": "2026-10-14T01:20:36.109Z",
   "source": "youtube-rss-spotify-generated",
   "version": "1.1",
   "data": {
@@ -199,8 +199,8 @@
         "id": "PLSSC9g7gvoYU",
         "title": "Speaker | Ap. Marci Glisson",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/XC1HZOA7yvo/maxresdefault.jpg",
-        "itemCount": 33,
+        "thumbnailUrl": "https://i.ytimg.com/vi/SExuugCL4hs/maxresdefault.jpg",
+        "itemCount": 34,
         "publishedAt": "2026-07-06T13:41:22.522573Z"
       },
       "PLMBRtLWv06Ag": {
@@ -375,8 +375,8 @@
         "id": "PL_b7G2GPm-jBab7eTdzdYLQPm5XWEzBxC",
         "title": "Topic | Life",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/J_ill2x8Dg0/maxresdefault.jpg",
-        "itemCount": 14,
+        "thumbnailUrl": "https://i.ytimg.com/vi/SExuugCL4hs/maxresdefault.jpg",
+        "itemCount": 15,
         "publishedAt": "2025-03-06T13:56:35.946486Z"
       },
       "PL_b7G2GPm-jBFfJXOB3f6o_zzY6LiPKGp": {
@@ -447,8 +447,8 @@
         "id": "PL_b7G2GPm-jDq-TdCa5GUjmnqkZqNtCK2",
         "title": "Topic | Growth",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/XC1HZOA7yvo/maxresdefault.jpg",
-        "itemCount": 10,
+        "thumbnailUrl": "https://i.ytimg.com/vi/SExuugCL4hs/maxresdefault.jpg",
+        "itemCount": 11,
         "publishedAt": "2025-03-06T13:48:30.115164Z"
       },
       "PL_b7G2GPm-jDliNQNq-jB_1thIgkyMtbH": {
@@ -551,8 +551,8 @@
         "id": "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3",
         "title": "Latest Sermons",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/SQ6dwikl1HM/maxresdefault.jpg",
-        "itemCount": 424,
+        "thumbnailUrl": "https://i.ytimg.com/vi/SExuugCL4hs/maxresdefault.jpg",
+        "itemCount": 425,
         "publishedAt": "2019-03-06T15:36:23.175978Z"
       }
     },
@@ -720,7 +720,7 @@
         "title": "Speaker | Ap. Marci Glisson",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/XC1HZOA7yvo/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/SExuugCL4hs/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PLSSC9g7gvoYU"
       },
@@ -918,7 +918,7 @@
         "title": "Topic | Life",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/J_ill2x8Dg0/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/SExuugCL4hs/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PL_b7G2GPm-jBab7eTdzdYLQPm5XWEzBxC"
       },
@@ -999,7 +999,7 @@
         "title": "Topic | Growth",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/XC1HZOA7yvo/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/SExuugCL4hs/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PL_b7G2GPm-jDq-TdCa5GUjmnqkZqNtCK2"
       },
@@ -1116,12 +1116,54 @@
         "title": "Latest Sermons",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/SQ6dwikl1HM/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/SExuugCL4hs/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
       }
     ],
     "latestSermons": [
+      {
+        "id": "SExuugCL4hs",
+        "mediaType": "video",
+        "rawTitle": "When Seasons Shift | Ap. Marci Glisson",
+        "mainTitle": "When Seasons Shift",
+        "subtitle": "Ap. Marci Glisson",
+        "minister": "",
+        "canonicalSpeaker": null,
+        "speaker": null,
+        "title": "When Seasons Shift",
+        "date": "October 13, 2026",
+        "publishedAt": "2026-10-13T22:30:36Z",
+        "duration": "55:32",
+        "description": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "summaryDescription": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "youtubeDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "youtubeVideoId": "SExuugCL4hs",
+        "youtubeId": "SExuugCL4hs",
+        "thumbnail": "https://i.ytimg.com/vi/SExuugCL4hs/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/SExuugCL4hs/maxresdefault.jpg",
+        "heroImage": "https://i.ytimg.com/vi/SExuugCL4hs/maxresdefault.jpg",
+        "embedUrl": "https://www.youtube.com/embed/SExuugCL4hs?rel=0",
+        "externalUrl": "https://www.youtube.com/watch?v=SExuugCL4hs",
+        "externalActionLabel": "Play on YouTube",
+        "playlistIds": [
+          "UU5k7VFwx3xZkBdGNWEDqMlQ",
+          "PLSSC9g7gvoYU",
+          "PL_b7G2GPm-jBab7eTdzdYLQPm5XWEzBxC",
+          "PL_b7G2GPm-jDq-TdCa5GUjmnqkZqNtCK2",
+          "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
+        ],
+        "tags": [
+          "Latest Sermons",
+          "Speaker | Ap. Marci Glisson",
+          "Topic | Life",
+          "Topic | Growth"
+        ],
+        "playlistTitle": "Latest Sermons",
+        "featured": true
+      },
       {
         "id": "SQ6dwikl1HM",
         "mediaType": "video",
@@ -1160,7 +1202,7 @@
           "Topic | Faith"
         ],
         "playlistTitle": "Latest Sermons",
-        "featured": true
+        "featured": false
       },
       {
         "id": "sgIwLyuXge4",
@@ -18116,8 +18158,9 @@
         "playlistId": "PL_b7G2GPm-jDq-TdCa5GUjmnqkZqNtCK2",
         "rawCollectionTitle": "Topic | Growth",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/XC1HZOA7yvo/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/SExuugCL4hs/maxresdefault.jpg",
         "itemIds": [
+          "SExuugCL4hs",
           "XC1HZOA7yvo",
           "ch5hYQXCpog",
           "gjFK2S_-dR0",
@@ -18191,8 +18234,9 @@
         "playlistId": "PL_b7G2GPm-jBab7eTdzdYLQPm5XWEzBxC",
         "rawCollectionTitle": "Topic | Life",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/J_ill2x8Dg0/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/SExuugCL4hs/maxresdefault.jpg",
         "itemIds": [
+          "SExuugCL4hs",
           "J_ill2x8Dg0",
           "nHYqWouGXEE",
           "QB_lD-9XJAg",
@@ -19008,10 +19052,11 @@
         "playlistId": "PLSSC9g7gvoYU",
         "rawCollectionTitle": "Speaker | Ap. Marci Glisson",
         "priority": 90,
-        "newestVideoPublishedAt": "2026-05-14T22:30:15Z",
+        "newestVideoPublishedAt": "2026-10-13T22:30:36Z",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/XC1HZOA7yvo/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/SExuugCL4hs/maxresdefault.jpg",
         "itemIds": [
+          "SExuugCL4hs",
           "XC1HZOA7yvo",
           "6MxBaJj8qnY",
           "8P-JostHZDo",
@@ -19435,8 +19480,9 @@
           "playlistId": "PL_b7G2GPm-jDq-TdCa5GUjmnqkZqNtCK2",
           "rawCollectionTitle": "Topic | Growth",
           "description": "",
-          "thumbnailUrl": "https://i.ytimg.com/vi/XC1HZOA7yvo/maxresdefault.jpg",
+          "thumbnailUrl": "https://i.ytimg.com/vi/SExuugCL4hs/maxresdefault.jpg",
           "itemIds": [
+            "SExuugCL4hs",
             "XC1HZOA7yvo",
             "ch5hYQXCpog",
             "gjFK2S_-dR0",
@@ -19510,8 +19556,9 @@
           "playlistId": "PL_b7G2GPm-jBab7eTdzdYLQPm5XWEzBxC",
           "rawCollectionTitle": "Topic | Life",
           "description": "",
-          "thumbnailUrl": "https://i.ytimg.com/vi/J_ill2x8Dg0/maxresdefault.jpg",
+          "thumbnailUrl": "https://i.ytimg.com/vi/SExuugCL4hs/maxresdefault.jpg",
           "itemIds": [
+            "SExuugCL4hs",
             "J_ill2x8Dg0",
             "nHYqWouGXEE",
             "QB_lD-9XJAg",
@@ -20327,10 +20374,11 @@
           "playlistId": "PLSSC9g7gvoYU",
           "rawCollectionTitle": "Speaker | Ap. Marci Glisson",
           "priority": 90,
-          "newestVideoPublishedAt": "2026-05-14T22:30:15Z",
+          "newestVideoPublishedAt": "2026-10-13T22:30:36Z",
           "description": "",
-          "thumbnailUrl": "https://i.ytimg.com/vi/XC1HZOA7yvo/maxresdefault.jpg",
+          "thumbnailUrl": "https://i.ytimg.com/vi/SExuugCL4hs/maxresdefault.jpg",
           "itemIds": [
+            "SExuugCL4hs",
             "XC1HZOA7yvo",
             "6MxBaJj8qnY",
             "8P-JostHZDo",
@@ -20632,6 +20680,48 @@
     ],
     "sermons": [
       {
+        "id": "SExuugCL4hs",
+        "mediaType": "video",
+        "rawTitle": "When Seasons Shift | Ap. Marci Glisson",
+        "mainTitle": "When Seasons Shift",
+        "subtitle": "Ap. Marci Glisson",
+        "minister": "",
+        "canonicalSpeaker": null,
+        "speaker": null,
+        "title": "When Seasons Shift",
+        "date": "October 13, 2026",
+        "publishedAt": "2026-10-13T22:30:36Z",
+        "duration": "55:32",
+        "description": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "summaryDescription": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "youtubeDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "youtubeVideoId": "SExuugCL4hs",
+        "youtubeId": "SExuugCL4hs",
+        "thumbnail": "https://i.ytimg.com/vi/SExuugCL4hs/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/SExuugCL4hs/maxresdefault.jpg",
+        "heroImage": "https://i.ytimg.com/vi/SExuugCL4hs/maxresdefault.jpg",
+        "embedUrl": "https://www.youtube.com/embed/SExuugCL4hs?rel=0",
+        "externalUrl": "https://www.youtube.com/watch?v=SExuugCL4hs",
+        "externalActionLabel": "Play on YouTube",
+        "playlistIds": [
+          "UU5k7VFwx3xZkBdGNWEDqMlQ",
+          "PLSSC9g7gvoYU",
+          "PL_b7G2GPm-jBab7eTdzdYLQPm5XWEzBxC",
+          "PL_b7G2GPm-jDq-TdCa5GUjmnqkZqNtCK2",
+          "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
+        ],
+        "tags": [
+          "Latest Sermons",
+          "Speaker | Ap. Marci Glisson",
+          "Topic | Life",
+          "Topic | Growth"
+        ],
+        "playlistTitle": "Latest Sermons",
+        "featured": true
+      },
+      {
         "id": "SQ6dwikl1HM",
         "mediaType": "video",
         "rawTitle": "The Brave and Faithful | Kingdom Courage | P. Joshua Clay",
@@ -20669,7 +20759,7 @@
           "Topic | Faith"
         ],
         "playlistTitle": "Latest Sermons",
-        "featured": true
+        "featured": false
       },
       {
         "id": "sgIwLyuXge4",
@@ -37248,6 +37338,50 @@
       }
     ],
     "audioEpisodes": [
+      {
+        "id": "anchor-faith-church-podcast-807791c9-9ea8-4f9c-9a42-6fab1e08303f",
+        "mediaType": "audio",
+        "title": "When Seasons Shift | Ap. Marci Glisson",
+        "mainTitle": "When Seasons Shift | Ap. Marci Glisson",
+        "host": "Anchor Faith Church Podcast",
+        "minister": "Anchor Faith Church Podcast",
+        "date": "October 13, 2026",
+        "publishedAt": "Tue, 13 Oct 2026 15:22:08 GMT",
+        "duration": "55:31",
+        "description": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "summaryDescription": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rssGuid": "807791c9-9ea8-4f9c-9a42-6fab1e08303f",
+        "guid": "807791c9-9ea8-4f9c-9a42-6fab1e08303f",
+        "enclosureUrl": "https://anchor.fm/s/128ece40/podcast/play/127405491/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-9-13%2F00910c4f-77f8-4820-5fcc-0417176a7833.mp3",
+        "thumbnail": "https://i.scdn.co/image/ab6765630000ba8a22a5006156ddfdbd11609a02",
+        "artworkUrl": "https://i.scdn.co/image/ab6765630000ba8a22a5006156ddfdbd11609a02",
+        "episodeArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_episode/3013488/3013488-1791904462058-d7a90e078d44.jpg",
+        "podcastArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/3013488/3013488-1782995684800-84c230b79db71.jpg",
+        "sourceUrl": "https://anchor.fm/s/128ece40/podcast/rss",
+        "audioUrl": "https://anchor.fm/s/128ece40/podcast/play/127405491/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-9-13%2F00910c4f-77f8-4820-5fcc-0417176a7833.mp3",
+        "externalUrl": "https://open.spotify.com/episode/5WdqKXr7rxiipqITR5tpBS",
+        "spotifyEpisodeId": "5WdqKXr7rxiipqITR5tpBS",
+        "spotifyEpisodeUrl": "https://open.spotify.com/episode/5WdqKXr7rxiipqITR5tpBS",
+        "spotifyUrl": "https://open.spotify.com/episode/5WdqKXr7rxiipqITR5tpBS",
+        "spotifyShowId": "7sMWiLwUHPAqHyxYBQp7Qx",
+        "showSpotifyUrl": "https://open.spotify.com/show/7sMWiLwUHPAqHyxYBQp7Qx",
+        "podcastId": "anchor-faith-church-podcast",
+        "podcastName": "Anchor Faith Church Podcast",
+        "tags": [
+          "Podcast",
+          "Anchor Faith Church Podcast"
+        ],
+        "localPodcastArtworkUrl": "./assets/podcast-artwork/anchor-faith-church.jpg",
+        "localPodcastArtworkWidth": 512,
+        "localPodcastArtworkHeight": 512,
+        "localPodcastArtworkType": "image/jpeg",
+        "spotifyMatchMethod": "exact-title",
+        "spotifyArtworkUrl": "https://i.scdn.co/image/ab6765630000ba8a22a5006156ddfdbd11609a02",
+        "spotifyArtworkWidth": 640,
+        "spotifyArtworkHeight": 640
+      },
       {
         "id": "anchor-faith-church-podcast-e6609faa-4b5d-4c6a-b9c2-cafda49889fc",
         "mediaType": "audio",
