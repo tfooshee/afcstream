@@ -1,6 +1,6 @@
 (function () {
   window.AnchorFaithMediaCache = {
-  "lastUpdated": "2026-10-19T20:44:51.857Z",
+  "lastUpdated": "2026-10-21T00:48:37.758Z",
   "source": "youtube-rss-spotify-generated",
   "version": "1.1",
   "data": {
@@ -199,8 +199,8 @@
         "id": "PLSSC9g7gvoYU",
         "title": "Speaker | Ap. Marci Glisson",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/SExuugCL4hs/maxresdefault.jpg",
-        "itemCount": 34,
+        "thumbnailUrl": "https://i.ytimg.com/vi/fX_eZtpJNqQ/maxresdefault.jpg",
+        "itemCount": 35,
         "publishedAt": "2026-07-06T13:41:22.522573Z"
       },
       "PLMBRtLWv06Ag": {
@@ -551,8 +551,8 @@
         "id": "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3",
         "title": "Latest Sermons",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/SExuugCL4hs/maxresdefault.jpg",
-        "itemCount": 425,
+        "thumbnailUrl": "https://i.ytimg.com/vi/fX_eZtpJNqQ/maxresdefault.jpg",
+        "itemCount": 426,
         "publishedAt": "2019-03-06T15:36:23.175978Z"
       }
     },
@@ -720,7 +720,7 @@
         "title": "Speaker | Ap. Marci Glisson",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/SExuugCL4hs/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/fX_eZtpJNqQ/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PLSSC9g7gvoYU"
       },
@@ -1116,12 +1116,50 @@
         "title": "Latest Sermons",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/SExuugCL4hs/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/fX_eZtpJNqQ/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
       }
     ],
     "latestSermons": [
+      {
+        "id": "fX_eZtpJNqQ",
+        "mediaType": "video",
+        "rawTitle": "Armed and Aware | Kingdom Defense | Ap. Marci Glisson",
+        "mainTitle": "Armed and Aware",
+        "subtitle": "Kingdom Defense",
+        "minister": "Ap. Marci Glisson",
+        "canonicalSpeaker": "Ap. Marci Glisson",
+        "speaker": "Ap. Marci Glisson",
+        "title": "Armed and Aware",
+        "date": "October 20, 2026",
+        "publishedAt": "2026-10-20T22:30:19Z",
+        "duration": "1:07:01",
+        "description": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "summaryDescription": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "youtubeDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "youtubeVideoId": "fX_eZtpJNqQ",
+        "youtubeId": "fX_eZtpJNqQ",
+        "thumbnail": "https://i.ytimg.com/vi/fX_eZtpJNqQ/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/fX_eZtpJNqQ/maxresdefault.jpg",
+        "heroImage": "https://i.ytimg.com/vi/fX_eZtpJNqQ/maxresdefault.jpg",
+        "embedUrl": "https://www.youtube.com/embed/fX_eZtpJNqQ?rel=0",
+        "externalUrl": "https://www.youtube.com/watch?v=fX_eZtpJNqQ",
+        "externalActionLabel": "Play on YouTube",
+        "playlistIds": [
+          "UU5k7VFwx3xZkBdGNWEDqMlQ",
+          "PLSSC9g7gvoYU",
+          "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
+        ],
+        "tags": [
+          "Latest Sermons",
+          "Speaker | Ap. Marci Glisson"
+        ],
+        "playlistTitle": "Latest Sermons",
+        "featured": true
+      },
       {
         "id": "SExuugCL4hs",
         "mediaType": "video",
@@ -1162,7 +1200,7 @@
           "Topic | Growth"
         ],
         "playlistTitle": "Latest Sermons",
-        "featured": true
+        "featured": false
       },
       {
         "id": "SQ6dwikl1HM",
@@ -19052,10 +19090,11 @@
         "playlistId": "PLSSC9g7gvoYU",
         "rawCollectionTitle": "Speaker | Ap. Marci Glisson",
         "priority": 90,
-        "newestVideoPublishedAt": "2026-10-13T22:30:36Z",
+        "newestVideoPublishedAt": "2026-10-20T22:30:19Z",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/SExuugCL4hs/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/fX_eZtpJNqQ/maxresdefault.jpg",
         "itemIds": [
+          "fX_eZtpJNqQ",
           "SExuugCL4hs",
           "XC1HZOA7yvo",
           "6MxBaJj8qnY",
@@ -20374,10 +20413,11 @@
           "playlistId": "PLSSC9g7gvoYU",
           "rawCollectionTitle": "Speaker | Ap. Marci Glisson",
           "priority": 90,
-          "newestVideoPublishedAt": "2026-10-13T22:30:36Z",
+          "newestVideoPublishedAt": "2026-10-20T22:30:19Z",
           "description": "",
-          "thumbnailUrl": "https://i.ytimg.com/vi/SExuugCL4hs/maxresdefault.jpg",
+          "thumbnailUrl": "https://i.ytimg.com/vi/fX_eZtpJNqQ/maxresdefault.jpg",
           "itemIds": [
+            "fX_eZtpJNqQ",
             "SExuugCL4hs",
             "XC1HZOA7yvo",
             "6MxBaJj8qnY",
@@ -20680,6 +20720,44 @@
     ],
     "sermons": [
       {
+        "id": "fX_eZtpJNqQ",
+        "mediaType": "video",
+        "rawTitle": "Armed and Aware | Kingdom Defense | Ap. Marci Glisson",
+        "mainTitle": "Armed and Aware",
+        "subtitle": "Kingdom Defense",
+        "minister": "Ap. Marci Glisson",
+        "canonicalSpeaker": "Ap. Marci Glisson",
+        "speaker": "Ap. Marci Glisson",
+        "title": "Armed and Aware",
+        "date": "October 20, 2026",
+        "publishedAt": "2026-10-20T22:30:19Z",
+        "duration": "1:07:01",
+        "description": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "summaryDescription": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "youtubeDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "youtubeVideoId": "fX_eZtpJNqQ",
+        "youtubeId": "fX_eZtpJNqQ",
+        "thumbnail": "https://i.ytimg.com/vi/fX_eZtpJNqQ/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/fX_eZtpJNqQ/maxresdefault.jpg",
+        "heroImage": "https://i.ytimg.com/vi/fX_eZtpJNqQ/maxresdefault.jpg",
+        "embedUrl": "https://www.youtube.com/embed/fX_eZtpJNqQ?rel=0",
+        "externalUrl": "https://www.youtube.com/watch?v=fX_eZtpJNqQ",
+        "externalActionLabel": "Play on YouTube",
+        "playlistIds": [
+          "UU5k7VFwx3xZkBdGNWEDqMlQ",
+          "PLSSC9g7gvoYU",
+          "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
+        ],
+        "tags": [
+          "Latest Sermons",
+          "Speaker | Ap. Marci Glisson"
+        ],
+        "playlistTitle": "Latest Sermons",
+        "featured": true
+      },
+      {
         "id": "SExuugCL4hs",
         "mediaType": "video",
         "rawTitle": "When Seasons Shift | Ap. Marci Glisson",
@@ -20719,7 +20797,7 @@
           "Topic | Growth"
         ],
         "playlistTitle": "Latest Sermons",
-        "featured": true
+        "featured": false
       },
       {
         "id": "SQ6dwikl1HM",
