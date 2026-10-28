@@ -1,6 +1,6 @@
 (function () {
   window.AnchorFaithMediaCache = {
-  "lastUpdated": "2026-10-26T20:46:45.097Z",
+  "lastUpdated": "2026-10-28T01:34:26.718Z",
   "source": "youtube-rss-spotify-generated",
   "version": "1.1",
   "data": {
@@ -191,8 +191,8 @@
         "id": "PLPkK9-b6IbA4",
         "title": "Speaker | P. Mike Krulcik",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/1ejW7OFjf7M/maxresdefault.jpg",
-        "itemCount": 22,
+        "thumbnailUrl": "https://i.ytimg.com/vi/vJhrJbc03AY/maxresdefault.jpg",
+        "itemCount": 23,
         "publishedAt": "2026-07-06T13:42:14.2866Z"
       },
       "PLSSC9g7gvoYU": {
@@ -303,8 +303,8 @@
         "id": "PL_b7G2GPm-jA2eaQiPk7Xk1tu4BBVh7VS",
         "title": "Topic | Serving",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/kqXTWPSVnp4/maxresdefault.jpg",
-        "itemCount": 7,
+        "thumbnailUrl": "https://i.ytimg.com/vi/vJhrJbc03AY/maxresdefault.jpg",
+        "itemCount": 8,
         "publishedAt": "2025-03-18T13:39:57.239058Z"
       },
       "PL_b7G2GPm-jCcklli6YRShvo-SUv7Oq07": {
@@ -551,8 +551,8 @@
         "id": "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3",
         "title": "Latest Sermons",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/fX_eZtpJNqQ/maxresdefault.jpg",
-        "itemCount": 426,
+        "thumbnailUrl": "https://i.ytimg.com/vi/vJhrJbc03AY/maxresdefault.jpg",
+        "itemCount": 427,
         "publishedAt": "2019-03-06T15:36:23.175978Z"
       }
     },
@@ -711,7 +711,7 @@
         "title": "Speaker | P. Mike Krulcik",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/1ejW7OFjf7M/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/vJhrJbc03AY/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PLPkK9-b6IbA4"
       },
@@ -837,7 +837,7 @@
         "title": "Topic | Serving",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/kqXTWPSVnp4/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/vJhrJbc03AY/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PL_b7G2GPm-jA2eaQiPk7Xk1tu4BBVh7VS"
       },
@@ -1116,12 +1116,52 @@
         "title": "Latest Sermons",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/fX_eZtpJNqQ/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/vJhrJbc03AY/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
       }
     ],
     "latestSermons": [
+      {
+        "id": "vJhrJbc03AY",
+        "mediaType": "video",
+        "rawTitle": "Rivers of Empowerment | Kingdom Service | P. Mike Krulcik",
+        "mainTitle": "Rivers of Empowerment",
+        "subtitle": "Kingdom Service",
+        "minister": "P. Mike Krulcik",
+        "canonicalSpeaker": "P. Mike Krulcik",
+        "speaker": "P. Mike Krulcik",
+        "title": "Rivers of Empowerment",
+        "date": "October 27, 2026",
+        "publishedAt": "2026-10-27T22:30:32Z",
+        "duration": "1:00:37",
+        "description": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "summaryDescription": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "youtubeDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "youtubeVideoId": "vJhrJbc03AY",
+        "youtubeId": "vJhrJbc03AY",
+        "thumbnail": "https://i.ytimg.com/vi/vJhrJbc03AY/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/vJhrJbc03AY/maxresdefault.jpg",
+        "heroImage": "https://i.ytimg.com/vi/vJhrJbc03AY/maxresdefault.jpg",
+        "embedUrl": "https://www.youtube.com/embed/vJhrJbc03AY?rel=0",
+        "externalUrl": "https://www.youtube.com/watch?v=vJhrJbc03AY",
+        "externalActionLabel": "Play on YouTube",
+        "playlistIds": [
+          "UU5k7VFwx3xZkBdGNWEDqMlQ",
+          "PLPkK9-b6IbA4",
+          "PL_b7G2GPm-jA2eaQiPk7Xk1tu4BBVh7VS",
+          "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
+        ],
+        "tags": [
+          "Latest Sermons",
+          "Speaker | P. Mike Krulcik",
+          "Topic | Serving"
+        ],
+        "playlistTitle": "Latest Sermons",
+        "featured": true
+      },
       {
         "id": "fX_eZtpJNqQ",
         "mediaType": "video",
@@ -1158,7 +1198,7 @@
           "Speaker | Ap. Marci Glisson"
         ],
         "playlistTitle": "Latest Sermons",
-        "featured": true
+        "featured": false
       },
       {
         "id": "SExuugCL4hs",
@@ -18473,8 +18513,9 @@
         "playlistId": "PL_b7G2GPm-jA2eaQiPk7Xk1tu4BBVh7VS",
         "rawCollectionTitle": "Topic | Serving",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/kqXTWPSVnp4/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/vJhrJbc03AY/maxresdefault.jpg",
         "itemIds": [
+          "vJhrJbc03AY",
           "kqXTWPSVnp4",
           "kV8y6E1KgqM",
           "WakGSHGoYwg",
@@ -19132,6 +19173,44 @@
         ]
       },
       {
+        "id": "collection-speaker-plpkk9-b6iba4",
+        "title": "P. Mike Krulcik",
+        "optionLabel": "P. Mike Krulcik",
+        "collectionType": "speaker",
+        "mediaType": "video",
+        "playlistId": "PLPkK9-b6IbA4",
+        "rawCollectionTitle": "Speaker | P. Mike Krulcik",
+        "priority": 0,
+        "newestVideoPublishedAt": "2026-10-27T22:30:32Z",
+        "description": "",
+        "thumbnailUrl": "https://i.ytimg.com/vi/vJhrJbc03AY/maxresdefault.jpg",
+        "itemIds": [
+          "vJhrJbc03AY",
+          "1ejW7OFjf7M",
+          "IqnCJ5LNQ1w",
+          "qwxQAQlKA5o",
+          "bW7fi0YuvNQ",
+          "W9MfBhbUaeU",
+          "0UW8I_HISZM",
+          "V8aAdEOWRvI",
+          "T48_NcRllTQ",
+          "u6gQPIUvFcY",
+          "tkkQ7mya15Q",
+          "a8aMeCbUGeQ",
+          "tYi3zZajY44",
+          "rYVi0x7KJIc",
+          "-A9VIjVYwQM",
+          "wiXcFmijiuM",
+          "vGQmQSZBZjw",
+          "seK8--1gJQc",
+          "c_6HTe4PmSo",
+          "cOJLqOsUStc",
+          "SYv-LU0whi8",
+          "yXUgUFuOg5w",
+          "H5h2NY4n678"
+        ]
+      },
+      {
         "id": "collection-speaker-plrzltdv2x4qe",
         "title": "P. Joshua Clay",
         "optionLabel": "P. Joshua Clay",
@@ -19206,43 +19285,6 @@
         "itemIds": [
           "_hRfHd_WOO4",
           "8FLOC1Qw5lc"
-        ]
-      },
-      {
-        "id": "collection-speaker-plpkk9-b6iba4",
-        "title": "P. Mike Krulcik",
-        "optionLabel": "P. Mike Krulcik",
-        "collectionType": "speaker",
-        "mediaType": "video",
-        "playlistId": "PLPkK9-b6IbA4",
-        "rawCollectionTitle": "Speaker | P. Mike Krulcik",
-        "priority": 0,
-        "newestVideoPublishedAt": "2026-05-26T22:30:01Z",
-        "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/1ejW7OFjf7M/maxresdefault.jpg",
-        "itemIds": [
-          "1ejW7OFjf7M",
-          "IqnCJ5LNQ1w",
-          "qwxQAQlKA5o",
-          "bW7fi0YuvNQ",
-          "W9MfBhbUaeU",
-          "0UW8I_HISZM",
-          "V8aAdEOWRvI",
-          "T48_NcRllTQ",
-          "u6gQPIUvFcY",
-          "tkkQ7mya15Q",
-          "a8aMeCbUGeQ",
-          "tYi3zZajY44",
-          "rYVi0x7KJIc",
-          "-A9VIjVYwQM",
-          "wiXcFmijiuM",
-          "vGQmQSZBZjw",
-          "seK8--1gJQc",
-          "c_6HTe4PmSo",
-          "cOJLqOsUStc",
-          "SYv-LU0whi8",
-          "yXUgUFuOg5w",
-          "H5h2NY4n678"
         ]
       },
       {
@@ -19796,8 +19838,9 @@
           "playlistId": "PL_b7G2GPm-jA2eaQiPk7Xk1tu4BBVh7VS",
           "rawCollectionTitle": "Topic | Serving",
           "description": "",
-          "thumbnailUrl": "https://i.ytimg.com/vi/kqXTWPSVnp4/maxresdefault.jpg",
+          "thumbnailUrl": "https://i.ytimg.com/vi/vJhrJbc03AY/maxresdefault.jpg",
           "itemIds": [
+            "vJhrJbc03AY",
             "kqXTWPSVnp4",
             "kV8y6E1KgqM",
             "WakGSHGoYwg",
@@ -20455,6 +20498,44 @@
           ]
         },
         {
+          "id": "collection-speaker-plpkk9-b6iba4",
+          "title": "P. Mike Krulcik",
+          "optionLabel": "P. Mike Krulcik",
+          "collectionType": "speaker",
+          "mediaType": "video",
+          "playlistId": "PLPkK9-b6IbA4",
+          "rawCollectionTitle": "Speaker | P. Mike Krulcik",
+          "priority": 0,
+          "newestVideoPublishedAt": "2026-10-27T22:30:32Z",
+          "description": "",
+          "thumbnailUrl": "https://i.ytimg.com/vi/vJhrJbc03AY/maxresdefault.jpg",
+          "itemIds": [
+            "vJhrJbc03AY",
+            "1ejW7OFjf7M",
+            "IqnCJ5LNQ1w",
+            "qwxQAQlKA5o",
+            "bW7fi0YuvNQ",
+            "W9MfBhbUaeU",
+            "0UW8I_HISZM",
+            "V8aAdEOWRvI",
+            "T48_NcRllTQ",
+            "u6gQPIUvFcY",
+            "tkkQ7mya15Q",
+            "a8aMeCbUGeQ",
+            "tYi3zZajY44",
+            "rYVi0x7KJIc",
+            "-A9VIjVYwQM",
+            "wiXcFmijiuM",
+            "vGQmQSZBZjw",
+            "seK8--1gJQc",
+            "c_6HTe4PmSo",
+            "cOJLqOsUStc",
+            "SYv-LU0whi8",
+            "yXUgUFuOg5w",
+            "H5h2NY4n678"
+          ]
+        },
+        {
           "id": "collection-speaker-plrzltdv2x4qe",
           "title": "P. Joshua Clay",
           "optionLabel": "P. Joshua Clay",
@@ -20529,43 +20610,6 @@
           "itemIds": [
             "_hRfHd_WOO4",
             "8FLOC1Qw5lc"
-          ]
-        },
-        {
-          "id": "collection-speaker-plpkk9-b6iba4",
-          "title": "P. Mike Krulcik",
-          "optionLabel": "P. Mike Krulcik",
-          "collectionType": "speaker",
-          "mediaType": "video",
-          "playlistId": "PLPkK9-b6IbA4",
-          "rawCollectionTitle": "Speaker | P. Mike Krulcik",
-          "priority": 0,
-          "newestVideoPublishedAt": "2026-05-26T22:30:01Z",
-          "description": "",
-          "thumbnailUrl": "https://i.ytimg.com/vi/1ejW7OFjf7M/maxresdefault.jpg",
-          "itemIds": [
-            "1ejW7OFjf7M",
-            "IqnCJ5LNQ1w",
-            "qwxQAQlKA5o",
-            "bW7fi0YuvNQ",
-            "W9MfBhbUaeU",
-            "0UW8I_HISZM",
-            "V8aAdEOWRvI",
-            "T48_NcRllTQ",
-            "u6gQPIUvFcY",
-            "tkkQ7mya15Q",
-            "a8aMeCbUGeQ",
-            "tYi3zZajY44",
-            "rYVi0x7KJIc",
-            "-A9VIjVYwQM",
-            "wiXcFmijiuM",
-            "vGQmQSZBZjw",
-            "seK8--1gJQc",
-            "c_6HTe4PmSo",
-            "cOJLqOsUStc",
-            "SYv-LU0whi8",
-            "yXUgUFuOg5w",
-            "H5h2NY4n678"
           ]
         },
         {
@@ -20720,6 +20764,46 @@
     ],
     "sermons": [
       {
+        "id": "vJhrJbc03AY",
+        "mediaType": "video",
+        "rawTitle": "Rivers of Empowerment | Kingdom Service | P. Mike Krulcik",
+        "mainTitle": "Rivers of Empowerment",
+        "subtitle": "Kingdom Service",
+        "minister": "P. Mike Krulcik",
+        "canonicalSpeaker": "P. Mike Krulcik",
+        "speaker": "P. Mike Krulcik",
+        "title": "Rivers of Empowerment",
+        "date": "October 27, 2026",
+        "publishedAt": "2026-10-27T22:30:32Z",
+        "duration": "1:00:37",
+        "description": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "summaryDescription": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "youtubeDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "youtubeVideoId": "vJhrJbc03AY",
+        "youtubeId": "vJhrJbc03AY",
+        "thumbnail": "https://i.ytimg.com/vi/vJhrJbc03AY/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/vJhrJbc03AY/maxresdefault.jpg",
+        "heroImage": "https://i.ytimg.com/vi/vJhrJbc03AY/maxresdefault.jpg",
+        "embedUrl": "https://www.youtube.com/embed/vJhrJbc03AY?rel=0",
+        "externalUrl": "https://www.youtube.com/watch?v=vJhrJbc03AY",
+        "externalActionLabel": "Play on YouTube",
+        "playlistIds": [
+          "UU5k7VFwx3xZkBdGNWEDqMlQ",
+          "PLPkK9-b6IbA4",
+          "PL_b7G2GPm-jA2eaQiPk7Xk1tu4BBVh7VS",
+          "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
+        ],
+        "tags": [
+          "Latest Sermons",
+          "Speaker | P. Mike Krulcik",
+          "Topic | Serving"
+        ],
+        "playlistTitle": "Latest Sermons",
+        "featured": true
+      },
+      {
         "id": "fX_eZtpJNqQ",
         "mediaType": "video",
         "rawTitle": "Armed and Aware | Kingdom Defense | Ap. Marci Glisson",
@@ -20755,7 +20839,7 @@
           "Speaker | Ap. Marci Glisson"
         ],
         "playlistTitle": "Latest Sermons",
-        "featured": true
+        "featured": false
       },
       {
         "id": "SExuugCL4hs",
@@ -37416,6 +37500,50 @@
       }
     ],
     "audioEpisodes": [
+      {
+        "id": "anchor-faith-church-podcast-441dc401-64cf-4743-ba7e-1a88ed22d8af",
+        "mediaType": "audio",
+        "title": "Rivers of Empowerment | Kingdom Service | P. Mike Krulcik",
+        "mainTitle": "Rivers of Empowerment | Kingdom Service | P. Mike Krulcik",
+        "host": "Anchor Faith Church Podcast",
+        "minister": "Anchor Faith Church Podcast",
+        "date": "October 27, 2026",
+        "publishedAt": "Tue, 27 Oct 2026 18:49:39 GMT",
+        "duration": "1:00:37",
+        "description": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "summaryDescription": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rssGuid": "441dc401-64cf-4743-ba7e-1a88ed22d8af",
+        "guid": "441dc401-64cf-4743-ba7e-1a88ed22d8af",
+        "enclosureUrl": "https://anchor.fm/s/128ece40/podcast/play/128206878/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-9-27%2F5e220b06-713c-e74b-1b20-2ff1bddb3076.mp3",
+        "thumbnail": "https://i.scdn.co/image/ab6765630000ba8a76f8c825f87c873b75d61c4b",
+        "artworkUrl": "https://i.scdn.co/image/ab6765630000ba8a76f8c825f87c873b75d61c4b",
+        "episodeArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_episode/3013488/3013488-1793126954372-ce9a761947afb.jpg",
+        "podcastArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/3013488/3013488-1782995684800-84c230b79db71.jpg",
+        "sourceUrl": "https://anchor.fm/s/128ece40/podcast/rss",
+        "audioUrl": "https://anchor.fm/s/128ece40/podcast/play/128206878/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-9-27%2F5e220b06-713c-e74b-1b20-2ff1bddb3076.mp3",
+        "externalUrl": "https://open.spotify.com/episode/2TLpxWGhOPwvypd6kAStU2",
+        "spotifyEpisodeId": "2TLpxWGhOPwvypd6kAStU2",
+        "spotifyEpisodeUrl": "https://open.spotify.com/episode/2TLpxWGhOPwvypd6kAStU2",
+        "spotifyUrl": "https://open.spotify.com/episode/2TLpxWGhOPwvypd6kAStU2",
+        "spotifyShowId": "7sMWiLwUHPAqHyxYBQp7Qx",
+        "showSpotifyUrl": "https://open.spotify.com/show/7sMWiLwUHPAqHyxYBQp7Qx",
+        "podcastId": "anchor-faith-church-podcast",
+        "podcastName": "Anchor Faith Church Podcast",
+        "tags": [
+          "Podcast",
+          "Anchor Faith Church Podcast"
+        ],
+        "localPodcastArtworkUrl": "./assets/podcast-artwork/anchor-faith-church.jpg",
+        "localPodcastArtworkWidth": 512,
+        "localPodcastArtworkHeight": 512,
+        "localPodcastArtworkType": "image/jpeg",
+        "spotifyMatchMethod": "exact-title",
+        "spotifyArtworkUrl": "https://i.scdn.co/image/ab6765630000ba8a76f8c825f87c873b75d61c4b",
+        "spotifyArtworkWidth": 640,
+        "spotifyArtworkHeight": 640
+      },
       {
         "id": "the-current-podcast-fca7623c-6b4e-443a-bf3e-796bebe7e484",
         "mediaType": "audio",
