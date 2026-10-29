@@ -1,6 +1,6 @@
 (function () {
   window.AnchorFaithMediaCache = {
-  "lastUpdated": "2026-10-28T01:34:26.718Z",
+  "lastUpdated": "2026-10-29T20:41:47.502Z",
   "source": "youtube-rss-spotify-generated",
   "version": "1.1",
   "data": {
@@ -37500,6 +37500,50 @@
       }
     ],
     "audioEpisodes": [
+      {
+        "id": "anchor-faith-church-podcast-1f95f148-82ce-42a7-8bcc-28df75c6897d",
+        "mediaType": "audio",
+        "title": "Words of Life | The Word of the King | Ap. Earl Glisson",
+        "mainTitle": "Words of Life | The Word of the King | Ap. Earl Glisson",
+        "host": "Anchor Faith Church Podcast",
+        "minister": "Anchor Faith Church Podcast",
+        "date": "October 29, 2026",
+        "publishedAt": "Thu, 29 Oct 2026 18:11:10 GMT",
+        "duration": "1:07:02",
+        "description": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "summaryDescription": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rssGuid": "1f95f148-82ce-42a7-8bcc-28df75c6897d",
+        "guid": "1f95f148-82ce-42a7-8bcc-28df75c6897d",
+        "enclosureUrl": "https://anchor.fm/s/128ece40/podcast/play/128369753/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-9-29%2Fb2b6ea84-ab1d-4f4e-b586-da3dad96edf3.mp3",
+        "thumbnail": "https://i.scdn.co/image/ab6765630000ba8aaf59fc3c18040fb3e4a65481",
+        "artworkUrl": "https://i.scdn.co/image/ab6765630000ba8aaf59fc3c18040fb3e4a65481",
+        "episodeArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_episode/3013488/3013488-1793297443984-433d3e8da66c.jpg",
+        "podcastArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/3013488/3013488-1782995684800-84c230b79db71.jpg",
+        "sourceUrl": "https://anchor.fm/s/128ece40/podcast/rss",
+        "audioUrl": "https://anchor.fm/s/128ece40/podcast/play/128369753/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-9-29%2Fb2b6ea84-ab1d-4f4e-b586-da3dad96edf3.mp3",
+        "externalUrl": "https://open.spotify.com/episode/3OBhcuIX25Ax16bO3Rgjj5",
+        "spotifyEpisodeId": "3OBhcuIX25Ax16bO3Rgjj5",
+        "spotifyEpisodeUrl": "https://open.spotify.com/episode/3OBhcuIX25Ax16bO3Rgjj5",
+        "spotifyUrl": "https://open.spotify.com/episode/3OBhcuIX25Ax16bO3Rgjj5",
+        "spotifyShowId": "7sMWiLwUHPAqHyxYBQp7Qx",
+        "showSpotifyUrl": "https://open.spotify.com/show/7sMWiLwUHPAqHyxYBQp7Qx",
+        "podcastId": "anchor-faith-church-podcast",
+        "podcastName": "Anchor Faith Church Podcast",
+        "tags": [
+          "Podcast",
+          "Anchor Faith Church Podcast"
+        ],
+        "localPodcastArtworkUrl": "./assets/podcast-artwork/anchor-faith-church.jpg",
+        "localPodcastArtworkWidth": 512,
+        "localPodcastArtworkHeight": 512,
+        "localPodcastArtworkType": "image/jpeg",
+        "spotifyMatchMethod": "exact-title",
+        "spotifyArtworkUrl": "https://i.scdn.co/image/ab6765630000ba8aaf59fc3c18040fb3e4a65481",
+        "spotifyArtworkWidth": 640,
+        "spotifyArtworkHeight": 640
+      },
       {
         "id": "anchor-faith-church-podcast-441dc401-64cf-4743-ba7e-1a88ed22d8af",
         "mediaType": "audio",
