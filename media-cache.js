@@ -1,6 +1,6 @@
 (function () {
   window.AnchorFaithMediaCache = {
-  "lastUpdated": "2026-10-29T20:41:47.502Z",
+  "lastUpdated": "2026-11-02T23:48:41.138Z",
   "source": "youtube-rss-spotify-generated",
   "version": "1.1",
   "data": {
