@@ -1,11 +1,12 @@
 (function () {
   window.AnchorFaithMediaCache = {
-  "lastUpdated": "2026-11-02T23:48:41.138Z",
+  "lastUpdated": "2026-11-04T03:04:16.908Z",
   "source": "youtube-rss-spotify-generated",
   "version": "1.1",
   "data": {
     "playlists": {
       "UU5k7VFwx3xZkBdGNWEDqMlQ": "Latest Sermons",
+      "PLbWBXABSizbQ": "Series | Produce Market",
       "PLErPMTcXnvww": "Topic | Discipline",
       "PLaRtahNWSQqc": "Topic | Finance",
       "PLGL-GCoeDNdI": "Series | Dominionaire",
@@ -74,6 +75,14 @@
         "description": "We opened our doors on April 11, 2004 and ever since that day we’ve had a focus to Ignite the City, Impact the Nation, and Influence the World. By God's great grace, we've seen Him do it. Our mission is to see people anchored to Christ to live by faith.\n\nFor more information, visit us at anchorfaith.com as well as our other channel - Anchor Faith Worship.",
         "thumbnailUrl": "https://yt3.ggpht.com/akBjcwO-AfI9lt5yzlDLSvxYg2oOIwzxFWN54G4A4CKecPwAnOAASrN7SbTNy3BdrCLIuh3W=s800-c-k-c0x00ffffff-no-rj",
         "isLatestShelf": true
+      },
+      "PLbWBXABSizbQ": {
+        "id": "PLbWBXABSizbQ",
+        "title": "Series | Produce Market",
+        "description": "",
+        "thumbnailUrl": "https://i.ytimg.com/vi/5W7yah3eOcs/maxresdefault.jpg",
+        "itemCount": 1,
+        "publishedAt": "2026-11-03T21:12:58.736366035Z"
       },
       "PLErPMTcXnvww": {
         "id": "PLErPMTcXnvww",
@@ -207,8 +216,8 @@
         "id": "PLMBRtLWv06Ag",
         "title": "Speaker | Ap. Earl Glisson",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Ym5rd0izRDg/maxresdefault.jpg",
-        "itemCount": 316,
+        "thumbnailUrl": "https://i.ytimg.com/vi/5W7yah3eOcs/maxresdefault.jpg",
+        "itemCount": 317,
         "publishedAt": "2026-07-06T13:40:39.553767Z"
       },
       "PLfxtsIJSYTIc": {
@@ -551,8 +560,8 @@
         "id": "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3",
         "title": "Latest Sermons",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/vJhrJbc03AY/maxresdefault.jpg",
-        "itemCount": 427,
+        "thumbnailUrl": "https://i.ytimg.com/vi/5W7yah3eOcs/maxresdefault.jpg",
+        "itemCount": 428,
         "publishedAt": "2019-03-06T15:36:23.175978Z"
       }
     },
@@ -566,6 +575,15 @@
         "mediaType": "video",
         "playlistId": "UU5k7VFwx3xZkBdGNWEDqMlQ",
         "isLatestShelf": true
+      },
+      {
+        "id": "youtube-PLbWBXABSizbQ",
+        "title": "Series | Produce Market",
+        "subtitle": "",
+        "description": "",
+        "thumbnailUrl": "https://i.ytimg.com/vi/5W7yah3eOcs/maxresdefault.jpg",
+        "mediaType": "video",
+        "playlistId": "PLbWBXABSizbQ"
       },
       {
         "id": "youtube-PLErPMTcXnvww",
@@ -729,7 +747,7 @@
         "title": "Speaker | Ap. Earl Glisson",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Ym5rd0izRDg/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/5W7yah3eOcs/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PLMBRtLWv06Ag"
       },
@@ -1116,12 +1134,52 @@
         "title": "Latest Sermons",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/vJhrJbc03AY/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/5W7yah3eOcs/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
       }
     ],
     "latestSermons": [
+      {
+        "id": "5W7yah3eOcs",
+        "mediaType": "video",
+        "rawTitle": "Self-Control | Produce Market | Ap. Earl Glisson",
+        "mainTitle": "Self-Control",
+        "subtitle": "Produce Market",
+        "minister": "Ap. Earl Glisson",
+        "canonicalSpeaker": "Ap. Earl Glisson",
+        "speaker": "Ap. Earl Glisson",
+        "title": "Self-Control",
+        "date": "November 3, 2026",
+        "publishedAt": "2026-11-03T23:30:01Z",
+        "duration": "51:46",
+        "description": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "summaryDescription": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "youtubeDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "youtubeVideoId": "5W7yah3eOcs",
+        "youtubeId": "5W7yah3eOcs",
+        "thumbnail": "https://i.ytimg.com/vi/5W7yah3eOcs/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/5W7yah3eOcs/maxresdefault.jpg",
+        "heroImage": "https://i.ytimg.com/vi/5W7yah3eOcs/maxresdefault.jpg",
+        "embedUrl": "https://www.youtube.com/embed/5W7yah3eOcs?rel=0",
+        "externalUrl": "https://www.youtube.com/watch?v=5W7yah3eOcs",
+        "externalActionLabel": "Play on YouTube",
+        "playlistIds": [
+          "UU5k7VFwx3xZkBdGNWEDqMlQ",
+          "PLbWBXABSizbQ",
+          "PLMBRtLWv06Ag",
+          "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
+        ],
+        "tags": [
+          "Latest Sermons",
+          "Series | Produce Market",
+          "Speaker | Ap. Earl Glisson"
+        ],
+        "playlistTitle": "Latest Sermons",
+        "featured": true
+      },
       {
         "id": "vJhrJbc03AY",
         "mediaType": "video",
@@ -1160,7 +1218,7 @@
           "Topic | Serving"
         ],
         "playlistTitle": "Latest Sermons",
-        "featured": true
+        "featured": false
       },
       {
         "id": "fX_eZtpJNqQ",
@@ -18757,6 +18815,20 @@
         ]
       },
       {
+        "id": "collection-series-plbwbxabsizbq",
+        "title": "Produce Market",
+        "optionLabel": "Produce Market",
+        "collectionType": "series",
+        "mediaType": "video",
+        "playlistId": "PLbWBXABSizbQ",
+        "rawCollectionTitle": "Series | Produce Market",
+        "description": "",
+        "thumbnailUrl": "https://i.ytimg.com/vi/5W7yah3eOcs/maxresdefault.jpg",
+        "itemIds": [
+          "5W7yah3eOcs"
+        ]
+      },
+      {
         "id": "collection-series-pl-b7g2gpm-jccklli6yrshvo-suv7oq07",
         "title": "The Fivefold Effect",
         "optionLabel": "The Fivefold Effect",
@@ -18801,10 +18873,11 @@
         "playlistId": "PLMBRtLWv06Ag",
         "rawCollectionTitle": "Speaker | Ap. Earl Glisson",
         "priority": 100,
-        "newestVideoPublishedAt": "2026-09-22T22:00:31Z",
+        "newestVideoPublishedAt": "2026-11-03T23:30:01Z",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/Ym5rd0izRDg/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/5W7yah3eOcs/maxresdefault.jpg",
         "itemIds": [
+          "5W7yah3eOcs",
           "Ym5rd0izRDg",
           "J_ill2x8Dg0",
           "n4rnzfkNxjg",
@@ -20082,6 +20155,20 @@
           ]
         },
         {
+          "id": "collection-series-plbwbxabsizbq",
+          "title": "Produce Market",
+          "optionLabel": "Produce Market",
+          "collectionType": "series",
+          "mediaType": "video",
+          "playlistId": "PLbWBXABSizbQ",
+          "rawCollectionTitle": "Series | Produce Market",
+          "description": "",
+          "thumbnailUrl": "https://i.ytimg.com/vi/5W7yah3eOcs/maxresdefault.jpg",
+          "itemIds": [
+            "5W7yah3eOcs"
+          ]
+        },
+        {
           "id": "collection-series-pl-b7g2gpm-jccklli6yrshvo-suv7oq07",
           "title": "The Fivefold Effect",
           "optionLabel": "The Fivefold Effect",
@@ -20126,10 +20213,11 @@
           "playlistId": "PLMBRtLWv06Ag",
           "rawCollectionTitle": "Speaker | Ap. Earl Glisson",
           "priority": 100,
-          "newestVideoPublishedAt": "2026-09-22T22:00:31Z",
+          "newestVideoPublishedAt": "2026-11-03T23:30:01Z",
           "description": "",
-          "thumbnailUrl": "https://i.ytimg.com/vi/Ym5rd0izRDg/maxresdefault.jpg",
+          "thumbnailUrl": "https://i.ytimg.com/vi/5W7yah3eOcs/maxresdefault.jpg",
           "itemIds": [
+            "5W7yah3eOcs",
             "Ym5rd0izRDg",
             "J_ill2x8Dg0",
             "n4rnzfkNxjg",
@@ -20764,6 +20852,46 @@
     ],
     "sermons": [
       {
+        "id": "5W7yah3eOcs",
+        "mediaType": "video",
+        "rawTitle": "Self-Control | Produce Market | Ap. Earl Glisson",
+        "mainTitle": "Self-Control",
+        "subtitle": "Produce Market",
+        "minister": "Ap. Earl Glisson",
+        "canonicalSpeaker": "Ap. Earl Glisson",
+        "speaker": "Ap. Earl Glisson",
+        "title": "Self-Control",
+        "date": "November 3, 2026",
+        "publishedAt": "2026-11-03T23:30:01Z",
+        "duration": "51:46",
+        "description": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "summaryDescription": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "youtubeDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "youtubeVideoId": "5W7yah3eOcs",
+        "youtubeId": "5W7yah3eOcs",
+        "thumbnail": "https://i.ytimg.com/vi/5W7yah3eOcs/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/5W7yah3eOcs/maxresdefault.jpg",
+        "heroImage": "https://i.ytimg.com/vi/5W7yah3eOcs/maxresdefault.jpg",
+        "embedUrl": "https://www.youtube.com/embed/5W7yah3eOcs?rel=0",
+        "externalUrl": "https://www.youtube.com/watch?v=5W7yah3eOcs",
+        "externalActionLabel": "Play on YouTube",
+        "playlistIds": [
+          "UU5k7VFwx3xZkBdGNWEDqMlQ",
+          "PLbWBXABSizbQ",
+          "PLMBRtLWv06Ag",
+          "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
+        ],
+        "tags": [
+          "Latest Sermons",
+          "Series | Produce Market",
+          "Speaker | Ap. Earl Glisson"
+        ],
+        "playlistTitle": "Latest Sermons",
+        "featured": true
+      },
+      {
         "id": "vJhrJbc03AY",
         "mediaType": "video",
         "rawTitle": "Rivers of Empowerment | Kingdom Service | P. Mike Krulcik",
@@ -20801,7 +20929,7 @@
           "Topic | Serving"
         ],
         "playlistTitle": "Latest Sermons",
-        "featured": true
+        "featured": false
       },
       {
         "id": "fX_eZtpJNqQ",
@@ -37500,6 +37628,50 @@
       }
     ],
     "audioEpisodes": [
+      {
+        "id": "anchor-faith-church-podcast-e3b13a6e-842b-4ef3-9f8e-8991f7bb25f6",
+        "mediaType": "audio",
+        "title": "Self-Control | Produce Market | Ap. Earl Glisson",
+        "mainTitle": "Self-Control | Produce Market | Ap. Earl Glisson",
+        "host": "Anchor Faith Church Podcast",
+        "minister": "Anchor Faith Church Podcast",
+        "date": "November 3, 2026",
+        "publishedAt": "Tue, 03 Nov 2026 21:15:21 GMT",
+        "duration": "51:45",
+        "description": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "summaryDescription": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rssGuid": "e3b13a6e-842b-4ef3-9f8e-8991f7bb25f6",
+        "guid": "e3b13a6e-842b-4ef3-9f8e-8991f7bb25f6",
+        "enclosureUrl": "https://anchor.fm/s/128ece40/podcast/play/128715413/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-10-3%2F92efc457-7620-5d19-9438-9a0c02c6b743.mp3",
+        "thumbnail": "https://i.scdn.co/image/ab6765630000ba8a137187116652c718b123bf9b",
+        "artworkUrl": "https://i.scdn.co/image/ab6765630000ba8a137187116652c718b123bf9b",
+        "episodeArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_episode/3013488/3013488-1793740495117-ea2833a39de6f.jpg",
+        "podcastArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/3013488/3013488-1782995684800-84c230b79db71.jpg",
+        "sourceUrl": "https://anchor.fm/s/128ece40/podcast/rss",
+        "audioUrl": "https://anchor.fm/s/128ece40/podcast/play/128715413/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-10-3%2F92efc457-7620-5d19-9438-9a0c02c6b743.mp3",
+        "externalUrl": "https://open.spotify.com/episode/4Men9a4qJwr8IGqxqGGUzi",
+        "spotifyEpisodeId": "4Men9a4qJwr8IGqxqGGUzi",
+        "spotifyEpisodeUrl": "https://open.spotify.com/episode/4Men9a4qJwr8IGqxqGGUzi",
+        "spotifyUrl": "https://open.spotify.com/episode/4Men9a4qJwr8IGqxqGGUzi",
+        "spotifyShowId": "7sMWiLwUHPAqHyxYBQp7Qx",
+        "showSpotifyUrl": "https://open.spotify.com/show/7sMWiLwUHPAqHyxYBQp7Qx",
+        "podcastId": "anchor-faith-church-podcast",
+        "podcastName": "Anchor Faith Church Podcast",
+        "tags": [
+          "Podcast",
+          "Anchor Faith Church Podcast"
+        ],
+        "localPodcastArtworkUrl": "./assets/podcast-artwork/anchor-faith-church.jpg",
+        "localPodcastArtworkWidth": 512,
+        "localPodcastArtworkHeight": 512,
+        "localPodcastArtworkType": "image/jpeg",
+        "spotifyMatchMethod": "exact-title",
+        "spotifyArtworkUrl": "https://i.scdn.co/image/ab6765630000ba8a137187116652c718b123bf9b",
+        "spotifyArtworkWidth": 640,
+        "spotifyArtworkHeight": 640
+      },
       {
         "id": "anchor-faith-church-podcast-1f95f148-82ce-42a7-8bcc-28df75c6897d",
         "mediaType": "audio",
