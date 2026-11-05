@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-11-04T03:04:16.908Z",
+  "lastUpdated": "2026-11-05T22:36:26.345Z",
   "source": "youtube-rss-spotify-generated",
   "version": "1.1",
   "data": {
@@ -37627,6 +37627,46 @@
       }
     ],
     "audioEpisodes": [
+      {
+        "id": "kingdom-first-business-alliance-podcast-315bc7bb-a3c5-4caa-ad71-a4dab34628cc",
+        "mediaType": "audio",
+        "title": "November 2026 Session",
+        "mainTitle": "November 2026 Session",
+        "host": "Kingdom First Business Alliance Podcast",
+        "minister": "Kingdom First Business Alliance Podcast",
+        "date": "November 4, 2026",
+        "publishedAt": "Wed, 04 Nov 2026 15:40:21 GMT",
+        "duration": "23:55",
+        "description": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "summaryDescription": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rssGuid": "315bc7bb-a3c5-4caa-ad71-a4dab34628cc",
+        "guid": "315bc7bb-a3c5-4caa-ad71-a4dab34628cc",
+        "enclosureUrl": "https://anchor.fm/s/10ef5931c/podcast/play/128775989/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-10-4%2F6592c821-a3da-7d76-3f4f-6bf0b3656fd8.mp3",
+        "thumbnail": "https://i.scdn.co/image/ab6765630000ba8aac56b77a2f381dcd847d64a3",
+        "artworkUrl": "https://i.scdn.co/image/ab6765630000ba8aac56b77a2f381dcd847d64a3",
+        "episodeArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_episode/45359423/45359423-1793806806266-c60803ff03057.jpg",
+        "podcastArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/45359423/45359423-1770821582639-b68b2c7e1c5ab.jpg",
+        "sourceUrl": "https://anchor.fm/s/10ef5931c/podcast/rss",
+        "audioUrl": "https://anchor.fm/s/10ef5931c/podcast/play/128775989/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-10-4%2F6592c821-a3da-7d76-3f4f-6bf0b3656fd8.mp3",
+        "externalUrl": "https://open.spotify.com/episode/2joIV95D0YgzDKpNAwEPdB",
+        "spotifyEpisodeId": "2joIV95D0YgzDKpNAwEPdB",
+        "spotifyEpisodeUrl": "https://open.spotify.com/episode/2joIV95D0YgzDKpNAwEPdB",
+        "spotifyUrl": "https://open.spotify.com/episode/2joIV95D0YgzDKpNAwEPdB",
+        "spotifyShowId": "4rbu39RRiyRqVWzlfFk77I",
+        "showSpotifyUrl": "https://open.spotify.com/show/4rbu39RRiyRqVWzlfFk77I",
+        "podcastId": "kingdom-first-business-alliance-podcast",
+        "podcastName": "Kingdom First Business Alliance Podcast",
+        "tags": [
+          "Podcast",
+          "Kingdom First Business Alliance Podcast"
+        ],
+        "spotifyMatchMethod": "exact-title",
+        "spotifyArtworkUrl": "https://i.scdn.co/image/ab6765630000ba8aac56b77a2f381dcd847d64a3",
+        "spotifyArtworkWidth": 640,
+        "spotifyArtworkHeight": 640
+      },
       {
         "id": "anchor-faith-church-podcast-e3b13a6e-842b-4ef3-9f8e-8991f7bb25f6",
         "mediaType": "audio",
