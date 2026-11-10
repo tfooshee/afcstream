@@ -1,6 +1,6 @@
 (function () {
   window.AnchorFaithMediaCache = {
-  "lastUpdated": "2026-11-05T22:36:26.345Z",
+  "lastUpdated": "2026-11-10T00:35:36.154Z",
   "source": "youtube-rss-spotify-generated",
   "version": "1.1",
   "data": {
@@ -82,7 +82,7 @@
         "description": "",
         "thumbnailUrl": "https://i.ytimg.com/vi/5W7yah3eOcs/maxresdefault.jpg",
         "itemCount": 1,
-        "publishedAt": "2026-11-03T21:12:58.736366035Z"
+        "publishedAt": "2026-11-03T21:12:58.736366Z"
       },
       "PLErPMTcXnvww": {
         "id": "PLErPMTcXnvww",
@@ -37628,6 +37628,50 @@
       }
     ],
     "audioEpisodes": [
+      {
+        "id": "anchor-faith-church-podcast-8baa2efa-c7fd-4bdd-9903-7be1fbfc5b73",
+        "mediaType": "audio",
+        "title": "Over All | Growing Kingdom | Ap. Earl Glisson",
+        "mainTitle": "Over All | Growing Kingdom | Ap. Earl Glisson",
+        "host": "Anchor Faith Church Podcast",
+        "minister": "Anchor Faith Church Podcast",
+        "date": "November 5, 2026",
+        "publishedAt": "Thu, 05 Nov 2026 19:56:55 GMT",
+        "duration": "50:38",
+        "description": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "summaryDescription": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rssGuid": "8baa2efa-c7fd-4bdd-9903-7be1fbfc5b73",
+        "guid": "8baa2efa-c7fd-4bdd-9903-7be1fbfc5b73",
+        "enclosureUrl": "https://anchor.fm/s/128ece40/podcast/play/128873294/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-10-5%2F3490663d-2396-70fc-cffe-fad8611801a6.mp3",
+        "thumbnail": "https://i.scdn.co/image/ab6765630000ba8a6ed3a1904d20b65edb87d07b",
+        "artworkUrl": "https://i.scdn.co/image/ab6765630000ba8a6ed3a1904d20b65edb87d07b",
+        "episodeArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_episode/3013488/3013488-1793908577941-c5aef9ef57606.jpg",
+        "podcastArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/3013488/3013488-1782995684800-84c230b79db71.jpg",
+        "sourceUrl": "https://anchor.fm/s/128ece40/podcast/rss",
+        "audioUrl": "https://anchor.fm/s/128ece40/podcast/play/128873294/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-10-5%2F3490663d-2396-70fc-cffe-fad8611801a6.mp3",
+        "externalUrl": "https://open.spotify.com/episode/1xU2uwG0UnwHDxMIGBvflL",
+        "spotifyEpisodeId": "1xU2uwG0UnwHDxMIGBvflL",
+        "spotifyEpisodeUrl": "https://open.spotify.com/episode/1xU2uwG0UnwHDxMIGBvflL",
+        "spotifyUrl": "https://open.spotify.com/episode/1xU2uwG0UnwHDxMIGBvflL",
+        "spotifyShowId": "7sMWiLwUHPAqHyxYBQp7Qx",
+        "showSpotifyUrl": "https://open.spotify.com/show/7sMWiLwUHPAqHyxYBQp7Qx",
+        "podcastId": "anchor-faith-church-podcast",
+        "podcastName": "Anchor Faith Church Podcast",
+        "tags": [
+          "Podcast",
+          "Anchor Faith Church Podcast"
+        ],
+        "localPodcastArtworkUrl": "./assets/podcast-artwork/anchor-faith-church.jpg",
+        "localPodcastArtworkWidth": 512,
+        "localPodcastArtworkHeight": 512,
+        "localPodcastArtworkType": "image/jpeg",
+        "spotifyMatchMethod": "exact-title",
+        "spotifyArtworkUrl": "https://i.scdn.co/image/ab6765630000ba8a6ed3a1904d20b65edb87d07b",
+        "spotifyArtworkWidth": 640,
+        "spotifyArtworkHeight": 640
+      },
       {
         "id": "kingdom-first-business-alliance-podcast-315bc7bb-a3c5-4caa-ad71-a4dab34628cc",
         "mediaType": "audio",
