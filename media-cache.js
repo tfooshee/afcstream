@@ -1,6 +1,6 @@
 (function () {
   window.AnchorFaithMediaCache = {
-  "lastUpdated": "2026-11-10T00:35:36.154Z",
+  "lastUpdated": "2026-11-11T02:53:10.403Z",
   "source": "youtube-rss-spotify-generated",
   "version": "1.1",
   "data": {
@@ -80,9 +80,9 @@
         "id": "PLbWBXABSizbQ",
         "title": "Series | Produce Market",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/5W7yah3eOcs/maxresdefault.jpg",
-        "itemCount": 1,
-        "publishedAt": "2026-11-03T21:12:58.736366Z"
+        "thumbnailUrl": "https://i.ytimg.com/vi/mqxh5zWGoPM/maxresdefault.jpg",
+        "itemCount": 2,
+        "publishedAt": "2026-11-03T21:12:58.736366035Z"
       },
       "PLErPMTcXnvww": {
         "id": "PLErPMTcXnvww",
@@ -184,8 +184,8 @@
         "id": "PLYS5NwJkobuA",
         "title": "Speaker | P. Chase Glisson",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/sgIwLyuXge4/maxresdefault.jpg",
-        "itemCount": 6,
+        "thumbnailUrl": "https://i.ytimg.com/vi/mqxh5zWGoPM/maxresdefault.jpg",
+        "itemCount": 7,
         "publishedAt": "2026-07-06T13:43:12.191956Z"
       },
       "PLDipE8M0XdWc": {
@@ -560,8 +560,8 @@
         "id": "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3",
         "title": "Latest Sermons",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/5W7yah3eOcs/maxresdefault.jpg",
-        "itemCount": 428,
+        "thumbnailUrl": "https://i.ytimg.com/vi/mqxh5zWGoPM/maxresdefault.jpg",
+        "itemCount": 429,
         "publishedAt": "2019-03-06T15:36:23.175978Z"
       }
     },
@@ -581,7 +581,7 @@
         "title": "Series | Produce Market",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/5W7yah3eOcs/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/mqxh5zWGoPM/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PLbWBXABSizbQ"
       },
@@ -711,7 +711,7 @@
         "title": "Speaker | P. Chase Glisson",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/sgIwLyuXge4/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/mqxh5zWGoPM/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PLYS5NwJkobuA"
       },
@@ -1134,12 +1134,52 @@
         "title": "Latest Sermons",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/5W7yah3eOcs/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/mqxh5zWGoPM/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
       }
     ],
     "latestSermons": [
+      {
+        "id": "mqxh5zWGoPM",
+        "mediaType": "video",
+        "rawTitle": "Gentleness | Produce Market | P. Chase Glisson",
+        "mainTitle": "Gentleness",
+        "subtitle": "Produce Market",
+        "minister": "P. Chase Glisson",
+        "canonicalSpeaker": "P. Chase Glisson",
+        "speaker": "P. Chase Glisson",
+        "title": "Gentleness",
+        "date": "November 10, 2026",
+        "publishedAt": "2026-11-10T23:30:09Z",
+        "duration": "1:10:11",
+        "description": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "summaryDescription": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "youtubeDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "youtubeVideoId": "mqxh5zWGoPM",
+        "youtubeId": "mqxh5zWGoPM",
+        "thumbnail": "https://i.ytimg.com/vi/mqxh5zWGoPM/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/mqxh5zWGoPM/maxresdefault.jpg",
+        "heroImage": "https://i.ytimg.com/vi/mqxh5zWGoPM/maxresdefault.jpg",
+        "embedUrl": "https://www.youtube.com/embed/mqxh5zWGoPM?rel=0",
+        "externalUrl": "https://www.youtube.com/watch?v=mqxh5zWGoPM",
+        "externalActionLabel": "Play on YouTube",
+        "playlistIds": [
+          "UU5k7VFwx3xZkBdGNWEDqMlQ",
+          "PLbWBXABSizbQ",
+          "PLYS5NwJkobuA",
+          "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
+        ],
+        "tags": [
+          "Latest Sermons",
+          "Series | Produce Market",
+          "Speaker | P. Chase Glisson"
+        ],
+        "playlistTitle": "Latest Sermons",
+        "featured": true
+      },
       {
         "id": "5W7yah3eOcs",
         "mediaType": "video",
@@ -1178,7 +1218,7 @@
           "Speaker | Ap. Earl Glisson"
         ],
         "playlistTitle": "Latest Sermons",
-        "featured": true
+        "featured": false
       },
       {
         "id": "vJhrJbc03AY",
@@ -18823,8 +18863,9 @@
         "playlistId": "PLbWBXABSizbQ",
         "rawCollectionTitle": "Series | Produce Market",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/5W7yah3eOcs/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/mqxh5zWGoPM/maxresdefault.jpg",
         "itemIds": [
+          "mqxh5zWGoPM",
           "5W7yah3eOcs"
         ]
       },
@@ -19246,6 +19287,28 @@
         ]
       },
       {
+        "id": "collection-speaker-plys5nwjkobua",
+        "title": "P. Chase Glisson",
+        "optionLabel": "P. Chase Glisson",
+        "collectionType": "speaker",
+        "mediaType": "video",
+        "playlistId": "PLYS5NwJkobuA",
+        "rawCollectionTitle": "Speaker | P. Chase Glisson",
+        "priority": 0,
+        "newestVideoPublishedAt": "2026-11-10T23:30:09Z",
+        "description": "",
+        "thumbnailUrl": "https://i.ytimg.com/vi/mqxh5zWGoPM/maxresdefault.jpg",
+        "itemIds": [
+          "mqxh5zWGoPM",
+          "sgIwLyuXge4",
+          "uc_ACtKWpJg",
+          "Raznj0gbY1o",
+          "9Ns2-vwV-mM",
+          "bfBdnqQ4Q4k",
+          "N-Qw73vaawY"
+        ]
+      },
+      {
         "id": "collection-speaker-plpkk9-b6iba4",
         "title": "P. Mike Krulcik",
         "optionLabel": "P. Mike Krulcik",
@@ -19301,27 +19364,6 @@
           "yFZJYTBdf-Y",
           "vLMO8i3lbQs",
           "b32kc8u_vvA"
-        ]
-      },
-      {
-        "id": "collection-speaker-plys5nwjkobua",
-        "title": "P. Chase Glisson",
-        "optionLabel": "P. Chase Glisson",
-        "collectionType": "speaker",
-        "mediaType": "video",
-        "playlistId": "PLYS5NwJkobuA",
-        "rawCollectionTitle": "Speaker | P. Chase Glisson",
-        "priority": 0,
-        "newestVideoPublishedAt": "2026-09-29T22:30:13Z",
-        "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/sgIwLyuXge4/maxresdefault.jpg",
-        "itemIds": [
-          "sgIwLyuXge4",
-          "uc_ACtKWpJg",
-          "Raznj0gbY1o",
-          "9Ns2-vwV-mM",
-          "bfBdnqQ4Q4k",
-          "N-Qw73vaawY"
         ]
       },
       {
@@ -20163,8 +20205,9 @@
           "playlistId": "PLbWBXABSizbQ",
           "rawCollectionTitle": "Series | Produce Market",
           "description": "",
-          "thumbnailUrl": "https://i.ytimg.com/vi/5W7yah3eOcs/maxresdefault.jpg",
+          "thumbnailUrl": "https://i.ytimg.com/vi/mqxh5zWGoPM/maxresdefault.jpg",
           "itemIds": [
+            "mqxh5zWGoPM",
             "5W7yah3eOcs"
           ]
         },
@@ -20586,6 +20629,28 @@
           ]
         },
         {
+          "id": "collection-speaker-plys5nwjkobua",
+          "title": "P. Chase Glisson",
+          "optionLabel": "P. Chase Glisson",
+          "collectionType": "speaker",
+          "mediaType": "video",
+          "playlistId": "PLYS5NwJkobuA",
+          "rawCollectionTitle": "Speaker | P. Chase Glisson",
+          "priority": 0,
+          "newestVideoPublishedAt": "2026-11-10T23:30:09Z",
+          "description": "",
+          "thumbnailUrl": "https://i.ytimg.com/vi/mqxh5zWGoPM/maxresdefault.jpg",
+          "itemIds": [
+            "mqxh5zWGoPM",
+            "sgIwLyuXge4",
+            "uc_ACtKWpJg",
+            "Raznj0gbY1o",
+            "9Ns2-vwV-mM",
+            "bfBdnqQ4Q4k",
+            "N-Qw73vaawY"
+          ]
+        },
+        {
           "id": "collection-speaker-plpkk9-b6iba4",
           "title": "P. Mike Krulcik",
           "optionLabel": "P. Mike Krulcik",
@@ -20641,27 +20706,6 @@
             "yFZJYTBdf-Y",
             "vLMO8i3lbQs",
             "b32kc8u_vvA"
-          ]
-        },
-        {
-          "id": "collection-speaker-plys5nwjkobua",
-          "title": "P. Chase Glisson",
-          "optionLabel": "P. Chase Glisson",
-          "collectionType": "speaker",
-          "mediaType": "video",
-          "playlistId": "PLYS5NwJkobuA",
-          "rawCollectionTitle": "Speaker | P. Chase Glisson",
-          "priority": 0,
-          "newestVideoPublishedAt": "2026-09-29T22:30:13Z",
-          "description": "",
-          "thumbnailUrl": "https://i.ytimg.com/vi/sgIwLyuXge4/maxresdefault.jpg",
-          "itemIds": [
-            "sgIwLyuXge4",
-            "uc_ACtKWpJg",
-            "Raznj0gbY1o",
-            "9Ns2-vwV-mM",
-            "bfBdnqQ4Q4k",
-            "N-Qw73vaawY"
           ]
         },
         {
@@ -20852,6 +20896,46 @@
     ],
     "sermons": [
       {
+        "id": "mqxh5zWGoPM",
+        "mediaType": "video",
+        "rawTitle": "Gentleness | Produce Market | P. Chase Glisson",
+        "mainTitle": "Gentleness",
+        "subtitle": "Produce Market",
+        "minister": "P. Chase Glisson",
+        "canonicalSpeaker": "P. Chase Glisson",
+        "speaker": "P. Chase Glisson",
+        "title": "Gentleness",
+        "date": "November 10, 2026",
+        "publishedAt": "2026-11-10T23:30:09Z",
+        "duration": "1:10:11",
+        "description": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "summaryDescription": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "youtubeDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "youtubeVideoId": "mqxh5zWGoPM",
+        "youtubeId": "mqxh5zWGoPM",
+        "thumbnail": "https://i.ytimg.com/vi/mqxh5zWGoPM/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/mqxh5zWGoPM/maxresdefault.jpg",
+        "heroImage": "https://i.ytimg.com/vi/mqxh5zWGoPM/maxresdefault.jpg",
+        "embedUrl": "https://www.youtube.com/embed/mqxh5zWGoPM?rel=0",
+        "externalUrl": "https://www.youtube.com/watch?v=mqxh5zWGoPM",
+        "externalActionLabel": "Play on YouTube",
+        "playlistIds": [
+          "UU5k7VFwx3xZkBdGNWEDqMlQ",
+          "PLbWBXABSizbQ",
+          "PLYS5NwJkobuA",
+          "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
+        ],
+        "tags": [
+          "Latest Sermons",
+          "Series | Produce Market",
+          "Speaker | P. Chase Glisson"
+        ],
+        "playlistTitle": "Latest Sermons",
+        "featured": true
+      },
+      {
         "id": "5W7yah3eOcs",
         "mediaType": "video",
         "rawTitle": "Self-Control | Produce Market | Ap. Earl Glisson",
@@ -20889,7 +20973,7 @@
           "Speaker | Ap. Earl Glisson"
         ],
         "playlistTitle": "Latest Sermons",
-        "featured": true
+        "featured": false
       },
       {
         "id": "vJhrJbc03AY",
@@ -37628,6 +37712,50 @@
       }
     ],
     "audioEpisodes": [
+      {
+        "id": "anchor-faith-church-podcast-9d246add-e667-4487-beea-90149869885b",
+        "mediaType": "audio",
+        "title": "Gentleness | Produce Market | P. Chase Glisson",
+        "mainTitle": "Gentleness | Produce Market | P. Chase Glisson",
+        "host": "Anchor Faith Church Podcast",
+        "minister": "Anchor Faith Church Podcast",
+        "date": "November 10, 2026",
+        "publishedAt": "Tue, 10 Nov 2026 15:05:52 GMT",
+        "duration": "1:10:11",
+        "description": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "summaryDescription": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rssGuid": "9d246add-e667-4487-beea-90149869885b",
+        "guid": "9d246add-e667-4487-beea-90149869885b",
+        "enclosureUrl": "https://anchor.fm/s/128ece40/podcast/play/129196356/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-10-10%2Fac932649-aee2-3951-d265-f8b8bbaf67d9.mp3",
+        "thumbnail": "https://i.scdn.co/image/ab6765630000ba8ada42af2c8bfd907139ab1ece",
+        "artworkUrl": "https://i.scdn.co/image/ab6765630000ba8ada42af2c8bfd907139ab1ece",
+        "episodeArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_episode/3013488/3013488-1794323122533-2c63c9fe593c1.jpg",
+        "podcastArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/3013488/3013488-1782995684800-84c230b79db71.jpg",
+        "sourceUrl": "https://anchor.fm/s/128ece40/podcast/rss",
+        "audioUrl": "https://anchor.fm/s/128ece40/podcast/play/129196356/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-10-10%2Fac932649-aee2-3951-d265-f8b8bbaf67d9.mp3",
+        "externalUrl": "https://open.spotify.com/episode/1tv8mJdYDW2ksEW0iBF8ms",
+        "spotifyEpisodeId": "1tv8mJdYDW2ksEW0iBF8ms",
+        "spotifyEpisodeUrl": "https://open.spotify.com/episode/1tv8mJdYDW2ksEW0iBF8ms",
+        "spotifyUrl": "https://open.spotify.com/episode/1tv8mJdYDW2ksEW0iBF8ms",
+        "spotifyShowId": "7sMWiLwUHPAqHyxYBQp7Qx",
+        "showSpotifyUrl": "https://open.spotify.com/show/7sMWiLwUHPAqHyxYBQp7Qx",
+        "podcastId": "anchor-faith-church-podcast",
+        "podcastName": "Anchor Faith Church Podcast",
+        "tags": [
+          "Podcast",
+          "Anchor Faith Church Podcast"
+        ],
+        "localPodcastArtworkUrl": "./assets/podcast-artwork/anchor-faith-church.jpg",
+        "localPodcastArtworkWidth": 512,
+        "localPodcastArtworkHeight": 512,
+        "localPodcastArtworkType": "image/jpeg",
+        "spotifyMatchMethod": "exact-title",
+        "spotifyArtworkUrl": "https://i.scdn.co/image/ab6765630000ba8ada42af2c8bfd907139ab1ece",
+        "spotifyArtworkWidth": 640,
+        "spotifyArtworkHeight": 640
+      },
       {
         "id": "anchor-faith-church-podcast-8baa2efa-c7fd-4bdd-9903-7be1fbfc5b73",
         "mediaType": "audio",
