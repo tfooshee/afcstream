@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-11-17T00:41:24.962Z",
+  "lastUpdated": "2026-11-19T23:27:00.091Z",
   "source": "youtube-rss-spotify-generated",
   "version": "1.1",
   "data": {
@@ -79,7 +79,7 @@
         "id": "PLbWBXABSizbQ",
         "title": "Series | Produce Market",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/mqxh5zWGoPM/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Zk1VuV4DXzY/maxresdefault.jpg",
         "itemCount": 3,
         "publishedAt": "2026-11-03T21:12:58.736366035Z"
       },
@@ -207,7 +207,7 @@
         "id": "PLSSC9g7gvoYU",
         "title": "Speaker | Ap. Marci Glisson",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/fX_eZtpJNqQ/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Zk1VuV4DXzY/maxresdefault.jpg",
         "itemCount": 36,
         "publishedAt": "2026-07-06T13:41:22.522573Z"
       },
@@ -559,7 +559,7 @@
         "id": "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3",
         "title": "Latest Sermons",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/mqxh5zWGoPM/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Zk1VuV4DXzY/maxresdefault.jpg",
         "itemCount": 430,
         "publishedAt": "2019-03-06T15:36:23.175978Z"
       }
@@ -580,7 +580,7 @@
         "title": "Series | Produce Market",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/mqxh5zWGoPM/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Zk1VuV4DXzY/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PLbWBXABSizbQ"
       },
@@ -737,7 +737,7 @@
         "title": "Speaker | Ap. Marci Glisson",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/fX_eZtpJNqQ/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Zk1VuV4DXzY/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PLSSC9g7gvoYU"
       },
@@ -1133,12 +1133,52 @@
         "title": "Latest Sermons",
         "subtitle": "",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/mqxh5zWGoPM/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Zk1VuV4DXzY/maxresdefault.jpg",
         "mediaType": "video",
         "playlistId": "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
       }
     ],
     "latestSermons": [
+      {
+        "id": "Zk1VuV4DXzY",
+        "mediaType": "video",
+        "rawTitle": "Faithfulness | Produce Market | Ap. Marci Glisson",
+        "mainTitle": "Faithfulness",
+        "subtitle": "Produce Market",
+        "minister": "Ap. Marci Glisson",
+        "canonicalSpeaker": "Ap. Marci Glisson",
+        "speaker": "Ap. Marci Glisson",
+        "title": "Faithfulness",
+        "date": "November 17, 2026",
+        "publishedAt": "2026-11-17T23:30:21Z",
+        "duration": "58:13",
+        "description": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "summaryDescription": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "youtubeDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "youtubeVideoId": "Zk1VuV4DXzY",
+        "youtubeId": "Zk1VuV4DXzY",
+        "thumbnail": "https://i.ytimg.com/vi/Zk1VuV4DXzY/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Zk1VuV4DXzY/maxresdefault.jpg",
+        "heroImage": "https://i.ytimg.com/vi/Zk1VuV4DXzY/maxresdefault.jpg",
+        "embedUrl": "https://www.youtube.com/embed/Zk1VuV4DXzY?rel=0",
+        "externalUrl": "https://www.youtube.com/watch?v=Zk1VuV4DXzY",
+        "externalActionLabel": "Play on YouTube",
+        "playlistIds": [
+          "UU5k7VFwx3xZkBdGNWEDqMlQ",
+          "PLbWBXABSizbQ",
+          "PLSSC9g7gvoYU",
+          "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
+        ],
+        "tags": [
+          "Latest Sermons",
+          "Series | Produce Market",
+          "Speaker | Ap. Marci Glisson"
+        ],
+        "playlistTitle": "Latest Sermons",
+        "featured": true
+      },
       {
         "id": "mqxh5zWGoPM",
         "mediaType": "video",
@@ -1177,7 +1217,7 @@
           "Speaker | P. Chase Glisson"
         ],
         "playlistTitle": "Latest Sermons",
-        "featured": true
+        "featured": false
       },
       {
         "id": "5W7yah3eOcs",
@@ -18862,8 +18902,9 @@
         "playlistId": "PLbWBXABSizbQ",
         "rawCollectionTitle": "Series | Produce Market",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/mqxh5zWGoPM/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Zk1VuV4DXzY/maxresdefault.jpg",
         "itemIds": [
+          "Zk1VuV4DXzY",
           "mqxh5zWGoPM",
           "5W7yah3eOcs"
         ]
@@ -19244,10 +19285,11 @@
         "playlistId": "PLSSC9g7gvoYU",
         "rawCollectionTitle": "Speaker | Ap. Marci Glisson",
         "priority": 90,
-        "newestVideoPublishedAt": "2026-10-20T22:30:19Z",
+        "newestVideoPublishedAt": "2026-11-17T23:30:21Z",
         "description": "",
-        "thumbnailUrl": "https://i.ytimg.com/vi/fX_eZtpJNqQ/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Zk1VuV4DXzY/maxresdefault.jpg",
         "itemIds": [
+          "Zk1VuV4DXzY",
           "fX_eZtpJNqQ",
           "SExuugCL4hs",
           "XC1HZOA7yvo",
@@ -20204,8 +20246,9 @@
           "playlistId": "PLbWBXABSizbQ",
           "rawCollectionTitle": "Series | Produce Market",
           "description": "",
-          "thumbnailUrl": "https://i.ytimg.com/vi/mqxh5zWGoPM/maxresdefault.jpg",
+          "thumbnailUrl": "https://i.ytimg.com/vi/Zk1VuV4DXzY/maxresdefault.jpg",
           "itemIds": [
+            "Zk1VuV4DXzY",
             "mqxh5zWGoPM",
             "5W7yah3eOcs"
           ]
@@ -20586,10 +20629,11 @@
           "playlistId": "PLSSC9g7gvoYU",
           "rawCollectionTitle": "Speaker | Ap. Marci Glisson",
           "priority": 90,
-          "newestVideoPublishedAt": "2026-10-20T22:30:19Z",
+          "newestVideoPublishedAt": "2026-11-17T23:30:21Z",
           "description": "",
-          "thumbnailUrl": "https://i.ytimg.com/vi/fX_eZtpJNqQ/maxresdefault.jpg",
+          "thumbnailUrl": "https://i.ytimg.com/vi/Zk1VuV4DXzY/maxresdefault.jpg",
           "itemIds": [
+            "Zk1VuV4DXzY",
             "fX_eZtpJNqQ",
             "SExuugCL4hs",
             "XC1HZOA7yvo",
@@ -20895,6 +20939,46 @@
     ],
     "sermons": [
       {
+        "id": "Zk1VuV4DXzY",
+        "mediaType": "video",
+        "rawTitle": "Faithfulness | Produce Market | Ap. Marci Glisson",
+        "mainTitle": "Faithfulness",
+        "subtitle": "Produce Market",
+        "minister": "Ap. Marci Glisson",
+        "canonicalSpeaker": "Ap. Marci Glisson",
+        "speaker": "Ap. Marci Glisson",
+        "title": "Faithfulness",
+        "date": "November 17, 2026",
+        "publishedAt": "2026-11-17T23:30:21Z",
+        "duration": "58:13",
+        "description": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "summaryDescription": "Stay Connected With Us\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "youtubeDescription": "Stay Connected With Us\n\nWebsite: http://anchorfaith.com\nAnchor Faith Church Facebook: https://www.facebook.com/anchorfaith/\nAnchor Faith Church Instagram:https://www.instagram.com/anchorfaith\nPastor Earl Glisson Facebook: https://www.facebook.com/earlwglisson/\nPastor Earl Glisson Instagram: https://www.instagram.com/earlglisson/",
+        "youtubeVideoId": "Zk1VuV4DXzY",
+        "youtubeId": "Zk1VuV4DXzY",
+        "thumbnail": "https://i.ytimg.com/vi/Zk1VuV4DXzY/maxresdefault.jpg",
+        "thumbnailUrl": "https://i.ytimg.com/vi/Zk1VuV4DXzY/maxresdefault.jpg",
+        "heroImage": "https://i.ytimg.com/vi/Zk1VuV4DXzY/maxresdefault.jpg",
+        "embedUrl": "https://www.youtube.com/embed/Zk1VuV4DXzY?rel=0",
+        "externalUrl": "https://www.youtube.com/watch?v=Zk1VuV4DXzY",
+        "externalActionLabel": "Play on YouTube",
+        "playlistIds": [
+          "UU5k7VFwx3xZkBdGNWEDqMlQ",
+          "PLbWBXABSizbQ",
+          "PLSSC9g7gvoYU",
+          "PL_b7G2GPm-jAEImVbxURY3m2XBeuxYv_3"
+        ],
+        "tags": [
+          "Latest Sermons",
+          "Series | Produce Market",
+          "Speaker | Ap. Marci Glisson"
+        ],
+        "playlistTitle": "Latest Sermons",
+        "featured": true
+      },
+      {
         "id": "mqxh5zWGoPM",
         "mediaType": "video",
         "rawTitle": "Gentleness | Produce Market | P. Chase Glisson",
@@ -20932,7 +21016,7 @@
           "Speaker | P. Chase Glisson"
         ],
         "playlistTitle": "Latest Sermons",
-        "featured": true
+        "featured": false
       },
       {
         "id": "5W7yah3eOcs",
@@ -37712,6 +37796,94 @@
     ],
     "audioEpisodes": [
       {
+        "id": "anchor-faith-church-podcast-524b7431-7c55-4f43-aca0-ce440e6af126",
+        "mediaType": "audio",
+        "title": "Keep to the Path | Kingdom Spirit | Ap. Earl Glisson",
+        "mainTitle": "Keep to the Path | Kingdom Spirit | Ap. Earl Glisson",
+        "host": "Anchor Faith Church Podcast",
+        "minister": "Anchor Faith Church Podcast",
+        "date": "November 19, 2026",
+        "publishedAt": "Thu, 19 Nov 2026 15:05:20 GMT",
+        "duration": "52:40",
+        "description": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rawDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "fullDescription": "Stay Connected With Us\n\nWebsite: anchorfaith.com\n\nAnchor Faith Church Facebook: www.facebook.com/anchorfaith\n\nAnchor Faith Church Instagram: www.instagram.com/anchorfaith\n\nPastor Earl Glisson Facebook: www.facebook.com/earlwglisson\n\nPastor Earl Glisson Instagram: www.instagram.com/earlglisson",
+        "summaryDescription": "Stay Connected With Us\nWebsite: anchorfaith.com\nAnchor Faith Church Facebook:...",
+        "rssGuid": "524b7431-7c55-4f43-aca0-ce440e6af126",
+        "guid": "524b7431-7c55-4f43-aca0-ce440e6af126",
+        "enclosureUrl": "https://anchor.fm/s/128ece40/podcast/play/129754373/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-10-19%2F955c5fac-e64a-0ecf-a83a-d50858b083da.mp3",
+        "thumbnail": "https://i.scdn.co/image/ab6765630000ba8a02a57b3071b34246a4c1af36",
+        "artworkUrl": "https://i.scdn.co/image/ab6765630000ba8a02a57b3071b34246a4c1af36",
+        "episodeArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_episode/3013488/3013488-1795100689708-8b295f3469b64.jpg",
+        "podcastArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/3013488/3013488-1782995684800-84c230b79db71.jpg",
+        "sourceUrl": "https://anchor.fm/s/128ece40/podcast/rss",
+        "audioUrl": "https://anchor.fm/s/128ece40/podcast/play/129754373/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-10-19%2F955c5fac-e64a-0ecf-a83a-d50858b083da.mp3",
+        "externalUrl": "https://open.spotify.com/episode/2lUuanIZMkFuqGfqspMmCd",
+        "spotifyEpisodeId": "2lUuanIZMkFuqGfqspMmCd",
+        "spotifyEpisodeUrl": "https://open.spotify.com/episode/2lUuanIZMkFuqGfqspMmCd",
+        "spotifyUrl": "https://open.spotify.com/episode/2lUuanIZMkFuqGfqspMmCd",
+        "spotifyShowId": "7sMWiLwUHPAqHyxYBQp7Qx",
+        "showSpotifyUrl": "https://open.spotify.com/show/7sMWiLwUHPAqHyxYBQp7Qx",
+        "podcastId": "anchor-faith-church-podcast",
+        "podcastName": "Anchor Faith Church Podcast",
+        "tags": [
+          "Podcast",
+          "Anchor Faith Church Podcast"
+        ],
+        "localPodcastArtworkUrl": "./assets/podcast-artwork/anchor-faith-church.jpg",
+        "localPodcastArtworkWidth": 512,
+        "localPodcastArtworkHeight": 512,
+        "localPodcastArtworkType": "image/jpeg",
+        "spotifyMatchMethod": "exact-title",
+        "spotifyArtworkUrl": "https://i.scdn.co/image/ab6765630000ba8a02a57b3071b34246a4c1af36",
+        "spotifyArtworkWidth": 640,
+        "spotifyArtworkHeight": 640
+      },
+      {
+        "id": "the-current-podcast-862cebb3-d0eb-4874-a982-24255fb7b63c",
+        "mediaType": "audio",
+        "title": "Stones That Speak | P. Chase Glisson",
+        "mainTitle": "Stones That Speak | P. Chase Glisson",
+        "host": "The.Crnt Podcast",
+        "minister": "The.Crnt Podcast",
+        "date": "November 19, 2026",
+        "publishedAt": "Thu, 19 Nov 2026 14:15:27 GMT",
+        "duration": "41:34",
+        "description": "Looking back on God's faithfulness.\nLearn more about The Current:...",
+        "rawDescription": "Looking back on God's faithfulness.\n\n\nLearn more about The Current: https://anchorfaith.com/tclinks/",
+        "fullDescription": "Looking back on God's faithfulness.\n\n\nLearn more about The Current: https://anchorfaith.com/tclinks/",
+        "summaryDescription": "Looking back on God's faithfulness.\nLearn more about The Current:...",
+        "rssGuid": "862cebb3-d0eb-4874-a982-24255fb7b63c",
+        "guid": "862cebb3-d0eb-4874-a982-24255fb7b63c",
+        "enclosureUrl": "https://anchor.fm/s/f9eea9b8/podcast/play/129751548/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-10-19%2F64970c3b-f416-fc18-cd85-9622073c4f93.mp3",
+        "thumbnail": "https://i.scdn.co/image/ab6765630000ba8aef336f91b0ecfd87f1fc44a2",
+        "artworkUrl": "https://i.scdn.co/image/ab6765630000ba8aef336f91b0ecfd87f1fc44a2",
+        "episodeArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_episode/41831678/41831678-1795097611691-74a6115fabf67.jpg",
+        "podcastArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/41831678/41831678-1736449271448-1b71638c40287.jpg",
+        "sourceUrl": "https://anchor.fm/s/f9eea9b8/podcast/rss",
+        "audioUrl": "https://anchor.fm/s/f9eea9b8/podcast/play/129751548/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-10-19%2F64970c3b-f416-fc18-cd85-9622073c4f93.mp3",
+        "externalUrl": "https://open.spotify.com/episode/2ibUlXvVipfG52gpzpcNxE",
+        "spotifyEpisodeId": "2ibUlXvVipfG52gpzpcNxE",
+        "spotifyEpisodeUrl": "https://open.spotify.com/episode/2ibUlXvVipfG52gpzpcNxE",
+        "spotifyUrl": "https://open.spotify.com/episode/2ibUlXvVipfG52gpzpcNxE",
+        "spotifyShowId": "7xu0obdpJbYpFT62IohTkl",
+        "showSpotifyUrl": "https://open.spotify.com/show/7xu0obdpJbYpFT62IohTkl",
+        "podcastId": "the-current-podcast",
+        "podcastName": "The.Crnt Podcast",
+        "tags": [
+          "Podcast",
+          "The.Crnt Podcast"
+        ],
+        "localPodcastArtworkUrl": "./assets/podcast-artwork/the-crnt.jpg",
+        "localPodcastArtworkWidth": 512,
+        "localPodcastArtworkHeight": 512,
+        "localPodcastArtworkType": "image/jpeg",
+        "spotifyMatchMethod": "exact-title",
+        "spotifyArtworkUrl": "https://i.scdn.co/image/ab6765630000ba8aef336f91b0ecfd87f1fc44a2",
+        "spotifyArtworkWidth": 640,
+        "spotifyArtworkHeight": 640
+      },
+      {
         "id": "anchor-faith-church-podcast-fed6c1b2-166d-4cfd-b2d6-54c4405785b6",
         "mediaType": "audio",
         "title": "Faithfulness | Produce Market | Ap. Marci Glisson",
@@ -37860,9 +38032,9 @@
         "rssGuid": "9d246add-e667-4487-beea-90149869885b",
         "guid": "9d246add-e667-4487-beea-90149869885b",
         "enclosureUrl": "https://anchor.fm/s/128ece40/podcast/play/129196356/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-10-10%2Fac932649-aee2-3951-d265-f8b8bbaf67d9.mp3",
-        "thumbnail": "https://i.scdn.co/image/ab6765630000ba8ada42af2c8bfd907139ab1ece",
-        "artworkUrl": "https://i.scdn.co/image/ab6765630000ba8ada42af2c8bfd907139ab1ece",
-        "episodeArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_episode/3013488/3013488-1794323122533-2c63c9fe593c1.jpg",
+        "thumbnail": "https://i.scdn.co/image/ab6765630000ba8a0273619e1c2aa664d62ed4a1",
+        "artworkUrl": "https://i.scdn.co/image/ab6765630000ba8a0273619e1c2aa664d62ed4a1",
+        "episodeArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_episode/3013488/3013488-1794922292496-76f2128500697.jpg",
         "podcastArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/3013488/3013488-1782995684800-84c230b79db71.jpg",
         "sourceUrl": "https://anchor.fm/s/128ece40/podcast/rss",
         "audioUrl": "https://anchor.fm/s/128ece40/podcast/play/129196356/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-10-10%2Fac932649-aee2-3951-d265-f8b8bbaf67d9.mp3",
@@ -37883,7 +38055,7 @@
         "localPodcastArtworkHeight": 512,
         "localPodcastArtworkType": "image/jpeg",
         "spotifyMatchMethod": "exact-title",
-        "spotifyArtworkUrl": "https://i.scdn.co/image/ab6765630000ba8ada42af2c8bfd907139ab1ece",
+        "spotifyArtworkUrl": "https://i.scdn.co/image/ab6765630000ba8a0273619e1c2aa664d62ed4a1",
         "spotifyArtworkWidth": 640,
         "spotifyArtworkHeight": 640
       },
@@ -37988,9 +38160,9 @@
         "rssGuid": "e3b13a6e-842b-4ef3-9f8e-8991f7bb25f6",
         "guid": "e3b13a6e-842b-4ef3-9f8e-8991f7bb25f6",
         "enclosureUrl": "https://anchor.fm/s/128ece40/podcast/play/128715413/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-10-3%2F92efc457-7620-5d19-9438-9a0c02c6b743.mp3",
-        "thumbnail": "https://i.scdn.co/image/ab6765630000ba8a137187116652c718b123bf9b",
-        "artworkUrl": "https://i.scdn.co/image/ab6765630000ba8a137187116652c718b123bf9b",
-        "episodeArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_episode/3013488/3013488-1793740495117-ea2833a39de6f.jpg",
+        "thumbnail": "https://i.scdn.co/image/ab6765630000ba8a75cff2e04511fb743aa9f6fc",
+        "artworkUrl": "https://i.scdn.co/image/ab6765630000ba8a75cff2e04511fb743aa9f6fc",
+        "episodeArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_episode/3013488/3013488-1794922451666-c4db75b57db9c.jpg",
         "podcastArtworkUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/3013488/3013488-1782995684800-84c230b79db71.jpg",
         "sourceUrl": "https://anchor.fm/s/128ece40/podcast/rss",
         "audioUrl": "https://anchor.fm/s/128ece40/podcast/play/128715413/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-10-3%2F92efc457-7620-5d19-9438-9a0c02c6b743.mp3",
@@ -38011,7 +38183,7 @@
         "localPodcastArtworkHeight": 512,
         "localPodcastArtworkType": "image/jpeg",
         "spotifyMatchMethod": "exact-title",
-        "spotifyArtworkUrl": "https://i.scdn.co/image/ab6765630000ba8a137187116652c718b123bf9b",
+        "spotifyArtworkUrl": "https://i.scdn.co/image/ab6765630000ba8a75cff2e04511fb743aa9f6fc",
         "spotifyArtworkWidth": 640,
         "spotifyArtworkHeight": 640
       },
